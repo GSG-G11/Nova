@@ -10,15 +10,19 @@ const login = async (req: Request, res: Response) => {
   const user = {
     id: 1,
     email: 'test@test.com',
-    password: 'Test1@',
+    password: 'Test@1',
     role: 'admin',
   };
   const { email, password }: {email: string, password: string} = user;
 
-  const result = await loginValidation(user);
-
-  if (result.error) {
-    res.status(400).json({ error: result.error.message });
+  try {
+    const result = await loginValidation(user);
+  } catch (error: any) {
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
   }
 
   // TODO: search for user in collections, check the role and compare password
