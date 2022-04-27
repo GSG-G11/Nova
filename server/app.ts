@@ -5,6 +5,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import {authRouter} from './routes'
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(compression());
 app.use(cookieParser());
+
+app.use('/api', authRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
