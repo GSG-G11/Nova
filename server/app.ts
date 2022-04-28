@@ -5,8 +5,11 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import startDb from './database/config';
 
 dotenv.config();
+
+startDb();
 
 const app: Application = express();
 
