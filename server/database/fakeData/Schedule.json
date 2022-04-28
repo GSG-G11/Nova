@@ -1,0 +1,19 @@
+{
+    "schedule": [
+        {
+            "language": "JavaScript",
+            "specialization": "Frontend",
+            "available": [
+                {
+                    "interviwerId": "2",
+                    "name": "Interview 1",
+                    "data": "2022-04-28",
+                    "time": [
+                       "12:00",
+                        "13:00"
+                    ]
+                }
+            ]
+        }
+    ]
+}

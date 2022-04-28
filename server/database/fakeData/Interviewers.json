@@ -1,0 +1,34 @@
+{
+    "interviewer":[
+        {
+            "userId": "2",
+            "languages": [
+                "JavaScript",
+                "PHP"
+            ],
+            "specialization": "Frontend",
+            "interviews": [
+                {
+                    "id": "1",
+                    "intervieweeId": 5,
+                    "date": "2022-04-28",
+                    "time": "12:00",
+                    "lang": "JavaScript",
+                    "specialization": "Frontend",
+                    "questionCategory": [
+                        "Technical"                        
+                    ]
+                }
+            ],
+            "schedule": [
+                {
+                    "date": "2022-04-28",
+                    "time": [
+                        "12:00",
+                        "13:00"
+                    ]
+                }
+            ]
+        }
+    ]
+}

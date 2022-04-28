@@ -23,6 +23,10 @@
                 "ts": "never",
                 "json": "never"
             }
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
         ]
     },
     "settings": {
