@@ -13,11 +13,12 @@ const schedule = new Schema({
     type: [
       {
         interviwerId: {
+          $ref: 'Interviewer',
           type: String,
           required: true,
         },
         date: {
-          type: Number,
+          type: Date,
           required: true,
         },
         time: {
@@ -35,6 +36,6 @@ const schedule = new Schema({
 
 });
 
-const scheduleSchema = model('schedule', schedule);
+const scheduleSchema = model('Schedule', schedule);
 
 export default scheduleSchema;

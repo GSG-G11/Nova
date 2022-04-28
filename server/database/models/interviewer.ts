@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const interviewer = new Schema({
   userId: {
+    $ref: 'User',
     type: String,
     required: true,
   },
@@ -17,11 +18,12 @@ const interviewer = new Schema({
     type: [
       {
         intervieweeId: {
+          $ref: 'Interviewee',
           type: String,
           required: true,
         },
         date: {
-          type: Number,
+          type: Date,
           required: true,
         },
         time: {
@@ -48,7 +50,7 @@ const interviewer = new Schema({
     type: [
       {
         date: {
-          type: Number,
+          type: Date,
           required: true,
         },
         time: {
@@ -62,6 +64,6 @@ const interviewer = new Schema({
 
 });
 
-const interviewerSchema = model('interviewer', interviewer);
+const interviewerSchema = model('Interviewer', interviewer);
 
 export default interviewerSchema;
