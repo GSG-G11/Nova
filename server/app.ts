@@ -6,6 +6,7 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import startDb from './database/config';
+import { errorHandler } from './middlewares/errors';
 
 dotenv.config();
 
@@ -26,4 +27,5 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(errorHandler);
 export default app;
