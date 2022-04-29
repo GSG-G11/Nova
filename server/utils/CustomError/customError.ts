@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-
 class CustomError extends Error {
   public code: number;
 

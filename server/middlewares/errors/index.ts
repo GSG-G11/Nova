@@ -1,5 +1,4 @@
-/* eslint-disable linebreak-style */
-import CustomError from './customError';
+import CustomError from '../../utils/CustomError/customError';
 import errorHandler from './errorHandler';
 
 export {

@@ -1,9 +1,8 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 import {
   Request, Response, NextFunction,
 } from 'express';
-import CustomError from './customError';
+import CustomError from '../../utils/CustomError/customError';
 
 const errorHandler = (
   error: CustomError,
