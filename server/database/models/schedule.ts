@@ -9,6 +9,10 @@ const schedule = new Schema({
     type: String,
     required: false,
   },
+  questionCategory: {
+    type: String,
+    required: false,
+  },
   available: {
     type: [
       {
