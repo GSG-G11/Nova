@@ -15,4 +15,9 @@ const findAccount = async (email: string) => {
   return user;
 };
 
-export { createAccount, findAccount };
+const deleteAccount = async (email: string) => {
+  const user = await userSchema.deleteOne({ email });
+  return user;
+};
+
+export { createAccount, findAccount, deleteAccount };
