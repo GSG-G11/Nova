@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Modal,
   Button,
@@ -7,26 +8,31 @@ import {
   Input,
   message,
 } from 'antd';
-import logo from '../../assets/images/logo.png';
+import logo from '../../../assets/images/logo.png';
 import './Signup.css';
-
-const axios = require('axios').default;
 
 function Signup() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [rool] = useState('');
 
   const signUp = async () => {
     try {
-      await axios.post('/api/signup', { fullName, email, password });
+      await axios.post('/api/signup', {
+        fullName,
+        email,
+        password,
+        rool,
+      });
+      setIsModalVisible(false);
       message.success('Welcome to Nova');
     } catch (err) {
-      // handel error
+      message.error('Sorry, try again');
       console.log(err);
     }
-    setIsModalVisible(false);
   };
 
   const showModal = () => {
@@ -37,14 +43,6 @@ function Signup() {
     setIsModalVisible(false);
   };
 
-  const passwordValidation = () => ({
-    validator(_, value) {
-      if (value.length >= 4) {
-        return Promise.resolve();
-      }
-      return Promise.reject(new Error('password should have at least 4 character '));
-    },
-  });
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -120,15 +118,13 @@ function Signup() {
             rules={[
               {
                 // password Should be combination of numbers & alphabets and one special character
-                // eslint-disable-next-line prefer-regex-literals
-                pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{4,}$'),
+                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,
                 message: 'Password must contain at least one lowercase letter, uppercase letter, number, and special character',
               },
               {
                 required: true,
                 message: 'Please input your Passsword',
               },
-              () => passwordValidation(),
             ]}
             hasFeedback
           >
@@ -139,6 +135,8 @@ function Signup() {
             name="confirm"
             label="Confirm Password"
             dependencies={['password']}
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
             hasFeedback
             rules={[
               {
