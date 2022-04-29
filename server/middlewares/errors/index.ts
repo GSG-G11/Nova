@@ -1,7 +1,7 @@
-import CustomError from '../../utils/CustomError/customError';
 import errorHandler from './errorHandler';
+import notFound from './notFound';
 
 export {
-  CustomError,
   errorHandler,
+  notFound,
 };

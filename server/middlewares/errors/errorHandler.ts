@@ -2,7 +2,7 @@
 import {
   Request, Response, NextFunction,
 } from 'express';
-import CustomError from '../../utils/CustomError/customError';
+import CustomError from '../../utils/CustomError';
 
 const errorHandler = (
   error: CustomError,
