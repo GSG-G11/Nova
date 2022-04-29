@@ -8,7 +8,7 @@
             "bio": "I'm a web developer",
             "cv": "link to cv",
             "profile_pic": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-            "level": "Beginner",
+            "level": "Junior",
             "role": "interviewee"
         },
         {
@@ -41,7 +41,7 @@
             "bio": "I'm a recruiter",
             "cv": "link to cv",
             "profile_pic": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-            "level": "mid",
+            "level": "Internship",
             "role": "interviewee"
         }
     ]

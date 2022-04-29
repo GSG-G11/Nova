@@ -1,16 +1,23 @@
 {
     "schedule": [
         {
-            "language": "JavaScript",
-            "specialization": "Frontend",
+            "language": ["JavaScript", "PHP"],
+            "specialization": ["Frontend", "Backend"],
             "available": [
                 {
                     "interviewerId": "2",
-                    "name": "Interview 1",
+                    "name": "Interviewer Name",
                     "date": "2022-04-28",
                     "time": [
-                       "12:00",
-                        "13:00"
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "2",
+                    "name": "Interviewer Name",
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
                     ]
                 }
             ]

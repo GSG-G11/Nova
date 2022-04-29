@@ -10,11 +10,23 @@
             "interviews": [
                 {
                     "id": "1",
-                    "intervieweeId": 5,
+                    "intervieweeId": 1,
                     "date": "2022-04-28",
-                    "time": "12:00",
+                    "time": 12,
                     "language": "JavaScript",
                     "specialization": "Frontend",
+                    "questionCategory": [
+                        "Technical",
+                        "Behavioural"                     
+                    ]
+                },
+                {
+                    "id": "2",
+                    "intervieweeId": 4,
+                    "date": "2022-04-29",
+                    "time": 12,
+                    "language": "PHP",
+                    "specialization": "Backend",
                     "questionCategory": [
                         "Technical"                        
                     ]
@@ -24,8 +36,13 @@
                 {
                     "date": "2022-04-28",
                     "time": [
-                        "12:00",
-                        "13:00"
+                       13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
                     ]
                 }
             ]
