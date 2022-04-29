@@ -29,7 +29,7 @@
                     "interviewerId": 2,
                     "date": "2022-04-29",
                     "time": "12:00",
-                    "lang": "PHP",
+                    "language": "PHP",
                     "specialization": "Backend",
                     "questionCategory": [
                         "Technical"
