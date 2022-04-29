@@ -1,14 +1,20 @@
-const jwt = require('jsonwebtoken');
+import { Request, Response, NextFunction } from 'express';
 
-const VerfiyAuth = (tokenKey: string) => new Promise((resolve, reject) => {
-  jwt.verify(tokenKey, process.env.SECRET_KEY, (err: Error, decoded: object) => {
-    if (err) reject(err);
-    else {
-      resolve(decoded);
+const { VerfiyAuth } = require('../../utils/auth');
+
+const userAuth = async (req: Request, res: Response, next: NextFunction) => {
+  const { JWT_SECRET } = req.cookies;
+
+  if (!JWT_SECRET) {
+    res.status(401).json({ message: 'Login First!' });
+  } else {
+    try {
+      await VerfiyAuth(JWT_SECRET);
+      next();
+    } catch (err) {
+      res.status(401).json({ message: 'Unauthorized user' });
     }
-  });
-});
-
-module.exports = {
-  VerfiyAuth,
+  }
 };
+
+export default userAuth;
