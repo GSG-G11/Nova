@@ -37,6 +37,11 @@ const user = new Schema({
     enum: ['INTERVIEWEE', 'INTERVIEWER', 'ADMIN'],
     required: true,
   },
+  is_verified: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
 });
 
 const userSchema = model('User', user);
