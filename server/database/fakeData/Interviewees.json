@@ -8,7 +8,7 @@
                     "interviewerId": 2,
                     "date": "2022-04-28",
                     "time": "12:00",
-                    "lang": "JavaScript",
+                    "language": "JavaScript",
                     "specialization": "Frontend",
                     "questionCategory": [
                         "Technical",
