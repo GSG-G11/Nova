@@ -1,8 +1,8 @@
 {
     "schedule": [
         {
-            "language": ["JavaScript", "PHP"],
-            "specialization": ["Frontend", "Backend"],
+            "languages": "JS, PHP",
+            "specialization": "Frontend, Backend",
             "available": [
                 {
                     "interviewerId": "2",

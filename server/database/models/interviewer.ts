@@ -45,6 +45,8 @@ const interviewer = new Schema({
         questionCategory: {
           type: Array,
           required: true,
+          enum: ['Technical', 'Behavioural'],
+
         },
       },
     ],

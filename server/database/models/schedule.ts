@@ -12,7 +12,7 @@ const schedule = new Schema({
   available: {
     type: [
       {
-        interviwerId: {
+        interviewerId: {
           $ref: 'Interviewer',
           type: String,
           required: true,

@@ -3,22 +3,20 @@
         {
             "userId": "2",
             "languages": [
-                "JavaScript",
+                "JS",
                 "PHP"
             ],
-            "specialization": "Frontend",
+            "specialization": "FRONTEND",
             "interviews": [
                 {
                     "id": "1",
                     "intervieweeId": 1,
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JavaScript",
-                    "specialization": "Frontend",
-                    "questionCategory": [
-                        "Technical",
-                        "Behavioural"                     
-                    ]
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory":"Behavioural",
+
                 },
                 {
                     "id": "2",
@@ -26,10 +24,9 @@
                     "date": "2022-04-29",
                     "time": 12,
                     "language": "PHP",
-                    "specialization": "Backend",
-                    "questionCategory": [
-                        "Technical"                        
-                    ]
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical"
+
                 }
             ],
             "schedule": [

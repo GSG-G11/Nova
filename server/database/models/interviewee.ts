@@ -34,6 +34,7 @@ const interviewee = new Schema({
         },
         questionCategory: {
           type: Array,
+          enum: ['Technical', 'Behavioural'],
           required: true,
         },
         review: {

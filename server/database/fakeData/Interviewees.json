@@ -8,12 +8,9 @@
                     "interviewerId": 2,
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JavaScript",
-                    "specialization": "Frontend",
-                    "questionCategory": [
-                        "Technical",
-                        "Behavioral"
-                    ],
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory": "Behavioural",
                     "review": {
                         "message": "He did a great job!",
                         "saved": false
@@ -30,10 +27,8 @@
                     "date": "2022-04-29",
                     "time": 12,
                     "language": "PHP",
-                    "specialization": "Backend",
-                    "questionCategory": [
-                        "Technical"
-                    ],
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical",
                     "review": {
                         "message": "More than expected",
                         "saved": true
