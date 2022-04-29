@@ -6,6 +6,7 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import startDb from './database/config';
+import signup from './routes';
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(compression());
 app.use(cookieParser());
-
+app.use(signup);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
   app.get('*', (req: Request, res: Response) => {
