@@ -29,6 +29,7 @@ const user = new Schema({
   },
   level: {
     type: String,
+    enum: ['JUNIOR', 'MIDDLE', 'SENIOR', 'EXPERT', 'INTERNSHIP'],
     required: false,
   },
   role: {

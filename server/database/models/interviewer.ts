@@ -8,10 +8,12 @@ const interviewer = new Schema({
   },
   languages: {
     type: Array,
+    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
     required: true,
   },
   specialization: {
     type: String,
+    enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
     required: true,
   },
   interviews: {
@@ -32,10 +34,12 @@ const interviewer = new Schema({
         },
         language: {
           type: String,
+          enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
           required: true,
         },
         specialization: {
           type: String,
+          enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
           required: true,
         },
         questionCategory: {
@@ -54,7 +58,7 @@ const interviewer = new Schema({
           required: true,
         },
         time: {
-          type: Number,
+          type: Array,
           required: true,
         },
       },

@@ -24,10 +24,12 @@ const interviewee = new Schema({
         },
         language: {
           type: String,
+          enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
           required: true,
         },
         specialization: {
           type: String,
+          enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
           required: true,
         },
         questionCategory: {
