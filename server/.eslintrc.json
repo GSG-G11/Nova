@@ -28,6 +28,7 @@
             "error",
             "windows"
         ]
+        
     },
     "settings": {
         "import/resolver": {

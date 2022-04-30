@@ -23,18 +23,18 @@ const interviewee = new Schema({
           required: true,
         },
         language: {
-          type: [String],
+          type: String,
           enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
           required: true,
         },
         specialization: {
-          type: [String],
+          type: String,
           enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
           required: true,
         },
         questionCategory: {
-          type: [String],
-          enum: ['Technical', 'Behavioural'],
+          type: String,
+          enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
         review: {

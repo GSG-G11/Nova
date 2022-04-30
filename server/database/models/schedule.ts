@@ -4,14 +4,17 @@ const schedule = new Schema({
   languages: {
     type: String,
     required: false,
+    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
   },
   specialization: {
     type: String,
     required: false,
+    enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
   },
   questionCategory: {
     type: String,
     required: false,
+    enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
   },
   available: {
     type: [
