@@ -1,9 +1,9 @@
 import express from 'express';
-import signUp from '../../controllers';
+import { signUp, validateEmail } from '../../controllers';
 
 const router: any = express.Router();
 
-router.post('/signup', signUp.signUp);
-// router.post('/api/auth/verify', signUp.signUp);
+router.post('/api/signup', signUp);
+router.get('/api/auth/verify', validateEmail);
 
 export default router;

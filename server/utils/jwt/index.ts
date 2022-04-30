@@ -1,4 +1,3 @@
-// const { verify, sign } = require('jsonwebtoken');
 import jwt from 'jsonwebtoken';
 
 const verifyToken = (token: string, secret: string) => new Promise((resolve, reject) => {
@@ -21,7 +20,7 @@ const signToken = (payload:string, secret:string) => new Promise((resolve, rejec
   });
 });
 
-export default {
+export {
   verifyToken,
   signToken,
 };
