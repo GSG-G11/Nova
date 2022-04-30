@@ -9,15 +9,18 @@ import {
   message,
 } from 'antd';
 import logo from '../../../assets/images/logo.png';
-import './Signup.css';
+import './index.css';
+
+const { Item } = Form;
+const { Password } = Input;
 
 function Signup() {
+  // eslint-disable-next-line no-unused-vars
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-  const [rool] = useState('');
 
   const signUp = async () => {
     try {
@@ -25,21 +28,17 @@ function Signup() {
         fullName,
         email,
         password,
-        rool,
       });
       setIsModalVisible(false);
       message.success('Welcome to Nova');
     } catch (err) {
-      message.error('Sorry, try again');
-      console.log(err);
+      message.error(`Sorry, try again , ${err.message}`);
     }
   };
-
   const showModal = () => {
     setIsModalVisible(true);
   };
-
-  const handleOk = () => {
+  const handleCancel = () => {
     setIsModalVisible(false);
   };
 
@@ -54,8 +53,8 @@ function Signup() {
             <img src={logo} alt="logo" className="logo-img" />
           </div>
         )}
+        onCancel={handleCancel}
         visible={isModalVisible}
-        onOk={handleOk}
         footer={null}
       >
         <Form
@@ -72,7 +71,7 @@ function Signup() {
           autoComplete="off"
           onFinish={signUp}
         >
-          <Form.Item
+          <Item
             name="fullName"
             label="Full Name"
             value={fullName}
@@ -89,9 +88,9 @@ function Signup() {
             ]}
           >
             <Input />
-          </Form.Item>
+          </Item>
 
-          <Form.Item
+          <Item
             name="email"
             label="Email"
             value={email}
@@ -108,9 +107,9 @@ function Signup() {
             ]}
           >
             <Input />
-          </Form.Item>
+          </Item>
 
-          <Form.Item
+          <Item
             name="Password"
             label="Password"
             value={password}
@@ -128,13 +127,13 @@ function Signup() {
             ]}
             hasFeedback
           >
-            <Input.Password />
-          </Form.Item>
+            <Password />
+          </Item>
 
-          <Form.Item
+          <Item
             name="confirm"
             label="Confirm Password"
-            dependencies={['password']}
+            dependencies={['Password']}
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             hasFeedback
@@ -145,7 +144,7 @@ function Signup() {
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('Password') === value) {
+                  if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
                   return Promise.reject(new Error('The two passwords that you entered do not match!'));
@@ -154,14 +153,14 @@ function Signup() {
             ]}
           >
             <Input.Password />
-          </Form.Item>
-          <Form.Item>
+          </Item>
+          <Item>
             <div className="form-group-btn">
               <Button type="primary" htmlType="submit" className="signup">
                 Register
               </Button>
             </div>
-          </Form.Item>
+          </Item>
         </Form>
       </Modal>
     </>
