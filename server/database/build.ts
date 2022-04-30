@@ -1,5 +1,4 @@
 /* eslint-disable import/extensions */
-// import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import startDb from './config';
 import userSchema from './models/user';
@@ -13,23 +12,30 @@ import scheduleSchema from './models/schedule';
 
 dotenv.config();
 
-startDb();
+const createFakeData = async () => {
+  try {
+    Users.user.forEach(async (user) => {
+      await userSchema.create(user);
+    });
 
-Users.user.forEach((user) => {
-  userSchema.create(user);
+    Schedule.schedule.forEach(async (schedule) => {
+      await scheduleSchema.create(schedule);
+    });
+
+    Interviewees.interviewee.forEach(async (interviewee) => {
+      await intervieweeSchema.create(interviewee);
+    });
+
+    Interviewers.interviewer.forEach(async (interviewer) => {
+      await interviewerSchema.create(interviewer);
+    });
+
+    console.log('Fake data created successfully');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+startDb().then(async () => {
+  await createFakeData();
 });
-
-Schedule.schedule.forEach((schedule) => {
-  scheduleSchema.create(schedule);
-});
-
-Interviewees.interviewee.forEach((interviewee) => {
-  intervieweeSchema.create(interviewee);
-});
-
-Interviewers.interviewer.forEach((interviewer) => {
-  interviewerSchema.create(interviewer);
-});
-
-// TODO: End connection
-// mongoose.connection.close();

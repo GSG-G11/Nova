@@ -28,7 +28,7 @@ const user = new Schema({
     required: false,
   },
   level: {
-    type: String,
+    type: [String],
     enum: ['JUNIOR', 'MIDDLE', 'SENIOR', 'EXPERT', 'INTERNSHIP'],
     required: false,
   },
