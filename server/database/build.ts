@@ -1,4 +1,5 @@
 /* eslint-disable import/extensions */
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import startDb from './config';
 import usersData from './fakeData/Users.json';
@@ -11,6 +12,11 @@ import Interviewer from './models/interviewer';
 import Schedule from './models/schedule';
 
 dotenv.config();
+
+mongoose.deleteModel('User');
+mongoose.deleteModel('Interviewee');
+mongoose.deleteModel('Interviewer');
+mongoose.deleteModel('Schedule');
 
 const createFakeData = async () => {
   try {
