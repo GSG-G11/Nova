@@ -56,6 +56,6 @@ const interviewee = new Schema({
 
 });
 
-const intervieweeSchema = model('Interviewee', interviewee);
+const Interviewee = model('Interviewee', interviewee);
 
-export default intervieweeSchema;
+export default Interviewee;

@@ -70,6 +70,6 @@ const interviewer = new Schema({
 
 });
 
-const interviewerSchema = model('Interviewer', interviewer);
+const Interviewer = model('Interviewer', interviewer);
 
-export default interviewerSchema;
+export default Interviewer;

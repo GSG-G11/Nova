@@ -1,33 +1,33 @@
 /* eslint-disable import/extensions */
 import dotenv from 'dotenv';
 import startDb from './config';
-import userSchema from './models/user';
-import Users from './fakeData/Users.json';
-import Interviewees from './fakeData/Interviewees.json';
-import Interviewers from './fakeData/Interviewers.json';
-import Schedule from './fakeData/Schedule.json';
-import intervieweeSchema from './models/interviewee';
-import interviewerSchema from './models/interviewer';
-import scheduleSchema from './models/schedule';
+import usersData from './fakeData/Users.json';
+import intervieweesData from './fakeData/Interviewees.json';
+import interviewersData from './fakeData/Interviewers.json';
+import scheduleData from './fakeData/Schedule.json';
+import User from './models/user';
+import Interviewee from './models/interviewee';
+import Interviewer from './models/interviewer';
+import Schedule from './models/schedule';
 
 dotenv.config();
 
 const createFakeData = async () => {
   try {
-    Users.user.forEach(async (user) => {
-      await userSchema.create(user);
+    usersData.user.forEach(async (user) => {
+      await User.create(user);
     });
 
-    Schedule.schedule.forEach(async (schedule) => {
-      await scheduleSchema.create(schedule);
+    scheduleData.schedule.forEach(async (schedule) => {
+      await Schedule.create(schedule);
     });
 
-    Interviewees.interviewee.forEach(async (interviewee) => {
-      await intervieweeSchema.create(interviewee);
+    intervieweesData.interviewee.forEach(async (interviewee) => {
+      await Interviewee.create(interviewee);
     });
 
-    Interviewers.interviewer.forEach(async (interviewer) => {
-      await interviewerSchema.create(interviewer);
+    interviewersData.interviewer.forEach(async (interviewer) => {
+      await Interviewer.create(interviewer);
     });
 
     console.log('Fake data created successfully');

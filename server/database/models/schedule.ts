@@ -40,6 +40,6 @@ const schedule = new Schema({
 
 });
 
-const scheduleSchema = model('Schedule', schedule);
+const Schedule = model('Schedule', schedule);
 
-export default scheduleSchema;
+export default Schedule;
