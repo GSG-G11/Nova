@@ -6,12 +6,18 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=production npx tsc && node ./dist",
+<<<<<<< HEAD
     "dev": "cross-env NODE_ENV=dev nodemon ./server/index.ts",
     "test": "jest server/tests",
+=======
+    "dev": "cross-env NODE_ENV=development nodemon ./server/index.ts",
+    "test": "jest",
+>>>>>>> 2c3a4cd776be5b5024b87c3485e776297a3742a9
     "heroku-postbuild": "cd client && npm install && npm run build",
     "lint": "eslint --ext .ts server/",
     "lint-fix": "eslint --ext .ts server/ --fix && cd client && npm run lint-fix",
-    "lint:client": "cd client && npm run lint"
+    "lint:client": "cd client && npm run lint",
+    "build:db": "cross-env NODE_ENV=development npx ts-node ./server/database/build.ts"
   },
   "pre-commit": [
     "lint",
