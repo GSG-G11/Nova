@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const signUpSchema = async (data: object) => {
+const signUpCheckInput = async (data: object) => {
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
@@ -11,4 +11,4 @@ const signUpSchema = async (data: object) => {
   return result;
 };
 
-export default signUpSchema;
+export default signUpCheckInput;

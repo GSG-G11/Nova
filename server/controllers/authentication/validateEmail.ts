@@ -15,12 +15,12 @@ const validateEmail = async (req: Request, res: Response) => {
       });
     }
 
-    const user = await findAccount({ accessToken });
+    const user = await findAccount(accessToken);
     await updateValidate({ accessToken }, true);
 
     return res.status(200).json({
       data: user,
-      message: '',
+      message: 'Email Valedated successfully',
     });
   } catch (error) {
     return res.json(error);

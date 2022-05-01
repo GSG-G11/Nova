@@ -11,7 +11,7 @@ const createAccount = async ({
   return user;
 };
 
-const findAccount = async (data: object) => {
+const findAccount = async (data: string) => {
   const user = await userSchema.findOne({ data });
   return user;
 };
