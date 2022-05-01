@@ -3959,6 +3959,10 @@ eslint-plugin-testing-library@^5.0.1:
     "@typescript-eslint/utils" "^5.13.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4621a4f164965e10502f6f83fd9dea3e131a50e
 eslint-scope@5.1.1, eslint-scope@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/eslint-scope/-/eslint-scope-5.1.1.tgz"
@@ -3976,12 +3980,19 @@ eslint-scope@5.1.1, eslint-scope@^5.1.1:
   "integrity" "sha512-QKQM/UXpIiHcLqJ5AOyIW7XZmzjkzQXYE54n1++wb0u9V/abW3l9uQnxX8Z5Xd18xyKIMTUAyQ0k1e8pz6LUrw=="
   "resolved" "https://registry.npmjs.org/eslint-scope/-/eslint-scope-7.1.1.tgz"
   "version" "7.1.1"
+<<<<<<< HEAD
 >>>>>>> 2c3a4cd776be5b5024b87c3485e776297a3742a9
+=======
+>>>>>>> f4621a4f164965e10502f6f83fd9dea3e131a50e
   dependencies:
     esrecurse "^4.3.0"
     estraverse "^4.1.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4621a4f164965e10502f6f83fd9dea3e131a50e
 eslint-scope@^7.1.1:
   version "7.1.1"
   resolved "https://registry.npmjs.org/eslint-scope/-/eslint-scope-7.1.1.tgz"
@@ -3999,7 +4010,11 @@ eslint-utils@^3.0.0:
   "integrity" "sha512-uuQC43IGctw68pJA1RgbQS8/NP7rch6Cwd4j3ZBtgo4/8Flj4eGE7ZYSZRN3iq5pVUv6GPdW5Z1RFleo84uLDA=="
   "resolved" "https://registry.npmjs.org/eslint-utils/-/eslint-utils-3.0.0.tgz"
   "version" "3.0.0"
+<<<<<<< HEAD
 >>>>>>> 2c3a4cd776be5b5024b87c3485e776297a3742a9
+=======
+
+>>>>>>> f4621a4f164965e10502f6f83fd9dea3e131a50e
   dependencies:
     eslint-visitor-keys "^2.0.0"
 
@@ -4354,6 +4369,10 @@ fork-ts-checker-webpack-plugin@^6.5.0:
     "@babel/code-frame" "^7.8.3"
     "@types/json-schema" "^7.0.5"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4621a4f164965e10502f6f83fd9dea3e131a50e
     chalk "^4.1.0"
     chokidar "^3.4.2"
     cosmiconfig "^6.0.0"
@@ -4925,7 +4944,11 @@ history@^5.2.0:
   "integrity" "sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ=="
   "resolved" "https://registry.npmjs.org/history/-/history-5.3.0.tgz"
   "version" "5.3.0"
+<<<<<<< HEAD
 >>>>>>> 2c3a4cd776be5b5024b87c3485e776297a3742a9
+=======
+
+>>>>>>> f4621a4f164965e10502f6f83fd9dea3e131a50e
   dependencies:
     "@babel/runtime" "^7.7.6"
 
