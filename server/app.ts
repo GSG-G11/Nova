@@ -5,12 +5,9 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-<<<<<<< HEAD
 import { authRouter } from './routes';
-=======
 import startDb from './database/config';
 import { errorHandler, notFound } from './middlewares/errors';
->>>>>>> 2c3a4cd776be5b5024b87c3485e776297a3742a9
 
 dotenv.config();
 
