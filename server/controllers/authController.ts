@@ -10,13 +10,7 @@ import { CustomError } from '../utils';
 const login = async (req: Request, res: Response) => {
   const { email, password }: {email: string, password: string} = req.body;
 
-  try {
-    const result = await loginValidation(req.body);
-  } catch (error: any) {
-    if (error.name === 'ValidationError') {
-      throw new CustomError(error.message, 400);
-    }
-  }
+  await loginValidation(req.body);
 
   const user = await User.findOne({ email });
 
