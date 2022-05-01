@@ -4,37 +4,35 @@ import { Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import loginValidation from '../utils/validation/loginValidation';
+import User from '../database/Models/User';
+import { CustomError } from '../utils';
 
 const login = async (req: Request, res: Response) => {
   // TODO: change static user to the incoming request
-  const user = {
-    id: 1,
-    email: 'test@test.com',
-    password: 'Test@1',
-    role: 'admin',
-  };
-  const { email, password }: {email: string, password: string} = user;
+  const { email, password }: {email: string, password: string} = req.body;
 
   try {
-    const result = await loginValidation(user);
+    const result = await loginValidation(req.body);
   } catch (error: any) {
     if (error.name === 'ValidationError') {
-      return res.status(400).json({
-        message: error.message,
-      });
+      throw new CustomError(error.message, 400);
     }
   }
 
-  // TODO: search for user in collections, check the role and compare password
+  const user = await User.findOne({ email });
 
-  // const validPassword: boolean = await bcrypt.compare(password, user.password);
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
 
-  const validPassword: boolean = password === user.password;
+  const validPassword: boolean = await bcrypt.compare(password, user.password);
 
   if (!validPassword) {
-    return res.status(400).json({
-      error: 'Invalid password',
-    });
+    throw new CustomError('Invalid password', 400);
+  }
+
+  if (!user.is_confirmed) {
+    throw new CustomError('Please Verify your email', 401);
   }
 
   const token: string = sign({ id: user.id }, process.env.JWT_SECRET ?? '', { expiresIn: '1h' });

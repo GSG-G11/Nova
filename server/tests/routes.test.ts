@@ -7,14 +7,17 @@ import app from '../app';
 
 describe('Login', () => {
   test('Successfully Logged In', (done) => {
-    request(app).post('/api/login').expect(200)
+    request(app).post('/api/login').send({
+      email: 'jack@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(200)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
         expect(res.body.message).toBe('Login successful');
-        expect(res.body.data.user.id).toBe(1);
-        expect(res.body.data.user.email).toBe('test@test.com');
+        expect(res.body.data.user.email).toBe('jack@gmail.com');
         return done();
       });
   });
