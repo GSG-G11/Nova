@@ -1,41 +1,40 @@
-/* eslint-disable import/extensions */
 import mongoose from 'mongoose';
 import startDb from './config';
 import usersData from './fakeData/Users.json';
 import intervieweesData from './fakeData/Interviewees.json';
 import interviewersData from './fakeData/Interviewers.json';
 import scheduleData from './fakeData/Schedule.json';
-import User from './models/user';
-import Interviewee from './models/interviewee';
-import Interviewer from './models/interviewer';
-import Schedule from './models/schedule';
-
-// Delete a collection
-const deleteCollection = async (model: any) => {
-  try {
-    await model.deleteMany({});
-  } catch (err) {
-    console.log(err);
-  }
-};
+import User from './Models/User';
+import Interviewee from './Models/Interviewee';
+import Interviewer from './Models/Interviewer';
+import Schedule from './Models/Schedule';
 
 const createFakeData = async () => {
   try {
+    await startDb();
     usersData.user.forEach(async (user: object) => {
+      await User.deleteMany({});
       await User.create(user);
     });
 
     scheduleData.schedule.forEach(async (schedule: object) => {
+      await Schedule.deleteMany({});
       await Schedule.create(schedule);
     });
 
     intervieweesData.interviewee.forEach(async (interviewee: object) => {
+      await Interviewee.deleteMany({});
       await Interviewee.create(interviewee);
     });
 
     interviewersData.interviewer.forEach(async (interviewer: object) => {
+      await Interviewer.deleteMany({});
       await Interviewer.create(interviewer);
     });
+
+    setTimeout(() => {
+      mongoose.connection.close();
+    }, 1500);
 
     console.log('Fake data created successfully');
   } catch (err: any) {
@@ -43,21 +42,6 @@ const createFakeData = async () => {
   }
 };
 
-const main = async () => {
-  try {
-    await startDb();
-    await deleteCollection(User);
-    await deleteCollection(Interviewee);
-    await deleteCollection(Interviewer);
-    await deleteCollection(Schedule);
-    await createFakeData();
-
-    setTimeout(() => {
-      mongoose.connection.close();
-    }, 1500);
-  } catch (err: any) {
-    throw new Error(err);
-  }
-};
-
-main();
+if (process.env.NODE_ENV === 'development') {
+  createFakeData();
+}

@@ -32,10 +32,6 @@ const schedule = new Schema({
           type: Array,
           required: true,
         },
-        name: {
-          type: String,
-          required: true,
-        },
       },
     ],
     required: false,

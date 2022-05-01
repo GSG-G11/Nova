@@ -35,6 +35,7 @@ const user = new Schema({
   role: {
     type: String,
     required: true,
+    enum: ['admin', 'interviewer', 'interviewee'],
   },
 });
 

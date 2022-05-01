@@ -21,7 +21,7 @@
             "ignorePackages",
             {
                 "ts": "never",
-                "json": "never"
+                "json": "always"
             }
         ],
         "linebreak-style": [
