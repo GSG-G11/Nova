@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
+const { verify } = require('jsonwebtoken');
 
-const VerfiyAuth = (tokenKey: string) => new Promise((resolve, reject) => {
-  jwt.verify(tokenKey, process.env.JWT_SECRET, (err: Error, decoded: object) => {
+const verfiyAuth = (token: string) => new Promise((resolve, reject) => {
+  verify(token, process.env.JWT_SECRET, (err: Error, decoded: object) => {
     if (err) reject(err);
     else {
       resolve(decoded);
@@ -10,5 +10,5 @@ const VerfiyAuth = (tokenKey: string) => new Promise((resolve, reject) => {
 });
 
 module.exports = {
-  VerfiyAuth,
+  verfiyAuth,
 };
