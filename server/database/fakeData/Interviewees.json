@@ -1,0 +1,40 @@
+{
+    "interviewee": [
+        {
+            "userId": "1",
+            "interviews": [
+                {
+                    "id": "1",
+                    "interviewerId": 2,
+                    "date": "2022-04-28",
+                    "time": 12,
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory": "Technical",
+                    "review": {
+                        "message": "He did a great job!",
+                        "saved": false
+                    }
+                }
+            ]
+        },
+        {
+            "userId": "4",
+            "interviews": [
+                {
+                    "id": "2",
+                    "interviewerId": 2,
+                    "date": "2022-04-29",
+                    "time": 12,
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical",
+                    "review": {
+                        "message": "More than expected",
+                        "saved": true
+                    }
+                }
+            ]
+        }
+    ]
+}

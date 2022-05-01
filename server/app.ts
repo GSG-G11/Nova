@@ -6,8 +6,13 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import { authRouter } from './routes';
+import startDb from './database/config';
+import { errorHandler, notFound } from './middlewares/errors';
+
 
 dotenv.config();
+
+startDb();
 
 const app: Application = express();
 
@@ -26,4 +31,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(notFound);
+app.use(errorHandler);
 export default app;
