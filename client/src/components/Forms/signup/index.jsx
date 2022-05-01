@@ -42,6 +42,15 @@ function Signup() {
     setIsModalVisible(false);
   };
 
+  const confirmPasswordHandel = (getFieldValue) => ({
+    validator(_, value) {
+      if (!value || getFieldValue('Password') === value) {
+        return Promise.resolve();
+      }
+      return Promise.reject(new Error('The two passwords that you entered do not match!'));
+    },
+  });
+
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -142,14 +151,16 @@ function Signup() {
                 required: true,
                 message: 'Please confirm your password!',
               },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                },
-              }),
+              // ({ getFieldValue }) => ({
+              //   validator(_, value) {
+              //     if (!value || getFieldValue('password') === value) {
+              //       return Promise.resolve();
+              //     }
+              // eslint-disable-next-line max-len
+              //     return Promise.reject(new Error('The two passwords that you entered do not match!'));
+              //   },
+              // }),
+              ({ getFieldValue }) => confirmPasswordHandel(getFieldValue),
             ]}
           >
             <Input.Password />
