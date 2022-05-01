@@ -81,6 +81,7 @@ describe('Login', () => {
         }
         expect(res.body.message).toBe('Login successful');
         expect(res.body.data.user.email).toBe('jack@gmail.com');
+        expect(res.headers['set-cookie'][0]).toContain('token');
         return done();
       });
   });

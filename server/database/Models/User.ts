@@ -37,7 +37,7 @@ const user = new Schema({
     required: true,
     enum: ['admin', 'interviewer', 'interviewee'],
   },
-  is_confirmed: {
+  is_verified: {
     type: Boolean,
     required: true,
     default: false,

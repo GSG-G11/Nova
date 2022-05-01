@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { login } from './authController';
+import login from './authController';
 
 export {
   login,

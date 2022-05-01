@@ -1,14 +1,20 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-unused-vars */
 import { Request, Response } from 'express';
-import { sign } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import { compare } from 'bcrypt';
+import { JwtPayload } from 'jsonwebtoken';
 import loginValidation from '../utils/validation/loginValidation';
 import User from '../database/Models/User';
-import { CustomError } from '../utils';
+import { CustomError, signToken } from '../utils';
+
+// I used declare to use JWT_SECRET from process.env
+declare const process: {
+  env: {
+    JWT_SECRET: string;
+  };
+};
 
 const login = async (req: Request, res: Response) => {
   const { email, password }: {email: string, password: string} = req.body;
+  const { JWT_SECRET } = process.env;
 
   await loginValidation(req.body);
 
@@ -18,36 +24,41 @@ const login = async (req: Request, res: Response) => {
     throw new CustomError('User not found', 404);
   }
 
-  const validPassword: boolean = await bcrypt.compare(password, user.password);
+  const validPassword: boolean = await compare(password, user.password);
 
   if (!validPassword) {
     throw new CustomError('Invalid password', 400);
   }
 
-  if (!user.is_confirmed) {
+  const { id, role, is_verified: isVerified } = user;
+
+  if (!isVerified) {
     throw new CustomError('Please Verify your email', 401);
   }
 
-  const token: string = sign({ id: user.id }, process.env.JWT_SECRET ?? '', { expiresIn: '1h' });
+  const payload: JwtPayload = {
+    id,
+    email,
+    role,
+  };
 
-  res.cookie('jwt', token, {
+  const token: any = await signToken(payload, JWT_SECRET, { expiresIn: '1h' });
+
+  res.cookie('token', token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60,
   });
 
-  return res.status(200).json({
+  return res.json({
     message: 'Login successful',
     data: {
       user: {
-        id: user.id,
-        email: user.email,
-        role: user.role,
+        id,
+        email,
+        role,
       },
-      token,
     },
   });
 };
 
-export {
-  login,
-};
+export default login;

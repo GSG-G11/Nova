@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { login } from '../controllers';
 
-const router: any = express.Router();
+const router: Router = express.Router();
 
 router.post('/login', login);
 

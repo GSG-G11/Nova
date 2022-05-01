@@ -10,7 +10,7 @@
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "JUNIOR",
             "role": "interviewee",
-            "is_confirmed": true
+            "is_verified": true
         },
         {
             "id": 2,
@@ -22,7 +22,7 @@
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "EXPERT",
             "role": "interviewer",
-            "is_confirmed": true
+            "is_verified": true
 
         },
         {
@@ -35,7 +35,7 @@
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "EXPERT",
             "role": "admin",
-            "is_confirmed": true
+            "is_verified": true
 
         },
         {
@@ -48,7 +48,7 @@
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "INTERNSHIP",
             "role": "interviewee",
-            "is_confirmed": false
+            "is_verified": false
 
         }
     ]
