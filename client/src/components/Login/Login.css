@@ -1,0 +1,39 @@
+.logo{
+  width: 130px;
+  height: 50px;
+  margin-top: 3rem;
+}
+
+.ant-modal-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ant-form{
+  margin-top:  3rem !important;
+  margin-left:  -5rem !important;
+  width: 22rem;
+}
+
+.ant-form .ant-row .ant-col .ant-form-item-control-input .ant-form-item-control-input-content .ant-btn{
+  width: 100%;
+  background-color: #432773;
+  border-color: #432773;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.ant-modal-footer , 
+.ant-modal-header 
+{
+  display: none;
+}
+
+.have-account{
+  margin-top: .5rem;
+}
+
+.ant-modal-content{
+  border-radius: 20px !important;
+}
