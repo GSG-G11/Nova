@@ -8,7 +8,6 @@ import User from '../database/Models/User';
 import { CustomError } from '../utils';
 
 const login = async (req: Request, res: Response) => {
-  // TODO: change static user to the incoming request
   const { email, password }: {email: string, password: string} = req.body;
 
   try {
