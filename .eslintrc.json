@@ -21,9 +21,14 @@
             "ignorePackages",
             {
                 "ts": "never",
-                "json": "never"
+                "json": "always"
             }
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
         ]
+        
     },
     "settings": {
         "import/resolver": {

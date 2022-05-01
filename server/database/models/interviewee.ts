@@ -33,7 +33,8 @@ const interviewee = new Schema({
           required: true,
         },
         questionCategory: {
-          type: Array,
+          type: String,
+          enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
         review: {
@@ -55,6 +56,6 @@ const interviewee = new Schema({
 
 });
 
-const intervieweeSchema = model('Interviewee', interviewee);
+const Interviewee = model('Interviewee', interviewee);
 
-export default intervieweeSchema;
+export default Interviewee;

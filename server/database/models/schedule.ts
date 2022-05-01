@@ -4,15 +4,22 @@ const schedule = new Schema({
   languages: {
     type: String,
     required: false,
+    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
   },
   specialization: {
     type: String,
     required: false,
+    enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
+  },
+  questionCategory: {
+    type: String,
+    required: false,
+    enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
   },
   available: {
     type: [
       {
-        interviwerId: {
+        interviewerId: {
           $ref: 'Interviewer',
           type: String,
           required: true,
@@ -25,10 +32,6 @@ const schedule = new Schema({
           type: Array,
           required: true,
         },
-        name: {
-          type: String,
-          required: true,
-        },
       },
     ],
     required: false,
@@ -36,6 +39,6 @@ const schedule = new Schema({
 
 });
 
-const scheduleSchema = model('Schedule', schedule);
+const Schedule = model('Schedule', schedule);
 
-export default scheduleSchema;
+export default Schedule;
