@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import mongoose from 'mongoose';
 import startDb from './config';
 import usersData from './fakeData/users.json';
