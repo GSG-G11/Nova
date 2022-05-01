@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 import startDb from './config';
-import usersData from './fakeData/Users.json';
-import intervieweesData from './fakeData/Interviewees.json';
-import interviewersData from './fakeData/Interviewers.json';
-import scheduleData from './fakeData/Schedule.json';
-import User from './Models/User';
-import Interviewee from './Models/Interviewee';
-import Interviewer from './Models/Interviewer';
-import Schedule from './Models/Schedule';
+import usersData from './fakeData/users.json';
+import intervieweesData from './fakeData/interviewees.json';
+import interviewersData from './fakeData/interviewers.json';
+import scheduleData from './fakeData/schedule.json';
+import User from './Models/user';
+import Interviewee from './Models/interviewee';
+import Interviewer from './Models/interviewer';
+import Schedule from './Models/schedule';
 
 const createFakeData = async () => {
   try {
