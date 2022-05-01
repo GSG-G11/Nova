@@ -7,12 +7,12 @@ const interviewer = new Schema({
     required: true,
   },
   languages: {
-    type: Array,
+    type: [String],
     enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
     required: true,
   },
   specialization: {
-    type: String,
+    type: [String],
     enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
     required: true,
   },
@@ -43,8 +43,10 @@ const interviewer = new Schema({
           required: true,
         },
         questionCategory: {
-          type: Array,
+          type: String,
           required: true,
+          enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
+
         },
       },
     ],
@@ -68,6 +70,6 @@ const interviewer = new Schema({
 
 });
 
-const interviewerSchema = model('Interviewer', interviewer);
+const Interviewer = model('Interviewer', interviewer);
 
-export default interviewerSchema;
+export default Interviewer;
