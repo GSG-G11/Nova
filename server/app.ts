@@ -7,6 +7,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import startDb from './database/config';
 import router from './routes';
+import { errorHandler, notFound } from './middlewares/errors';
 
 dotenv.config();
 
@@ -20,11 +21,15 @@ app.use(cors());
 app.use(compression());
 app.use(cookieParser());
 app.use(router);
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
   app.get('*', (req: Request, res: Response) => {
     res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
+
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;

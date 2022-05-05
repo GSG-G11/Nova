@@ -34,8 +34,8 @@ const user = new Schema({
   },
   role: {
     type: String,
-    enum: ['INTERVIEWEE', 'INTERVIEWER', 'ADMIN'],
     required: true,
+    enum: ['ADMIN', 'INTERVIEWER', 'INTERVIEWEE'],
   },
   is_verified: {
     type: Boolean,
@@ -44,6 +44,6 @@ const user = new Schema({
   },
 });
 
-const userSchema = model('User', user);
+const User = model('User', user);
 
-export default userSchema;
+export default User;

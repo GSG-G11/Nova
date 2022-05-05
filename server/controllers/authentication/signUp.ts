@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { signToken, mailSender, signUpCheckInput } from '../../utils';
-import userSchema from '../../database/models/user';
+import User from '../../database/Models/User';
 
 const signUp = async (req: Request, res: Response) => {
     interface Body {
@@ -19,7 +19,7 @@ const signUp = async (req: Request, res: Response) => {
       name, email, password,
     });
 
-    const checkEmail = await userSchema.findOne({ email });
+    const checkEmail = await User.findOne({ email });
 
     if (checkEmail) {
       throw new Error('Email already exists');
@@ -29,7 +29,7 @@ const signUp = async (req: Request, res: Response) => {
 
     const hashedPassword: string = await bcrypt.hash(password, 10);
 
-    await userSchema.create({
+    await User.create({
       email, password: hashedPassword, name, role,
     });
 
