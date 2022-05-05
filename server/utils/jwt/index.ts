@@ -1,7 +1,13 @@
 import jwt from 'jsonwebtoken';
 
-const verifyToken = (token: string, secret: string) => new Promise((resolve, reject) => {
-  jwt.verify(token, secret, (err, decode) => {
+const { SECRET_KEY } = process.env;
+
+if (!SECRET_KEY) {
+  throw new Error('SECRET_KEY is not defined');
+}
+
+const verifyToken = (token: string) => new Promise((resolve, reject) => {
+  jwt.verify(token, SECRET_KEY, (err, decode) => {
     if (err) {
       reject(err);
     } else {
@@ -10,8 +16,8 @@ const verifyToken = (token: string, secret: string) => new Promise((resolve, rej
   });
 });
 
-const signToken = (payload:string, secret:string) => new Promise((resolve, reject) => {
-  jwt.sign(payload, secret, (err, token) => {
+const signToken = (payload:string) => new Promise((resolve, reject) => {
+  jwt.sign(payload, SECRET_KEY, (err, token) => {
     if (err) {
       reject(err);
     } else {

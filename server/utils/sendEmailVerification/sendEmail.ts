@@ -20,7 +20,7 @@ const mailSender = (email: string, accessToken: string, name:string) => {
 
   transporter.sendMail(mailOptions, (error: any, info: any) => {
     if (error) {
-      return 'Error sending email';
+      return info;
     }
     return 'Email sent';
   });

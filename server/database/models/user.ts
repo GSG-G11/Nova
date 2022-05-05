@@ -10,10 +10,6 @@ const user = new Schema({
     required: true,
     unique: true,
   },
-  accessToken: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,

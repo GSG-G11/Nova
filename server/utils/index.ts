@@ -1,7 +1,7 @@
 import { verifyToken, signToken } from './jwt';
-import { hashPassword, comparePassword } from './bcrypt';
 import mailSender from './sendEmailVerification/sendEmail';
+import signUpCheckInput from './validation/signUpCheckInput';
 
 export {
-  verifyToken, signToken, hashPassword, comparePassword, mailSender,
+  verifyToken, signToken, mailSender, signUpCheckInput,
 };

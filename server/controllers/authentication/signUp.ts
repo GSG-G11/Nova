@@ -1,13 +1,9 @@
 import { Request, Response } from 'express';
-import dotenv from 'dotenv';
-import signUpCheckInput from '../../utils/validation/signUpSchema';
-import { createAccount, findAccount } from '../../database/queries/signUpUser';
-import { hashPassword, signToken, mailSender } from '../../utils';
-
-dotenv.config();
+import bcrypt from 'bcrypt';
+import { signToken, mailSender, signUpCheckInput } from '../../utils';
+import userSchema from '../../database/models/user';
 
 const signUp = async (req: Request, res: Response) => {
-  try {
     interface Body {
       name: string;
       email: string;
@@ -23,23 +19,18 @@ const signUp = async (req: Request, res: Response) => {
       name, email, password,
     });
 
-    const checkEmail = await findAccount(email);
+    const checkEmail = await userSchema.findOne({ email });
 
     if (checkEmail) {
       throw new Error('Email already exists');
     }
 
-    const { SECRET_KEY } = process.env;
+    const accessToken: any = await signToken(email);
 
-    if (!SECRET_KEY) {
-      throw new Error('SECRET_KEY is not defined');
-    }
-    const accessToken: any = await signToken(email, SECRET_KEY);
+    const hashedPassword: string = await bcrypt.hash(password, 10);
 
-    const hashedPassword: string = await hashPassword(password);
-
-    await createAccount({
-      email, hashedPassword, name, role, accessToken,
+    await userSchema.create({
+      email, password: hashedPassword, name, role,
     });
 
     mailSender(email, accessToken, name);
@@ -49,9 +40,6 @@ const signUp = async (req: Request, res: Response) => {
       },
       message: 'Account created successfully',
     });
-  } catch (error) {
-    return res.json(error);
-  }
 };
 
 export default signUp;

@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import dotenv from 'dotenv';
-import { findAccount, updateValidate } from '../../database/queries/signUpUser';
-
-dotenv.config();
+import { verifyToken } from '../../utils';
+import userSchema from '../../database/models/user';
 
 const validateEmail = async (req: Request, res: Response) => {
   try {
@@ -10,13 +8,15 @@ const validateEmail = async (req: Request, res: Response) => {
 
     if (!accessToken) {
       return res.status(401).json({
-        data: '',
+        data: 'No token provided',
         message: 'accessToken is not defined',
       });
     }
+    const token: any = await verifyToken(accessToken);
 
-    const user = await findAccount(accessToken);
-    await updateValidate({ accessToken }, true);
+    const user = await userSchema.findOne({ token });
+
+    await userSchema.updateOne({ token }, { $set: { is_verified: true } });
 
     return res.status(200).json({
       data: user,
