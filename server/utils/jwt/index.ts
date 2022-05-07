@@ -1,13 +1,15 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload, sign } from 'jsonwebtoken';
 
-const { SECRET_KEY } = process.env;
+declare const process: {
+  env: {
+    JWT_SECRET: string;
+  };
+};
 
-if (!SECRET_KEY) {
-  throw new Error('SECRET_KEY is not defined');
-}
+const { JWT_SECRET } = process.env;
 
 const verifyToken = (token: string) => new Promise((resolve, reject) => {
-  jwt.verify(token, SECRET_KEY, (err, decode) => {
+  jwt.verify(token, JWT_SECRET, (err, decode) => {
     if (err) {
       reject(err);
     } else {
@@ -16,13 +18,15 @@ const verifyToken = (token: string) => new Promise((resolve, reject) => {
   });
 });
 
-const signToken = (payload:string) => new Promise((resolve, reject) => {
-  jwt.sign(payload, SECRET_KEY, (err, token) => {
+const signToken = (
+  payload: JwtPayload,
+  options?: any,
+) => new Promise((resolve, reject) => {
+  sign(payload, JWT_SECRET, options, (err: any, token: any) => {
     if (err) {
       reject(err);
-    } else {
-      resolve(token);
     }
+    resolve(token);
   });
 });
 

@@ -35,12 +35,12 @@ const user = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ['ADMIN', 'INTERVIEWER', 'INTERVIEWEE'],
+    enum: ['admin', 'interviewer', 'interviewee'],
   },
   is_verified: {
     type: Boolean,
+    required: true,
     default: false,
-    required: false,
   },
 });
 

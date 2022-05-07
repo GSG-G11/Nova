@@ -3,8 +3,8 @@ import { signUp, validateEmail } from '../../controllers';
 
 const router: any = express.Router();
 
-router.post('/api/signup', signUp);
+router.post('/signup', signUp);
 
-router.get('/api/auth/verify', validateEmail);
+router.get('/auth/verify', validateEmail);
 
 export default router;

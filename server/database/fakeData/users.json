@@ -4,45 +4,52 @@
             "id": 1,
             "name": "Jane Doe",
             "email": "jane@gmail.com",
-            "password": "$2a$10$KXdWNpCUVb9U8ePldP419undqNuiA321ZfM4W4vDbs9CpnSBPpCDC",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "I'm a web developer",
             "cv": "link to cv",
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "JUNIOR",
-            "role": "interviewee"
+            "role": "interviewee",
+            "is_verified": true
         },
         {
             "id": 2,
             "name": "Jack Doe",
             "email": "jack@gmail.com",
-            "password": "$2a$10$KXdWNpCUVb9U8ePldP419undqNuiA321ZfM4W4vDbs9CpnSBPpCDC",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "I'm an interviewer",
             "cv": "link to cv",
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "EXPERT",
-            "role": "interviewer"
+            "role": "interviewer",
+            "is_verified": true
+
         },
         {
             "id": 3,
             "name": "Admin Doe",
             "email": "admin@gmail.com",
-            "password": "$2a$10$KXdWNpCUVb9U8ePldP419undqNuiA321ZfM4W4vDbs9CpnSBPpCDC",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "",
             "cv": "",
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "EXPERT",
-            "role": "admin"
+            "role": "admin",
+            "is_verified": true
+
         },
         {
             "id": 4,
             "name": "Larry Doe",
             "email": "larry@gmail.com",
-            "password": "$2a$10$KXdWNpCUVb9U8ePldP419undqNuiA321ZfM4W4vDbs9CpnSBPpCDC",
-            "bio": "I'm a recruiter",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm a web developer",
             "cv": "link to cv",
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "INTERNSHIP",
-            "role": "interviewee"
+            "role": "interviewee",
+            "is_verified": false
+
         }
     ]
 }

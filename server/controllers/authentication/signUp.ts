@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { signToken, mailSender, signUpCheckInput } from '../../utils';
 import User from '../../database/Models/User';
@@ -25,7 +26,10 @@ const signUp = async (req: Request, res: Response) => {
       throw new Error('Email already exists');
     }
 
-    const accessToken: any = await signToken(email);
+    const payload: JwtPayload = {
+      email,
+    };
+    const accessToken: any = await signToken(payload);
 
     const hashedPassword: string = await bcrypt.hash(password, 10);
 
