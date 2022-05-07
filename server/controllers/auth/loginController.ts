@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { compare } from 'bcrypt';
 import { JwtPayload } from 'jsonwebtoken';
-import User from '../database/Models/User';
-import { CustomError, signToken, loginValidation } from '../utils';
+import User from '../../database/Models/User';
+import { CustomError, signToken, loginValidation } from '../../utils';
 
 // I used declare to use JWT_SECRET from process.env
 
