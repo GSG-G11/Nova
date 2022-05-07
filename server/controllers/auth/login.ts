@@ -33,7 +33,7 @@ const login = async (req: Request, res: Response) => {
     role,
   };
 
-  const token: any = await signToken(payload, { expiresIn: '1h' });
+  const token: any = await signToken(payload);
 
   res.cookie('token', token, {
     httpOnly: true,

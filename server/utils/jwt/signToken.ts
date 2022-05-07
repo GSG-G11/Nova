@@ -10,7 +10,7 @@ const { JWT_SECRET } = process.env;
 
 const signToken = (
   payload: JwtPayload,
-  options: any,
+  options?: any,
 ) => new Promise((resolve, reject) => {
   sign(payload, JWT_SECRET, options, (err: any, token: any) => {
     if (err) {
