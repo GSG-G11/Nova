@@ -1,6 +1,7 @@
 const checkAuth = require('./auth/checkAuth');
+import login from './auth/login';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
   checkAuth,
+  login,
 };

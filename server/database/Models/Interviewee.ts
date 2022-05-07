@@ -1,26 +1,16 @@
 import { Schema, model } from 'mongoose';
 
-const interviewer = new Schema({
+const interviewee = new Schema({
   userId: {
     $ref: 'User',
     type: String,
     required: true,
   },
-  languages: {
-    type: Array,
-    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
-    required: true,
-  },
-  specialization: {
-    type: String,
-    enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
-    required: true,
-  },
   interviews: {
     type: [
       {
-        intervieweeId: {
-          $ref: 'Interviewee',
+        interviewerId: {
+          $ref: 'Interviewer',
           type: String,
           required: true,
         },
@@ -43,23 +33,21 @@ const interviewer = new Schema({
           required: true,
         },
         questionCategory: {
-          type: Array,
+          type: String,
+          enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
-      },
-    ],
-    required: false,
-  },
-  schedule: {
-    type: [
-      {
-        date: {
-          type: Date,
-          required: true,
-        },
-        time: {
-          type: Array,
-          required: true,
+        review: {
+          type: {
+            message: {
+              type: String,
+              required: false,
+            },
+            saved: {
+              type: Boolean,
+              required: false,
+            },
+          },
         },
       },
     ],
@@ -68,6 +56,6 @@ const interviewer = new Schema({
 
 });
 
-const interviewerSchema = model('Interviewer', interviewer);
+const Interviewee = model('Interviewee', interviewee);
 
-export default interviewerSchema;
+export default Interviewee;

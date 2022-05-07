@@ -17,6 +17,7 @@
     "plugins": [
         "react"
     ],
+    "root": true,
     "rules": {
         "react/jsx-filename-extension": [
             1,
@@ -29,7 +30,7 @@
         ],
         "linebreak-style": [
             "error",
-            "windows"
+            "unix"
         ]
     }
 }

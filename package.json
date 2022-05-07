@@ -11,7 +11,8 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "lint": "eslint --ext .ts server/",
     "lint-fix": "eslint --ext .ts server/ --fix && cd client && npm run lint-fix",
-    "lint:client": "cd client && npm run lint"
+    "lint:client": "cd client && npm run lint",
+    "build:db": "cross-env NODE_ENV=development npx ts-node ./server/database/build.ts"
   },
   "pre-commit": [
     "lint",
@@ -19,6 +20,8 @@
     "test"
   ],
   "dependencies": {
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-typescript": "^7.16.7",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
