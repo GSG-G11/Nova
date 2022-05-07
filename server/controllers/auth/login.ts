@@ -4,8 +4,6 @@ import { JwtPayload } from 'jsonwebtoken';
 import User from '../../database/Models/User';
 import { CustomError, signToken, loginValidation } from '../../utils';
 
-// I used declare to use JWT_SECRET from process.env
-
 const login = async (req: Request, res: Response) => {
   const { email, password }: {email: string, password: string} = req.body;
 
@@ -31,7 +29,7 @@ const login = async (req: Request, res: Response) => {
 
   const payload: JwtPayload = {
     id,
-    email,
+    isVerified,
     role,
   };
 
@@ -47,7 +45,7 @@ const login = async (req: Request, res: Response) => {
     data: {
       user: {
         id,
-        email,
+        isVerified,
         role,
       },
     },
