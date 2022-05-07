@@ -9,6 +9,4 @@ const verfiyAuth = (token: string) => new Promise((resolve, reject) => {
   });
 });
 
-module.exports = {
-  verfiyAuth,
-};
+export default verfiyAuth;

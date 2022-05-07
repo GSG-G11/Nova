@@ -1,6 +1,7 @@
 const userAuth = require('./userAuth');
+const adminAuth = require('./adminAuth');
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
   userAuth,
+  adminAuth,
 };
