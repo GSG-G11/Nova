@@ -10,9 +10,15 @@ const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
+  if (error.name === 'ValidationError') {
+    return res.status(400).json({
+      message: error.message,
+    });
+  }
   const status = error.code || 500;
   const message = error.message || 'Something went wrong';
-  res.status(status).send({
+
+  return res.status(status).send({
     status,
     message,
   });
