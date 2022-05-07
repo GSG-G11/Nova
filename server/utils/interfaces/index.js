@@ -1,3 +1,3 @@
-import RequestType from './adminInterface';
+import RequestType from './RequestType';
 
 export default RequestType;
