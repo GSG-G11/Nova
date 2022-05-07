@@ -1,6 +1,6 @@
 import nodeMailer from 'nodemailer';
 
-const mailSender = (email: string, accessToken: string, name:string) => {
+const mailSender = async (email: string, accessToken: string, name:string) => {
   const transporter: any = nodeMailer.createTransport({
     service: 'gmail',
     auth: {
@@ -18,7 +18,7 @@ const mailSender = (email: string, accessToken: string, name:string) => {
     <a href=http://localhost:8000/api/auth/verify?accessToken=${accessToken}>Verify Your Email</a>`,
   };
 
-  transporter.sendMail(mailOptions, (error: any, info: any) => {
+  await transporter.sendMail(mailOptions, (error: any, info: any) => {
     if (error) {
       return info;
     }

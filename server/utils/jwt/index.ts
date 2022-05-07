@@ -1,4 +1,4 @@
-import jwt, { JwtPayload, sign } from 'jsonwebtoken';
+import { JwtPayload, sign, verify } from 'jsonwebtoken';
 
 declare const process: {
   env: {
@@ -9,7 +9,7 @@ declare const process: {
 const { JWT_SECRET } = process.env;
 
 const verifyToken = (token: string) => new Promise((resolve, reject) => {
-  jwt.verify(token, JWT_SECRET, (err, decode) => {
+  verify(token, JWT_SECRET, (err, decode) => {
     if (err) {
       reject(err);
     } else {

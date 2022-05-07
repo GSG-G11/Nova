@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { signToken, mailSender, signUpCheckInput } from '../../utils';
+import {
+  signToken, mailSender, signupValidation, CustomError,
+} from '../../utils';
 import User from '../../database/Models/User';
 
-const signUp = async (req: Request, res: Response) => {
+const signup = async (req: Request, res: Response) => {
     interface Body {
       name: string;
       email: string;
@@ -16,14 +18,15 @@ const signUp = async (req: Request, res: Response) => {
       name, email, password, role,
     }:Body = req.body;
 
-    await signUpCheckInput({
+    await signupValidation({
       name, email, password,
     });
 
     const checkEmail = await User.findOne({ email });
 
     if (checkEmail) {
-      throw new Error('Email already exists');
+      await User.deleteOne({ email });
+      throw new CustomError('Email already exists', 409);
     }
 
     const payload: JwtPayload = {
@@ -42,8 +45,8 @@ const signUp = async (req: Request, res: Response) => {
       data: {
         name, email, password, role,
       },
-      message: 'Account created successfully',
+      message: 'Account created successfully please check your email to verify your account',
     });
 };
 
-export default signUp;
+export default signup;
