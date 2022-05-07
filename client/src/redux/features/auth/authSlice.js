@@ -13,13 +13,7 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    reset: (state) => {
-      state.isAuthenticated = false;
-      state.user = null;
-      state.loading = false;
-    },
-  },
+  reducers: {},
 });
 
 export default authSlice.reducer;
