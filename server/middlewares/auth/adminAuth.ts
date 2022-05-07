@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
-import { CustomError } from '../../utils';
+import { Response, NextFunction } from 'express';
+import { CustomError, RequestType } from '../../utils';
 
-const adminAuth = (req: Request, res: Response, next: NextFunction) => {
-  const { userInfo } = req;
-  if (userInfo.role === 'admin') {
+const adminAuth = (req: RequestType, res: Response, next: NextFunction) => {
+  const { userInfo: { role } } = req;
+
+  if (role === 'admin') {
     next();
   } else {
     throw new CustomError('You are not authorized', 401);
