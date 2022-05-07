@@ -5,15 +5,9 @@ import User from '../database/Models/User';
 import { CustomError, signToken, loginValidation } from '../utils';
 
 // I used declare to use JWT_SECRET from process.env
-declare const process: {
-  env: {
-    JWT_SECRET: string;
-  };
-};
 
 const login = async (req: Request, res: Response) => {
   const { email, password }: {email: string, password: string} = req.body;
-  const { JWT_SECRET } = process.env;
 
   await loginValidation(req.body);
 
@@ -41,7 +35,7 @@ const login = async (req: Request, res: Response) => {
     role,
   };
 
-  const token: any = await signToken(payload, JWT_SECRET, { expiresIn: '1h' });
+  const token: any = await signToken(payload, { expiresIn: '1h' });
 
   res.cookie('token', token, {
     httpOnly: true,
