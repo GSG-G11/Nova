@@ -1,6 +1,6 @@
-const verfiyAuth = require('./verifyToken');
+const verfiyToken = require('./verifyToken');
 
 export {
   // eslint-disable-next-line import/prefer-default-export
-  verfiyAuth,
+  verfiyToken,
 };

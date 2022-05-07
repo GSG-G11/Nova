@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import { CustomError, RequestType, verfiyAuth } from '../../utils';
+import { CustomError, RequestType, verfiyToken } from '../../utils';
 
 const userAuth = async (req: RequestType, res: Response, next: NextFunction) => {
   const { token } = req.cookies;
@@ -7,7 +7,7 @@ const userAuth = async (req: RequestType, res: Response, next: NextFunction) => 
   if (!token) {
     throw new CustomError('Login First!', 401);
   } else {
-    const userInfo = await verfiyAuth(token);
+    const userInfo = await verfiyToken(token);
     if (userInfo.isVerified) {
       req.userInfo = userInfo;
       next();
