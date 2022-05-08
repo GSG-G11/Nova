@@ -3,11 +3,14 @@ import {
   Form, Input, Button,
 } from 'antd';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import './Login.css';
+import { setUser } from '../../redux/features/auth/user';
 
 function Demo() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const changeEmail = (e) => {
     e.preventDefault();
@@ -23,7 +26,16 @@ function Demo() {
     await axios.post('/api/login', {
       email,
       password,
-    });
+      role: 'interviewee',
+    })
+      .then((res) => {
+        if (res.data.message !== 'Login successful') {
+          throw new Error('Login failed');
+        }
+        dispatch(setUser(res.data.data.user));
+      }).catch(() => {
+        dispatch(setUser({ isVerified: false, role: '' }));
+      });
   };
 
   return (
