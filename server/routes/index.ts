@@ -1,6 +1,8 @@
-/* eslint-disable import/prefer-default-export */
+import express, { Router } from 'express';
 import authRouter from './authRoutes';
 
-export {
-  authRouter,
-};
+const router: Router = express.Router();
+
+router.use(authRouter);
+
+export default router;

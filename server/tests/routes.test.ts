@@ -62,6 +62,7 @@ describe('Login', () => {
     }).expect(401)
       .end((err, res) => {
         if (err) {
+          console.log(err, 'errordd');
           return done(err);
         }
         expect(res.body.message).toBe('Please Verify your email');
