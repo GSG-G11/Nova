@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -10,14 +9,14 @@ import {
   message,
 } from 'antd';
 import logo from '../../../assets/images/logo.png';
-import './index.css';
+import './style.css';
 import { signUpAction } from '../../../redux/features/auth/authSlice';
 
 const { Item } = Form;
 const { Password } = Input;
 
-function Signup() {
-  // eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line react/function-component-definition
+const Signup = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -180,6 +179,6 @@ function Signup() {
       </Modal>
     </>
   );
-}
+};
 
 export default Signup;
