@@ -1,20 +1,18 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
-import checkUser from './authService';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import authService from './authService';
 
-let userExist;
-(async () => {
-  const user = await checkUser();
-  if (user) {
-    userExist = user;
-  } else {
-    userExist = false;
+const checkUser = createAsyncThunk('auth/checkUser', async (_, thinkAPI) => {
+  try {
+    return await authService.checkUser();
+  } catch (error) {
+    return thinkAPI.rejectWithValue(error);
   }
-})();
+});
 // Create the initial state for the auth feature
 const initialState = {
   isAuthenticated: false,
-  user: userExist,
+  user: null,
   loading: false,
 };
 
@@ -24,6 +22,21 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+  },
+  extraReducers: (builder) => {
+    builder.addCase(checkUser.fulfilled, (state, action) => {
+      state.isAuthenticated = true;
+      state.user = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(checkUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(checkUser.rejected, (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.loading = false;
+    });
   },
 });
 

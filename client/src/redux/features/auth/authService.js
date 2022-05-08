@@ -10,4 +10,7 @@ const checkUser = async () => {
   }
 };
 
-export default checkUser;
+const authService = {
+  checkUser,
+};
+export default authService;
