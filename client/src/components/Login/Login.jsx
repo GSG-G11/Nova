@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import './Login.css';
+import './style.css';
 import { setUser } from '../../redux/features/auth/user';
 
 function Demo() {

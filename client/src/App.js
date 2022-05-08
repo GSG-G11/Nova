@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginModal from './components/Login/LoginModal';
+import LoginModal from './components/Login';
 import 'antd/dist/antd.css';
 
 function App() {

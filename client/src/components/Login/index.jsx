@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import Login from './Login';
 import logo from '../../assets/Nova Logo.png';
-import './Login.css';
+import './style.css';
 
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
