@@ -21,7 +21,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-  const [rool] = useState('interviewee');
+  const rool = 'interviewee';
   const dispatch = useDispatch();
 
   const signUp = async () => {
