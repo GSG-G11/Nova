@@ -5,6 +5,6 @@ import { login, checkAuth } from '../controllers';
 const router: Router = express.Router();
 
 router.post('/login', login);
-router.get('/api/checkAuth', checkAuth);
+router.get('/checkAuth', checkAuth);
 
 export default router;
