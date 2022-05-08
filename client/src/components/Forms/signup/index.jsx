@@ -15,8 +15,7 @@ import { signUpAction } from '../../../redux/features/auth/authSlice';
 const { Item } = Form;
 const { Password } = Input;
 
-// eslint-disable-next-line react/function-component-definition
-const Signup = () => {
+function Signup() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -179,6 +178,6 @@ const Signup = () => {
       </Modal>
     </>
   );
-};
+}
 
 export default Signup;
