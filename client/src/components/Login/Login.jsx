@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import './style.css';
 import { setUser } from '../../redux/features/auth/user';
 
-function Demo() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -100,4 +100,4 @@ function Demo() {
   );
 }
 
-export default Demo;
+export default Login;
