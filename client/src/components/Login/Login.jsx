@@ -10,8 +10,8 @@ import { setUser } from '../../redux/features/auth/user';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
-
   const { Item } = Form;
   const { Password } = Input;
   const changeEmail = (e) => {
@@ -25,19 +25,13 @@ function Login() {
   };
 
   const onFinish = async () => {
-    await axios.post('/api/login', {
-      email,
-      password,
-      role: 'interviewee',
-    })
-      .then((res) => {
-        if (res.data.message !== 'Login successful') {
-          throw new Error('Login failed');
-        }
-        dispatch(setUser(res.data.data.user));
-      }).catch(() => {
-        dispatch(setUser({ isVerified: false, role: '' }));
-      });
+    try {
+      const user = await axios.post('/api/login', { email, password });
+      dispatch(setUser(user.data.data.user));
+      setError('');
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
 
   return (
@@ -89,11 +83,13 @@ function Login() {
           span: 16,
         }}
       >
+        <h4 className="errors">{error}</h4>
         <Button type="primary" htmlType="submit">
           Login
         </Button>
         <div className="have-account">
           Don`t have an account?
+          {/* Here We need to change the anchor tag when connenct all pages together */}
           <a href="/signup">Sign up</a>
 
         </div>
