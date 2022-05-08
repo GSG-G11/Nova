@@ -21,18 +21,21 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [rool] = useState('interviewee');
   const dispatch = useDispatch();
 
   const signUp = async () => {
     try {
-      await axios.post('/api/signup', {
+      const { message: msg } = await axios.post('/api/signup', {
         fullName,
         email,
         password,
+        confirm,
+        rool,
       });
       dispatch(signUpAction());
       setIsModalVisible(false);
-      message.success('Welcome to Nova');
+      message.success(msg);
     } catch (err) {
       message.error(`Sorry, try again , ${err.message}`);
     }
@@ -56,7 +59,7 @@ function Signup() {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Open Modal
+        Sign Up
       </Button>
       <Modal
         title={(
@@ -153,19 +156,10 @@ function Signup() {
                 required: true,
                 message: 'Please confirm your password!',
               },
-              // ({ getFieldValue }) => ({
-              //   validator(_, value) {
-              //     if (!value || getFieldValue('password') === value) {
-              //       return Promise.resolve();
-              //     }
-              // eslint-disable-next-line max-len
-              //     return Promise.reject(new Error('The two passwords that you entered do not match!'));
-              //   },
-              // }),
               ({ getFieldValue }) => confirmPasswordHandel(getFieldValue),
             ]}
           >
-            <Input.Password />
+            <Password />
           </Item>
           <Item>
             <div className="form-group-btn">
