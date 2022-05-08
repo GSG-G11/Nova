@@ -13,7 +13,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'jackgmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(400)
       .end((err, res) => {
         if (err) {
@@ -28,7 +27,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'potato@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(404)
       .end((err, res) => {
         if (err) {
@@ -43,7 +41,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'jack@gmail.com',
       password: 'Abed@12345',
-      role: 'interviewee',
     }).expect(400)
       .end((err, res) => {
         if (err) {
@@ -58,7 +55,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'larry@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(401)
       .end((err, res) => {
         if (err) {
@@ -73,7 +69,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'jack@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(200)
       .end((err, res) => {
         if (err) {
