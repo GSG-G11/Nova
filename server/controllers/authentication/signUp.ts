@@ -25,7 +25,6 @@ const signup = async (req: Request, res: Response) => {
     const checkEmail = await User.findOne({ email });
 
     if (checkEmail) {
-      // await User.deleteOne({ email });
       throw new CustomError('Email already exists', 409);
     }
 
@@ -44,6 +43,7 @@ const signup = async (req: Request, res: Response) => {
     await mailSender(email, 'Verify your email', `<h1>${name} Thanks for registering</h1>
     <h2>Click the link below to verify your account</h2>
     <a href=http://localhost:8000/api/auth/verify?accessToken=${accessToken}>Verify Your Email</a>`);
+
     return res.status(201).json({
       data: {
         name, email, password, role,
