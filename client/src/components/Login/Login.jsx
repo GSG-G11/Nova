@@ -12,6 +12,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
+  const { Item } = Form;
+  const { Password } = Input;
   const changeEmail = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
@@ -53,7 +55,7 @@ function Login() {
       onFinish={onFinish}
       autoComplete="off"
     >
-      <Form.Item
+      <Item
         label="Email"
         name="Email"
         rules={[
@@ -65,9 +67,9 @@ function Login() {
         ]}
       >
         <Input onChange={changeEmail} />
-      </Form.Item>
+      </Item>
 
-      <Form.Item
+      <Item
         label="Password"
         name="password"
         rules={[
@@ -78,10 +80,10 @@ function Login() {
           },
         ]}
       >
-        <Input.Password onChange={changePassword} />
-      </Form.Item>
+        <Password onChange={changePassword} />
+      </Item>
 
-      <Form.Item
+      <Item
         wrapperCol={{
           offset: 8,
           span: 16,
@@ -95,7 +97,7 @@ function Login() {
           <a href="/signup">Sign up</a>
 
         </div>
-      </Form.Item>
+      </Item>
     </Form>
   );
 }
