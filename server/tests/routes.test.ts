@@ -86,4 +86,54 @@ describe('Login', () => {
   });
 });
 
+describe('signup', () => {
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'jackgmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"email" must be a valid email');
+        return done();
+      });
+  });
+
+  test('Signup with existing user', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'jane@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(409)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Email already exists');
+        return done();
+      });
+  });
+
+  test('Signup with non existent user', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
+        return done();
+      });
+  });
+});
+
 afterAll(() => mongoose.connection.close());
