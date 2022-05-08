@@ -26,14 +26,14 @@ function Signup() {
 
   const signUp = async () => {
     try {
-      const { message: msg } = await axios.post('/api/signup', {
+      const { data, message: msg } = await axios.post('/api/signup', {
         fullName,
         email,
         password,
         confirm,
         rool,
       });
-      dispatch(signUpAction());
+      dispatch(signUpAction(data));
       setIsModalVisible(false);
       message.success(msg);
     } catch (err) {
