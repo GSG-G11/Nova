@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { get } from 'axios';
 
 const checkUser = async () => {
   try {
-    const { response } = await axios.get('/api/users/checkAuth');
+    const response = await get('/api/users/checkAuth');
     return response.data;
   } catch (error) {
     console.log(error);

@@ -1,0 +1,24 @@
+{
+    "schedule": [
+        {
+            "language": "JS",
+            "specialization": "FRONTEND",
+            "available": [
+                {
+                    "interviewerId": "2",
+                    "date": "2022-04-28",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "2",
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        }
+    ]
+}

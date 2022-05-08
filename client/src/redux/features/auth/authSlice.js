@@ -6,7 +6,7 @@ let userExist;
 (async () => {
   const user = await checkUser();
   if (user) {
-    userExist = true;
+    userExist = user;
   } else {
     userExist = false;
   }
