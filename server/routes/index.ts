@@ -1,10 +1,8 @@
-import express from 'express';
-import { signup } from '../controllers';
-import authRouter from './authRoutes/login';
+import express, { Router } from 'express';
+import authRouter from './authRoutes';
 
-const router: any = express.Router();
+const router: Router = express.Router();
 
-router.use(signup);
 router.use(authRouter);
 
 export default router;

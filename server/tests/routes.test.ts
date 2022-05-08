@@ -5,9 +5,9 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../app';
-import startDb from '../database/config';
+import createFakeData from '../database/build';
 
-beforeAll(() => startDb());
+beforeAll(() => createFakeData());
 describe('Login', () => {
   test('Should return error with validation', (done) => {
     request(app).post('/api/login').send({
