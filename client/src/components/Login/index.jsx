@@ -25,7 +25,7 @@ function LoginModal() {
         Log in
       </Button>
       <Modal title="Log in" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <img className="logo" src={logo} alt="" />
+        <img className="logo" src={logo} alt="logo" />
         <Login />
       </Modal>
     </>

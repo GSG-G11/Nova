@@ -15,22 +15,20 @@ function Login() {
   const { Item } = Form;
   const { Password } = Input;
   const changeEmail = (e) => {
-    e.preventDefault();
     setEmail(e.target.value);
   };
 
   const changePassword = (e) => {
-    e.preventDefault();
     setPassword(e.target.value);
   };
 
   const onFinish = async () => {
     try {
-      const user = await axios.post('/api/login', { email, password });
-      dispatch(setUser(user.data.data.user));
+      const { data } = await axios.post('/api/login', { email, password });
+      dispatch(setUser(data.data.user));
       setError('');
-    } catch (err) {
-      setError(err.response.data.message);
+    } catch ({ response }) {
+      setError(response.data.message);
     }
   };
 
