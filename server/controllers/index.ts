@@ -1,5 +1,5 @@
-const checkAuth = require('./auth/checkAuth');
 import login from './auth/login';
+import checkAuth from './auth/checkAuth';
 
 export {
   checkAuth,
