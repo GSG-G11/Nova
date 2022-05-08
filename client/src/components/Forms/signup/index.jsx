@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
   Modal,
@@ -10,6 +11,7 @@ import {
 } from 'antd';
 import logo from '../../../assets/images/logo.png';
 import './index.css';
+import { signUpAction } from '../../../redux/features/auth/authSlice';
 
 const { Item } = Form;
 const { Password } = Input;
@@ -21,6 +23,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const dispatch = useDispatch();
 
   const signUp = async () => {
     try {
@@ -29,6 +32,7 @@ function Signup() {
         email,
         password,
       });
+      dispatch(signUpAction());
       setIsModalVisible(false);
       message.success('Welcome to Nova');
     } catch (err) {
