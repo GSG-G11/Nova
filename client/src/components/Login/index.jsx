@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
-import Login from './Login';
+import LoginForm from './LoginForm';
 import logo from '../../assets/Nova Logo.png';
 import './style.css';
 
-function LoginModal() {
+const LoginModal = function () {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -26,10 +26,10 @@ function LoginModal() {
       </Button>
       <Modal title="Log in" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <img className="logo" src={logo} alt="logo" />
-        <Login />
+        <LoginForm />
       </Modal>
     </>
   );
-}
+};
 
 export default LoginModal;

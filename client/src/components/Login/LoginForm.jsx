@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import './style.css';
 import { setUser } from '../../redux/features/auth/user';
 
-function Login() {
+const LoginForm = function () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -52,9 +52,12 @@ function Login() {
         name="Email"
         rules={[
           {
+            type: 'email',
+            message: 'Please input a valid email!',
+          },
+          {
             required: true,
             message: 'Please input your Email!',
-            type: 'email',
           },
         ]}
       >
@@ -66,9 +69,12 @@ function Login() {
         name="password"
         rules={[
           {
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,
+            message: 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character',
+          },
+          {
             required: true,
             message: 'Please input your password!',
-            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,
           },
         ]}
       >
@@ -94,6 +100,6 @@ function Login() {
       </Item>
     </Form>
   );
-}
+};
 
-export default Login;
+export default LoginForm;
