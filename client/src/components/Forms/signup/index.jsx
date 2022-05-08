@@ -21,7 +21,6 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-  const rool = 'interviewee';
   const dispatch = useDispatch();
 
   const signUp = async () => {
@@ -31,7 +30,7 @@ function Signup() {
         email,
         password,
         confirm,
-        rool,
+        role: 'interviewee',
       });
       dispatch(signUpAction(data));
       setIsModalVisible(false);
