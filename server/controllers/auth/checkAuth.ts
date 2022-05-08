@@ -1,6 +1,7 @@
 import { Response } from 'express';
+import { RequestType } from '../../utils';
 
-const checkAuth = (req: any, res: Response) => {
+const checkAuth = (req: RequestType, res: Response) => {
   const { userInfo } = req;
   res.json({ data: userInfo });
 };
