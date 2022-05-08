@@ -1,10 +1,20 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import checkUser from './authService';
 
+let userExist;
+(async () => {
+  const user = await checkUser();
+  if (user) {
+    userExist = true;
+  } else {
+    userExist = false;
+  }
+})();
 // Create the initial state for the auth feature
 const initialState = {
   isAuthenticated: false,
-  user: null,
+  user: userExist,
   loading: false,
 };
 
@@ -13,7 +23,9 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+  },
 });
 
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;
