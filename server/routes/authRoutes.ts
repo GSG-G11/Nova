@@ -5,6 +5,6 @@ import { userAuth } from '../middlewares/auth';
 const router: Router = express.Router();
 
 router.post('/login', login);
-router.get('/checkAuth', userAuth, checkAuth);
+router.get('/users/checkAuth', userAuth, checkAuth);
 
 export default router;
