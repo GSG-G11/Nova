@@ -5,8 +5,13 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import startDb from './database/config';
+import { authRouter } from './routes';
+import { errorHandler, notFound } from './middlewares/errors';
 
 dotenv.config();
+
+startDb();
 
 const app: Application = express();
 
@@ -16,6 +21,7 @@ app.use(cors());
 app.use(compression());
 app.use(cookieParser());
 
+app.use('/api', authRouter);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
   app.get('*', (req: Request, res: Response) => {
@@ -23,4 +29,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(notFound);
+app.use(errorHandler);
 export default app;
