@@ -2,13 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
 
-const checkUser = createAsyncThunk('auth/checkUser', async (_, thinkAPI) => {
-  try {
-    return await authService.checkUser();
-  } catch (error) {
-    return thinkAPI.rejectWithValue(error);
-  }
-});
+const checkUser = createAsyncThunk('auth/checkUser', async () => authService.checkUser());
 // Create the initial state for the auth feature
 const initialState = {
   isAuthenticated: false,
