@@ -4,10 +4,17 @@ import User from '../../database/Models/User';
 import { CustomError, RequestType } from '../../utils';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
-  const { page, saved } = req.query;
+  let { page, saved } = req.query;
   const id = req.userInfo?.id;
   const user : object | null = await User.findById(id);
 
+  if (!Number(page)) {
+    page = '1';
+  }
+
+  if (saved !== 'true' && saved !== 'false') {
+    saved = 'false';
+  }
   console.log(page, saved);
   if (!user) {
     throw new CustomError('User not found', 404);
