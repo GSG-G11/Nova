@@ -28,7 +28,6 @@ const LoginForm = () => {
   const onFinish = async () => {
     try {
       const { data } = await axios.post('/api/login', { email, password });
-      console.log(data.data);
       dispatch(setUser(data.data.user));
       // when all pages done link to home page
     } catch ({ response }) {
