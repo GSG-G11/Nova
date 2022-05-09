@@ -86,4 +86,53 @@ describe('Login', () => {
   });
 });
 
+describe('Get Interviewee Reviews', () => {
+  test('Should Throw an error if user not authenticated', (done) => {
+    request(app).get('/api/user/review').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should return Reviews found', (done) => {
+    request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Reviews found');
+        return done();
+      });
+  });
+
+  test('Should return not saved Reviews', (done) => {
+    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Reviews found');
+        expect(res.body.length).toBe(2);
+        return done();
+      });
+  });
+
+  test('Should return 3 saved Reviews', (done) => {
+    request(app).get('/api/user/review?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Reviews found');
+      expect(res.body.length).toBe(3);
+      return done();
+    });
+  });
+});
+
 afterAll(() => mongoose.connection.close());
