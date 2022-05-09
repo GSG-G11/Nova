@@ -7,7 +7,7 @@ const loginValidation = async (data: object) => {
     role: Joi.string().required(),
   });
 
-  const result: ValidationResult = await schema.validateAsync(data);
+  const result: ValidationResult = await schema.validateAsync(data, { abortEarly: false });
   return result;
 };
 
