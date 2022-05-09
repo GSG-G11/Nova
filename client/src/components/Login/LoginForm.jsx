@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import './style.css';
-import { setUser } from '../../redux/features/auth/user';
+import { setUser } from '../../redux/features/auth/authSlice';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -28,6 +28,7 @@ const LoginForm = () => {
   const onFinish = async () => {
     try {
       const { data } = await axios.post('/api/login', { email, password });
+      console.log(data.data);
       dispatch(setUser(data.data.user));
       // when all pages done link to home page
     } catch ({ response }) {
