@@ -134,6 +134,32 @@ describe('signup', () => {
         return done();
       });
   });
+
+  test('Verify Email failed', (done) => {
+    request(app).patch('/api/auth/verify').expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Access token not found');
+        return done();
+      });
+  });
+
+  // todo: test for email verification
+  // test('Verify Email', (done) => {
+  //   request(app).patch('/api/auth/verify?accessT
+  // oken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY
+  // 29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4').expect(200)
+  //     .end((err, res) => {
+  //       if (err) {
+  //         console.log(err, 11111111);
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Email Valedated successfully');
+  //       return done();
+  //     });
+  // });
 });
 
 afterAll(() => mongoose.connection.close());

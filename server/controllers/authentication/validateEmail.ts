@@ -8,15 +8,14 @@ const validateEmail = async (req: Request, res: Response) => {
   if (!accessToken) {
     throw new CustomError('Access token not found', 401);
   }
-  const token: any = await verifyToken(accessToken);
-
-  const user = await User.findOne({ email: token.email });
+  const { email }: any = await verifyToken(accessToken);
+  const user = await User.findOne({ email });
 
   if (!user) {
     throw new CustomError('User not found', 404);
   }
 
-  await User.updateOne({ email: token.email }, { $set: { is_verified: true } });
+  await User.updateOne({ email }, { $set: { is_verified: true } });
 
   return res.status(200).json({
     data: user,
