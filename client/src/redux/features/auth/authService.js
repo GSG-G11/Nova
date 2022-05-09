@@ -2,7 +2,8 @@ import { get } from 'axios';
 
 const checkUser = async () => {
   const response = await get('/api/users/checkAuth');
-  return response.data;
+  const { data } = response;
+  return data;
 };
 
 const authService = {

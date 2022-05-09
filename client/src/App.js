@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { checkUser } from './redux/features/auth/authSlice';
 
 function App() {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(checkUser());
-  }, [user]);
+  }, []);
 
   return (
     <div className="App">
