@@ -1,7 +1,9 @@
 import { Response } from 'express';
-import Joi from 'joi';
 import Interviewee from '../../database/Models/Interviewee';
-import { CustomError, RequestType } from '../../utils';
+import User from '../../database/Models/User';
+import { CustomError, mailSender, RequestType } from '../../utils';
+import interviewValidation from '../../utils/validation/interviewValidation';
+import emailTemplate from './interviewEmailTemplate';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -9,21 +11,14 @@ const createInterview = async (req: RequestType, res: Response) => {
     interviewerId, date, time, language, specialization, questionCategory,
   } = req.body;
 
-  const interviewSchema = Joi.object({
-    interviewerId: Joi.string().required(),
-    date: Joi.date().required(),
-    time: Joi.number().required(),
-    language: Joi.string().valid('JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO').required(),
-    specialization: Joi.string().valid('FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK').required(),
-    questionCategory: Joi.string().valid('Technical', 'Analytical', 'Algorithms', 'System Design').required(),
-  });
+  // Validate the incoming request
+  await interviewValidation(req.body);
 
-  const validateInterview = await interviewSchema.validateAsync(req.body);
+  // Get the interviewee and interviewer
+  const { email: intervieweeEmail } = await User.findById(id);
+  const { email: interviewerEmail } = await User.findById(interviewerId);
 
-  if (validateInterview.error) {
-    throw new CustomError(validateInterview.error.details[0].message, 400);
-  }
-
+  // Get the interviewee interviews
   const { interviews } = await Interviewee.findOne({
     where: {
       userId: id,
@@ -39,10 +34,12 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
   };
 
+  // Add the interview to the interviewee interviews
   if (interviews) {
     interviews.push(interview);
   }
 
+  // Update the interviewee interviews
   const updatedInterviews = await Interviewee.updateOne({
     where: {
       userId: id,
@@ -54,9 +51,18 @@ const createInterview = async (req: RequestType, res: Response) => {
     throw new CustomError('Interview not created', 400);
   }
 
+  // Send Emails to both interviewee and interviewer
+
+  mailSender(interviewerEmail, 'Interview Request', `You have a new interview request from ${intervieweeEmail}`);
+
+  mailSender(intervieweeEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory));
+
+  // Return the interviewee interview
   res.status(201).json({
     message: 'Interview created successfully',
-    data: interviews,
+    data: {
+      interview,
+    },
   });
 };
 
