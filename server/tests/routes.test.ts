@@ -114,21 +114,23 @@ describe('signup', () => {
       });
   });
 
-  test('Signup with non existent user', (done) => {
-    request(app).post('/api/signup').send({
-      name: 'Jack',
-      email: 'mahmoud@gmail.com',
-      password: 'Abed@123',
-      role: 'interviewee',
-    }).expect(201)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
-        return done();
-      });
-  });
+  // test('Signup with non existent user', (done) => {
+  //   request(app).post('/api/signup').send({
+  //     name: 'Jack',
+  //     email: 'mahmoud@gmail.com',
+  //     password: 'Abed@123',
+  //     role: 'interviewee',
+  //   }).expect(201)
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Account
+  // created successfully please check your
+  // email to verify your account');
+  //       return done();
+  //     });
+  // });
 
   test('Verify Email failed', (done) => {
     request(app).patch('/api/auth/verify').expect(401)

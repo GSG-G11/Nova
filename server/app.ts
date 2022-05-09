@@ -6,7 +6,7 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import startDb from './database/config';
-import router from './routes';
+import { authRouter, userRouter } from './routes';
 import { errorHandler, notFound } from './middlewares/errors';
 
 dotenv.config();
@@ -20,7 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(compression());
 app.use(cookieParser());
-app.use('/api', router);
+app.use('/api', authRouter);
+app.use('/api/user', userRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
