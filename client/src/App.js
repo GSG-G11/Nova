@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import 'antd/dist/antd.css';
-import { SignupModal } from './components/Forms';
 import { useSelector, useDispatch } from 'react-redux';
+import { SignupModal } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     dispatch(checkUser());
   }, []);
-  
+
   return (
     <div className="App">
       <SignupModal />
@@ -32,5 +32,6 @@ function App() {
         </div>
       )}
     </div>
+  );
 }
 export default App;
