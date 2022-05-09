@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Form, Input, Button,
+  message,
 } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -10,7 +11,6 @@ import { setUser } from '../../redux/features/auth/user';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const { Item } = Form;
   const { Password } = Input;
@@ -21,14 +21,17 @@ const LoginForm = () => {
   const changePassword = (e) => {
     setPassword(e.target.value);
   };
+  const error = (data) => {
+    message.error(data);
+  };
 
   const onFinish = async () => {
     try {
       const { data } = await axios.post('/api/login', { email, password });
       dispatch(setUser(data.data.user));
-      setError('');
+      // when all pages done link to home page
     } catch ({ response }) {
-      setError(response.data.message);
+      error(response.data.message);
     }
   };
 
