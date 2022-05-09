@@ -8,9 +8,7 @@ const validateEmail = async (req: Request, res: Response) => {
     throw new CustomError('Access token not found', 401);
   }
 
-  console.log(accessToken, 111111111);
   const { email }: any = await verfiyToken(accessToken);
-  console.log(email);
   const user = await User.findOne({ email });
 
   if (!user) {
