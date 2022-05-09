@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import './style.css';
 import { setUser } from '../../redux/features/auth/user';
 
-const LoginForm = function () {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

@@ -4,7 +4,7 @@ import LoginForm from './LoginForm';
 import logo from '../../assets/Nova Logo.png';
 import './style.css';
 
-const LoginModal = function () {
+const LoginModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
