@@ -1,14 +1,16 @@
 import { Request, Response } from 'express';
-import { verifyToken, CustomError } from '../../utils';
+import { verfiyToken, CustomError } from '../../utils';
 import User from '../../database/Models/User';
 
 const validateEmail = async (req: Request, res: Response) => {
   const { accessToken }: { accessToken?: string } = req.query;
-
   if (!accessToken) {
     throw new CustomError('Access token not found', 401);
   }
-  const { email }: any = await verifyToken(accessToken);
+
+  console.log(accessToken, 111111111);
+  const { email }: any = await verfiyToken(accessToken);
+  console.log(email);
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -17,9 +19,9 @@ const validateEmail = async (req: Request, res: Response) => {
 
   await User.updateOne({ email }, { $set: { is_verified: true } });
 
-  return res.status(200).json({
+  return res.json({
     data: user,
-    message: 'Email Valedated successfully',
+    message: 'Email Valediction successfully',
   });
 };
 

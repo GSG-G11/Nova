@@ -148,9 +148,9 @@ describe('signup', () => {
 
   // todo: test for email verification
   // test('Verify Email', (done) => {
-  //   request(app).patch('/api/auth/verify?accessT
-  // oken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY
-  // 29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4').expect(200)
+  //   request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsIn
+  // R5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.
+  // v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4').expect(200)
   //     .end((err, res) => {
   //       if (err) {
   //         console.log(err, 11111111);
