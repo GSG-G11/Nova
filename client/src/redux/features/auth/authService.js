@@ -1,8 +1,7 @@
 import { get } from 'axios';
 
 const checkUser = async () => {
-  const response = await get('/api/users/checkAuth');
-  const { data } = response;
+  const { data } = await get('/api/users/checkAuth');
   return data;
 };
 
