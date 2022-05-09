@@ -312,6 +312,23 @@ const emailTemplate = (
                   <!-- START MAIN CONTENT AREA -->
                   <tr>
                     <td class="wrapper">
+                    <a
+                    href="https://ibb.co/5F9GJFH"
+                    style="display: flex; justify-content: flex-start; align-items: flex-start"
+                  >
+                    <img
+                      src="https://i.ibb.co/9tvcdt5/Nova-Logo.png"
+                      alt="Nova-Logo"
+                      style="
+                        max-width: 50%;
+                        height: auto;
+                        border-radius: 0.5rem;
+                        align-self: center;
+                        margin-bottom: 1.8rem;
+                        margin-right: 4.2rem;
+                      "
+                      border="0"
+                  /></a>
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                           <td>
