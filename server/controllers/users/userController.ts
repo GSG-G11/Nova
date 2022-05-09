@@ -17,7 +17,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   if (saved !== 'true' && saved !== 'false') {
     saved = 'false';
   }
-  console.log(page, saved);
 
   // TODO: replace the userId string with the userId from the user object
   const userInterviews = await Interviewee.find({ userId: '4' });
@@ -34,13 +33,17 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     review: interview.review,
   }));
 
-  // const filterReviews = saved === 'true' ? reviews.filter(/
-  // (review: any) => review.saved === 'true') : reviews;
+  const filterReviews = saved === 'true' ? reviews.filter(
+    (review: any) => review.review.saved === true,
+  ) : reviews.filter((review: any) => review.review.saved === false);
 
-  const paginatedReviews: Array<any> = reviews.slice((Number(page) - 1) * 3, Number(page) * 3);
+  const paginatedReviews: Array<any> = filterReviews
+    .slice((Number(page) - 1) * 3, Number(page) * 3);
 
   return res.json({
     message: 'Reviews found',
+    length: paginatedReviews.length,
+    page: Number(page),
     data: paginatedReviews,
   });
 };
