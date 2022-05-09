@@ -19,7 +19,7 @@ const validateEmail = async (req: Request, res: Response) => {
 
   return res.json({
     data: user,
-    message: 'Email Valediction successfully',
+    message: 'Your account is verified successfully',
   });
 };
 
