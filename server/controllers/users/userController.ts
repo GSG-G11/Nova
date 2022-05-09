@@ -7,7 +7,9 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   let { page, saved } = req.query;
   const id = req.userInfo?.id;
   const user : object | null = await User.findById(id);
-
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
   if (!Number(page)) {
     page = '1';
   }
@@ -16,9 +18,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     saved = 'false';
   }
   console.log(page, saved);
-  if (!user) {
-    throw new CustomError('User not found', 404);
-  }
 
   // TODO: replace the userId string with the userId from the user object
   const userInterviews = await Interviewee.find({ userId: '4' });
@@ -38,11 +37,11 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   // const filterReviews = saved === 'true' ? reviews.filter(/
   // (review: any) => review.saved === 'true') : reviews;
 
-  // const paginatedReviews: number = filterReviews.slice((Number(page) - 1) * 3, Number(page) * 3);
+  const paginatedReviews: Array<any> = reviews.slice((Number(page) - 1) * 3, Number(page) * 3);
 
   return res.json({
     message: 'Reviews found',
-    data: reviews,
+    data: paginatedReviews,
   });
 };
 
