@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import { hash } from 'bcrypt';
 import {
   signToken, mailSender, signupValidation, CustomError, signupInterface,
 } from '../../utils';
@@ -27,7 +27,7 @@ const signup = async (req: signupInterface, res: Response) => {
 
   const accessToken: any = await signToken(payload);
 
-  const hashedPassword: string = await bcrypt.hash(password, 10);
+  const hashedPassword: string = await hash(password, 10);
 
   await User.create({
     email, password: hashedPassword, name, role,
