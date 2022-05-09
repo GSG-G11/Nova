@@ -1,11 +1,8 @@
-import { Request } from 'express';
+interface Body {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  }
 
-interface signupInterface extends Request {
-    userInfo?: {
-      name: string;
-      email: string;
-      password: string;
-      role: string;
-    };
-}
-export default signupInterface;
+export default Body;

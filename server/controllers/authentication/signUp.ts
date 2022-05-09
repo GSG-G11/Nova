@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 import { hash } from 'bcrypt';
 import {
@@ -6,10 +6,10 @@ import {
 } from '../../utils';
 import User from '../../database/Models/User';
 
-const signup = async (req: signupInterface, res: Response) => {
+const signup = async (req: Request, res: Response) => {
   const {
     name, email, password, role,
-  } = req.body;
+  }: signupInterface = req.body;
 
   await signupValidation({
     name, email, password,
