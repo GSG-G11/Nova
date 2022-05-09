@@ -1,3 +1,3 @@
-const verfiyToken = require('./verifyToken');
+import verfiyToken from './verifyToken';
 
 export default verfiyToken;
