@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import authService from './authService';
 
+export const checkUser = createAsyncThunk('auth/checkUser', async () => authService.checkUser());
 // Create the initial state for the auth feature
 const initialState = {
   isAuthenticated: false,
@@ -17,6 +19,21 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(checkUser.fulfilled, (state, action) => {
+      state.isAuthenticated = true;
+      state.user = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(checkUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(checkUser.rejected, (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.loading = false;
+    });
   },
 });
 
