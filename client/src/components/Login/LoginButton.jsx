@@ -4,7 +4,7 @@ import LoginForm from './LoginForm';
 import logo from '../../assets/Nova Logo.png';
 import './style.css';
 
-const LoginModal = () => {
+const LoginButton = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -32,4 +32,4 @@ const LoginModal = () => {
   );
 };
 
-export default LoginModal;
+export default LoginButton;

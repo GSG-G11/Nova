@@ -21,17 +21,14 @@ const LoginForm = () => {
   const changePassword = (e) => {
     setPassword(e.target.value);
   };
-  const error = (data) => {
-    message.error(data);
-  };
 
   const onFinish = async () => {
     try {
       const { data } = await axios.post('/api/login', { email, password });
       dispatch(setUser(data.data.user));
       // when all pages done link to home page
-    } catch ({ response }) {
-      error(response.data.message);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
     }
   };
 
@@ -90,7 +87,6 @@ const LoginForm = () => {
           span: 16,
         }}
       >
-        <h4 className="errors">{error}</h4>
         <Button type="primary" htmlType="submit">
           Login
         </Button>
