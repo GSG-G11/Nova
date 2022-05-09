@@ -45,3 +45,5 @@ const createFakeData = async () => {
 if (process.env.NODE_ENV === 'development') {
   createFakeData();
 }
+
+export default createFakeData;

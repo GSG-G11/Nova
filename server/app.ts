@@ -32,4 +32,5 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(notFound);
 app.use(errorHandler);
+
 export default app;

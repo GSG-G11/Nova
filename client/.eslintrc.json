@@ -31,6 +31,7 @@
         "linebreak-style": [
             "error",
             "unix"
-        ]
+        ],
+        "react/function-component-definition": 0
     }
 }
