@@ -4,10 +4,10 @@ import {
   Modal,
 } from 'antd';
 import logo from '../../../assets/images/logo.png';
-import SingUpForm from './Form';
+import SignupForm from './Form';
 import './style.css';
 
-const Signup = () => {
+const SignupModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -32,10 +32,10 @@ const Signup = () => {
         visible={isModalVisible}
         footer={null}
       >
-        <SingUpForm />
+        <SignupForm />
       </Modal>
     </>
   );
 };
 
-export default Signup;
+export default SignupModal;

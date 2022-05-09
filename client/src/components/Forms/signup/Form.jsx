@@ -19,12 +19,13 @@ const confirmPasswordHandel = (getFieldValue) => ({
   },
 });
 
-const SingUpForm = () => {
+const SignupForm = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const dispatch = useDispatch();
+
   const signUp = async () => {
     try {
       const { data, message: msg } = await axios.post('/api/signup', {
@@ -41,6 +42,7 @@ const SingUpForm = () => {
       message.error(`Sorry, try again , ${err.message}`);
     }
   };
+
   const { Item } = Form;
   const { Password } = Input;
   return (
@@ -145,4 +147,4 @@ const SingUpForm = () => {
   );
 };
 
-export default SingUpForm;
+export default SignupForm;

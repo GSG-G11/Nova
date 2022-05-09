@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { Signup } from './Forms';
+import { SignupModal } from './Forms';
 
 export {
-  Signup,
+  SignupModal,
 };

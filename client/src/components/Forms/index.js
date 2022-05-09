@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import Signup from './signup/index';
+import SignupModal from './signup/index';
 
 export {
-  Signup,
+  SignupModal,
 };
