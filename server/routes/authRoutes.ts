@@ -9,6 +9,6 @@ const router: Router = express.Router();
 router.post('/login', login);
 router.post('/signup', signup);
 router.get('/auth/verify', validateEmail);
-router.get('/users//checkAuth', userAuth, checkAuth);
+router.get('/users/checkAuth', userAuth, checkAuth);
 
 export default router;
