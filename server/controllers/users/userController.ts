@@ -5,17 +5,22 @@ import { CustomError, RequestType } from '../../utils';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
   let { page, saved } = req.query;
+
+  if (!page || !saved) {
+    page = '1';
+    saved = 'false';
+  }
   const id = req.userInfo?.id;
   const user : object | null = await User.findById(id);
   if (!user) {
     throw new CustomError('User not found', 404);
   }
   if (!Number(page)) {
-    page = '1';
+    throw new CustomError('Invalid Page', 400);
   }
 
   if (saved !== 'true' && saved !== 'false') {
-    saved = 'false';
+    throw new CustomError('Invalid Input', 400);
   }
 
   // TODO: replace the userId string with the userId from the user object
@@ -27,24 +32,25 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     });
   }
 
-  const { interviews } : any = userInterviews[0];
+  // filter reviews based on the saved parameter and paginate the results
+  const filteredReviews = await Interviewee.aggregate([{
+    $unwind: '$interviews',
+  },
+  {
+    $match: {
+      'interviews.review.saved': saved === 'true',
+    },
+  }]).skip((Number(page) - 1) * 3).limit(3);
 
-  const reviews = interviews.map((interview: any) => ({
-    review: interview.review,
+  // Get the reviews of the user
+  const reviews = filteredReviews.map((interviewee) => ({
+    review: interviewee.interviews.review,
   }));
-
-  const filterReviews = saved === 'true' ? reviews.filter(
-    (review: any) => review.review.saved === true,
-  ) : reviews.filter((review: any) => review.review.saved === false);
-
-  const paginatedReviews: Array<any> = filterReviews
-    .slice((Number(page) - 1) * 3, Number(page) * 3);
-
   return res.json({
     message: 'Reviews found',
-    length: paginatedReviews.length,
+    length: reviews.length,
     page: Number(page),
-    data: paginatedReviews,
+    data: reviews,
   });
 };
 
