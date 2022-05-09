@@ -159,4 +159,38 @@ describe('signup', () => {
   // });
 });
 
+describe('Create Interview', () => {
+  test('Should return Authentication error', (done) => {
+    request(app).post('/api/interview').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should return Validation error', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+
+      interviewerId: 123,
+      date: '2022-05-09',
+      time: 2,
+      language: 'RUBY',
+      specialization: 'BACKEND',
+      questionCategory: 'Technical',
+
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        expect(res.body.message).toBe('"interviewerId" must be a string');
+        return done();
+      });
+  });
+});
+
 afterAll(() => mongoose.connection.close());
