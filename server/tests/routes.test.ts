@@ -128,6 +128,7 @@ describe('signup', () => {
     }).expect(201)
       .end((err, res) => {
         if (err) {
+          console.log(err);
           return done(err);
         }
         expect(res.body.message).toBe('Account created successfully please check your email to verify your account');

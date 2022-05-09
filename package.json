@@ -16,6 +16,7 @@
   },
   "pre-commit": [
     "lint",
+    "lint-fix",
     "lint:client",
     "test"
   ],

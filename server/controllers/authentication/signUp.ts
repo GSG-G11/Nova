@@ -45,9 +45,6 @@ const signup = async (req: Request, res: Response) => {
     <a href=http://localhost:8000/api/auth/verify?accessToken=${accessToken}>Verify Your Email</a>`);
 
     return res.status(201).json({
-      data: {
-        name, email, password, role,
-      },
       message: 'Account created successfully please check your email to verify your account',
     });
 };
