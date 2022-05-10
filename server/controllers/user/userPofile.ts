@@ -1,18 +1,13 @@
+/* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import User from '../../database/Models/User';
+import { paramSchema } from '../../utils';
 
-const getUserByID = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const user : any = await User.findOne({ _id: new ObjectId(id) });
-  res.status(200).json({
-    data: {
-      name: user.name,
-      bio: user.bio,
-      profile_picture: user.profile_picture,
-    },
-  });
+const getUserById = async (req: Request, res: Response) => {
+  const { id } = await paramSchema.validateAsync(req.params);
+  const user : object | null = await User.findOne({ _id: new ObjectId(id) });
+  res.json({ data: user });
 };
 
-export default getUserByID;
+export default getUserById;
