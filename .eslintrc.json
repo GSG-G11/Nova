@@ -27,8 +27,8 @@
         "linebreak-style": [
             "error",
             "unix"
-        ]
-        
+        ],
+        "camelcase": "off"
     },
     "settings": {
         "import/resolver": {

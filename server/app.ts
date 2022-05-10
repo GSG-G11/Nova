@@ -22,6 +22,7 @@ app.use(compression());
 app.use(cookieParser());
 
 app.use('/api', router);
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'build')));
   app.get('*', (req: Request, res: Response) => {

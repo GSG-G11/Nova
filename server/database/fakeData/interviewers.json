@@ -15,8 +15,8 @@
                     "time": 12,
                     "language": "JS",
                     "specialization": "FRONTEND",
-                    "questionCategory":"Technical"
-
+                    "questionCategory":"Technical",
+                    "is_cancalled": false
                 },
                 {
                     "id": "2",
@@ -25,8 +25,8 @@
                     "time": 12,
                     "language": "PHP",
                     "specialization": "BACKEND",
-                    "questionCategory":"Technical"
-
+                    "questionCategory":"Technical",
+                    "is_cancalled": false
                 }
             ],
             "schedule": [

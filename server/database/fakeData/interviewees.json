@@ -11,6 +11,7 @@
                     "language": "JS",
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
+                    "is_cancalled": false,
                     "review": {
                         "message": "He did a great job!",
                         "saved": false
@@ -29,6 +30,7 @@
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
+                    "is_cancalled": false,
                     "review": {
                         "message": "More than expected",
                         "saved": true
