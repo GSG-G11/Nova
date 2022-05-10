@@ -100,7 +100,7 @@ describe('signup', () => {
 
   test('Signup with existing user', (done) => {
     request(app).post('/api/signup').send({
-      name: 'Jane',
+      name: 'Jack',
       email: 'jane@gmail.com',
       password: 'Abed@123',
       role: 'interviewee',
@@ -110,6 +110,22 @@ describe('signup', () => {
           return done(err);
         }
         expect(res.body.message).toBe('Email already exists');
+        return done();
+      });
+  });
+
+  test('Signup with non existent user', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
         return done();
       });
   });

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import LoginForm from './LoginForm';
-import logo from '../../assets/Nova Logo.png';
+import logo from '../../assets/images/logo.png';
 import '../Forms/signup/signup.css';
 
 const LoginButton = () => {
