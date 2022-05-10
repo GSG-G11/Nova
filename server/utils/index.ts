@@ -6,6 +6,12 @@ import loginValidation from './validation/loginValidation';
 import { RequestType, signupInterface } from './interfaces';
 
 export {
-  verifyToken, signToken, mailSender, signupValidation, CustomError, loginValidation, RequestType,
+  verifyToken,
+  signToken,
+  mailSender,
+  signupValidation,
+  CustomError,
+  loginValidation,
+  RequestType,
   signupInterface,
 };
