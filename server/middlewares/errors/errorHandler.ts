@@ -15,6 +15,7 @@ const errorHandler = (
       message: error.message,
     });
   }
+
   const status = error.code || 500;
   const message = error.message || 'Something went wrong';
 

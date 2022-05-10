@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { RequestType } from '../../utils';
 
-const updateReview = (req: RequestType, res: Response) => {
+const updateReview = async (req: RequestType, res: Response) => {
   const { interviewId } : any = req.params;
 
   res.send(interviewId);
