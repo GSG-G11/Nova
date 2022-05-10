@@ -1,7 +1,7 @@
 {
     "interviewee": [
         {
-            "userId": "1",
+            "userId": "627a27c142c2195ced5a537a",
             "interviews": [
                 {
                     "id": "1",
@@ -14,6 +14,18 @@
                     "review": {
                         "message": "He did a great job!",
                         "saved": false
+                    }
+                },
+                {
+                    "id": "2",
+                    "interviewerId": 1,
+                    "date": "2022-06-28",
+                    "time": 1,
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory": "Algorithms",
+                    "review": {
+                        
                     }
                 }
             ]
