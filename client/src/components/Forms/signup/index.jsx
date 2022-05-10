@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import logo from '../../../assets/images/logo.png';
 import SignupForm from './Form';
-import './style.css';
+import './signup.css';
 
 const SignupModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

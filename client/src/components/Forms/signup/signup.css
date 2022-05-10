@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 }
-.logo-img {
+.logo-img,.logo {
   width: 140px;
 }
 .ant-form-horizontal .ant-form-item-label {

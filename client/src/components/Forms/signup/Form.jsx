@@ -6,7 +6,7 @@ import {
   message,
 } from 'antd';
 import { useDispatch } from 'react-redux';
-import './style.css';
+import './signup.css';
 import axios from 'axios';
 import { signUpAction } from '../../../redux/features/auth/authSlice';
 
@@ -28,7 +28,7 @@ const SignupForm = () => {
 
   const signUp = async () => {
     try {
-      const { data, message: msg } = await axios.post('/api/signup', {
+      const { data } = await axios.post('/api/signup', {
         fullName,
         email,
         password,
@@ -36,10 +36,9 @@ const SignupForm = () => {
         role: 'interviewee',
       });
       dispatch(signUpAction(data));
-      // setIsModalVisible(false); /// close modal after signup
-      message.success(msg);
-    } catch (err) {
-      message.error(`Sorry, try again , ${err.message}`);
+      message.success(`Welcome ${fullName}, Signup success`);
+    } catch ({ message: messageError }) {
+      message.error({ content: message });
     }
   };
 
