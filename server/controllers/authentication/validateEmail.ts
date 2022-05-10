@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { verfiyToken, CustomError } from '../../utils';
+import { verifyToken, CustomError } from '../../utils';
 import User from '../../database/Models/User';
 
 const validateEmail = async (req: Request, res: Response) => {
@@ -8,7 +8,7 @@ const validateEmail = async (req: Request, res: Response) => {
     throw new CustomError('Access token not found', 401);
   }
 
-  const { email }: any = await verfiyToken(accessToken);
+  const { email }: any = await verifyToken(accessToken);
   const user = await User.findOne({ email });
 
   if (!user) {
