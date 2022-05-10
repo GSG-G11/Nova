@@ -3,7 +3,6 @@ import { CustomError, RequestType } from '../../utils';
 
 const adminAuth = (req: RequestType, res: Response, next: NextFunction) => {
   const { userInfo } = req;
-
   if (userInfo?.role === 'admin') {
     next();
   } else {

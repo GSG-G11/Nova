@@ -7,7 +7,7 @@ const userAuth = async (req: RequestType, res: Response, next: NextFunction) => 
   if (!token) {
     throw new CustomError('Login First!', 401);
   } else {
-    const userInfo = await verfiyToken(token);
+    const userInfo: any = await verfiyToken(token);
     if (userInfo.isVerified) {
       req.userInfo = userInfo;
       next();
