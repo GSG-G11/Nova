@@ -4,12 +4,12 @@ import { RequestType } from '../../utils';
 import validateQuery from '../../utils/validation/queryValidation';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
-  const { page = '1' } = req.query;
+  const { page = '1', saved = undefined } = req.query;
 
   await validateQuery(req.query);
   // Convert the incoming saved string into a boolean
-  const savedBoolean : any = req.query.saved ? JSON.parse(req.query.saved.toString())
-    : req.query.saved;
+  const savedBoolean : any = saved ? JSON.parse(saved.toString())
+    : saved;
 
   // const id = req.userInfo?.id;
 
