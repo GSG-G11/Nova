@@ -43,19 +43,13 @@ const getInterviews = async (req: RequestType, res: Response) => {
   }
   const { _id, role } = user[0];
 
-  const { status, page }: {status?: string, page?: string} = req.query;
-
-  if (!status || !page) {
-    throw new CustomError('Status and page are required', 400);
-  }
+  const { status = 'upcoming', page = '1' }: {status?: string, page?: string} = req.query;
 
   await queryValidation({ status, page });
 
   const interviews = await getData(role, _id.valueOf(), status, page);
-  if (interviews.length === 0) {
-    throw new CustomError('No interviews found', 404);
-  }
-  res.status(200).json({
+
+  res.json({
     data: interviews,
     message: 'Interviews fetched successfully!',
   });
