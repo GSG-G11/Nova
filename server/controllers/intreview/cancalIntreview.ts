@@ -5,9 +5,9 @@ import Interviewee from '../../database/Models/Interviewee';
 const cancalInterview = async (req: RequestType, res: Response) => {
   // use vaildation for params after marge
   const { interviewId } : any = req.params;
-
+  console.log(interviewId);
   // find the intreview object by interviewId
-  const interview = await Interviewee.findOne({ 'interviews._id': interviewId });
+  const interview = await Interviewee.findOne({ 'interviews._id': interviewId }, { interviews: 1 });
 
   if (!interview) {
     return res.json({
@@ -17,10 +17,12 @@ const cancalInterview = async (req: RequestType, res: Response) => {
 
   // deruct the interview object to got the interviews array
   const { interviews } = interview;
-  const intrviewObj = interviews[0];
+  const interviewObj = interviews[0];
 
-  const result = await Interviewee.updateOne({ 'interviews._id': interviewId }, { $set: { 'intrviewObj.is_cancalled': !intrviewObj.is_cancalled } });
+  const result = await Interviewee.updateOne({ 'interviews._id': interviewId }, { $set: { 'interviews.is_cancalled': true } });
 
+  console.log(interviewObj);
+  // !interviewObj.is_cancalled
   return res.json({ data: result, message: 'Interviews updated successfully' });
 };
 export default cancalInterview;
