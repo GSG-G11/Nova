@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
-import { CustomError, mailSender, RequestType } from '../../utils';
+import { mailSender, RequestType } from '../../utils';
 import interviewValidation from '../../utils/validation/interviewValidation';
 import emailTemplate from '../../utils/email/interviewEmailTemplate';
 
@@ -18,13 +18,6 @@ const createInterview = async (req: RequestType, res: Response) => {
   const [{ email: intervieweeEmail }, { email: interviewerEmail }] : any = await Promise
     .all([await User.findById(id), await User.findById(interviewerId)]);
 
-  // Get the interviewee interviews
-  const { interviews } = await Interviewee.findOne({
-    where: {
-      userId: id,
-    },
-  });
-
   const interview = {
     interviewerId,
     date,
@@ -34,22 +27,18 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
   };
 
-  // Add the interview to the interviewee interviews
-  if (interviews) {
-    interviews.push(interview);
-  }
-
-  // Update the interviewee interviews
-  const updatedInterviews = await Interviewee.updateOne({
+  // Update interviewee interviews
+  await Interviewee.findOneAndUpdate({
     where: {
       userId: id,
     },
-    interviews,
+  }, {
+    $push: {
+      interviews: interview,
+    },
+  }, {
+    new: true,
   });
-
-  if (!updatedInterviews) {
-    throw new CustomError('Interview not created', 400);
-  }
 
   // Send Emails to both interviewee and interviewer
 

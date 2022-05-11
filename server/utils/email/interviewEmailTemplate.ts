@@ -1,20 +1,14 @@
-const emailTemplate = (
+const interviewerTemplate = (name: string) => `<h1>Interview Request</h1>
+  <p>An Interview request has been sent to you by ${name}</p>`;
+
+const template = (
   date: string,
   time: number,
   language: string,
   specialization: string,
   questionCategory: string,
   name: string = '',
-) => {
-  let intervieweeName;
-  if (name) {
-    intervieweeName = name;
-    return `
-    <h1>Interview Request</h1>
-    <p>An Interview request has been sent to you by ${name}</p>`;
-  }
-  return (
-    `<!doctype html>
+) => (`<!doctype html>
     <html>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -342,7 +336,7 @@ const emailTemplate = (
                         <tr>
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
-                            ${intervieweeName ? `<p>${intervieweeName}</p>` : ''}
+                            ${name ? `<p>${interviewerTemplate(name)}</p>` : ''}
                             <p> Your interview will be scheduled on <strong>${date}</strong> at <strong>${time}</strong>. The details as follows</p>
                             <p>Language: ${language}</p>
                             <p>Specialty: ${specialization}</p>
@@ -368,7 +362,21 @@ const emailTemplate = (
       </body>
     </html>
     `
-  );
+);
+
+const emailTemplate = (
+  date: string,
+  time: number,
+  language: string,
+  specialization: string,
+  questionCategory: string,
+  name: string = '',
+) => {
+  if (name) {
+    return template(date, time, language, specialization, questionCategory, name);
+  }
+
+  return template(date, time, language, specialization, questionCategory);
 };
 
 export default emailTemplate;
