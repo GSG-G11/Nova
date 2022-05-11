@@ -2,7 +2,7 @@ import express, { Router } from 'express';
 import {
   deleteInterview,
 } from '../controllers';
-import { userAuth } from '../middlewares/auth';
+import { userAuth } from '../middleWares/auth';
 
 const router: Router = express.Router();
 

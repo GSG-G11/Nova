@@ -6,19 +6,30 @@ import Interviewer from '../../database/Models/Interviewer';
 import Interviewee from '../../database/Models/Interviewee';
 
 const deleteData = async (role: string, userId: string, interviewId: string) => {
-  const dataBaseInterviewe = (role === 'interviewer') ? Interviewer : Interviewee;
+  let dataBaseInterview;
+
+  switch (role) {
+    case 'interviewer':
+      dataBaseInterview = Interviewer;
+      break;
+    case 'interviewee':
+      dataBaseInterview = Interviewee;
+      break;
+    default:
+      throw new CustomError('Invalid role!', 401);
+  }
 
   const firstCondition = {
     $match: {
       userId,
     },
   };
-  const seconedCondition = {
+  const secondCondition = {
     $pull: { interviews: { _id: new ObjectId(interviewId) } },
 
   };
 
-  const interviews = await dataBaseInterviewe.updateOne(firstCondition, seconedCondition);
+  const interviews = await dataBaseInterview.updateOne(firstCondition, secondCondition);
   return interviews;
 };
 
