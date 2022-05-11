@@ -8,23 +8,29 @@ import Interviewee from '../../database/Models/Interviewee';
 const getData = async (role: string, userId: string, status: string, page: string) => {
   // const pageLimitMax = Number(page) * 3;
   const pageLimitMin = (Number(page) - 1) * 3;
-  console.log(pageLimitMin);
   const dataBaseInterviewe = (role === 'interviewer') ? Interviewer : Interviewee;
 
-  const cond1 = {
-    userId: '627a27c142c2195ced5a537a',
-  };
-  const cond2 = {
-    interviews: { $elemMatch: { date: { $gt: new Date() } } },
-  };
-  const cond3 = {
-    interviews: { $elemMatch: { date: { $lt: new Date() } } },
-  };
+  console.log(status);
 
-  const condStatus = (status === 'upcoming') ? cond2 : cond3;
+  const condTime = (status === 'upcoming') ? { $gt: new Date() } : { $lt: new Date() };
 
-  const interviews = await dataBaseInterviewe.find(cond1, condStatus);
-  console.log(interviews);
+  console.log(condTime);
+
+  const cond = [
+    {
+      $match: {
+        userId: '627a27c142c2195ced5a537a',
+      },
+    },
+    { $unwind: '$interviews' },
+    {
+      $match: {
+        'interviews.date': condTime,
+      },
+    },
+  ];
+
+  const interviews = await dataBaseInterviewe.aggregate(cond).skip(pageLimitMin).limit(3);
 
   return interviews;
 };
