@@ -37,6 +37,11 @@ const interviewee = new Schema({
           enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
+        is_cancalled: {
+          type: Boolean,
+          default: false,
+          required: true,
+        },
         review: {
           type: {
             message: {
