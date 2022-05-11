@@ -66,7 +66,4 @@ const createInterview = async (req: RequestType, res: Response) => {
   });
 };
 
-export {
-  // eslint-disable-next-line import/prefer-default-export
-  createInterview,
-};
+export default createInterview;
