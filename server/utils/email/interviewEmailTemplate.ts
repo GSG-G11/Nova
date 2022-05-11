@@ -342,7 +342,7 @@ const emailTemplate = (
                         <tr>
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
-                            ${intervieweeName}
+                            ${intervieweeName ? `<p>${intervieweeName}</p>` : ''}
                             <p> Your interview will be scheduled on <strong>${date}</strong> at <strong>${time}</strong>. The details as follows</p>
                             <p>Language: ${language}</p>
                             <p>Specialty: ${specialization}</p>
