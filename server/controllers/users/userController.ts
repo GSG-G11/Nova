@@ -2,14 +2,12 @@ import { Response } from 'express';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import { CustomError, RequestType } from '../../utils';
+import validateQuery from '../../utils/validation/queryValidation';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
-  let { page, saved } = req.query;
+  const { page = '1', saved = 'false' } = req.query;
 
-  if (!page || !saved) {
-    page = '1';
-    saved = 'false';
-  }
+  await validateQuery(req.query);
   const id = req.userInfo?.id;
   const user : object | null = await User.findById(id);
   if (!user) {
