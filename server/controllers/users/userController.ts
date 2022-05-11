@@ -4,7 +4,7 @@ import { RequestType } from '../../utils';
 import validateQuery from '../../utils/validation/queryValidation';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
-  const { page = '1', saved = undefined } = req.query;
+  const { page = '1', saved } = req.query;
 
   await validateQuery(req.query);
   // Convert the incoming saved string into a boolean
@@ -67,8 +67,10 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   return res.json({
     message: 'Reviews found',
     length: filteredReviews.length,
-    page: Number(page),
-    data: filteredReviews,
+    data: {
+      length: filteredReviews.length,
+      reviews: filteredReviews,
+    },
   });
 };
 
