@@ -27,6 +27,15 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
   };
 
+  const interviewerInterview = {
+    intervieweeId: id,
+    date,
+    time,
+    language,
+    specialization,
+    questionCategory,
+  };
+
   // Update interviewee interviews
   await Interviewee.findOneAndUpdate({
     where: {
@@ -35,6 +44,19 @@ const createInterview = async (req: RequestType, res: Response) => {
   }, {
     $push: {
       interviews: interview,
+    },
+  }, {
+    new: true,
+  });
+
+  // Update interviewer interviews
+  await Interviewee.findOneAndUpdate({
+    where: {
+      userId: interviewerId,
+    },
+  }, {
+    $push: {
+      interviews: interviewerInterview,
     },
   }, {
     new: true,
