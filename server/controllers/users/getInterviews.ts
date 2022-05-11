@@ -13,7 +13,7 @@ const getData = async (role: string, userId: string, status: string, page: strin
   const condition = [
     {
       $match: {
-        userId: '627a27c142c2195ced5a537a',
+        userId,
       },
     },
     { $unwind: '$interviews' },
