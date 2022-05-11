@@ -3,7 +3,8 @@ import mailSender from './sendEmailVerification/sendEmail';
 import signupValidation from './validation/signupValidation';
 import CustomError from './CustomError';
 import loginValidation from './validation/loginValidation';
-import { RequestType, signupInterface } from './interfaces';
+import updateInfoValidation from './validation/updateInfoValidation';
+import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
 
 export {
   verifyToken,
@@ -14,4 +15,6 @@ export {
   loginValidation,
   RequestType,
   signupInterface,
+  updateInfoInterface,
+  updateInfoValidation,
 };
