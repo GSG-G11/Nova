@@ -4,8 +4,21 @@ import './UserInfo.css';
 import { useSelector } from 'react-redux';
 
 const UserInfo = () => {
+  // TODO: get id from redux state
   const { user: { role } } = useSelector((state) => state.auth);
 
+  // TODO: useEffect to fetch user info when the function is ready
+  //   const [userInfo, setUserInfo] = useState(null);
+
+  //   useEffect(() => {
+  //     if (id) {
+  //       axios.get(`/api/users/${id}`).then((res) => {
+  //         setUserInfo(res.data);
+  //       });
+  //     }
+  //   }, []);
+
+  // TODO: Replace with user info from redux state
   return (
     <div className="user__info-section">
       <div className="user__primary">

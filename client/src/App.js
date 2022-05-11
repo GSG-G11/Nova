@@ -7,7 +7,7 @@ import UserInfo from './components/UserInfo/UserInfo';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, user } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(checkUser());
   }, []);
@@ -20,7 +20,9 @@ const App = () => {
         </div>
       )}
       <LoginButton />
-      <UserInfo />
+      {
+       user && <UserInfo />
+     }
     </div>
   );
 };

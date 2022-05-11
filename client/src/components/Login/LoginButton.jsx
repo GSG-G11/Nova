@@ -26,7 +26,7 @@ const LoginButton = () => {
       </Button>
       <Modal title="Log in" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <img className="logo" src={logo} alt="logo" />
-        <LoginForm />
+        <LoginForm handleOk={handleOk} />
       </Modal>
     </>
   );

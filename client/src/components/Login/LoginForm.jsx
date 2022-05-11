@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux';
 import './style.css';
 import { setUser } from '../../redux/features/auth/authSlice';
 
-const LoginForm = () => {
+// eslint-disable-next-line react/prop-types
+const LoginForm = ({ handleOk }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const LoginForm = () => {
     try {
       const { data } = await axios.post('/api/login', { email, password });
       dispatch(setUser(data.data.user));
+      handleOk();
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
