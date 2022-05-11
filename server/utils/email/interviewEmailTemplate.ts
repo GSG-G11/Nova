@@ -4,8 +4,17 @@ const emailTemplate = (
   language: string,
   specialization: string,
   questionCategory: string,
-) => (
-  `<!doctype html>
+  name: string = '',
+) => {
+  let intervieweeName;
+  if (name) {
+    intervieweeName = name;
+    return `
+    <h1>Interview Request</h1>
+    <p>An Interview request has been sent to you by ${name}</p>`;
+  }
+  return (
+    `<!doctype html>
     <html>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -333,7 +342,7 @@ const emailTemplate = (
                         <tr>
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
-                            <p>You requested an interview, the following details were provided:</p>
+                            ${intervieweeName}
                             <p> Your interview will be scheduled on <strong>${date}</strong> at <strong>${time}</strong>. The details as follows</p>
                             <p>Language: ${language}</p>
                             <p>Specialty: ${specialization}</p>
@@ -359,6 +368,7 @@ const emailTemplate = (
       </body>
     </html>
     `
-);
+  );
+};
 
 export default emailTemplate;

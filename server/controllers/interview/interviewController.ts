@@ -3,7 +3,7 @@ import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import { CustomError, mailSender, RequestType } from '../../utils';
 import interviewValidation from '../../utils/validation/interviewValidation';
-import emailTemplate from './interviewEmailTemplate';
+import emailTemplate from '../../utils/email/interviewEmailTemplate';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -53,7 +53,7 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   // Send Emails to both interviewee and interviewer
 
-  mailSender(interviewerEmail, 'Interview Request', `You have a new interview request from ${intervieweeEmail}`);
+  mailSender(interviewerEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory, intervieweeEmail));
 
   mailSender(intervieweeEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory));
 
