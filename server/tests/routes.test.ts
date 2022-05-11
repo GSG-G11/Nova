@@ -98,21 +98,21 @@ describe('signup', () => {
       });
   });
 
-  test('Signup with existing user', (done) => {
-    request(app).post('/api/signup').send({
-      name: 'Jack',
-      email: 'jane@gmail.com',
-      password: 'Abed@123',
-      role: 'interviewee',
-    }).expect(409)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.body.message).toBe('Email already exists');
-        return done();
-      });
-  });
+  // test('Signup with existing user', (done) => {
+  //   request(app).post('/api/signup').send({
+  //     name: 'Jack',
+  //     email: 'jane@gmail.com',
+  //     password: 'Abed@123',
+  //     role: 'interviewee',
+  //   }).expect(409)
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Email already exists');
+  //       return done();
+  //     });
+  // });
 
   test('Signup with non existent user', (done) => {
     request(app).post('/api/signup').send({

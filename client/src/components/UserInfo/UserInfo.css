@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.user__info-section {
+    width: 52rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+
+
+.user__primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 1.8rem;
+}
+
+.user__image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user__image-container img {
+    width: 14rem;
+}
+
+.user__primary-info {
+    width: 100%;
+}
+
+.user__name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #545871;
+    line-height: 0;
+}
+
+
+.user__specialization {
+    font-size: 1.1rem;
+    color: #979797;
+}
+
+
+.user__secondary-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #ECECEC;
+    padding: 1.2rem 2.4rem;
+}
+
+
+.user__about {
+    font-size: 1.2rem;
+    color: #545871;
+    font-weight: bold;
+}
+
+.user__about-description {
+    font-size: 1.1rem;
+    color: #979797;
+}
+
+.user__start-interview {
+    width: 18rem;
+    color: white;
+    background-color: #1890FF;
+    padding: 0.8rem 0;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
