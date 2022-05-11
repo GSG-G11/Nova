@@ -7,7 +7,7 @@ import request from 'supertest';
 import app from '../app';
 import createFakeData from '../database/build';
 
-beforeAll(() => createFakeData());
+beforeEach(() => createFakeData());
 describe('Login', () => {
   test('Should return error with validation', (done) => {
     request(app).post('/api/login').send({
@@ -142,19 +142,16 @@ describe('signup', () => {
   });
 
   // todo: test for email verification
-  // test('Verify Email', (done) => {
-  //   request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsIn
-  // R5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.
-  // v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4').expect(200)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         console.log(err, 11111111);
-  //         return done(err);
-  //       }
-  //       expect(res.body.message).toBe('Email Valedated successfully');
-  //       return done();
-  //     });
-  // });
+  test('Verify Email', (done) => {
+    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhcnJ5QGdtYWlsLmNvbSIsImlhdCI6MTY1MjE4ODM2M30.W80qvkj96eqcTReiG7pgXMHW5Ij-ipoPJkVtwFaDOTg').expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Your account is verified successfully');
+        return done();
+      });
+  });
 });
 
 afterAll(() => mongoose.connection.close());
