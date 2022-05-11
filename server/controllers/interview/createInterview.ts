@@ -15,8 +15,8 @@ const createInterview = async (req: RequestType, res: Response) => {
   await interviewValidation(req.body);
 
   // Get the interviewee and interviewer
-  const { email: intervieweeEmail } = await User.findById(id);
-  const { email: interviewerEmail } = await User.findById(interviewerId);
+  const { email: intervieweeEmail, email: interviewerEmail } : any = await Promise
+    .all([User.findById(id), User.findById(interviewerId)]);
 
   // Get the interviewee interviews
   const { interviews } = await Interviewee.findOne({
