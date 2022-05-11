@@ -1,9 +1,11 @@
 import { Response } from 'express';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
-import { mailSender, RequestType } from '../../utils';
+import { CustomError, mailSender, RequestType } from '../../utils';
 import interviewValidation from '../../utils/validation/interviewValidation';
 import emailTemplate from '../../utils/email/interviewEmailTemplate';
+import Schedule from '../../database/Models/Schedule';
+import Interviewer from '../../database/Models/Interviewer';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -17,6 +19,52 @@ const createInterview = async (req: RequestType, res: Response) => {
   // Get the interviewee and interviewer
   const [{ email: intervieweeEmail }, { email: interviewerEmail }] : any = await Promise
     .all([await User.findById(id), await User.findById(interviewerId)]);
+
+  const interviewerSchedule = await Schedule.aggregate([{
+    $project: {
+      _id: 0,
+      'available.date': 1,
+      'available.time': 1,
+      'available.interviewerId': 1,
+    },
+  }, {
+    $unwind: '$available',
+  },
+  {
+    $match: {
+      'available.interviewerId': '2',
+    },
+  }, {
+    $group: {
+      _id: '$available.date',
+      timeSlot: {
+        $first: {
+          time: '$available.time',
+          date: '$available.date',
+        },
+
+      },
+    },
+  },
+
+  ]);
+
+  // Check if the interviewer is available on the date and time
+  const filteredSchedule = interviewerSchedule.filter((x) => {
+    const dateConvert = new Date(x.timeSlot.date).toISOString().split('T')[0];
+    return dateConvert === date;
+  });
+
+  if (filteredSchedule.length === 0) {
+    throw new CustomError('Interviewer is not available on this date', 400);
+  }
+
+  filteredSchedule.forEach((x) => {
+    const { timeSlot: { time: freeTime } } = x;
+    if (!freeTime.includes(time)) {
+      throw new CustomError('Interviewer is not available on this time', 400);
+    }
+  });
 
   const interview = {
     interviewerId,
@@ -50,7 +98,7 @@ const createInterview = async (req: RequestType, res: Response) => {
   });
 
   // Update interviewer interviews
-  await Interviewee.findOneAndUpdate({
+  await Interviewer.findOneAndUpdate({
     where: {
       userId: interviewerId,
     },
