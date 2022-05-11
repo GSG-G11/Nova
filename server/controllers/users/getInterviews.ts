@@ -6,9 +6,24 @@ import Interviewee from '../../database/Models/Interviewee';
 
 const getData = async (role: string, userId: string, status: string, page: string) => {
   const pageLimitMin = (Number(page) - 1) * 3;
-  const dataBaseInterviewe = (role === 'interviewer') ? Interviewer : Interviewee;
+  let dataBaseInterview;
 
-  const timecondition = (status === 'upcoming') ? { $gt: new Date() } : { $lte: new Date() };
+  switch (role) {
+    case 'interviewer':
+      dataBaseInterview = Interviewer;
+      break;
+    case 'interviewee':
+      dataBaseInterview = Interviewee;
+      break;
+    default:
+      throw new CustomError('Invalid role!', 401);
+  }
+
+  if (!dataBaseInterview) {
+    throw new CustomError('Invalid role!', 401);
+  }
+
+  const timeCondition = (status === 'upcoming') ? { $gt: new Date() } : { $lte: new Date() };
 
   const condition = [
     {
@@ -19,12 +34,12 @@ const getData = async (role: string, userId: string, status: string, page: strin
     { $unwind: '$interviews' },
     {
       $match: {
-        'interviews.date': timecondition,
+        'interviews.date': timeCondition,
       },
     },
   ];
 
-  const interviews = await dataBaseInterviewe.aggregate(condition).skip(pageLimitMin).limit(3);
+  const interviews = await dataBaseInterview.aggregate(condition).skip(pageLimitMin).limit(3);
 
   return interviews;
 };
