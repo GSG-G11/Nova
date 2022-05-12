@@ -1,9 +1,10 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
+import { getAllReviews, getUserById } from '../controllers';
+import { userAuth } from '../middlewares/auth';
 
-import { getUserById } from '../controllers';
+const router : Router = Router();
 
-const router: Router = express.Router();
-
-router.get('/:id', getUserById);
+router.get('/info/:id', getUserById);
+router.get('/review', userAuth, getAllReviews);
 
 export default router;

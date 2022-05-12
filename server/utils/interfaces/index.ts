@@ -1,3 +1,4 @@
 import RequestType from './RequestType';
+import signupInterface from './signupInterface';
 
-export default RequestType;
+export { RequestType, signupInterface };
