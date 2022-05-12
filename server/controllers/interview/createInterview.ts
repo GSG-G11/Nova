@@ -66,8 +66,8 @@ const createInterview = async (req: RequestType, res: Response) => {
   }
 
   // remove the time from the available time
-  const indexOfFreeTime = freeTime.indexOf(time);
-  const newTimes = freeTime.filter((_: any, i: any) => i !== indexOfFreeTime);
+  const indexOfScheduleFreeTime = freeTime.indexOf(time);
+  const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
   // update the schedule for the interviewer
   await Schedule.updateOne({
@@ -76,7 +76,7 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   }, {
     $set: {
-      'available.$.time': newTimes,
+      'available.$.time': newScheduleTimes,
     },
   });
 
@@ -111,21 +111,50 @@ const createInterview = async (req: RequestType, res: Response) => {
     new: true,
   });
 
-  // Update interviewer interviews and schedule
-  await Interviewer.findOneAndUpdate({
-    where: {
-      userId: interviewerId,
-    },
-  }, {
+  // Update interviewer interviews
+  await Interviewer.findByIdAndUpdate(interviewerId, {
     $push: {
       interviews: interviewerInterview,
-    },
-    $set: {
-      'schedule.$.time': newTimes,
     },
   }, {
     new: true,
   });
+
+  // Find the date in interviewer  and update the time in it
+
+  const findDateQuery: any = [
+    {
+      $unwind: '$schedule',
+    }, {
+      $match: {
+        'schedule.date': {
+          $eq: new Date(date),
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        'schedule.date': 1,
+        'schedule.time': 1,
+      },
+    },
+  ];
+
+  const findDate = await Interviewer.aggregate(findDateQuery);
+  const updateTimeAvailable = findDate[0].schedule.time;
+  const indexOfTime = updateTimeAvailable.indexOf(time);
+  const newTime = updateTimeAvailable.filter((_: any, i: any) => i !== indexOfTime);
+
+  await Interviewer.updateOne({
+    'schedule.time': time,
+  }, {
+    $set: {
+      'schedule.$.time': newTime,
+    },
+  });
+
+  console.log(newTime);
 
   // Send Emails to both interviewee and interviewer
 
