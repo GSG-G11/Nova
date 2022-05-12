@@ -222,4 +222,38 @@ describe('Interview Reviews', () => {
   });
 });
 
+describe('Get Interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).get('/api/users/interview').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if invalid not role', (done) => {
+    request(app).get('/api/users/interview').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid role!');
+        return done();
+      });
+  });
+
+  test('Should return Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Interviews fetched successfully!');
+      return done();
+    });
+  });
+});
+
 afterAll(() => mongoose.connection.close());
