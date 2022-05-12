@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-first-prop-new-line */
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import LoginForm from './LoginForm';
-import logo from '../../assets/Nova Logo.png';
-import './style.css';
+import logo from '../../../assets/images/logo.png';
+import '../style.css';
 
 const LoginButton = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,9 +25,19 @@ const LoginButton = () => {
       <Button type="primary" onClick={showModal}>
         Log in
       </Button>
-      <Modal title="Log in" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <img className="logo" src={logo} alt="logo" />
-        <LoginForm handleOk={handleOk} />
+      <Modal title={(
+        <div className="modal-logo-img">
+          <img src={logo} alt="logo" className="logo-img" />
+        </div>
+        )}
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <LoginForm
+          handleOk={handleOk}
+        />
       </Modal>
     </>
   );
