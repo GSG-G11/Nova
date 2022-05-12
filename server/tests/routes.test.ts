@@ -5,15 +5,15 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../app';
-import startDb from '../database/config';
+import createFakeData from '../database/build';
 
-beforeAll(() => startDb());
+beforeEach(() => createFakeData());
+
 describe('Login', () => {
   test('Should return error with validation', (done) => {
     request(app).post('/api/login').send({
       email: 'jackgmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(400)
       .end((err, res) => {
         if (err) {
@@ -28,7 +28,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'potato@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(404)
       .end((err, res) => {
         if (err) {
@@ -43,7 +42,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'jack@gmail.com',
       password: 'Abed@12345',
-      role: 'interviewee',
     }).expect(400)
       .end((err, res) => {
         if (err) {
@@ -58,7 +56,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'larry@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(401)
       .end((err, res) => {
         if (err) {
@@ -73,7 +70,6 @@ describe('Login', () => {
     request(app).post('/api/login').send({
       email: 'jack@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
     }).expect(200)
       .end((err, res) => {
         if (err) {
@@ -98,8 +94,7 @@ describe('Get Interviewee Reviews', () => {
   });
 
   test('Should return Reviews found', (done) => {
-    request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
-      .end((err, res) => {
+    request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
         if (err) {
           return done(err);
         }
@@ -108,16 +103,75 @@ describe('Get Interviewee Reviews', () => {
         return done();
       });
   });
+describe('signup', () => {
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'jackgmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"email" must be a valid email');
+        return done();
+      });
+  });
+
+  test('Signup with existing user', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'jane@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+    }).expect(409)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Email already exists');
+        return done();
+      });
+  });
+
+  test('Signup with non existent user', (done) => {
+    request(app)
+      .post('/api/signup')
+      .send({
+        name: 'Jack',
+        email: 'mahmoud@gmail.com',
+        password: 'Abed@123',
+        role: 'interviewee',
+      })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
+        return done();
+      });
+  });
 
   test('Should return not saved Reviews', (done) => {
-    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200)
-      .end((err, res) => {
+    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200).end((err, res) => {
         if (err) {
           return done(err);
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Reviews found');
         expect(res.body.data.length).toBe(2);
+        return done();
+      });
+  });
+  test('Verify Email failed', (done) => {
+    request(app).patch('/api/auth/verify').expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Access token not found');
         return done();
       });
   });
@@ -132,6 +186,16 @@ describe('Get Interviewee Reviews', () => {
       expect(res.body.data.length).toBe(3);
       return done();
     });
+  test('Verify Email', (done) => {
+    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Your account is verified successfully');
+        return done();
+      });
   });
 });
 

@@ -1,9 +1,17 @@
+import { verifyToken, signToken } from './jwt';
+import mailSender from './sendEmailVerification/sendEmail';
+import signupValidation from './validation/signupValidation';
 import CustomError from './CustomError';
-import RequestType from './interfaces/RequestType';
-import { verfiyToken } from './jwt';
-import signToken from './jwt/signToken';
 import loginValidation from './validation/loginValidation';
+import { RequestType, signupInterface } from './interfaces';
 
 export {
-  CustomError, RequestType, verfiyToken, signToken, loginValidation,
+  verifyToken,
+  signToken,
+  mailSender,
+  signupValidation,
+  CustomError,
+  loginValidation,
+  RequestType,
+  signupInterface,
 };
