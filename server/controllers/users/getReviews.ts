@@ -15,23 +15,20 @@ const getAllReviews = async (req: RequestType, res: Response) => {
 
   // filter reviews based on the saved parameter and paginate the results
   // TODO: Replace the static userId with the logged in user's id when create review is implemented
-  let filter : any;
-  if (savedBoolean === true || savedBoolean === false) {
-    const savedReviewsFilter = {
-      $match: {
-        userId: id,
-        'interviews.review.saved': savedBoolean,
-      },
-    };
-    filter = savedReviewsFilter;
-  } else {
-    const allReviews = {
-      $match: {
-        userId: id,
-      },
-    };
-    filter = allReviews;
-  }
+  // let filter : any;
+  // if (savedBoolean === true || savedBoolean === false) {
+  //   const savedReviewsFilter = {
+
+  //   };
+  //   filter = savedReviewsFilter;
+  // } else {
+  //   const allReviews = {
+  //     $match: {
+  //       userId: id,
+  //     },
+  //   };
+  //   filter = allReviews;
+  // }
 
   const filteredReviews : any | undefined = await Interviewee.aggregate([{
     $project: {
@@ -45,7 +42,10 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     $unwind: '$interviews',
   },
   {
-    ...filter,
+    $match: {
+      userId: id,
+      'interviews.review.saved': savedBoolean,
+    },
   },
   {
     $group: {
