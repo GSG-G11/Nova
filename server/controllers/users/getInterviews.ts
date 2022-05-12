@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import User from '../../database/Models/User';
-import { CustomError, RequestType, queryValidation } from '../../utils';
+import { CustomError, RequestType, getInterviewsQueryValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
 import Interviewee from '../../database/Models/Interviewee';
 
@@ -52,7 +52,7 @@ const getInterviews = async (req: RequestType, res: Response) => {
 
   const { status = 'upcoming', page = '1' }: {status?: string, page?: string} = req.query;
 
-  await queryValidation({ status, page });
+  await getInterviewsQueryValidation({ status, page });
 
   const interviews = await getData(role, _id.valueOf(), status, page);
 
