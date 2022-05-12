@@ -21,9 +21,7 @@ const updateReview = async (req: RequestType, res: Response) => {
   }
 
   // Get the interview from the interviews array
-  const { interviews } = interview;
-  const { review } = interviews[0];
-  const { saved } = review;
+  const { interviews: { review: { saved } } } = interview;
 
   // Update the saved in review
   const updatedReview = await Interviewee.updateOne(
@@ -36,12 +34,11 @@ const updateReview = async (req: RequestType, res: Response) => {
   );
 
   if (!updatedReview) {
-    throw new CustomError('Failed to update', 500);
+    throw new CustomError('Failed to update', 400);
   }
 
   return res.json({
-    message: 'Interview found',
-    data: review,
+    message: 'Successfully updated!',
   });
 };
 
