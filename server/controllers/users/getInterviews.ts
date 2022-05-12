@@ -19,10 +19,6 @@ const getData = async (role: string, userId: string, status: string, page: strin
       throw new CustomError('Invalid role!', 401);
   }
 
-  if (!dataBaseInterview) {
-    throw new CustomError('Invalid role!', 401);
-  }
-
   const timeCondition = (status === 'upcoming') ? { $gt: new Date() } : { $lte: new Date() };
 
   const condition = [
@@ -47,11 +43,7 @@ const getData = async (role: string, userId: string, status: string, page: strin
 const getInterviews = async (req: RequestType, res: Response) => {
   const { userInfo } = req;
 
-  if (!userInfo) {
-    throw new CustomError('User not found', 404);
-  }
-
-  const user = await User.find({ _id: userInfo.id });
+  const user = await User.find({ _id: userInfo?.id });
 
   if (!user) {
     throw new CustomError('User not found', 404);
