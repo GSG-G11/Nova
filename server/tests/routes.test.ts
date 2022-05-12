@@ -157,16 +157,16 @@ describe('signup', () => {
   });
 });
 
-// describe('get User Info', () => {
-//   test('Get User Info for profile', (done) => {
-//     request(app).get('/api/user/info/627ce2639bb41910f96a9a6f').expect(200)
-//       .end((err, res) => {
-//         if (err) return done(err);
-//         expect(res.body.data.name).toBe('Jane Doe');
-//         return done();
-//       });
-//   });
-// });
+describe('get User Info', () => {
+  test('Get User Info for profile', (done) => {
+    request(app).get('/api/user/info/627c92140d0c3622573195cb').expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.data.name).toBe('Jane Doe');
+        return done();
+      });
+  });
+});
 
 describe('Interview Reviews', () => {
   test('Should Throw an error if user not authenticated', (done) => {

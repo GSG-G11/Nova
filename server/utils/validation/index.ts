@@ -1,7 +1,6 @@
 import loginValidation from './loginValidation';
-import paramSchema from './paramsValidation';
 
 export {
+  // eslint-disable-next-line import/prefer-default-export
   loginValidation,
-  paramSchema,
 };

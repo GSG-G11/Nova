@@ -1,9 +1,16 @@
 import { Request, Response } from 'express';
+import { Types } from 'mongoose';
 import User from '../../database/Models/User';
-import { paramSchema } from '../../utils';
+import { CustomError } from '../../utils';
 
 const getUserById = async (req: Request, res: Response) => {
-  const { id } = await paramSchema.validateAsync(req.params);
+  const { id } = req.params;
+  const validId: boolean = Types.ObjectId.isValid(id);
+
+  if (!validId) {
+    throw new CustomError('Invalid user', 400);
+  }
+
   const {
     name,
     bio,
