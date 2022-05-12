@@ -23,7 +23,7 @@ const SignupForm = () => {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
 
-  const signUp = async () => {
+  const signup = async () => {
     try {
       const { message: verfiyMsg } = await axios.post('/api/signup', {
         fullName,
@@ -33,8 +33,8 @@ const SignupForm = () => {
         role: 'interviewee',
       });
       message.success(`Welcome ${fullName}, ${verfiyMsg}`);
-    } catch ({ message: messageError }) {
-      message.error({ content: message });
+    } catch ({ Response: { data: { message: msg } } }) {
+      message.error({ msg });
     }
   };
 
@@ -53,7 +53,7 @@ const SignupForm = () => {
         remember: true,
       }}
       autoComplete="off"
-      onFinish={signUp}
+      onFinish={signup}
     >
       <Item
         name="fullName"
