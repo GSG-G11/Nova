@@ -10,8 +10,11 @@ import Interviewer from '../../database/Models/Interviewer';
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
   const {
-    interviewerId, date, time, language, specialization, questionCategory,
+    interviewerId, date, language, specialization, questionCategory,
   } = req.body;
+  let { time } = req.body;
+
+  time = Number(time);
 
   // Validate the incoming request
   await interviewValidation(req.body);
