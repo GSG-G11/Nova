@@ -167,6 +167,25 @@ describe('Interview Reviews', () => {
       return done();
     });
   });
+  test('Should throw an error if page query is not valid', (done) => {
+    request(app).get('/api/user/review?page=a').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('"page" must be a number');
+      return done();
+    });
+  });
+
+  test('Should throw an error if saved query is not valid', (done) => {
+    request(app).get('/api/user/review?saved=potato').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('"saved" must be a boolean');
+      return done();
+    });
+  });
 
   test('Should return Reviews found', (done) => {
     request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
