@@ -82,27 +82,6 @@ describe('Login', () => {
   });
 });
 
-describe('Get Interviewee Reviews', () => {
-  test('Should Throw an error if user not authenticated', (done) => {
-    request(app).get('/api/user/review').expect(401).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.body.message).toBe('Login First!');
-      return done();
-    });
-  });
-
-  test('Should return Reviews found', (done) => {
-    request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Reviews found');
-        return done();
-      });
-  });
 describe('signup', () => {
   test('Should return error with validation', (done) => {
     request(app).post('/api/signup').send({
@@ -154,17 +133,6 @@ describe('signup', () => {
       });
   });
 
-  test('Should return not saved Reviews', (done) => {
-    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200).end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Reviews found');
-        expect(res.body.data.length).toBe(2);
-        return done();
-      });
-  });
   test('Verify Email failed', (done) => {
     request(app).patch('/api/auth/verify').expect(401)
       .end((err, res) => {
@@ -172,6 +140,53 @@ describe('signup', () => {
           return done(err);
         }
         expect(res.body.message).toBe('Access token not found');
+        return done();
+      });
+  });
+
+  test('Verify Email', (done) => {
+    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4')
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Your account is verified successfully');
+        return done();
+      });
+  });
+});
+
+describe('Interview Reviews', () => {
+  test('Should Throw an error if user not authenticated', (done) => {
+    request(app).get('/api/user/review').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should return Reviews found', (done) => {
+    request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Reviews found');
+      return done();
+    });
+  });
+  test('Should return not saved Reviews', (done) => {
+    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Reviews found');
+        expect(res.body.data.length).toBe(2);
         return done();
       });
   });
@@ -186,16 +201,6 @@ describe('signup', () => {
       expect(res.body.data.length).toBe(3);
       return done();
     });
-  test('Verify Email', (done) => {
-    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4')
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.body.message).toBe('Your account is verified successfully');
-        return done();
-      });
   });
 });
 
