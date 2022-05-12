@@ -5,9 +5,9 @@ import {
 } from 'antd';
 import logo from '../../../assets/images/logo.png';
 import SignupForm from './Form';
-import './signup.css';
+import '../style.css';
 
-const SignupModal = () => {
+const SignupButton = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -38,4 +38,4 @@ const SignupModal = () => {
   );
 };
 
-export default SignupModal;
+export default SignupButton;

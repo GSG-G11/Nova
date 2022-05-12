@@ -43,3 +43,8 @@ button.ant-btn.ant-btn-primary.signup:hover {
 .ant-modal-content {
   border-radius: 5px;
 }
+.have-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

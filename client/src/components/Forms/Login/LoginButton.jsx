@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import LoginForm from './LoginForm';
-import logo from '../../assets/images/logo.png';
-import '../Forms/signup/signup.css';
+import logo from '../../../assets/images/logo.png';
+import '../style.css';
 
 const LoginButton = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);

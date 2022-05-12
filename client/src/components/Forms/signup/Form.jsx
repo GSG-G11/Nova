@@ -5,10 +5,8 @@ import {
   Input,
   message,
 } from 'antd';
-import { useDispatch } from 'react-redux';
-import './signup.css';
+import '../style.css';
 import axios from 'axios';
-import { signUpAction } from '../../../redux/features/auth/authSlice';
 
 const confirmPasswordHandel = (getFieldValue) => ({
   validator(_, value) {
@@ -24,19 +22,17 @@ const SignupForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-  const dispatch = useDispatch();
 
   const signUp = async () => {
     try {
-      const { data } = await axios.post('/api/signup', {
+      const { message: verfiyMsg } = await axios.post('/api/signup', {
         fullName,
         email,
         password,
         confirm,
         role: 'interviewee',
       });
-      dispatch(signUpAction(data));
-      message.success(`Welcome ${fullName}, Signup success`);
+      message.success(`Welcome ${fullName}, ${verfiyMsg}`);
     } catch ({ message: messageError }) {
       message.error({ content: message });
     }
@@ -140,6 +136,12 @@ const SignupForm = () => {
           <Button type="primary" htmlType="submit" className="signup">
             Register
           </Button>
+        </div>
+      </Item>
+      <Item>
+        <div className="have-account">
+          Do you have an account?
+          <a href="/api/login">Log in</a>
         </div>
       </Item>
     </Form>

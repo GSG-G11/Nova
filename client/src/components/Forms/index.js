@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import SignupModal from './signup/index';
+import SignupButton from './signup/SignupButton';
+import LoginButton from './Login/LoginButton';
 
 export {
-  SignupModal,
+  SignupButton,
+  LoginButton,
 };

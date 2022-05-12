@@ -5,8 +5,8 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import '../Forms/signup/signup.css';
-import { signUpAction } from '../../redux/features/auth/authSlice';
+import '../style.css';
+import { setUser } from '../../../redux/features/auth/authSlice';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ const LoginForm = () => {
   const onFinish = async () => {
     try {
       const { data } = await axios.post('/api/login', { email, password });
-      dispatch(signUpAction(data.data.user));
+      dispatch(setUser(data.data.user));
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -90,6 +90,12 @@ const LoginForm = () => {
         <Button type="primary" htmlType="submit" className="signup">
           Login
         </Button>
+      </Item>
+      <Item>
+        <div className="have-account">
+          Don`t have an account?
+          <a href="/api/signup">Sign up</a>
+        </div>
       </Item>
     </Form>
   );

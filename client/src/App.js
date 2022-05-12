@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { SignupModal } from './components/Forms';
-import LoginButton from './components/Login/LoginButton';
+import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 
 const App = () => {
@@ -14,7 +13,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <SignupModal />
+      <SignupButton />
       {loading ? 'Loading...' : (
         <div>
           hi
