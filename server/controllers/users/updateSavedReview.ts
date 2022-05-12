@@ -1,9 +1,15 @@
 import { Response } from 'express';
+import { Types } from 'mongoose';
 import Interviewee from '../../database/Models/Interviewee';
 import { CustomError, RequestType } from '../../utils';
 
 const updateReview = async (req: RequestType, res: Response) => {
   const { interviewId } : any = req.params;
+
+  const validId = Types.ObjectId.isValid(interviewId);
+  if (!validId) {
+    throw new CustomError('Invalid ID', 400);
+  }
 
   // Get the interview through the interviews in the interviewee collection
   const interview = await Interviewee.findOne({ 'interviews._id': interviewId }, { interviews: 1, _id: 0 });
@@ -39,7 +45,4 @@ const updateReview = async (req: RequestType, res: Response) => {
   });
 };
 
-export {
-  // eslint-disable-next-line import/prefer-default-export
-  updateReview,
-};
+export default updateReview;
