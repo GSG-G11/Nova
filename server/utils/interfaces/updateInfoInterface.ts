@@ -1,5 +1,5 @@
 interface Body {
-  profile_picture: string;
+  image: string;
   cv: string;
   bio: string;
   level: string;

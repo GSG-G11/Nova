@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const updateInfoValidation = async (data: object) => {
   const schema = Joi.object({
-    profile_picture: Joi.string(),
+    image: Joi.string(),
     cv: Joi.string(),
     bio: Joi.string(),
     level: Joi.string(),
