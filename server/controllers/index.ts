@@ -1,7 +1,8 @@
 import login from './authentication/login';
 import checkAuth from './authentication/checkAuth';
 import createInterview from './interview/createInterview';
-import signup from './authentication/signUp';
+import getAllReviews from './users/getReviews';
+import signup from './authentication/signup';
 import validateEmail from './authentication/validateEmail';
 
 export {
@@ -10,4 +11,5 @@ export {
   checkAuth,
   login,
   createInterview,
+  getAllReviews,
 };

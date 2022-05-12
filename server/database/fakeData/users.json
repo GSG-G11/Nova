@@ -1,7 +1,7 @@
 {
     "user": [
         {
-            "id": 1,
+            "_id": "627c92140d0c3622573195ca",
             "name": "Jane Doe",
             "email": "jane@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -13,7 +13,7 @@
             "is_verified": true
         },
         {
-            "id": 2,
+            "_id": "627c92140d0c3622573195cb",
             "name": "Jack Doe",
             "email": "jack@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -26,7 +26,7 @@
 
         },
         {
-            "id": 3,
+            "_id": "627c92140d0c3622573195cc",
             "name": "Admin Doe",
             "email": "admin@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -39,7 +39,7 @@
 
         },
         {
-            "id": 4,
+            "_id": "627c92140d0c3622573195cd",
             "name": "Larry Doe",
             "email": "larry@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -52,16 +52,30 @@
 
         },
         {
-            "id": 6,
+            "_id": "627c92140d0c3622573195ce",
+            "name": "Larry Doe",
+            "email": "larrys@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm a web developer",
+            "cv": "link to cv",
+            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "level": "INTERNSHIP",
+            "role": "interviewee",
+            "is_verified": true
+
+        },
+        {
+            "_id": "627c92140d0c3622573195cf",
             "name": "Abed Shamia",
             "email": "3boodshamia@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "I'm a web developer",
             "cv": "link to cv",
             "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-            "level": "JUNIOR",
+            "level": "INTERNSHIP",
             "role": "interviewee",
             "is_verified": true
+
         }
     ]
 }

@@ -28,7 +28,9 @@ async function startDb() {
     if (!URL) {
       throw new Error('DB_URL is not defined');
     }
-    const db = await mongoose.connect(URL);
+    const db = await mongoose.connect(URL, {
+      ignoreUndefined: true,
+    });
     console.log('Connected to DB');
     return db;
   } catch (error) {
