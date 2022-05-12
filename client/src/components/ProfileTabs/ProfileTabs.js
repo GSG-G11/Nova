@@ -2,21 +2,23 @@ import React from 'react';
 import { Tabs } from 'antd';
 import './ProfileTabs.css';
 
+const { TabPane } = Tabs;
+
 const ProfileTabs = () => (
   <div>
     <Tabs defaultActiveKey="1" className="Tabs__section" centered>
-      <Tabs.TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
+      <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
         Contents of Tab Pane 1
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="Reviews" key="2">
+      </TabPane>
+      <TabPane tab="Interviews history" key="2">
         Content of Tab Pane 2
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="Settings" key="3">
+      </TabPane>
+      <TabPane tab="Reviews" key="3">
         Content of Tab Pane 3
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="Interviews history" key="4">
+      </TabPane>
+      <TabPane tab="Settings" key="4">
         Content of Tab Pane 4
-      </Tabs.TabPane>
+      </TabPane>
     </Tabs>
   </div>
 );
