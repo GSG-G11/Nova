@@ -15,55 +15,48 @@ const getAllReviews = async (req: RequestType, res: Response) => {
 
   // filter reviews based on the saved parameter and paginate the results
   // TODO: Replace the static userId with the logged in user's id when create review is implemented
-  let filteredReviews : any | undefined;
+  let filter : any;
   if (savedBoolean === true || savedBoolean === false) {
-    filteredReviews = await Interviewee.aggregate([{
-      $project: {
-        _id: 0,
-        userId: 1,
-        'interviews.review': 1,
-      },
-    },
-
-    {
-      $unwind: '$interviews',
-    },
-    {
+    const savedReviewsFilter = {
       $match: {
         userId: '4',
         'interviews.review.saved': savedBoolean,
       },
-    },
-    {
-      $group: {
-        _id: '$interviews.review._id',
-        review: {
-          $first: '$interviews.review',
-        },
-      },
-    },
-    ]).skip((Number(page) - 1) * 3).limit(3);
-  }
-
-  if (savedBoolean === undefined) {
-    filteredReviews = await Interviewee.aggregate([{
-      $project: {
-        _id: 0,
-        userId: 1,
-        'interviews.review': 1,
-      },
-    },
-    {
+    };
+    filter = savedReviewsFilter;
+  } else {
+    const allReviews = {
       $match: {
         userId: '4',
       },
-    },
-    {
-      $unwind: '$interviews',
-    },
-
-    ]).skip((Number(page) - 1) * 3).limit(3);
+    };
+    filter = allReviews;
   }
+
+  const filteredReviews : any | undefined = await Interviewee.aggregate([{
+    $project: {
+      _id: 0,
+      userId: 1,
+      'interviews.review': 1,
+    },
+  },
+
+  {
+    $unwind: '$interviews',
+  },
+  {
+    ...filter,
+  },
+  {
+    $group: {
+      _id: '$interviews.review._id',
+      review: {
+        $first: '$interviews.review',
+      },
+    },
+  },
+  ]).skip((Number(page) - 1) * 3).limit(3);
+
   return res.json({
     message: 'Reviews found',
     data: {
