@@ -223,4 +223,44 @@ describe('Interview Reviews', () => {
   });
 });
 
+describe('Update Info', () => {
+  test('Should throw an error if user not logged in', (done) => {
+    request(app).patch('/api/user').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if Update failed', (done) => {
+    request(app).patch('/api/user').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Update failed');
+        return done();
+      });
+  });
+
+  test('Should update user info', (done) => {
+    request(app).patch('/api/user').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      cv: 'cv.pdf',
+      bio: 'I am a software engineer',
+    })
+
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('User info updated successfully');
+        return done();
+      });
+  });
+});
+
 afterAll(() => mongoose.connection.close());

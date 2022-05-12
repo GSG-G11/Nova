@@ -22,9 +22,9 @@ const updateInfo = async (req: RequestType, res: Response) => {
   });
 
   if (user.modifiedCount > 0) {
-    return res.json({ message: 'User updated successfully' });
+    return res.json({ message: 'User info updated successfully' });
   }
-  throw new CustomError('Update failed', 500);
+  throw new CustomError('Update failed', 400);
 };
 
 export default updateInfo;
