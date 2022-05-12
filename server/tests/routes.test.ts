@@ -86,4 +86,13 @@ describe('Login', () => {
   });
 });
 
+test('Get User Info for profile', (done) => {
+  request(app).get('/api/user/627ce2639bb41910f96a9a6f').expect(200)
+    .end((err, res) => {
+      if (err) return done(err);
+      expect(res.body.data.name).toBe('Jane Doe');
+      return done();
+    });
+});
+
 afterAll(() => mongoose.connection.close());
