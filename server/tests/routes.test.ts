@@ -68,7 +68,7 @@ describe('Login', () => {
 
   test('Successfully Logged In', (done) => {
     request(app).post('/api/login').send({
-      email: 'jack@gmail.com',
+      email: 'jane@gmail.com',
       password: 'Abed@123',
     }).expect(200)
       .end((err, res) => {
@@ -154,6 +154,72 @@ describe('signup', () => {
         expect(res.body.message).toBe('Your account is verified successfully');
         return done();
       });
+  });
+});
+
+describe('Interview Reviews', () => {
+  test('Should Throw an error if user not authenticated', (done) => {
+    request(app).get('/api/user/review').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+  test('Should throw an error if page query is not valid', (done) => {
+    request(app).get('/api/user/review?page=a').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('"page" must be a number');
+      return done();
+    });
+  });
+
+  test('Should throw an error if saved query is not valid', (done) => {
+    request(app).get('/api/user/review?saved=potato').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('"saved" must be a boolean');
+      return done();
+    });
+  });
+
+  test('Should return Reviews found', (done) => {
+    request(app).get('/api/user/review').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Reviews found');
+      return done();
+    });
+  });
+  test('Should return not saved Reviews', (done) => {
+    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Reviews found');
+        expect(res.body.data.length).toBe(2);
+        return done();
+      });
+  });
+
+  test('Should return 3 saved Reviews', (done) => {
+    request(app).get('/api/user/review?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Reviews found');
+      expect(res.body.data.length).toBe(3);
+      return done();
+    });
   });
 });
 
