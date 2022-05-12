@@ -4,6 +4,8 @@ import signupValidation from './validation/signupValidation';
 import CustomError from './CustomError';
 import loginValidation from './validation/loginValidation';
 import { RequestType, signupInterface } from './interfaces';
+import interviewValidation from './validation/interviewValidation';
+import emailTemplate from './email/interviewEmailTemplate';
 
 export {
   verifyToken,
@@ -14,4 +16,6 @@ export {
   loginValidation,
   RequestType,
   signupInterface,
+  interviewValidation,
+  emailTemplate,
 };

@@ -1,23 +1,18 @@
 import { Response } from 'express';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
-import { CustomError, mailSender, RequestType } from '../../utils';
-import interviewValidation from '../../utils/validation/interviewValidation';
-import emailTemplate from '../../utils/email/interviewEmailTemplate';
+import {
+  CustomError, mailSender, RequestType, emailTemplate, interviewValidation,
+} from '../../utils';
 import Schedule from '../../database/Models/Schedule';
 import Interviewer from '../../database/Models/Interviewer';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
-  const {
-    interviewerId, date, language, specialization, questionCategory,
-  } = req.body;
-  let { time } = req.body;
-
-  time = Number(time);
-
   // Validate the incoming request
-  await interviewValidation(req.body);
+  const {
+    interviewerId, date, language, specialization, questionCategory, time,
+  } : any = await interviewValidation(req.body);
 
   // Get the interviewee and interviewer emails
   const [{ email: intervieweeEmail },
