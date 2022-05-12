@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import LoginButton from './components/Login/LoginButton';
-import { checkUser } from './redux/features/auth/authSlice';
 import 'antd/dist/antd.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { LoginButton, SignupButton } from './components/Forms';
+import { checkUser } from './redux/features/auth/authSlice';
 import ProfileTabs from './components/ProfileTabs/ProfileTabs';
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <SignupButton />
       {loading ? 'Loading...' : (
         <div>
           hi
