@@ -4,7 +4,6 @@
             "userId": "627c92140d0c3622573195ca",
             "interviews": [
                 {
-                    "id": "1",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-28",
                     "time": 12,
@@ -22,7 +21,6 @@
             "userId": "627c92140d0c3622573195ce",
             "interviews": [
                 {
-                    "id": "2",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
                     "time": 12,
@@ -35,7 +33,6 @@
                     }
                 },
                 {
-                    "id": "2",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
                     "time": 13,
@@ -48,7 +45,6 @@
                     }
                 },
                 {
-                    "id": "2",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
                     "time": 14,
@@ -61,7 +57,6 @@
                     }
                 },
                 {
-                    "id": "2",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
                     "time": 15,
@@ -74,7 +69,6 @@
                     }
                 },
                 {
-                    "id": "2",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
                     "time": 16,

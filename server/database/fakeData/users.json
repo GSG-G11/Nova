@@ -2,7 +2,6 @@
     "user": [
         {
             "_id": "627c92140d0c3622573195ca",
-            "id": 1,
             "name": "Jane Doe",
             "email": "jane@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -15,7 +14,6 @@
         },
         {
             "_id": "627c92140d0c3622573195cb",
-            "id": 2,
             "name": "Jack Doe",
             "email": "jack@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -29,7 +27,6 @@
         },
         {
             "_id": "627c92140d0c3622573195cc",
-            "id": 3,
             "name": "Admin Doe",
             "email": "admin@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -43,7 +40,6 @@
         },
         {
             "_id": "627c92140d0c3622573195cd",
-            "id": 4,
             "name": "Larry Doe",
             "email": "larry@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
@@ -57,7 +53,6 @@
         },
         {
             "_id": "627c92140d0c3622573195ce",
-            "id": 5,
             "name": "Larry Doe",
             "email": "larrys@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",

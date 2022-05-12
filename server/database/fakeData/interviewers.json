@@ -9,7 +9,6 @@
             "specialization": "FRONTEND",
             "interviews": [
                 {
-                    "id": "1",
                     "intervieweeId": "627c92140d0c3622573195ca",
                     "date": "2022-04-28",
                     "time": 12,
@@ -19,7 +18,6 @@
 
                 },
                 {
-                    "id": "2",
                     "intervieweeId": "627c92140d0c3622573195ce",
                     "date": "2022-04-29",
                     "time": 12,
