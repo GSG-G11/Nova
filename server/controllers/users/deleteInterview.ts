@@ -37,11 +37,7 @@ const deleteInterview = async (req: RequestType, res: Response) => {
   const { userInfo } = req;
   const { id } = req.params;
 
-  if (!userInfo) {
-    throw new CustomError('User not found', 404);
-  }
-
-  const user = await User.find({ _id: userInfo.id });
+  const user = await User.find({ _id: userInfo?.id });
 
   if (!user) {
     throw new CustomError('User not found', 404);
