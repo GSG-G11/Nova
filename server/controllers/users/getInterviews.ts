@@ -56,6 +56,9 @@ const getInterviews = async (req: RequestType, res: Response) => {
 
   const interviews = await getData(role, _id.valueOf(), status, page);
 
+  if (!interviews.length) {
+    throw new CustomError('No interviews found', 404);
+  }
   res.json({
     data: interviews,
     message: 'Interviews fetched successfully!',

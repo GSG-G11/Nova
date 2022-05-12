@@ -245,12 +245,23 @@ describe('Get Interview', () => {
   });
 
   test('Should return Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+    request(app).get('/api/users/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
       if (err) {
         return done(err);
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Interviews fetched successfully!');
+      return done();
+    });
+  });
+
+  test('Should return error no Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('No interviews found');
       return done();
     });
   });
