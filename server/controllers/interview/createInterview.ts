@@ -18,7 +18,7 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   // Get the interviewee and interviewer emails
   const [{ email: intervieweeEmail }, { email: interviewerEmail }] : any = await Promise
-    .all([await User.findById(id), await User.findById(interviewerId)]);
+    .all([User.findById(id), User.findById(interviewerId)]);
 
   // Get Available interviewers schedule
   const interviewersSchedule = await Schedule.aggregate([{
@@ -98,27 +98,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
   };
 
-  // Update interviewee interviews
-  await Interviewee.findOneAndUpdate({
-    where: {
-      userId: id,
-    },
-  }, {
-    $push: {
-      interviews: interview,
-    },
-  }, {
-    new: true,
-  });
-
   // Update interviewer interviews
-  await Interviewer.findByIdAndUpdate(interviewerId, {
-    $push: {
-      interviews: interviewerInterview,
-    },
-  }, {
-    new: true,
-  });
 
   // Find the date in interviewer  and update the time in it
 
@@ -146,21 +126,41 @@ const createInterview = async (req: RequestType, res: Response) => {
   const indexOfTime = updateTimeAvailable.indexOf(time);
   const newTime = updateTimeAvailable.filter((_: any, i: any) => i !== indexOfTime);
 
-  await Interviewer.updateOne({
-    'schedule.time': time,
-  }, {
-    $set: {
-      'schedule.$.time': newTime,
-    },
-  });
+  await Promise.all([
+    // Update interviewee interviews
+    await Interviewee.findOneAndUpdate({
+      where: {
+        userId: id,
+      },
+    }, {
+      $push: {
+        interviews: interview,
+      },
+    }, {
+      new: true,
+    }),
+    // Update interviewer interviews
+    await Interviewer.findByIdAndUpdate(interviewerId, {
+      $push: {
+        interviews: interviewerInterview,
+      },
+    }, {
+      new: true,
+    }),
+    await Interviewer.updateOne({
+      'schedule.time': time,
+    }, {
+      $set: {
+        'schedule.$.time': newTime,
+      },
+    }),
+    // Send Emails to both interviewee and interviewer
+    await
+    mailSender(interviewerEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory, intervieweeEmail)),
+    await
+    mailSender(intervieweeEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory)),
 
-  console.log(newTime);
-
-  // Send Emails to both interviewee and interviewer
-
-  mailSender(interviewerEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory, intervieweeEmail));
-
-  mailSender(intervieweeEmail, 'Interview Request', emailTemplate(date, time, language, specialization, questionCategory));
+  ]);
 
   // Return the interviewee interview
   res.status(201).json({
