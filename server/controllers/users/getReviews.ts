@@ -66,7 +66,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   }
   return res.json({
     message: 'Reviews found',
-    length: filteredReviews.length,
     data: {
       length: filteredReviews.length,
       reviews: filteredReviews,
@@ -74,7 +73,4 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   });
 };
 
-export {
-  // eslint-disable-next-line import/prefer-default-export
-  getAllReviews,
-};
+export default getAllReviews;

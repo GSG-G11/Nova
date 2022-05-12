@@ -117,7 +117,7 @@ describe('Get Interviewee Reviews', () => {
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Reviews found');
-        expect(res.body.length).toBe(2);
+        expect(res.body.data.length).toBe(2);
         return done();
       });
   });
@@ -129,7 +129,7 @@ describe('Get Interviewee Reviews', () => {
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Reviews found');
-      expect(res.body.length).toBe(3);
+      expect(res.body.data.length).toBe(3);
       return done();
     });
   });
