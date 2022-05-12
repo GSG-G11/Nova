@@ -18,7 +18,6 @@ const deleteData = async (role: string, userId: string, interviewId: string) => 
     default:
       throw new CustomError('Invalid role!', 401);
   }
-
   const firstCondition = {
     $match: {
       userId,
@@ -37,7 +36,7 @@ const deleteInterview = async (req: RequestType, res: Response) => {
   const { userInfo } = req;
   const { id } = req.params;
 
-  const user = await User.find({ _id: userInfo?.id });
+  const user = await User.find({ _id: new ObjectId(userInfo?.id) });
 
   if (!user) {
     throw new CustomError('User not found', 404);
