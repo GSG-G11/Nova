@@ -33,7 +33,7 @@ const createInterview = async (req: RequestType, res: Response) => {
   },
   {
     $match: {
-      'available.interviewerId': '2',
+      'available.interviewerId': interviewerId,
     },
   }, {
     $group: {
