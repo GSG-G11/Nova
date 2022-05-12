@@ -50,22 +50,34 @@ const createInterview = async (req: RequestType, res: Response) => {
   ]);
 
   // Check if the interviewer is available on the date and time
-  const filteredSchedule = interviewerSchedule.filter((x) => {
+  const filteredDateSchedule = interviewerSchedule.filter((x) => {
     const dateConvert = new Date(x.timeSlot.date).toISOString().split('T')[0];
     return dateConvert === date;
   });
 
-  if (filteredSchedule.length === 0) {
+  if (filteredDateSchedule.length === 0) {
     throw new CustomError('Interviewer is not available on this date', 400);
   }
+  const { timeSlot: { time: freeTime } } : any = filteredDateSchedule[0];
 
-  filteredSchedule.forEach((x) => {
-    const { timeSlot: { time: freeTime } } = x;
-    if (!freeTime.includes(time)) {
-      throw new CustomError('Interviewer is not available on this time', 400);
-    }
+  if (!freeTime.includes(time)) {
+    throw new CustomError('Interviewer is not available on this time', 400);
+  }
+
+  // remove the time from the available time
+  const indexOfFreeTime = freeTime.indexOf(time);
+  const newTimes = freeTime.filter((_: any, i: any) => i !== indexOfFreeTime);
+
+  // update the schedule for the interviewer
+  await Schedule.updateOne({
+    'available.date': date,
+    'available.time': time,
+
+  }, {
+    $set: {
+      'available.$.time': newTimes,
+    },
   });
-
   const interview = {
     interviewerId,
     date,
