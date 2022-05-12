@@ -12,29 +12,24 @@ import Schedule from './Models/Schedule';
 const createFakeData = async () => {
   try {
     await startDb();
-    usersData.user.forEach(async (user: object) => {
-      await User.deleteMany({});
-      await User.create(user);
-    });
 
-    scheduleData.schedule.forEach(async (schedule: object) => {
-      await Schedule.deleteMany({});
-      await Schedule.create(schedule);
-    });
+    await Promise.all([
+      User.deleteMany({}),
+      Schedule.deleteMany({}),
+      Interviewee.deleteMany({}),
+      Interviewer.deleteMany({}),
+    ]);
 
-    intervieweesData.interviewee.forEach(async (interviewee: object) => {
-      await Interviewee.deleteMany({});
-      await Interviewee.create(interviewee);
-    });
+    await Promise.all([
+      User.insertMany(usersData.user),
+      Schedule.insertMany(scheduleData.schedule),
+      Interviewee.insertMany(intervieweesData.interviewee),
+      Interviewer.insertMany(interviewersData.interviewer),
+    ]);
 
-    interviewersData.interviewer.forEach(async (interviewer: object) => {
-      await Interviewer.deleteMany({});
-      await Interviewer.create(interviewer);
-    });
-
-    setTimeout(() => {
+    await setTimeout(() => {
       mongoose.connection.close();
-    }, 1500);
+    }, 1000);
 
     console.log('Fake data created successfully');
   } catch (err: any) {
