@@ -257,4 +257,168 @@ describe('Create Interview', () => {
   });
 });
 
+describe('Create Interview', () => {
+  test('Should Throw an error if user not authenticated', (done) => {
+    request(app).post('/api/interview').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should Throw an error for wrong questionCategory', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-28',
+      time: 14,
+      language: 'JS',
+      specialization: 'BACKEND',
+      questionCategory: 'potato',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"questionCategory" must be one of [Technical, Analytical, Algorithms, System Design]');
+        return done();
+      });
+  });
+
+  test('Should Throw an error for wrong Specialization', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-28',
+      time: 14,
+      language: 'JS',
+      specialization: 'POTATO',
+      questionCategory: 'Technical',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        return done();
+      });
+  });
+
+  test('Should Throw an error for wrong language', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-28',
+      time: 14,
+      language: 'Arabic',
+      specialization: 'FRONTEND',
+      questionCategory: 'Technical',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        return done();
+      });
+  });
+
+  test('Should Throw an error for wrong time', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-28',
+      time: 'LOL',
+      language: 'JS',
+      specialization: 'FRONTEND',
+      questionCategory: 'Technical',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"time" must be a number');
+        return done();
+      });
+  });
+
+  test('Should Throw an error for wrong date', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: 'aha12',
+      time: 12,
+      language: 'JS',
+      specialization: 'FRONTEND',
+      questionCategory: 'Technical',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"date" must be a valid date');
+        return done();
+      });
+  });
+
+  test('Should Throw an error for interviewer not available on that date', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-01',
+      time: 12,
+      language: 'JS',
+      specialization: 'FRONTEND',
+      questionCategory: 'Technical',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interviewer is not available on this date');
+        return done();
+      });
+  });
+
+  test('Should Throw an error for interviewer not available on that time', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-28',
+      time: 20,
+      language: 'JS',
+      specialization: 'FRONTEND',
+      questionCategory: 'Technical',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interviewer is not available on this time');
+        return done();
+      });
+  });
+
+  test('Should create an interview', (done) => {
+    request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      interviewerId: '627c92140d0c3622573195cb',
+      date: '2022-04-28',
+      time: 14,
+      language: 'JS',
+      specialization: 'FRONTEND',
+      questionCategory: 'Technical',
+    })
+      .expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        expect(res.body.message).toBe('Interview created successfully');
+        return done();
+      });
+  });
+});
 afterAll(() => mongoose.connection.close());
