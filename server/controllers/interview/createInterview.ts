@@ -16,11 +16,12 @@ const createInterview = async (req: RequestType, res: Response) => {
   // Validate the incoming request
   await interviewValidation(req.body);
 
-  // Get the interviewee and interviewer
+  // Get the interviewee and interviewer emails
   const [{ email: intervieweeEmail }, { email: interviewerEmail }] : any = await Promise
     .all([await User.findById(id), await User.findById(interviewerId)]);
 
-  const interviewerSchedule = await Schedule.aggregate([{
+  // Get Available interviewers schedule
+  const interviewersSchedule = await Schedule.aggregate([{
     $project: {
       _id: 0,
       'available.date': 1,
@@ -50,7 +51,7 @@ const createInterview = async (req: RequestType, res: Response) => {
   ]);
 
   // Check if the interviewer is available on the date and time
-  const filteredDateSchedule = interviewerSchedule.filter((x) => {
+  const filteredDateSchedule = interviewersSchedule.filter((x) => {
     const dateConvert = new Date(x.timeSlot.date).toISOString().split('T')[0];
     return dateConvert === date;
   });
@@ -78,6 +79,7 @@ const createInterview = async (req: RequestType, res: Response) => {
       'available.$.time': newTimes,
     },
   });
+
   const interview = {
     interviewerId,
     date,
@@ -109,7 +111,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     new: true,
   });
 
-  // Update interviewer interviews
+  // Update interviewer interviews and schedule
   await Interviewer.findOneAndUpdate({
     where: {
       userId: interviewerId,
@@ -117,6 +119,9 @@ const createInterview = async (req: RequestType, res: Response) => {
   }, {
     $push: {
       interviews: interviewerInterview,
+    },
+    $set: {
+      'schedule.$.time': newTimes,
     },
   }, {
     new: true,
