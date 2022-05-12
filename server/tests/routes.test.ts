@@ -68,7 +68,7 @@ describe('Login', () => {
 
   test('Successfully Logged In', (done) => {
     request(app).post('/api/login').send({
-      email: 'jack@gmail.com',
+      email: 'jane@gmail.com',
       password: 'Abed@123',
     }).expect(200)
       .end((err, res) => {

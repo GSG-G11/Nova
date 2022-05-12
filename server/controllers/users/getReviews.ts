@@ -11,7 +11,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   const savedBoolean : any = saved ? JSON.parse(saved.toString())
     : saved;
 
-  // const id = req.userInfo?.id;
+  const id = req.userInfo?.id;
 
   // filter reviews based on the saved parameter and paginate the results
   // TODO: Replace the static userId with the logged in user's id when create review is implemented
@@ -19,7 +19,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   if (savedBoolean === true || savedBoolean === false) {
     const savedReviewsFilter = {
       $match: {
-        userId: '4',
+        userId: id,
         'interviews.review.saved': savedBoolean,
       },
     };
@@ -27,7 +27,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   } else {
     const allReviews = {
       $match: {
-        userId: '4',
+        userId: id,
       },
     };
     filter = allReviews;
