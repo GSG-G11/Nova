@@ -36,6 +36,10 @@
     color: white;
 }
 
+.interview-form {
+    width: 55rem !important;
+}
+
 .interview-form__radio-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -61,9 +65,39 @@
     
 }
 
+.interview-form__radio-group-fourth {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+}
+.interview-form__radio-group-fourth .date-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding-bottom: 3.2rem;
+}
+
+.interview-form__radio-group-fourth .date-column p {
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: #432773 solid 1px;
+    padding: 0.8rem;
+    border-radius: 10px;
+    align-self: center;
+    background-color: #3d0d8b;
+    color: white;
+}
+
 .interview-form__radio-group label, 
 .interview-form__radio-group-second label,
-.interview-form__radio-group-third label {
+.interview-form__radio-group-third label,
+.interview-form__radio-group-fourth label {
     font-size: 1rem;
     color: #432773;
     font-weight: bold;

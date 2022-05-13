@@ -48,7 +48,12 @@ const InterviewForm = () => {
 
       <div className="btns">
         {
-          step === 1 ? <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button> : <Button type="primary" onClick={() => setStep(step - 1)}> Previous </Button>
+          step === 1 ? <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button> : (
+            <>
+              <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button>
+              <Button type="primary" onClick={() => setStep(step - 1)}> Previous </Button>
+            </>
+          )
         }
 
         {
