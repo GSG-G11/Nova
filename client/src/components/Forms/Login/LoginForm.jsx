@@ -5,8 +5,8 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import './style.css';
-import { setUser } from '../../redux/features/auth/authSlice';
+import '../style.css';
+import { setUser } from '../../../redux/features/auth/authSlice';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -24,8 +24,8 @@ const LoginForm = () => {
 
   const onFinish = async () => {
     try {
-      const { data } = await axios.post('/api/login', { email, password });
-      dispatch(setUser(data.data.user));
+      const { data: { data: { user } } } = await axios.post('/api/login', { email, password });
+      dispatch(setUser(user));
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -36,10 +36,10 @@ const LoginForm = () => {
     <Form
       name="basic"
       labelCol={{
-        span: 8,
+        span: 20,
       }}
       wrapperCol={{
-        span: 16,
+        span: 25,
       }}
       initialValues={{
         remember: true,
@@ -87,14 +87,14 @@ const LoginForm = () => {
           span: 16,
         }}
       >
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" className="signup">
           Login
         </Button>
+      </Item>
+      <Item>
         <div className="have-account">
           Don`t have an account?
-          {/* Here We need to change the anchor tag when connenct all pages together */}
-          <a href="/signup">Sign up</a>
-
+          <a href="/api/signup">Sign up</a>
         </div>
       </Item>
     </Form>
