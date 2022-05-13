@@ -5,11 +5,9 @@ import axios from 'axios';
 import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner';
 
 const UserInfo = () => {
-  // TODO: get id from redux state
   const { user: { id, role } } = useSelector((state) => state.auth);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
-  // TODO: useEffect to fetch user info when the function is ready
 
   useEffect(() => {
     if (id) {
@@ -22,7 +20,6 @@ const UserInfo = () => {
 
   const { name, bio, profilePicture } = user;
 
-  // TODO: Replace with user info from redux state
   return (
     <div className="user__info-section">
       {loading ? (
