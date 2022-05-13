@@ -9,19 +9,29 @@ import './InterviewForm.css';
 const InterviewForm = () => {
   const [step, setStep] = React.useState(1);
   const [visible, setVisible] = React.useState(true);
+  const [formData, setFormData] = React.useState({
+    specialization: '',
+    language: '',
+    questionCategory: '',
+    time: '',
+    date: '',
+    interviewerId: '',
+  });
+
+  console.log(formData);
 
   const renderSwitch = () => {
     switch (step) {
       case 1:
-        return <StepOne />;
+        return <StepOne setFormData={setFormData} title="Specialization" />;
       case 2:
-        return <StepTwo />;
+        return <StepTwo setFormData={setFormData} title="Language" />;
       case 3:
-        return <StepThree />;
+        return <StepThree title="Question Category" />;
       case 4:
-        return <StepFour />;
+        return <StepFour title="Available Time" />;
       default:
-        return <StepOne />;
+        return <StepOne title="Specialization" />;
     }
   };
   return (
@@ -31,9 +41,6 @@ const InterviewForm = () => {
       closable={false}
       className="interview-form"
     >
-      <div className="interview-header">
-        <p>Add Interview</p>
-      </div>
       <p className="interview-modal-title">Create Interview</p>
       <Form>
         {renderSwitch()}
@@ -45,7 +52,7 @@ const InterviewForm = () => {
         }
 
         {
-            step === 3
+            step === 4
               ? <Button type="primary" onClick={() => setVisible(false)}> Submit </Button>
               : <Button type="primary" onClick={() => setStep(step + 1)}> Next </Button>
         }
