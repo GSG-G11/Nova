@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
+import UpcomingInterviews from './components/UpcomingInterviews/UpcomingInterviews';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const App = () => {
         </div>
       )}
       <LoginButton />
+      <UpcomingInterviews />
     </div>
   );
 };

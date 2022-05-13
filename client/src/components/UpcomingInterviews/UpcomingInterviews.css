@@ -1,0 +1,7 @@
+.ant-table-wrapper{
+  width: 70%;
+}
+
+.ant-pagination, .ant-table-pagination ant-table-pagination-right{
+  display: none;
+}
