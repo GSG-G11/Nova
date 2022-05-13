@@ -1,11 +1,10 @@
 {
     "interviewee": [
         {
-            "userId": "3",
+            "userId": "627c92140d0c3622573195ca",
             "interviews": [
                 {
-                    "id": "1",
-                    "interviewerId": 2,
+                    "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-28",
                     "time": 12,
                     "language": "JS",
@@ -49,8 +48,7 @@
             "userId": "627c92140d0c3622573195cb",
             "interviews": [
                 {
-                    "id": "2",
-                    "interviewerId": 2,
+                    "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
                     "time": 12,
                     "language": "PHP",
@@ -64,10 +62,9 @@
 
                 },
                 {
-                    "id": "2",
-                    "interviewerId": 2,
+                    "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
-                    "time": 12,
+                    "time": 13,
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
@@ -77,10 +74,9 @@
                     }
                 },
                 {
-                    "id": "2",
-                    "interviewerId": 2,
+                    "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
-                    "time": 12,
+                    "time": 14,
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
@@ -90,10 +86,9 @@
                     }
                 },
                 {
-                    "id": "2",
-                    "interviewerId": 2,
+                    "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
-                    "time": 12,
+                    "time": 15,
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
@@ -103,23 +98,9 @@
                     }
                 },
                 {
-                    "id": "2",
-                    "interviewerId": 2,
+                    "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-29",
-                    "time": 12,
-                    "language": "PHP",
-                    "specialization": "BACKEND",
-                    "questionCategory":"Technical",
-                    "review": {
-                        "message": "More than expected",
-                        "saved": true
-                    }
-                },
-                {
-                    "id": "2",
-                    "interviewerId": 2,
-                    "date": "2022-04-29",
-                    "time": 12,
+                    "time": 16,
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
