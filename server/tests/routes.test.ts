@@ -72,8 +72,7 @@ describe('signup', () => {
   });
 
   test('Verify Email', (done) => {
-    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4')
-      .expect(200)
+    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhcnJ5QGdtYWlsLmNvbSIsImlhdCI6MTY1MjE4ODM2M30.W80qvkj96eqcTReiG7pgXMHW5Ij-ipoPJkVtwFaDOTg').expect(200)
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -462,6 +461,51 @@ describe('Delete interview', () => {
         expect(res.body.message).toBe('Interview deleted successfully');
         return done();
       });
+  });
+});
+
+describe('Get Interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).get('/api/users/interview').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if invalid not role', (done) => {
+    request(app).get('/api/users/interview').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid role!');
+        return done();
+      });
+  });
+
+  test('Should return Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Interviews fetched successfully!');
+      return done();
+    });
+  });
+
+  test('Should return error no Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('No interviews found');
+      return done();
+    });
   });
 });
 afterAll(() => mongoose.connection.close());
