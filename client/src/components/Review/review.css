@@ -1,0 +1,20 @@
+.ant-tabs-content-holder {
+    background-color: #f8f7f7;
+    padding-top: 2%;
+}
+.ant-comment {
+    margin-bottom: 2%;
+    background-color: #fff;
+}
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
