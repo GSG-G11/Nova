@@ -1,5 +1,5 @@
 import React from 'react';
-import './LoadingSpinner.css';
+import './style.css';
 
 const LoadingSpinner = () => (
   <div className="lds-ring">

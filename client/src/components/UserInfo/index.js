@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './UserInfo.css';
+import './style.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const UserInfo = () => {
   const { user: { id, role } } = useSelector((state) => state.auth);
