@@ -18,5 +18,4 @@ export {
   signupInterface,
   interviewValidation,
   emailTemplate,
-  paramSchema,
 };
