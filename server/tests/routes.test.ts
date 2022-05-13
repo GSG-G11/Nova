@@ -261,7 +261,6 @@ describe('Create Interview', () => {
         if (err) {
           return done(err);
         }
-
         expect(res.body.message).toBe('"interviewerId" must be a string');
         return done();
       });
@@ -428,6 +427,39 @@ describe('Create Interview', () => {
         }
 
         expect(res.body.message).toBe('Interview created successfully');
+        return done();
+      });
+  });
+});
+
+describe('Delete interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).delete('/api/interview/1').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+  test('Should throw an error if interview does not exist', (done) => {
+    request(app).delete('/api/interview/627d1d11f5243856363a3a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interview not found');
+        return done();
+      });
+  });
+
+  test('Should delete interview', (done) => {
+    request(app).delete('/api/interview/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interview deleted successfully');
         return done();
       });
   });
