@@ -33,6 +33,7 @@
 
 .user__image-container img {
     width: 14rem;
+    border-radius: 50%;
 }
 
 .user__primary-info {
