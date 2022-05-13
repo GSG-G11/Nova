@@ -1,5 +1,6 @@
 import login from './authentication/login';
 import checkAuth from './authentication/checkAuth';
+import updateInfo from './users/updateInfo';
 import getInterviews from './users/getInterviews';
 import deleteInterview from './users/deleteInterview';
 import createInterview from './interview/createInterview';
@@ -13,6 +14,7 @@ export {
   validateEmail,
   checkAuth,
   login,
+  updateInfo,
   getInterviews,
   deleteInterview,
   createInterview,

@@ -1,14 +1,16 @@
 import express, { Router } from 'express';
 import {
+  updateInfo,
   getInterviews,
   deleteInterview,
   getAllReviews,
   getUserById,
 } from '../controllers';
-import { userAuth } from '../middlewares/auth';
+import { userAuth } from '../middleWares/auth';
 
 const router: Router = express.Router();
 
+router.patch('/user', userAuth, updateInfo);
 router.get('/users/interview', userAuth, getInterviews);
 router.delete('/interview/:id', userAuth, deleteInterview);
 router.get('/user/review', userAuth, getAllReviews);
