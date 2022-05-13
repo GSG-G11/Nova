@@ -18,3 +18,8 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
 }
+button.saved-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
