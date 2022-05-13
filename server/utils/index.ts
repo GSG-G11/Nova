@@ -1,8 +1,8 @@
 import { verifyToken, signToken } from './jwt';
 import mailSender from './sendEmailVerification/sendEmail';
 import signupValidation from './validation/signupValidation';
+import { loginValidation, paramSchema } from './validation';
 import CustomError from './CustomError';
-import loginValidation from './validation/loginValidation';
 import { RequestType, signupInterface } from './interfaces';
 
 export {
@@ -14,4 +14,5 @@ export {
   loginValidation,
   RequestType,
   signupInterface,
+  paramSchema,
 };
