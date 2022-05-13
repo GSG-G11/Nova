@@ -44,7 +44,16 @@
     padding-bottom: 3.2rem;
 }
 
-.interview-form__radio-group label {
+.interview-form__radio-group-second {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    padding: 1rem;
+    padding-bottom: 3.2rem;   
+}
+
+.interview-form__radio-group label, 
+.interview-form__radio-group-second label {
     font-size: 1rem;
     color: #432773;
     font-weight: bold;
