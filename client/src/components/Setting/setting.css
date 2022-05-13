@@ -1,0 +1,5 @@
+.btn-save-holder {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
+}
