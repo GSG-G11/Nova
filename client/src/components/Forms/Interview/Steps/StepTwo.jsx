@@ -47,7 +47,7 @@ const StepTwo = ({ title }) => (
         <Input
           name="language"
           type="radio"
-          value="Ruby"
+          value="RUBY"
           id="Ruby"
           className="interview-form__radio-input"
 
@@ -69,7 +69,7 @@ const StepTwo = ({ title }) => (
         <Input
           name="language"
           type="radio"
-          value="Java"
+          value="JAVA"
           id="Java"
           className="interview-form__radio-input"
 
@@ -91,7 +91,7 @@ const StepTwo = ({ title }) => (
         <Input
           name="language"
           type="radio"
-          value="Go"
+          value="GO"
           id="Go"
           className="interview-form__radio-input"
 
@@ -102,7 +102,7 @@ const StepTwo = ({ title }) => (
         <Input
           name="language"
           type="radio"
-          value="Python"
+          value="PYTHON"
           id="Python"
           className="interview-form__radio-input"
 
