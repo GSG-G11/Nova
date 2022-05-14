@@ -1,12 +1,18 @@
 import { Response } from 'express';
+import Schedule from '../../database/Models/Schedule';
 import { RequestType, getInterviewTimeValidation } from '../../utils';
 
 const getAvailableTime = async (req: RequestType, res: Response) => {
   const { specialization, language } : any = await getInterviewTimeValidation(req.body);
 
-  console.log(specialization, language);
+  const availableTime = await Schedule.find({ specialization, language });
 
-  res.send('getAvailableTime');
+  const { available } = availableTime[0];
+
+  res.json({
+    message: 'Success',
+    data: available,
+  });
 };
 
 export default getAvailableTime;
