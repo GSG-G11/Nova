@@ -4,7 +4,7 @@ import { Input, Radio } from 'antd';
 
 const { Group } = Radio;
 // eslint-disable-next-line react/prop-types
-const StepThree = ({ title }) => (
+const StepThree = ({ title, handleChange, formData: { questionCategory } }) => (
   <div>
     <div className="interview-header">
       <p>{title}</p>
@@ -17,6 +17,9 @@ const StepThree = ({ title }) => (
           id="Technical"
           value="Technical"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={questionCategory === 'Technical'}
+
         />
         <label htmlFor="Technical">
           Technical
@@ -27,6 +30,9 @@ const StepThree = ({ title }) => (
           value="Analytical"
           id="Analytical"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={questionCategory === 'Analytical'}
+
         />
         <label htmlFor="Analytical">
           Analytical
@@ -37,6 +43,9 @@ const StepThree = ({ title }) => (
           value="Algorithms"
           id="Algorithms"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={questionCategory === 'Algorithms'}
+
         />
         <label htmlFor="Algorithms">
           Algorithms
@@ -47,6 +56,9 @@ const StepThree = ({ title }) => (
           value="System Design"
           id="System Design"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={questionCategory === 'System Design'}
+
         />
         <label htmlFor="System Design">
           System Design

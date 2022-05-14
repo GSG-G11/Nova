@@ -4,7 +4,7 @@ import { Input, Radio } from 'antd';
 
 const { Group } = Radio;
 // eslint-disable-next-line react/prop-types
-const StepFour = ({ title }) => (
+const StepFour = ({ title, handleChange }) => (
   <div>
     <div className="interview-header">
       <p>{title}</p>
@@ -14,32 +14,37 @@ const StepFour = ({ title }) => (
         <div className="date-column">
           <p className="interview-form__date">2022 - 05 - 14</p>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             id="FRONTEND"
             value={12}
             className="interview-form__radio-input"
+            onChange={handleChange}
           />
           <label htmlFor="FRONTEND">
             12:00 - 13:00
           </label>
 
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={14}
             id="SECURITY"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="SECURITY">
             14:00 - 15:00
           </label>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={16}
             id="BACKEND"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="BACKEND">
             16:00 - 17:00
@@ -49,32 +54,38 @@ const StepFour = ({ title }) => (
         <div className="date-column">
           <p className="interview-form__date">2022 - 05 - 20</p>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             id="12-2022-05-20"
             value={12}
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="12-2022-05-20">
             12:00 - 13:00
           </label>
 
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={14}
             id="14-2022-05-20"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="14-2022-05-20">
             14:00 - 15:00
           </label>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={16}
             id="16-2022-05-20"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="16-2022-05-20">
             16:00 - 17:00
@@ -83,32 +94,38 @@ const StepFour = ({ title }) => (
         <div className="date-column">
           <p className="interview-form__date">2022 - 06 - 20</p>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             id="12-2022-06-20"
             value={12}
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="12-2022-06-20">
             12:00 - 13:00
           </label>
 
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={14}
             id="14-2022-06-20"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="14-2022-06-20">
             14:00 - 15:00
           </label>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={16}
             id="16-2022-06-20"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="16-2022-06-20">
             16:00 - 17:00
@@ -118,32 +135,38 @@ const StepFour = ({ title }) => (
         <div className="date-column">
           <p className="interview-form__date">2022 - 05 - 28</p>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             id="12-2022-05-28"
             value={12}
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="12-2022-05-28">
             12:00 - 13:00
           </label>
 
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={14}
             id="14-2022-05-28"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="14-2022-05-28">
             14:00 - 15:00
           </label>
           <Input
-            name="specialization"
+            name="time"
             type="radio"
             value={16}
             id="16-2022-05-28"
             className="interview-form__radio-input"
+            onChange={handleChange}
+
           />
           <label htmlFor="16-2022-05-28">
             16:00 - 17:00

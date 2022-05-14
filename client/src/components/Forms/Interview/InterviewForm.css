@@ -117,10 +117,13 @@
     display: none;
 }
 
-.interview-step-content .interview-form__radio-input + label:hover,
-.interview-step-content .interview-form__radio-input:checked + label {
+.interview-step-content .interview-form__radio-input + label:hover {
     background-color: #432773;
     color: white;
 }
 
+.interview-step-content .interview-form__radio-input:checked + label {
+    background-color: #432773;
+    color: white;
+}
 

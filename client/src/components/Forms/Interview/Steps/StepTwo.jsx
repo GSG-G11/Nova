@@ -4,7 +4,7 @@ import { Input, Radio } from 'antd';
 
 const { Group } = Radio;
 // eslint-disable-next-line react/prop-types
-const StepTwo = ({ title }) => (
+const StepTwo = ({ title, handleChange, formData: { language } }) => (
   <div>
     <div className="interview-header">
       <p>{title}</p>
@@ -17,6 +17,8 @@ const StepTwo = ({ title }) => (
           id="JavaScript"
           value="JS"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'JS'}
 
         />
         <label htmlFor="JavaScript">
@@ -28,6 +30,8 @@ const StepTwo = ({ title }) => (
           value="PHP"
           id="PHP"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'PHP'}
 
         />
         <label htmlFor="PHP">
@@ -39,6 +43,8 @@ const StepTwo = ({ title }) => (
           value="C++"
           id="C++"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'C++'}
 
         />
         <label htmlFor="C++">
@@ -50,6 +56,8 @@ const StepTwo = ({ title }) => (
           value="RUBY"
           id="Ruby"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'RUBY'}
 
         />
         <label htmlFor="Ruby">
@@ -61,6 +69,8 @@ const StepTwo = ({ title }) => (
           value="C#"
           id="C#"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'C#'}
 
         />
         <label htmlFor="C#">
@@ -72,6 +82,8 @@ const StepTwo = ({ title }) => (
           value="JAVA"
           id="Java"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'JAVA'}
 
         />
         <label htmlFor="Java">
@@ -83,6 +95,8 @@ const StepTwo = ({ title }) => (
           value="C"
           id="C"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'C'}
 
         />
         <label htmlFor="C">
@@ -94,6 +108,8 @@ const StepTwo = ({ title }) => (
           value="GO"
           id="Go"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'GO'}
 
         />
         <label htmlFor="Go">
@@ -105,6 +121,8 @@ const StepTwo = ({ title }) => (
           value="PYTHON"
           id="Python"
           className="interview-form__radio-input"
+          onChange={handleChange}
+          checked={language === 'PYTHON'}
 
         />
         <label htmlFor="Python">

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Modal, Form } from 'antd';
+import {
+  Button, Modal, Form,
+} from 'antd';
 import StepOne from './Steps/StepOne';
 import StepTwo from './Steps/StepTwo';
 import StepThree from './Steps/StepThree';
@@ -7,9 +9,9 @@ import StepFour from './Steps/StepFour';
 import './InterviewForm.css';
 
 const InterviewForm = () => {
-  const [step, setStep] = React.useState(1);
   const [visible, setVisible] = React.useState(true);
   const [formData, setFormData] = React.useState({
+    step: 1,
     specialization: '',
     language: '',
     questionCategory: '',
@@ -18,20 +20,38 @@ const InterviewForm = () => {
     interviewerId: '',
   });
 
-  console.log(formData);
+  const { step } = formData;
 
+  const nextStep = () => {
+    setFormData({ ...formData, step: step + 1 });
+  };
+
+  const prevStep = () => {
+    setFormData({ ...formData, step: step - 1 });
+  };
+
+  const handleChange = (e) => {
+    const { name, value, checked } = e.target;
+    setFormData({ ...formData, [name]: checked ? value : checked });
+  };
+
+  const handleSubmit = () => {
+    console.log(formData);
+  };
+
+  console.log(formData);
   const renderSwitch = () => {
     switch (step) {
       case 1:
-        return <StepOne setFormData={setFormData} title="Specialization" />;
+        return <StepOne handleChange={handleChange} formData={formData} title="Specialization" />;
       case 2:
-        return <StepTwo setFormData={setFormData} title="Language" />;
+        return <StepTwo handleChange={handleChange} formData={formData} title="Language" />;
       case 3:
-        return <StepThree title="Question Category" />;
+        return <StepThree handleChange={handleChange} formData={formData} title="Question Category" />;
       case 4:
-        return <StepFour title="Available Time" />;
+        return <StepFour handleChange={handleChange} formData={formData} title="Available Time" />;
       default:
-        return <StepOne title="Specialization" />;
+        return <StepOne handleChange={handleChange} title="Specialization" />;
     }
   };
   return (
@@ -42,7 +62,7 @@ const InterviewForm = () => {
       className="interview-form"
     >
       <p className="interview-modal-title">Create Interview</p>
-      <Form>
+      <Form onFinish={handleSubmit}>
         {renderSwitch()}
       </Form>
 
@@ -51,7 +71,7 @@ const InterviewForm = () => {
           step === 1 ? <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button> : (
             <>
               <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button>
-              <Button type="primary" onClick={() => setStep(step - 1)}> Previous </Button>
+              <Button type="primary" onClick={() => prevStep()}> Previous </Button>
             </>
           )
         }
@@ -59,7 +79,7 @@ const InterviewForm = () => {
         {
             step === 4
               ? <Button type="primary" onClick={() => setVisible(false)}> Submit </Button>
-              : <Button type="primary" onClick={() => setStep(step + 1)}> Next </Button>
+              : <Button type="primary" onClick={() => nextStep()}> Next </Button>
         }
       </div>
     </Modal>
