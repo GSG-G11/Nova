@@ -8,6 +8,7 @@ import getUserById from './users/getUserById';
 import getAllReviews from './users/getReviews';
 import signup from './authentication/signup';
 import validateEmail from './authentication/validateEmail';
+import getAvailableTime from './interview/getAvailableTime';
 
 export {
   signup,
@@ -20,4 +21,5 @@ export {
   createInterview,
   getAllReviews,
   getUserById,
+  getAvailableTime,
 };
