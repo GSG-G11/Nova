@@ -21,7 +21,8 @@ const updateReview = async (req: RequestType, res: Response) => {
   }
 
   // Get the interview from the interviews array
-  const { interviews: { review: { saved } } } = interview;
+  const { interviews } = interview;
+  const { review: { saved } } = interviews[0];
 
   // Update the saved in review
   const updatedReview = await Interviewee.updateOne(
