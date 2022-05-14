@@ -84,3 +84,13 @@
     border: none;
     outline: none;
 }
+
+.user__level {
+    font-size: 1.2rem;
+    color: #545871;
+    font-weight: bold;
+}
+
+.user__level strong {
+    text-transform: uppercase;
+}

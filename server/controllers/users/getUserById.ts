@@ -15,11 +15,12 @@ const getUserById = async (req: Request, res: Response) => {
     name,
     bio,
     profile_picture: profilePicture,
-    specialization,
+    cv,
+    level,
   } = await User.findOne({ _id: id });
   res.json({
     data: {
-      name, bio, specialization, profilePicture,
+      name, bio, cv, profilePicture, level,
     },
   });
 };

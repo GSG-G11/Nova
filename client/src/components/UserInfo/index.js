@@ -30,7 +30,9 @@ const UserInfo = () => {
     };
   }, [id]);
 
-  const { name, bio, profilePicture } = user;
+  const {
+    name, bio, profilePicture, level, cv,
+  } = user;
 
   return (
     <div className="user__info-section">
@@ -44,6 +46,12 @@ const UserInfo = () => {
             </div>
             <div className="user__primary-info">
               <p className="user__name">{name}</p>
+              <p className="user__level">
+                Experience:
+                {' '}
+                <strong>{level}</strong>
+              </p>
+
               {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
               <button type="button" className="user__start-interview">
                 Start a Practice Interview
@@ -57,6 +65,12 @@ const UserInfo = () => {
             <p className="user__about-description">
               {bio}
             </p>
+            <p className="user__cv">
+              Link to CV:
+              {' '}
+              <a href={cv} target="_blank" rel="noreferrer">{cv}</a>
+            </p>
+
           </div>
         </>
       )}
