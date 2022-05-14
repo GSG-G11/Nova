@@ -8,6 +8,7 @@ import { RequestType, signupInterface, updateInfoInterface } from './interfaces'
 import { validateQuery, getInterviewsQueryValidation } from './validation/queryValidation';
 import interviewValidation from './validation/interviewValidation';
 import emailTemplate from './email/interviewEmailTemplate';
+import getInterviewTimeValidation from './validation/getInterviewTimeValidation';
 
 export {
   getInterviewsQueryValidation,
@@ -24,4 +25,5 @@ export {
   updateInfoValidation,
   interviewValidation,
   emailTemplate,
+  getInterviewTimeValidation,
 };
