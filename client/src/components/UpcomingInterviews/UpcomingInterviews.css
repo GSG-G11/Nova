@@ -2,6 +2,6 @@
   width: 70%;
 }
 
-.ant-pagination, .ant-table-pagination ant-table-pagination-right{
-  display: none;
+.ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table-pagination{
+  /* display: none; */
 }
