@@ -72,8 +72,7 @@ describe('signup', () => {
   });
 
   test('Verify Email', (done) => {
-    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVAZ21haWwuY29tIiwiaWF0IjoxNjUyMDg0OTA0fQ.v5gHev_T6kHLavk88B-YDOoD-w4HewhldXjDElW2Tk4')
-      .expect(200)
+    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhcnJ5QGdtYWlsLmNvbSIsImlhdCI6MTY1MjE4ODM2M30.W80qvkj96eqcTReiG7pgXMHW5Ij-ipoPJkVtwFaDOTg').expect(200)
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -261,7 +260,6 @@ describe('Create Interview', () => {
         if (err) {
           return done(err);
         }
-
         expect(res.body.message).toBe('"interviewerId" must be a string');
         return done();
       });
@@ -428,6 +426,124 @@ describe('Create Interview', () => {
         }
 
         expect(res.body.message).toBe('Interview created successfully');
+        return done();
+      });
+  });
+});
+
+describe('Delete interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).delete('/api/interview/1').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+  test('Should throw an error if interview does not exist', (done) => {
+    request(app).delete('/api/interview/627d1d11f5243856363a3a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interview not found');
+        return done();
+      });
+  });
+
+  test('Should delete interview', (done) => {
+    request(app).delete('/api/interview/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interview deleted successfully');
+        return done();
+      });
+  });
+});
+
+describe('Get Interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).get('/api/users/interview').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if invalid not role', (done) => {
+    request(app).get('/api/users/interview').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid role!');
+        return done();
+      });
+  });
+
+  test('Should return Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Interviews fetched successfully!');
+      return done();
+    });
+  });
+
+  test('Should return error no Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('No interviews found');
+      return done();
+    });
+  });
+});
+
+describe('Update Info', () => {
+  test('Should throw an error if user not logged in', (done) => {
+    request(app).patch('/api/user').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if Update failed', (done) => {
+    request(app).patch('/api/user').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Update failed');
+        return done();
+      });
+  });
+
+  test('Should update user info', (done) => {
+    request(app).patch('/api/user').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      cv: 'cv.pdf',
+      bio: 'I am a software engineer',
+    })
+
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('User info updated successfully');
         return done();
       });
   });
