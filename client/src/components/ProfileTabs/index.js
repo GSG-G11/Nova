@@ -6,15 +6,10 @@ import './style.css';
 const { TabPane } = Tabs;
 
 const ProfileTabs = () => {
-  let userRole;
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
-  if (user) {
-    userRole = user.role;
-  }
-
+  const role = user?.role;
   return (
-    userRole && (
+    role && (
     <div>
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
         <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
@@ -23,7 +18,7 @@ const ProfileTabs = () => {
         <TabPane tab="Interviews history" key="2">
           Content of Tab Pane 2
         </TabPane>
-        {userRole === 'interviewee' ? (
+        {role === 'interviewee' ? (
           <TabPane tab="Reviews" key="3">
             Content of Tab Pane 3
           </TabPane>
