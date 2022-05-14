@@ -1,9 +1,20 @@
-import { Router } from 'express';
-import { getAllReviews } from '../controllers';
-import { userAuth } from '../middlewares/auth';
+import express, { Router } from 'express';
+import {
+  updateInfo,
+  getInterviews,
+  deleteInterview,
+  getAllReviews,
+  getUserById,
+} from '../controllers';
+import { userAuth } from '../middleWares/auth';
 
-const router : Router = Router();
+const router: Router = express.Router();
 
+router.patch('/user', userAuth, updateInfo);
+router.get('/users/interview', userAuth, getInterviews);
+router.delete('/interview/:id', userAuth, deleteInterview);
+router.get('/user/review', userAuth, getAllReviews);
+router.get('/user/info/:id', getUserById);
 router.get('/user/review', userAuth, getAllReviews);
 
 export default router;
