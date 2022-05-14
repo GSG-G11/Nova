@@ -15,8 +15,12 @@
                     "language": "JS",
                     "specialization": "FRONTEND",
                     "is_cancalled": false,
+<<<<<<< HEAD
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
+=======
+                    "questionCategory":"Technical"
+>>>>>>> 6f32a8294b9bc794f2063c5767b4552b2bd4c956
 
                 },
                 {

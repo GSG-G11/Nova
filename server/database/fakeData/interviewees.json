@@ -35,9 +35,10 @@
                     "interviewerId": 2,
                     "date": "2022-04-10T14:30:21.892Z",
                     "time": 12,
-                    "language": "JS",
-                    "specialization": "FRONTEND",
-                    "questionCategory": "Technical",
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical",
+                    "is_cancalled": false,
                     "review": {
                         "message": "He did a great job!",
                         "saved": false
@@ -119,7 +120,6 @@
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
-                    "is_cancalled": false,
                     "review": {
                         "message": "More than expected",
                         "saved": false

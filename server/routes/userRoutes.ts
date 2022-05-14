@@ -4,8 +4,8 @@ import {
   getInterviews,
   deleteInterview,
   getAllReviews,
-  cancalInterview,
   getUserById,
+  cancalInterview,
 } from '../controllers';
 import { userAuth } from '../middleWares/auth';
 
