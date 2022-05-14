@@ -1,14 +1,17 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import {
+  updateReview,
   updateInfo,
   getInterviews,
   deleteInterview,
   getAllReviews,
   getUserById,
 } from '../controllers';
-import { userAuth } from '../middleWares/auth';
+import { userAuth } from '../middlewares/auth';
 
-const router: Router = express.Router();
+const router: Router = Router();
+
+router.patch('/user/interview/review/:interviewId', userAuth, updateReview);
 
 router.patch('/user', userAuth, updateInfo);
 router.get('/users/interview', userAuth, getInterviews);
