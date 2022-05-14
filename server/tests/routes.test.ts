@@ -475,6 +475,28 @@ describe('Get Interview', () => {
     });
   });
 
+  describe('Update saved review in interview', () => {
+    test('Should return authentication error', (done) => {
+      request(app).patch('/api/user/interview/review/123').expect(401).end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Login First!');
+        return done();
+      });
+    });
+    test('Should return Invalid Id', (done) => {
+      request(app).patch('/api/user/interview/review/123').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(400)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.message).toBe('Invalid ID');
+          return done();
+        });
+    });
+  });
+
   test('Should throw an error if invalid not role', (done) => {
     request(app).get('/api/users/interview').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`])
       .end((err, res) => {

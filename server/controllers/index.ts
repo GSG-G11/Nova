@@ -1,5 +1,6 @@
 import login from './authentication/login';
 import checkAuth from './authentication/checkAuth';
+import updateReview from './users/updateSavedReview';
 import updateInfo from './users/updateInfo';
 import getInterviews from './users/getInterviews';
 import deleteInterview from './users/deleteInterview';
@@ -14,6 +15,7 @@ export {
   validateEmail,
   checkAuth,
   login,
+  updateReview,
   updateInfo,
   getInterviews,
   deleteInterview,
