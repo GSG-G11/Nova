@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import Interviewee from '../../database/Models/Interviewee';
-import { RequestType } from '../../utils';
-import validateQuery from '../../utils/validation/queryValidation';
+import { RequestType, validateQuery } from '../../utils';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
   const { page = '1', saved } = req.query;

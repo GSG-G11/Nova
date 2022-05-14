@@ -1,7 +1,7 @@
 {
     "interviewer":[
         {
-            "userId": "2",
+            "userId": "627c92140d0c3622573195cb",
             "languages": [
                 "JS",
                 "PHP"
@@ -9,19 +9,18 @@
             "specialization": "FRONTEND",
             "interviews": [
                 {
-                    "id": "1",
-                    "intervieweeId": 1,
+                    "intervieweeId": "627c92140d0c3622573195ca",
                     "date": "2022-04-28",
                     "time": 12,
                     "language": "JS",
                     "specialization": "FRONTEND",
                     "is_cancalled": false,
-                    "questionCategory":"Technical"
+                    "questionCategory":"Technical",
+                    "_id": "627d1d11f5243856362e8a8c"
 
                 },
                 {
-                    "id": "2",
-                    "intervieweeId": 4,
+                    "intervieweeId": "627c92140d0c3622573195ce",
                     "date": "2022-04-29",
                     "time": 12,
                     "language": "PHP",
