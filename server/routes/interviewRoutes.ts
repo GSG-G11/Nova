@@ -5,6 +5,6 @@ import { userAuth } from '../middlewares/auth';
 const router : Router = Router();
 
 router.post('/interview', userAuth, createInterview);
-router.get('/interview/available', getAvailableTime);
+router.post('/interview/available', getAvailableTime);
 
 export default router;
