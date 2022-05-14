@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import InterviewForm from './components/Forms/Interview/InterviewForm';
+import ProfileTabs from './components/ProfileTabs';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const App = () => {
       )}
       <LoginButton />
       <InterviewForm />
+      <ProfileTabs />
     </div>
   );
 };
