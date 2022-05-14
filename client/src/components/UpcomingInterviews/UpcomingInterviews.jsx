@@ -1,48 +1,45 @@
-import { Table, Tag, Space } from 'antd';
-import React, { useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { Table, Space } from 'antd';
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UpcomingInterviews.css';
 
-const { Column, ColumnGroup } = Table;
-
-const data = [
-  {
-    key: '1',
-    Name: 'John',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    Name: 'Jim',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    Name: 'Joe',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+const { Column } = Table;
 
 const UpcomingInterviews = () => {
+  const [dataSource, setDataSource] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('/api/users/interview?status=upcoming');
-      console.log(result);
+      const { data } = await axios.get('/api/users/interview?status=upcoming');
+      if (data.message === 'Interviews fetched successfully!') {
+        setDataSource([]);
+        const { data: { data: { name } } } = await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`);
+        data.data.forEach((obj) => {
+          setDataSource((prev) => [...prev, {
+            // eslint-disable-next-line no-underscore-dangle
+            key: obj.interviews._id,
+            Name: name,
+            questionCategory: obj.interviews.questionCategory,
+            language: obj.interviews.language,
+            specialization: obj.interviews.specialization,
+            date: obj.interviews.date,
+            time: obj.interviews.time,
+          },
+          ]);
+        });
+      }
     };
     fetchData();
   }, []);
   return (
-    <Table dataSource={data}>
-      <ColumnGroup title="Title" dataIndex="Name" key="Name" />
-      <Column title="Score" dataIndex="age" key="age" />
-      <Column title="Interviewee Name" dataIndex="address" key="address" />
-      <Column
+    <Table dataSource={dataSource}>
+      <Column title="Interviewer Name" dataIndex="Name" key="Name" />
+      <Column title="Question category" dataIndex="questionCategory" key="questionCategory" />
+      <Column title="Language" dataIndex="language" key="language" />
+      <Column title="Specialization" dataIndex="specialization" key="specialization" />
+      {/* <Column
         title="Question category"
         dataIndex="tags"
         key="tags"
@@ -55,8 +52,9 @@ const UpcomingInterviews = () => {
             ))}
           </>
         )}
-      />
-      <Column title="Date" dataIndex="address" key="address" />
+      /> */}
+      <Column title="Date" dataIndex="date" key="date" />
+      <Column title="Time" dataIndex="time" key="time" />
       <Column
         title="Action"
         key="action"
@@ -71,5 +69,4 @@ const UpcomingInterviews = () => {
     </Table>
   );
 };
-
 export default UpcomingInterviews;
