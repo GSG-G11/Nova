@@ -1,15 +1,20 @@
 import React from 'react';
 import { Tabs } from 'antd';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './style.css';
 
 const { TabPane } = Tabs;
 
 const ProfileTabs = () => {
-  // TODO: replace the role with the user's role
-  // const { user: { role } } = useSelector((state) => state.auth);
-  const role = 'interviewer';
+  let userRole;
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  if (user) {
+    userRole = user.role;
+  }
+
   return (
+    userRole && (
     <div>
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
         <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
@@ -18,7 +23,7 @@ const ProfileTabs = () => {
         <TabPane tab="Interviews history" key="2">
           Content of Tab Pane 2
         </TabPane>
-        {role === 'interviewee' ? (
+        {userRole === 'interviewee' ? (
           <TabPane tab="Reviews" key="3">
             Content of Tab Pane 3
           </TabPane>
@@ -33,6 +38,7 @@ const ProfileTabs = () => {
         </TabPane>
       </Tabs>
     </div>
+    )
   );
 };
 export default ProfileTabs;
