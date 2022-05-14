@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Button, Modal, Form,
+  Button, Modal, Form, Popconfirm,
 } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import StepOne from './Steps/StepOne';
 import StepTwo from './Steps/StepTwo';
 import StepThree from './Steps/StepThree';
@@ -39,6 +40,19 @@ const InterviewForm = () => {
     console.log(formData);
   };
 
+  const CancelPop = (
+    <Popconfirm
+      className="pop"
+      onConfirm={() => setVisible(false)}
+      title="Are you sure？"
+      okText="Yes"
+      cancelText="No"
+      icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+    >
+      <Button type="primary"> Cancel </Button>
+    </Popconfirm>
+  );
+
   console.log(formData);
   const renderSwitch = () => {
     switch (step) {
@@ -68,9 +82,9 @@ const InterviewForm = () => {
 
       <div className="btns">
         {
-          step === 1 ? <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button> : (
+          step === 1 ? CancelPop : (
             <>
-              <Button type="primary" onClick={() => setVisible(false)}> Cancel </Button>
+              {CancelPop}
               <Button type="primary" onClick={() => prevStep()}> Previous </Button>
             </>
           )

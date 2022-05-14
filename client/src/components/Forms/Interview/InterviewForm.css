@@ -127,3 +127,7 @@
     color: white;
 }
 
+
+.pop {
+    z-index: 99999;
+}
