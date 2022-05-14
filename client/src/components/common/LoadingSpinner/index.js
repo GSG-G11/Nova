@@ -1,14 +1,10 @@
 import React from 'react';
-import './style.css';
+import { Spin } from 'antd';
+
+import { LoadingOutlined } from '@ant-design/icons';
 
 const LoadingSpinner = () => (
-  <div className="lds-ring">
-    <div />
-    <div />
-    <div />
-    <div />
-  </div>
-
+  <Spin indicator={<LoadingOutlined style={{ fontSize: 58, color: '#591871' }} spin />} />
 );
 
 export default LoadingSpinner;

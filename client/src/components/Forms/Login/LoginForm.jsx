@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import '../style.css';
 import { setUser } from '../../../redux/features/auth/authSlice';
 
-// eslint-disable-next-line react/prop-types
 const LoginForm = ({ handleOk }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
