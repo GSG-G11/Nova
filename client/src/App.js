@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
-import ProfileTabs from './components/ProfileTabs/ProfileTabs';
+import ProfileTabs from './components/ProfileTabs';
 
 const App = () => {
   const dispatch = useDispatch();
