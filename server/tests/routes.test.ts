@@ -641,4 +641,21 @@ describe('Get Available interview times', () => {
         return done();
       });
   });
+
+  test('Should Get 0 available interview times', (done) => {
+    request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      language: 'RUBY',
+      specialization: 'BACKEND',
+    })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Success');
+        expect(res.body.data.length).toBe(0);
+
+        return done();
+      });
+  });
 });

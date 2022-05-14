@@ -7,7 +7,7 @@ const getAvailableTime = async (req: RequestType, res: Response) => {
 
   const availableTime = await Schedule.find({ specialization, language });
 
-  const { available } = availableTime[0];
+  const { available } = availableTime[0] || { available: [] };
 
   res.json({
     message: 'Success',
