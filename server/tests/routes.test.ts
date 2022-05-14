@@ -571,3 +571,74 @@ describe('Update Info', () => {
   });
 });
 afterAll(() => mongoose.connection.close());
+
+describe('Get Available interview times', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).post('/api/interview/available').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw a required validation error', (done) => {
+    request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"language" is required. "specialization" is required');
+        return done();
+      });
+  });
+
+  test('Should throw a language validation error', (done) => {
+    request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      language: 'potato',
+      specialization: 'FRONTEND',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        return done();
+      });
+  });
+
+  test('Should throw a specialization validation error', (done) => {
+    request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      language: 'JS',
+      specialization: 'potato',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        return done();
+      });
+  });
+
+  test('Should Get Available interview times', (done) => {
+    request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      language: 'JS',
+      specialization: 'FRONTEND',
+    })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Success');
+        expect(res.body.data.length).toBe(2);
+
+        return done();
+      });
+  });
+});
