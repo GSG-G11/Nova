@@ -11,12 +11,11 @@ import { userAuth } from '../middleWares/auth';
 
 const router: Router = express.Router();
 
-router.patch('/user', userAuth, updateInfo);
-router.get('/users/interview', userAuth, getInterviews);
+router.get('/interview', userAuth, getInterviews);
+router.get('/review', userAuth, getAllReviews);
 router.delete('/interview/:id', userAuth, deleteInterview);
-router.get('/user/review', userAuth, getAllReviews);
-router.get('/user/info/:id', getUserById);
+router.patch('/', userAuth, updateInfo);
 router.patch('/:interviewId', userAuth, cancalInterview);
-router.get('/user/review', userAuth, getAllReviews);
+router.get('/info/:id', getUserById);
 
 export default router;

@@ -433,7 +433,7 @@ describe('Create Interview', () => {
 
 describe('Delete interview', () => {
   test('Should throw an error if user not authenticated', (done) => {
-    request(app).delete('/api/interview/1').expect(401).end((err, res) => {
+    request(app).delete('/api/user/interview/1').expect(401).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -442,7 +442,7 @@ describe('Delete interview', () => {
     });
   });
   test('Should throw an error if interview does not exist', (done) => {
-    request(app).delete('/api/interview/627d1d11f5243856363a3a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+    request(app).delete('/api/user/interview/627d1d11f5243856363a3a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -453,7 +453,7 @@ describe('Delete interview', () => {
   });
 
   test('Should delete interview', (done) => {
-    request(app).delete('/api/interview/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
+    request(app).delete('/api/user/interview/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.TEST_TOKEN}`])
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -466,7 +466,7 @@ describe('Delete interview', () => {
 
 describe('Get Interview', () => {
   test('Should throw an error if user not authenticated', (done) => {
-    request(app).get('/api/users/interview').expect(401).end((err, res) => {
+    request(app).get('/api/user/interview').expect(401).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -476,7 +476,7 @@ describe('Get Interview', () => {
   });
 
   test('Should throw an error if invalid not role', (done) => {
-    request(app).get('/api/users/interview').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`])
+    request(app).get('/api/user/interview').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`])
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -487,7 +487,7 @@ describe('Get Interview', () => {
   });
 
   test('Should return Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+    request(app).get('/api/user/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -498,7 +498,7 @@ describe('Get Interview', () => {
   });
 
   test('Should return error no Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+    request(app).get('/api/user/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
       if (err) {
         return done(err);
       }
