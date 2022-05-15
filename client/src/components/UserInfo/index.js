@@ -3,7 +3,7 @@ import './style.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from 'antd';
+import { Button, Image } from 'antd';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const UserInfo = () => {
@@ -48,7 +48,7 @@ const UserInfo = () => {
         <>
           <div className="user__primary">
             <div className="user__image-container">
-              <img src={profilePicture} alt="" />
+              <Image src={profilePicture} alt="profile" className="user__image" />
             </div>
             <div className="user__primary-info">
               <p className="user__name">{name}</p>
