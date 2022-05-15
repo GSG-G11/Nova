@@ -3,9 +3,12 @@ import './style.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Image, message } from 'antd';
+import {
+  Button, Image, message, Typography,
+} from 'antd';
 import LoadingSpinner from '../common/LoadingSpinner';
 
+const { Text, Title } = Typography;
 const UserInfo = () => {
   const { id } = useParams();
   const [user, setUser] = useState({});
@@ -48,16 +51,11 @@ const UserInfo = () => {
         <>
           <div className="user__primary">
             <div className="user__image-container">
-              <Image src={profilePicture} alt="profile" className="user__image" />
+              <Image src={profilePicture} alt="profile" />
             </div>
             <div className="user__primary-info">
-              <p className="user__name">{name}</p>
-              <p className="user__level">
-                Experience:
-                {' '}
-                <strong>{level}</strong>
-              </p>
-
+              <Title level={2} className="user__name">{name}</Title>
+              <Text className="user__level">{level}</Text>
               {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
               <Button type="primary" className="user__start-interview">
                 Start a Practice Interview
@@ -67,10 +65,10 @@ const UserInfo = () => {
           </div>
 
           <div className="user__secondary-info">
-            <p className="user__about">About me</p>
-            <p className="user__about-description">
+            <Title level={4} className="user__about">About me</Title>
+            <Text className="user__about-description">
               {bio}
-            </p>
+            </Text>
             <p className="user__cv">
               Link to CV:
               {' '}
