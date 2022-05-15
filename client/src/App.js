@@ -14,14 +14,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <SignupButton />
       {loading ? 'Loading...' : (
         <div>
           hi
+          <SignupButton />
+          <LoginButton />
+          <UpcomingInterviews />
         </div>
       )}
-      <LoginButton />
-      <UpcomingInterviews />
     </div>
   );
 };
