@@ -26,8 +26,8 @@ const UpcomingInterviews = ({ status }) => {
       try {
         const { data } = await axios.get(`/api/users/interview?status=upcoming&&page=${page}`);
         let nameData;
-        if (user.data.role) {
-          const { data: { data: { name } } } = (user.data.role === 'interviewee') ? await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`)
+        if (user.role) {
+          const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`)
             : await axios.get(`/api/user/info/${data.data[0].interviews.intervieweeId}`);
           nameData = name;
         }
@@ -66,7 +66,7 @@ const UpcomingInterviews = ({ status }) => {
         },
       }}
     >
-      {user.data.role === 'interviewee' ? (
+      {user.role === 'interviewee' ? (
         <Column
           title="Interviewer Name"
           dataIndex="Name"

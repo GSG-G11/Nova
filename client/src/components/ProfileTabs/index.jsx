@@ -8,9 +8,13 @@ const { TabPane } = Tabs;
 
 const ProfileTabs = () => {
   const { user } = useSelector((state) => state.auth);
-  const { role } = user.data;
+  console.log(user, 'hello');
+  const rol = user.role;
+  console.log(rol, '222');
+  // const { role } = user.data;
+  // console.log(role);
   return (
-    role && (
+    user?.role && (
     <div>
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
         <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
@@ -19,7 +23,7 @@ const ProfileTabs = () => {
         <TabPane tab="Interviews history" key="2">
           Content of Tab Pane 2
         </TabPane>
-        {role === 'interviewee' ? (
+        {user?.role === 'interviewee' ? (
           <TabPane tab="Reviews" key="3">
             Content of Tab Pane 3
           </TabPane>
