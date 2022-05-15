@@ -3,6 +3,7 @@ import './style.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Button } from 'antd';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const UserInfo = () => {
@@ -15,18 +16,23 @@ const UserInfo = () => {
   const loggedInUserRole = loggedInUser?.role;
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    const getUserData = async () => {
-      setLoading(true);
-      const { data: { data } } = await axios.get(`/api/user/info/${id}`, { signal });
-      setUser(data);
-      setLoading(false);
-    };
-    getUserData();
+    const source = axios.CancelToken.source();
+    try {
+      const getUserData = async () => {
+        setLoading(true);
+        const { data: { data } } = await axios.get(`/api/user/info/${id}`, {
+          cancelToken: source.token,
+        });
+        setUser(data);
+        setLoading(false);
+      };
+      getUserData();
+    } catch (error) {
+      console.log(error);
+    }
 
     return () => {
-      controller.abort();
+      source.cancel();
     };
   }, [id]);
 
@@ -53,9 +59,9 @@ const UserInfo = () => {
               </p>
 
               {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
-              <button type="button" className="user__start-interview">
+              <Button type="primary" className="user__start-interview">
                 Start a Practice Interview
-              </button>
+              </Button>
               )}
             </div>
           </div>
@@ -68,7 +74,7 @@ const UserInfo = () => {
             <p className="user__cv">
               Link to CV:
               {' '}
-              <a href={cv} target="_blank" rel="noreferrer">{cv}</a>
+              <a href={cv} download target="_blank" rel="noreferrer">{cv}</a>
             </p>
 
           </div>
