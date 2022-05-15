@@ -3,7 +3,7 @@ import './style.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Image } from 'antd';
+import { Button, Image, message } from 'antd';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const UserInfo = () => {
@@ -28,7 +28,7 @@ const UserInfo = () => {
       };
       getUserData();
     } catch (error) {
-      console.log(error);
+      message.error(error);
     }
 
     return () => {
