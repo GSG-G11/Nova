@@ -30,8 +30,8 @@ const UserInfo = () => {
         setLoading(false);
       };
       getUserData();
-    } catch (error) {
-      message.error(error);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
     }
 
     return () => {
