@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button, Modal, Form, Popconfirm, Steps,
+  Button, Modal, Form, Popconfirm, Steps, message,
 } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -29,9 +29,12 @@ const InterviewForm = () => {
   const { step } = formData;
   const [progressPercent, setProgressPercent] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [finalSubmit, setFinalSubmit] = useState(false);
   const [availableTime, setAvailableTime] = useState([]);
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
+
     const getData = async () => {
       if (isSubmitting) {
         const { data: { data } } = await axios.post('/api/interview/available', {
@@ -41,8 +44,27 @@ const InterviewForm = () => {
         setAvailableTime(data);
       }
     };
-    getData();
-  }, [isSubmitting]);
+
+    const submitData = async () => {
+      if (finalSubmit) {
+        const response = await axios.post('/api/interview', {
+          ...formData,
+        });
+        console.log(response);
+      }
+      setFinalSubmit(false);
+    };
+    try {
+      getData();
+      submitData();
+    } catch ({ response: { data: { msg } } }) {
+      message.error(msg);
+    }
+
+    return () => {
+      source.cancel();
+    };
+  }, [isSubmitting, finalSubmit]);
   const nextStep = () => {
     setFormData({ ...formData, step: step + 1 });
     setProgressPercent((step + 1) * 25);
@@ -60,7 +82,7 @@ const InterviewForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
+    setFinalSubmit(true);
   };
 
   const handleFirstStepSubmit = () => {
@@ -70,7 +92,6 @@ const InterviewForm = () => {
       specialization: formData.specialization,
       language: formData.language,
     }));
-    console.log(firstStepData);
     setIsSubmitting(true);
     nextStep();
   };
@@ -88,7 +109,6 @@ const InterviewForm = () => {
     </Popconfirm>
   );
 
-  // console.log(formData);
   const renderSwitch = () => {
     switch (step) {
       case 0:
@@ -102,6 +122,7 @@ const InterviewForm = () => {
           <StepFour
             handleChange={handleChange}
             formData={formData}
+            setFormData={setFormData}
             title="Available Days"
             availableTime={availableTime}
             setAvailableTime={setAvailableTime}
