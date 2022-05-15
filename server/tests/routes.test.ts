@@ -55,7 +55,8 @@ describe('signup', () => {
   //       if (err) {
   //         return done(err);
   //       }
-  //       expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
+  //       expect(res.body.message).toBe('
+  // Account created successfully please check your email to verify your account');
   //       return done();
   //     });
   // });
