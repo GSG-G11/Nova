@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './UpcomingInterviews.css';
+import PropTypes from 'prop-types';
 
 const { Column } = Table;
-
-const UpcomingInterviews = () => {
+const UpcomingInterviews = ({ status }) => {
   const { user } = useSelector((state) => state.auth);
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
@@ -79,18 +79,37 @@ const UpcomingInterviews = () => {
       <Column title="Specialization" dataIndex="specialization" key="specialization" />
       <Column title="Date" dataIndex="date" key="date" />
       <Column title="Time" dataIndex="time" key="time" />
-      <Column
-        title="Action"
-        key="action"
-        render={(text, record) => (
-          <Space size="middle">
-            <Button onClick={() => cancelInterview(record.key)} type="primary" key={record.key} danger>
-              Delete Interview
-            </Button>
-          </Space>
-        )}
-      />
+      {(status === 'upcoming') ? (
+        <Column
+          title="Action"
+          key="action"
+          render={(text, record) => (
+            <Space size="middle">
+              <Button type="primary" key={record.key} danger>
+                Cancel Interview
+              </Button>
+            </Space>
+          )}
+        />
+      ) : (
+        <Column
+          title="Action"
+          key="action"
+          render={(text, record) => (
+            <Space size="middle">
+              <Button onClick={() => cancelInterview(record.key)} type="primary" key={record.key} danger>
+                Delete Interview
+              </Button>
+            </Space>
+          )}
+        />
+      )}
     </Table>
   );
 };
+
+UpcomingInterviews.propTypes = {
+  status: PropTypes.string.isRequired,
+};
+
 export default UpcomingInterviews;

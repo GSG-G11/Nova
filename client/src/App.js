@@ -3,11 +3,11 @@ import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
-import UpcomingInterviews from './components/UpcomingInterviews/UpcomingInterviews';
+import ProfileTabs from './components/ProfileTabs';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, user } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(checkUser());
   }, []);
@@ -19,7 +19,7 @@ const App = () => {
           hi
           <SignupButton />
           <LoginButton />
-          <UpcomingInterviews />
+          {user && <ProfileTabs />}
         </div>
       )}
     </div>
