@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './UpcomingInterviews.css';
 import PropTypes from 'prop-types';
+import PopUpConfirm from '../Common/PopUpConfirm';
 
 const { Column } = Table;
 const UpcomingInterviews = ({ status }) => {
@@ -13,28 +14,21 @@ const UpcomingInterviews = ({ status }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
 
-  const cancelInterview = async (id) => {
-    try {
-      await axios.delete(`/api/interview/${id}`);
-      setDataSource((prev) => prev.filter((item) => item.key !== id));
-    } catch (error) {
-      message.error(error);
-    }
-  };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/users/interview?status=upcoming&&page=${page}`);
+        const { data } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`);
         let nameData;
         if (user.role) {
           const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`)
             : await axios.get(`/api/user/info/${data.data[0].interviews.intervieweeId}`);
           nameData = name;
         }
+        setDataSource([]);
         data.data.forEach((obj) => {
           const date = new Date(obj.interviews.date);
           const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
-          setDataSource([{
+          setDataSource((prev) => [...prev, {
             // eslint-disable-next-line no-underscore-dangle
             key: obj.interviews._id,
             Name: nameData,
@@ -59,7 +53,7 @@ const UpcomingInterviews = ({ status }) => {
       dataSource={dataSource}
       pagination={{
         current: page,
-        pageSize: 3,
+        pageSize: 10,
         total: 50,
         onChange: (pageCh) => {
           setPage(pageCh);
@@ -96,11 +90,24 @@ const UpcomingInterviews = ({ status }) => {
           title="Action"
           key="action"
           render={(text, record) => (
-            <Space size="middle">
-              <Button onClick={() => cancelInterview(record.key)} type="primary" key={record.key} danger>
-                Delete Interview
-              </Button>
-            </Space>
+            <PopUpConfirm
+              config={
+              {
+                title: 'Delete interview?',
+                content: 'Are you sure you want to delete this interview?',
+                async onOk() {
+                  try {
+                    await axios.delete(`/api/interview/${record.key}`);
+                    setDataSource((prev) => prev.filter((item) => item.key !== record.key));
+                  } catch (error) {
+                    message.error(error);
+                  }
+                },
+              }
+            }
+              message="Delete"
+              key={record.key}
+            />
           )}
         />
       )}
