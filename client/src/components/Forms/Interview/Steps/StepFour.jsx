@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -22,7 +24,12 @@ const StepFour = ({
       <div className="interview-step-content">
         <Group buttonStyle="outline" size="large" className="interview-form__radio-group-fourth">
           <div className="date-column">
-            {availableTime.map((slot, i) => (
+            {!availableTime.length && (
+              <p>
+                Sorry, no available interviewers for this date.
+              </p>
+            )}
+            {availableTime.length && availableTime.map((slot, i) => (
               <>
 
                 <Input
@@ -32,10 +39,6 @@ const StepFour = ({
                   onChange={handleChange}
                   onClick={() => {
                     setHours(slot.time);
-                    setFormData({
-                      ...formData,
-                      interviewerId: slot.interviewerId,
-                    });
                     setToggleHours((prevState) => {
                       if (prevState === i) {
                         return null;
@@ -48,7 +51,16 @@ const StepFour = ({
                   id={slot._id}
                   checked={slot.date.split('T')[0] === formData.date}
                 />
-                <label htmlFor={slot._id} className="interview-form__radio-label">
+                <label
+                  htmlFor={slot._id}
+                  onClick={() => {
+                    setFormData({
+                      ...formData,
+                      interviewerId: slot.interviewerId,
+                    });
+                  }}
+                  className="interview-form__radio-label"
+                >
                   {slot.date.split('T')[0]}
                 </label>
 

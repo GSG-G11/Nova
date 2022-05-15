@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button, Modal, Form, Popconfirm, Steps, message,
 } from 'antd';
@@ -8,6 +8,7 @@ import {
   StepOne, StepTwo, StepThree, StepFour,
 } from './Steps';
 import './InterviewForm.css';
+import StepFive from './Steps/StepFive';
 
 const { Step } = Steps;
 const InterviewForm = () => {
@@ -21,50 +22,12 @@ const InterviewForm = () => {
     date: '',
     interviewerId: '',
   });
-  const [firstStepData, setFirstStepData] = useState({
-    specialization: '',
-    language: '',
-  });
 
   const { step } = formData;
   const [progressPercent, setProgressPercent] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [finalSubmit, setFinalSubmit] = useState(false);
   const [availableTime, setAvailableTime] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-
-    const getData = async () => {
-      if (isSubmitting) {
-        const { data: { data } } = await axios.post('/api/interview/available', {
-          specialization: 'BACKEND',
-          language: 'JAVA',
-        });
-        setAvailableTime(data);
-      }
-    };
-
-    const submitData = async () => {
-      if (finalSubmit) {
-        const response = await axios.post('/api/interview', {
-          ...formData,
-        });
-        console.log(response);
-      }
-      setFinalSubmit(false);
-    };
-    try {
-      getData();
-      submitData();
-    } catch ({ response: { data: { msg } } }) {
-      message.error(msg);
-    }
-
-    return () => {
-      source.cancel();
-    };
-  }, [isSubmitting, finalSubmit]);
   const nextStep = () => {
     setFormData({ ...formData, step: step + 1 });
     setProgressPercent((step + 1) * 25);
@@ -74,26 +37,59 @@ const InterviewForm = () => {
     setFormData({ ...formData, step: step - 1 });
     setProgressPercent(25 * (step - 1));
   };
+  const getAvailableTime = async () => {
+    if (!formData.specialization || !formData.language || !formData.questionCategory) {
+      message.error('Please select specialization, language and question category');
+      return;
+    }
+    try {
+      const { data: { data } } = await axios.post('/api/interview/available', {
+        specialization: formData.specialization,
+        language: formData.language,
+      });
+      setAvailableTime(data);
+      nextStep();
+    } catch (err) {
+      message.error(err.response.data.message);
+    }
+  };
+
+  const submitInterview = async () => {
+    if (!availableTime.length) {
+      message.error('You can not submit interview request due to no available time');
+      return;
+    }
+    if (!formData.date || !formData.time || !formData.interviewerId) {
+      message.error('Please select time and date');
+      return;
+    }
+    try {
+      setLoading(true);
+      nextStep();
+      const { step: stepIgnored, ...rest } = formData;
+      const response = await axios.post('/api/interview', {
+        ...rest,
+      });
+      message.success(response.data.message);
+      setLoading(false);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     setFormData({ ...formData, [name]: checked ? value : checked });
-    console.log(formData);
   };
 
-  const handleSubmit = () => {
-    setFinalSubmit(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    submitInterview();
   };
 
   const handleFirstStepSubmit = () => {
-    setFirstStepData((prevState) => ({
-      ...prevState,
-      ...firstStepData,
-      specialization: formData.specialization,
-      language: formData.language,
-    }));
-    setIsSubmitting(true);
-    nextStep();
+    getAvailableTime();
   };
 
   const CancelPop = (
@@ -128,9 +124,49 @@ const InterviewForm = () => {
             setAvailableTime={setAvailableTime}
           />
         );
+      case 4:
+        return <StepFive title="Congratulations" loading={loading} />;
       default:
         return <StepOne handleChange={handleChange} title="Specialization" />;
     }
+  };
+
+  const renderButtons = () => {
+    if (step === 0) {
+      return {
+        next: <Button type="primary" onClick={nextStep}> Next </Button>,
+        cancel: CancelPop,
+      };
+    } if (step === 1) {
+      return {
+        next: <Button type="primary" onClick={nextStep}> Next </Button>,
+        previous: <Button type="primary" onClick={prevStep}> Previous </Button>,
+        cancel: CancelPop,
+      };
+    } if (step === 2) {
+      return {
+        next: <Button type="primary" onClick={handleFirstStepSubmit}> Next </Button>,
+        previous: <Button type="primary" onClick={prevStep}> Previous </Button>,
+        cancel: CancelPop,
+      };
+    } if (step === 3) {
+      return {
+        submit: <Button type="primary" onClick={handleSubmit}> Submit </Button>,
+        previous: <Button type="primary" onClick={prevStep}> Previous </Button>,
+        cancel: CancelPop,
+      };
+    } if (step === 4) {
+      return {
+        submit: <Button type="primary" onClick={() => setVisible(false)}> Done </Button>,
+        cancel: CancelPop,
+      };
+    }
+
+    return {
+      next: <Button type="primary" onClick={nextStep}> Next </Button>,
+      previous: <Button type="primary" onClick={prevStep}> Previous </Button>,
+      cancel: CancelPop,
+    };
   };
   return (
     <Modal
@@ -140,12 +176,13 @@ const InterviewForm = () => {
       className="interview-form"
     >
       <p className="interview-modal-title">Create Interview</p>
-      <Form onFinish={handleSubmit}>
+      <Form onFinish={() => handleSubmit()}>
         <Steps current={step} className="form-steps" percent={progressPercent}>
           <Step title="Specialization" />
           <Step title="Language" />
           <Step title="Question Category" />
           <Step title="Available Days" />
+          <Step title="Matched?" />
         </Steps>
         <Form onFinish={handleFirstStepSubmit}>
           {renderSwitch()}
@@ -153,20 +190,10 @@ const InterviewForm = () => {
       </Form>
 
       <div className="btns">
-        {
-          step === 0 ? CancelPop : (
-            <>
-              {CancelPop}
-              <Button type="primary" onClick={() => prevStep()}> Previous </Button>
-            </>
-          )
-        }
-
-        {
-            step === 2
-              ? <Button type="primary" onClick={() => handleFirstStepSubmit()}> Submit </Button>
-              : <Button type="primary" onClick={() => nextStep()}> Next </Button>
-        }
+        {renderButtons().cancel}
+        {renderButtons().previous}
+        {renderButtons().next}
+        {renderButtons().submit}
       </div>
     </Modal>
   );
