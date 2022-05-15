@@ -35,7 +35,9 @@ const LoginButton = () => {
         onCancel={handleCancel}
         footer={null}
       >
-        <LoginForm />
+        <LoginForm
+          handleOk={handleOk}
+        />
       </Modal>
     </>
   );
