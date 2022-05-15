@@ -6,6 +6,7 @@ import {
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import '../style.css';
+import PropTypes from 'prop-types';
 import { setUser } from '../../../redux/features/auth/authSlice';
 
 const LoginForm = ({ handleOk }) => {
@@ -102,4 +103,7 @@ const LoginForm = ({ handleOk }) => {
   );
 };
 
+LoginForm.propTypes = {
+  handleOk: PropTypes.func.isRequired,
+};
 export default LoginForm;
