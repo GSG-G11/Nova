@@ -47,6 +47,11 @@ const interviewee = new Schema({
               type: Boolean,
               required: false,
             },
+            created_at: {
+              type: Date,
+              default: Date.now,
+              required: true,
+            },
           },
         },
       },
