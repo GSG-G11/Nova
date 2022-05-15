@@ -131,3 +131,12 @@
 .form-steps {
     padding: 1.8rem;
 }
+
+.interview-form__radio-group-fourth-hours  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+    align-items: center;
+    width: 100%;
+}

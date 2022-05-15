@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button, Modal, Form, Popconfirm, Steps,
 } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import StepOne from './Steps/StepOne';
-import StepTwo from './Steps/StepTwo';
-import StepThree from './Steps/StepThree';
-import StepFour from './Steps/StepFour';
+import axios from 'axios';
+import {
+  StepOne, StepTwo, StepThree, StepFour,
+} from './Steps';
 import './InterviewForm.css';
 
 const { Step } = Steps;
@@ -21,10 +21,28 @@ const InterviewForm = () => {
     date: '',
     interviewerId: '',
   });
+  const [firstStepData, setFirstStepData] = useState({
+    specialization: '',
+    language: '',
+  });
 
   const { step } = formData;
   const [progressPercent, setProgressPercent] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [availableTime, setAvailableTime] = useState([]);
 
+  useEffect(() => {
+    const getData = async () => {
+      if (isSubmitting) {
+        const { data: { data } } = await axios.post('/api/interview/available', {
+          specialization: 'BACKEND',
+          language: 'JAVA',
+        });
+        setAvailableTime(data);
+      }
+    };
+    getData();
+  }, [isSubmitting]);
   const nextStep = () => {
     setFormData({ ...formData, step: step + 1 });
     setProgressPercent((step + 1) * 25);
@@ -38,10 +56,23 @@ const InterviewForm = () => {
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     setFormData({ ...formData, [name]: checked ? value : checked });
+    console.log(formData);
   };
 
   const handleSubmit = () => {
     console.log(formData);
+  };
+
+  const handleFirstStepSubmit = () => {
+    setFirstStepData((prevState) => ({
+      ...prevState,
+      ...firstStepData,
+      specialization: formData.specialization,
+      language: formData.language,
+    }));
+    console.log(firstStepData);
+    setIsSubmitting(true);
+    nextStep();
   };
 
   const CancelPop = (
@@ -57,7 +88,7 @@ const InterviewForm = () => {
     </Popconfirm>
   );
 
-  console.log(formData);
+  // console.log(formData);
   const renderSwitch = () => {
     switch (step) {
       case 0:
@@ -67,7 +98,15 @@ const InterviewForm = () => {
       case 2:
         return <StepThree handleChange={handleChange} formData={formData} title="Question Category" />;
       case 3:
-        return <StepFour handleChange={handleChange} formData={formData} title="Available Time" />;
+        return (
+          <StepFour
+            handleChange={handleChange}
+            formData={formData}
+            title="Available Days"
+            availableTime={availableTime}
+            setAvailableTime={setAvailableTime}
+          />
+        );
       default:
         return <StepOne handleChange={handleChange} title="Specialization" />;
     }
@@ -85,9 +124,11 @@ const InterviewForm = () => {
           <Step title="Specialization" />
           <Step title="Language" />
           <Step title="Question Category" />
-          <Step title="Available Time" />
+          <Step title="Available Days" />
         </Steps>
-        {renderSwitch()}
+        <Form onFinish={handleFirstStepSubmit}>
+          {renderSwitch()}
+        </Form>
       </Form>
 
       <div className="btns">
@@ -101,8 +142,8 @@ const InterviewForm = () => {
         }
 
         {
-            step === 3
-              ? <Button type="primary" onClick={() => setVisible(false)}> Submit </Button>
+            step === 2
+              ? <Button type="primary" onClick={() => handleFirstStepSubmit()}> Submit </Button>
               : <Button type="primary" onClick={() => nextStep()}> Next </Button>
         }
       </div>
