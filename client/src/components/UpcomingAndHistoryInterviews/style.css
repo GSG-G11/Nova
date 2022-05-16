@@ -5,3 +5,7 @@
 .addReview{
   margin-right: 1rem;
 }
+
+.textArea{
+  height: 200px !important;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Input } from 'antd';
+import './style.css';
 
 const { TextArea } = Input;
 
@@ -35,7 +36,7 @@ const AddReviewButton = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <TextArea value={review} placeholder="Add your review here." style={{ height: 100 }} onChange={onChange} />
+        <TextArea className="textArea" value={review} placeholder="Add your review here." onChange={onChange} />
       </Modal>
     </>
   );

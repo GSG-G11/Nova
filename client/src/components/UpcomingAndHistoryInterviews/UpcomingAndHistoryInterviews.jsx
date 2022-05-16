@@ -15,16 +15,23 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
 
+  const deleteInterview = async (id) => {
+    try {
+      await axios.delete(`/api/interview/${id}`);
+      setDataSource((prev) => prev.filter((item) => item.key !== id));
+    } catch (error) {
+      message.error(error);
+    }
+  };
+
   useEffect(() => {
+    const cancelToken = axios.CancelToken;
+    const source = cancelToken.source();
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`);
-        let nameData;
-        if (user.role) {
-          const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`)
-            : await axios.get(`/api/user/info/${data.data[0].interviews.intervieweeId}`);
-          nameData = name;
-        }
+        const { data } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`, { cancelToken: source.token });
+        const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`, { cancelToken: source.token })
+          : await axios.get(`/api/user/info/${data.data[0].interviews.intervieweeId}`, { cancelToken: source.token });
         setDataSource([]);
         data.data.forEach((obj) => {
           const date = new Date(obj.interviews.date);
@@ -32,22 +39,23 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           setDataSource((prev) => [...prev, {
             // eslint-disable-next-line no-underscore-dangle
             key: obj.interviews._id,
-            Name: nameData,
+            Name: name,
             questionCategory: obj.interviews.questionCategory,
             language: obj.interviews.language,
             specialization: obj.interviews.specialization,
             date: dateStr,
-            time: obj.interviews.time,
+            time: `${obj.interviews.time}-${obj.interviews.time + 1}`,
           },
           ]);
         });
+        source.cancel();
       } catch (error) {
         setDataSource([]);
         message.error(error);
       }
     };
     fetchData();
-  }, [user, page]);
+  }, [page]);
 
   return (
     <Table
@@ -100,12 +108,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
                 title: 'Delete interview?',
                 content: 'Are you sure you want to delete this interview?',
                 async onOk() {
-                  try {
-                    await axios.delete(`/api/interview/${record.key}`);
-                    setDataSource((prev) => prev.filter((item) => item.key !== record.key));
-                  } catch (error) {
-                    message.error(error);
-                  }
+                  deleteInterview(record.key);
                 },
               }
             }
