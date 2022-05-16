@@ -10,6 +10,7 @@ import getAllReviews from './users/getReviews';
 import signup from './authentication/signup';
 import validateEmail from './authentication/validateEmail';
 import getAvailableTime from './interview/getAvailableTime';
+import createReview from './users/createReview';
 
 export {
   signup,
@@ -24,4 +25,5 @@ export {
   getAllReviews,
   getUserById,
   getAvailableTime,
+  createReview,
 };
