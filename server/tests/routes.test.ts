@@ -671,3 +671,85 @@ describe('Get Available interview times', () => {
       });
   });
 });
+
+describe('Create Review for a specific interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).post('/api/user/review/12345').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if user is not interviewer', (done) => {
+    request(app).post('/api/user/review/12345').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      review: 'This is a review',
+    })
+      .expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('You are not authorized to access this resource');
+        return done();
+      });
+  });
+
+  test('Should throw an error if the interview Id is invalid', (done) => {
+    request(app).post('/api/user/review/12345').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      review: 'This is a review',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid ID');
+        return done();
+      });
+  });
+
+  test('Should throw an error if the review message is empty', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: '',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"message" is not allowed to be empty');
+        return done();
+      });
+  });
+
+  test('Should throw an error if the review message is not string', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: 123,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"message" must be a string');
+        return done();
+      });
+  });
+
+  test('Should create a review for the interview', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: 'This is a review',
+    })
+      .expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Review created successfully');
+        return done();
+      });
+  });
+});

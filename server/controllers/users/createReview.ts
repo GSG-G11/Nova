@@ -6,14 +6,13 @@ import { createReviewValidation, RequestType } from '../../utils';
 
 const createReview = async (req: RequestType, res: Response) => {
   const { id } = req.params;
-
-  const { message, saved }: any = await createReviewValidation(req.body);
   const isValid = Types.ObjectId.isValid(id);
   if (!isValid) {
     return res.status(400).send({
       message: 'Invalid ID',
     });
   }
+  const { message, saved }: any = await createReviewValidation(req.body);
 
   const findInterview = await Interviewee.aggregate([{
     $unwind: '$interviews',
@@ -37,7 +36,7 @@ const createReview = async (req: RequestType, res: Response) => {
   },
   ]);
 
-  return res.json({
+  return res.status(201).json({
     message: 'Review created successfully',
     data: findInterview,
   });
