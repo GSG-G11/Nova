@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Input } from 'antd';
 import PropTypes from 'prop-types';
@@ -16,7 +15,6 @@ const RadioInput = ({
       onClick={handleChange}
       checked={value === option}
     />
-    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
     <label htmlFor={option}>
       {option === 'JS' ? 'JavaScript' : option}
     </label>
