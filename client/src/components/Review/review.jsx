@@ -15,22 +15,24 @@ const ReviewCard = () => {
   const [filterVal, setFilterVal] = useState('all');
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.get(
-          '/api/user/review',
-        );
-        setReviews(response.data.reviews);
-        setSaved(response.data.saved);
-      } catch ({ Response: { data: { message: msg } } }) {
-        message.error(msg);
-      }
-    })();
+    const source = axios.CancelToken.source();
+    try {
+      const getReviews = async () => {
+        const { data: { data } } = await axios.get('/api/user/review', { cancelToken: source.token });
+        setReviews(data.reviews);
+      };
+      getReviews();
+    } catch ({ Response: { data: { message: msg } } }) {
+      message.error(msg);
+    }
+    return () => {
+      source.cancel();
+    };
   }, [reviews]);
 
-  const handleSave = async () => {
+  const handleSave = async (interviewId) => {
     try {
-      const { message: savedMsg } = await axios.patch('/api/user/interview/review/:interviewId');
+      const { message: savedMsg } = await axios.patch(`/api/user/interview/review/${interviewId}`);
       if (savedMsg === 'Successfully updated!') {
         setSaved(!saved);
       }
@@ -39,39 +41,42 @@ const ReviewCard = () => {
     }
   };
 
-  const actions = [
-    <Tooltip key="comment-basic-like" title="Save">
-      <button type="button" onClick={handleSave}>
-        {saved ? <StarFilled /> : <StarOutlined />}
-      </button>
-    </Tooltip>,
-  ];
   return (
-    <>
-      <div className="filter-holder">
-        <Select defaultValue="all" style={{ width: 120 }} value={filterVal} onChange={(value) => setFilterVal(value)}>
-          <Option value="all">all</Option>
-          <Option value="saved">saved</Option>
-        </Select>
-      </div>
-      <div className="review-card">
-        {reviews.length > 0 ? reviews.map((review) => (
+    <div className="review-tab">
+      {reviews.length > 0 ? reviews.map((review) => (
+        <>
+          <div className="filter-holder">
+            <Select defaultValue="all" style={{ width: 120 }} value={filterVal} onChange={(value) => setFilterVal(value)}>
+              <Option value="all">all</Option>
+              <Option value="saved">saved</Option>
+            </Select>
+          </div>
           <Comment
-            actions={actions}
-            author="Han Solo"
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+            actions={[
+              <Tooltip key="comment-basic-like" title="Save">
+                <button type="button" onClick={() => handleSave(review.id)} className="saved-btn">
+                  {saved ? <StarFilled /> : <StarOutlined />}
+                </button>
+              </Tooltip>,
+            ]}
+            author={review.interviewerName}
+            avatar={<Avatar src={review.interviewerImage} alt="Han Solo" />}
             content={(
               <p>
-                {review.message}
+                {review.review.message}
                 .
               </p>
             )}
+            datetime={(
+              <Tooltip>
+                <span>{review.review.created_at}</span>
+              </Tooltip>
+            )}
           />
-        )) : <div className="alert alert-primary"> There is no reviews until now </div>}
-        ,
-      </div>
 
-    </>
+        </>
+      )) : (<div className="alert alert-primary"> There is no reviews until now </div>) }
+    </div>
   );
 };
 export default ReviewCard;
