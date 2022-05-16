@@ -671,3 +671,29 @@ describe('Get Available interview times', () => {
       });
   });
 });
+
+describe('Get Interviewer Available Time', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).get('/api/users/interviewer/available').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should Get Available Time', (done) => {
+    request(app).get('/api/users/interviewer/available').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`])
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Schedule fetched successfully');
+        expect(res.body.data.length).toBe(2);
+
+        return done();
+      });
+  });
+});
