@@ -1,6 +1,7 @@
 import loginValidation from './loginValidation';
+import postAvailableTimeValidation from './postAvailableTimeValidation';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
   loginValidation,
+  postAvailableTimeValidation,
 };
