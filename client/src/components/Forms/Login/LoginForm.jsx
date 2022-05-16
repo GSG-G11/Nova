@@ -6,9 +6,10 @@ import {
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import '../style.css';
+import PropTypes from 'prop-types';
 import { setUser } from '../../../redux/features/auth/authSlice';
 
-const LoginForm = () => {
+const LoginForm = ({ handleOk }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const LoginForm = () => {
     try {
       const { data: { data: { user } } } = await axios.post('/api/login', { email, password });
       dispatch(setUser(user));
+      handleOk();
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -101,4 +103,7 @@ const LoginForm = () => {
   );
 };
 
+LoginForm.propTypes = {
+  handleOk: PropTypes.func.isRequired,
+};
 export default LoginForm;
