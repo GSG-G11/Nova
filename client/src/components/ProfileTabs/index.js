@@ -9,9 +9,8 @@ const { TabPane } = Tabs;
 const ProfileTabs = () => {
   const { user } = useSelector((state) => state.auth);
   const role = user?.role;
-  console.log(role);
   return (
-    // role && (
+    role && (
     <div className="profile-tabs-holder">
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
         <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
@@ -20,22 +19,22 @@ const ProfileTabs = () => {
         <TabPane tab="Interviews history" key="2">
           Content of Tab Pane 2
         </TabPane>
-        {/* {role === 'interviewee' ? ( */}
-        <TabPane tab="Reviews" key="3">
-          Content of Tab Pane 3
-        </TabPane>
+        {role === 'interviewee' ? (
+          <TabPane tab="Reviews" key="3">
+            Content of Tab Pane 3
+          </TabPane>
 
-        {/* ) : ( */}
-        <TabPane tab="Schedule" key="3">
-          Content of Tab Pane 3
-        </TabPane>
-        {/* )} */}
+        ) : (
+          <TabPane tab="Schedule" key="3">
+            Content of Tab Pane 3
+          </TabPane>
+        )}
         <TabPane tab="Settings" key="4">
           <SettingTab />
         </TabPane>
       </Tabs>
     </div>
+    )
   );
-  // );
 };
 export default ProfileTabs;
