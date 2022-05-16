@@ -232,6 +232,18 @@ describe('Interview Reviews', () => {
       return done();
     });
   });
+
+  test('Should return interviewer name', (done) => {
+    request(app).get('/api/user/review?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Reviews found');
+      expect(res.body.data.reviews[0].interviewerName).toBe('Jack Doe');
+      return done();
+    });
+  });
 });
 
 describe('Create Interview', () => {
