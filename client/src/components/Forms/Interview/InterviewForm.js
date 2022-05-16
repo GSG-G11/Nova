@@ -22,7 +22,6 @@ const InterviewForm = () => {
     date: '',
     interviewerId: '',
   });
-  console.log(formData);
 
   const { step } = formData;
   const [progressPercent, setProgressPercent] = useState(0);
