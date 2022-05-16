@@ -1,11 +1,10 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Radio } from 'antd';
+import PropTypes from 'prop-types';
 import RadioInput from '../RadioInput';
 
 const questionCategories = ['Technical', 'Analytical', 'Algorithms', 'System Design'];
 const { Group } = Radio;
-// eslint-disable-next-line react/prop-types
 const StepThree = ({ title, handleChange, formData: { questionCategory } }) => (
   <div>
     <div className="interview-header">
@@ -29,4 +28,11 @@ const StepThree = ({ title, handleChange, formData: { questionCategory } }) => (
   </div>
 );
 
+StepThree.propTypes = {
+  title: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  formData: PropTypes.shape({
+    questionCategory: PropTypes.string.isRequired,
+  }).isRequired,
+};
 export default StepThree;

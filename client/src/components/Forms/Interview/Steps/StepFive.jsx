@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import { Typography } from 'antd';
+import PropTypes from 'prop-types';
 import LoadingSpinner from '../../../common/LoadingSpinner';
 
 const { Title, Text } = Typography;
@@ -39,6 +39,11 @@ const StepFive = ({ title, loading }) => {
       </div>
     </div>
   );
+};
+
+StepFive.propTypes = {
+  title: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default StepFive;

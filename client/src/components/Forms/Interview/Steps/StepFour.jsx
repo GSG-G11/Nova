@@ -1,15 +1,11 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { Input, Radio } from 'antd';
+import PropTypes from 'prop-types';
 import Hours from '../Hours';
 import LoadingSpinner from '../../../common/LoadingSpinner';
 
 const { Group } = Radio;
-// eslint-disable-next-line react/prop-types
 const StepFour = ({
   title, handleChange, availableTime, setFormData,
   formData, loading,
@@ -61,6 +57,7 @@ const StepFour = ({
                         interviewerId: slot.interviewerId,
                       });
                     }}
+                    aria-hidden="true"
                     className="interview-form__radio-label"
                   >
                     {slot.date.split('T')[0]}
@@ -89,6 +86,24 @@ const StepFour = ({
       </div>
     </div>
   );
+};
+
+StepFour.propTypes = {
+  title: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  availableTime: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    time: PropTypes.arrayOf(PropTypes.string).isRequired,
+    interviewerId: PropTypes.string.isRequired,
+  })).isRequired,
+  setFormData: PropTypes.func.isRequired,
+  formData: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    interviewerId: PropTypes.string.isRequired,
+  }).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default StepFour;

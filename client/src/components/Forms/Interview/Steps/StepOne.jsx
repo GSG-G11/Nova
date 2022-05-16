@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Radio } from 'antd';
+import PropTypes from 'prop-types';
 import RadioInput from '../RadioInput';
 
 const { Group } = Radio;
@@ -20,5 +19,13 @@ const StepOne = ({ title, handleChange, formData: { specialization } }) => (
     </div>
   </div>
 );
+
+StepOne.propTypes = {
+  title: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  formData: PropTypes.shape({
+    specialization: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default StepOne;
