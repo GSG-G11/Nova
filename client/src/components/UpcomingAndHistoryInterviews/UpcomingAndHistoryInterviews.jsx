@@ -10,7 +10,7 @@ import PopUpConfirm from '../Common/PopUpConfirm';
 import AddReviewButton from './AddReviewButton';
 
 const { Column } = Table;
-const UpcomingInterviews = ({ status }) => {
+const UpcomingAndHistoryInterviews = ({ status }) => {
   const { user } = useSelector((state) => state.auth);
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
@@ -120,8 +120,8 @@ const UpcomingInterviews = ({ status }) => {
   );
 };
 
-UpcomingInterviews.propTypes = {
+UpcomingAndHistoryInterviews.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-export default UpcomingInterviews;
+export default UpcomingAndHistoryInterviews;
