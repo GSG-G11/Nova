@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { Input, Radio } from 'antd';
+import { Radio } from 'antd';
+import RadioInput from '../RadioInput';
 
+const questionCategories = ['Technical', 'Analytical', 'Algorithms', 'System Design'];
 const { Group } = Radio;
 // eslint-disable-next-line react/prop-types
 const StepThree = ({ title, handleChange, formData: { questionCategory } }) => (
@@ -11,58 +13,16 @@ const StepThree = ({ title, handleChange, formData: { questionCategory } }) => (
     </div>
     <div className="interview-step-content">
       <Group buttonStyle="outline" size="large" className="interview-form__radio-group-third">
-        <Input
-          name="questionCategory"
-          type="radio"
-          id="Technical"
-          value="Technical"
-          className="interview-form__radio-input"
-          onChange={handleChange}
-          checked={questionCategory === 'Technical'}
+        {questionCategories.map((option) => (
+          <RadioInput
+            key={option}
+            name="questionCategory"
+            value={questionCategory}
+            handleChange={handleChange}
+            option={option}
 
-        />
-        <label htmlFor="Technical">
-          Technical
-        </label>
-        <Input
-          name="questionCategory"
-          type="radio"
-          value="Analytical"
-          id="Analytical"
-          className="interview-form__radio-input"
-          onChange={handleChange}
-          checked={questionCategory === 'Analytical'}
-
-        />
-        <label htmlFor="Analytical">
-          Analytical
-        </label>
-        <Input
-          name="questionCategory"
-          type="radio"
-          value="Algorithms"
-          id="Algorithms"
-          className="interview-form__radio-input"
-          onChange={handleChange}
-          checked={questionCategory === 'Algorithms'}
-
-        />
-        <label htmlFor="Algorithms">
-          Algorithms
-        </label>
-        <Input
-          name="questionCategory"
-          type="radio"
-          value="System Design"
-          id="System Design"
-          className="interview-form__radio-input"
-          onChange={handleChange}
-          checked={questionCategory === 'System Design'}
-
-        />
-        <label htmlFor="System Design">
-          System Design
-        </label>
+          />
+        ))}
       </Group>
     </div>
 

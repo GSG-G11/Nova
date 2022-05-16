@@ -4,6 +4,7 @@ import { CheckCircleTwoTone } from '@ant-design/icons';
 import { Typography } from 'antd';
 import LoadingSpinner from '../../../common/LoadingSpinner';
 
+const { Title, Text } = Typography;
 const StepFive = ({ title, loading }) => {
   if (loading) {
     return (
@@ -21,16 +22,17 @@ const StepFive = ({ title, loading }) => {
       <div className="interview-step-content">
         <div className="interview-form__radio-group-fifth">
           <div className="interview-form__radio-group-fifth-check">
+            <Title level={1}>You have been matched!</Title>
             <CheckCircleTwoTone
               twoToneColor="#52c41a"
               className="interview-form__radio-group-fifth-check-icon"
             />
-            <Typography.Title>
-              You have successfully booked an interview.
-            </Typography.Title>
-            <Typography.Text>
+            <Title>
+              You Successfully booked an interview.
+            </Title>
+            <Text>
               You will receive an email with the details of your interview.
-            </Typography.Text>
+            </Text>
           </div>
         </div>
 

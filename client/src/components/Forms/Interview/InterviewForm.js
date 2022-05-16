@@ -22,6 +22,7 @@ const InterviewForm = () => {
     date: '',
     interviewerId: '',
   });
+  console.log(formData);
 
   const { step } = formData;
   const [progressPercent, setProgressPercent] = useState(0);
@@ -43,12 +44,14 @@ const InterviewForm = () => {
       return;
     }
     try {
+      setLoading(true);
+      nextStep();
       const { data: { data } } = await axios.post('/api/interview/available', {
         specialization: formData.specialization,
         language: formData.language,
       });
       setAvailableTime(data);
-      nextStep();
+      setLoading(false);
     } catch (err) {
       message.error(err.response.data.message);
     }
@@ -122,6 +125,7 @@ const InterviewForm = () => {
             title="Available Days"
             availableTime={availableTime}
             setAvailableTime={setAvailableTime}
+            loading={loading}
           />
         );
       case 4:

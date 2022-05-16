@@ -163,7 +163,15 @@
     border-radius: 0.8rem;
     margin-bottom: 3.2rem;
 }
-
+.interview-step-content.fourth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.8rem;
+    margin-bottom: 3.2rem;
+}
 @keyframes makeIcon {
     0% {
         clip-path: polygon(0 0, 0 0, 0 0, 0 0);
