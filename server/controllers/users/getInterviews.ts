@@ -37,7 +37,13 @@ const getData = async (role: string, userId: string, status: string, page: strin
 
   const interviews = await dataBaseInterview.aggregate(condition).skip(pageLimitMin).limit(3);
 
-  return interviews;
+  if (page === '1') {
+    const interviewsCount = await dataBaseInterview.aggregate(condition);
+    const count = interviewsCount.length;
+    return { interviews, count };
+  }
+
+  return { interviews };
 };
 
 const getInterviews = async (req: RequestType, res: Response) => {
@@ -54,13 +60,14 @@ const getInterviews = async (req: RequestType, res: Response) => {
 
   await getInterviewsQueryValidation({ status, page });
 
-  const interviews = await getData(role, _id.valueOf(), status, page);
+  const { interviews, count } = await getData(role, _id.valueOf(), status, page);
 
   if (!interviews.length) {
     throw new CustomError('No interviews found', 404);
   }
   res.json({
     data: interviews,
+    count,
     message: 'Interviews fetched successfully!',
   });
 };
