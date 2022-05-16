@@ -14,6 +14,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
   const { user } = useSelector((state) => state.auth);
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const deleteInterview = async (id) => {
     try {
@@ -29,11 +30,14 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
     const source = cancelToken.source();
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`, { cancelToken: source.token });
-        const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${data.data[0].interviews.interviewerId}`, { cancelToken: source.token })
-          : await axios.get(`/api/user/info/${data.data[0].interviews.intervieweeId}`, { cancelToken: source.token });
+        const { data: { data, count } } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`, { cancelToken: source.token });
+        if (page === 1) {
+          setPageNumber(count);
+        }
         setDataSource([]);
-        data.data.forEach((obj) => {
+        data.forEach(async (obj) => {
+          const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${obj.interviews.interviewerId}`, { cancelToken: source.token })
+            : await axios.get(`/api/user/info/${obj.interviews.intervieweeId}`, { cancelToken: source.token });
           const date = new Date(obj.interviews.date);
           const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
           setDataSource((prev) => [...prev, {
@@ -48,13 +52,13 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           },
           ]);
         });
-        source.cancel();
       } catch (error) {
         setDataSource([]);
         message.error(error);
       }
     };
     fetchData();
+    // source.cancel();
   }, [page]);
 
   return (
@@ -62,8 +66,8 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
       dataSource={dataSource}
       pagination={{
         current: page,
-        pageSize: 10,
-        total: 50,
+        pageSize: 3,
+        total: pageNumber,
         onChange: (pageCh) => {
           setPage(pageCh);
         },
