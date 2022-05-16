@@ -9,6 +9,7 @@ import { validateQuery, getInterviewsQueryValidation } from './validation/queryV
 import interviewValidation from './validation/interviewValidation';
 import emailTemplate from './email/interviewEmailTemplate';
 import getInterviewTimeValidation from './validation/getInterviewTimeValidation';
+import createReviewValidation from './validation/createReviewValidation';
 
 export {
   getInterviewsQueryValidation,
@@ -26,4 +27,5 @@ export {
   interviewValidation,
   emailTemplate,
   getInterviewTimeValidation,
+  createReviewValidation,
 };
