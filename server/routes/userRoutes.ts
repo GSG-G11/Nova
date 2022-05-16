@@ -6,6 +6,7 @@ import {
   deleteInterview,
   getAllReviews,
   getUserById,
+  getInterviewerAvailableTime,
 } from '../controllers';
 import { userAuth } from '../middlewares/auth';
 
@@ -19,5 +20,5 @@ router.delete('/interview/:id', userAuth, deleteInterview);
 router.get('/user/review', userAuth, getAllReviews);
 router.get('/user/info/:id', getUserById);
 router.get('/user/review', userAuth, getAllReviews);
-
+router.get('/users/interviewer/available', userAuth, getInterviewerAvailableTime);
 export default router;
