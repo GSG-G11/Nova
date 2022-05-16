@@ -4,9 +4,10 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import './UpcomingInterviews.css';
+import './style.css';
 import PropTypes from 'prop-types';
 import PopUpConfirm from '../Common/PopUpConfirm';
+import AddReviewButton from './AddReviewButton';
 
 const { Column } = Table;
 const UpcomingInterviews = ({ status }) => {
@@ -80,6 +81,7 @@ const UpcomingInterviews = ({ status }) => {
           render={(text, record) => (
             <Space size="middle">
               <Button type="primary" key={record.key} danger>
+                {/* Here we must send to backend when the route is ready */}
                 Cancel Interview
               </Button>
             </Space>
@@ -90,8 +92,10 @@ const UpcomingInterviews = ({ status }) => {
           title="Action"
           key="action"
           render={(text, record) => (
-            <PopUpConfirm
-              config={
+            <>
+              <AddReviewButton />
+              <PopUpConfirm
+                config={
               {
                 title: 'Delete interview?',
                 content: 'Are you sure you want to delete this interview?',
@@ -105,9 +109,10 @@ const UpcomingInterviews = ({ status }) => {
                 },
               }
             }
-              message="Delete"
-              key={record.key}
-            />
+                message="Delete"
+                key={record.key}
+              />
+            </>
           )}
         />
       )}
