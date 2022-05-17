@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Form, Input, Checkbox, Button, message,
+  Form, Input, Button, message, Radio,
 } from 'antd';
 import './setting.css';
 
 const SettingTab = () => {
   const { Item } = Form;
-  const options = [
-    { label: 'Junior', value: 'Junior' },
-    { label: 'Senior', value: 'Senior' },
-    { label: 'Internship', value: 'Internship' },
-    { label: 'Expert', value: 'Expert' },
-    { label: 'Mid-level', value: 'Mid-level' },
-  ];
   const [imgLink, setImgLink] = useState('');
   const [cvLink, setCVLink] = useState('');
   const [bio, setBio] = useState('');
@@ -51,8 +44,14 @@ const SettingTab = () => {
         <Item name="bio" label="Bio" type="text" value={bio}>
           <Input.TextArea placeholder="Please input your Bio" onChange={(e) => setBio(e.target.value)} value={bio} />
         </Item>
-        <Item name="experenice" label="Level of Experenice" value={experenice} onChange={(e) => setExperenice(e.target.value)}>
-          <Checkbox.Group options={options} />
+        <Item name="experenice" label="Level of Experenice">
+          <Radio.Group value={experenice} onChange={(e) => setExperenice(e.target.value)}>
+            <Radio value="Junior">Junior</Radio>
+            <Radio value="Mid-level">Mid-level</Radio>
+            <Radio value="Senior">Senior</Radio>
+            <Radio value="Internship">Internship</Radio>
+            <Radio value="Expert">Expert</Radio>
+          </Radio.Group>
         </Item>
       </Form>
       <div className="btn-save-holder">
