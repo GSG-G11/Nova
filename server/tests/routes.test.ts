@@ -752,4 +752,4 @@ describe('Post interview time', () => {
   });
 });
 
-afterAll(() => mongoose.connection.close());
+afterAll(async () => mongoose.connection.close());

@@ -16,39 +16,51 @@ const createInterview = async (req: RequestType, res: Response) => {
     interviewerId, date, language, specialization, questionCategory, time,
   } : any = await interviewValidation(req.body);
 
-  // Get the interviewee and interviewer emails
-  const [{ email: intervieweeEmail },
+  // Get the interviewee and interviewer emails and Meet Link
+  const [meetingLink, { email: intervieweeEmail },
     { email: interviewerEmail },
     interviewersSchedule] : any = await Promise
-      .all([User.findById(id), User.findById(interviewerId), Schedule.aggregate([{
-        $project: {
-          _id: 0,
-          'available.date': 1,
-          'available.time': 1,
-          'available.interviewerId': 1,
+      .all([
+        // Get Google Meet Link
+        Meeting({
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN,
+          date: date.toISOString().slice(0, 10),
+          time: time.length === 1 ? `0${time}:00` : `${time}:00`,
+          summary: 'Interview',
+          location: 'Online',
+          description: 'Interview',
+        }),
+        User.findById(id), User.findById(interviewerId), Schedule.aggregate([{
+          $project: {
+            _id: 0,
+            'available.date': 1,
+            'available.time': 1,
+            'available.interviewerId': 1,
+          },
+        }, {
+          $unwind: '$available',
         },
-      }, {
-        $unwind: '$available',
-      },
-      {
-        $match: {
-          'available.interviewerId': interviewerId,
-          'available.date': new Date(date),
-        },
-      }, {
-        $group: {
-          _id: '$available.date',
-          timeSlot: {
-            $first: {
-              time: '$available.time',
-              date: '$available.date',
-            },
+        {
+          $match: {
+            'available.interviewerId': interviewerId,
+            'available.date': new Date(date),
+          },
+        }, {
+          $group: {
+            _id: '$available.date',
+            timeSlot: {
+              $first: {
+                time: '$available.time',
+                date: '$available.date',
+              },
 
+            },
           },
         },
-      },
 
-      ])]);
+        ])]);
 
   if (interviewersSchedule.length === 0) {
     throw new CustomError('Interviewer is not available on this date', 400);
@@ -71,6 +83,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
+    meetingLink,
   };
 
   const interviewerInterview = {
@@ -80,21 +93,10 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
+    meetingLink,
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const [meetingLink, ...other] = await Promise.all([
-    // Get Google Meet Link
-    Meeting({
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      refreshToken: process.env.REFRESH_TOKEN,
-      date: date.toISOString().slice(0, 10),
-      time: time.length === 1 ? `0${time}:00` : `${time}:00`,
-      summary: 'Interview',
-      location: 'Online',
-      description: 'Interview',
-    }),
+  await Promise.all([
     Schedule.updateOne({
       'available.date': date,
       'available.time': time,

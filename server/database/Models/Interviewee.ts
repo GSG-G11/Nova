@@ -37,6 +37,10 @@ const interviewee = new Schema({
           enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
+        meetingLink: {
+          type: String,
+          required: true,
+        },
         review: {
           type: {
             message: {
