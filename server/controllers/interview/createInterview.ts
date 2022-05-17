@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import GoogleMeet from 'google-meet-api';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import {
@@ -7,6 +8,7 @@ import {
 import Schedule from '../../database/Models/Schedule';
 import Interviewer from '../../database/Models/Interviewer';
 
+const Meeting = GoogleMeet.meet;
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
   // Validate the incoming request
@@ -62,7 +64,6 @@ const createInterview = async (req: RequestType, res: Response) => {
   const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
   // // update the schedule for the interviewer
-
   const interview = {
     interviewerId,
     date,
@@ -81,7 +82,19 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
   };
 
-  await Promise.all([
+  // eslint-disable-next-line no-unused-vars
+  const [meetingLink, ...other] = await Promise.all([
+    // Get Google Meet Link
+    Meeting({
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      refreshToken: process.env.REFRESH_TOKEN,
+      date: date.toISOString().slice(0, 10),
+      time: time.length === 1 ? `0${time}:00` : `${time}:00`,
+      summary: 'Interview',
+      location: 'Online',
+      description: 'Interview',
+    }),
     Schedule.updateOne({
       'available.date': date,
       'available.time': time,
@@ -152,6 +165,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     message: 'Interview created successfully',
     data: {
       interview,
+      meetingLink,
     },
   });
 };
