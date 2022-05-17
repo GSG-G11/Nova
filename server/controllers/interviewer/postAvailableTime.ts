@@ -20,14 +20,12 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
 
   const { date, time } = req.body;
 
+  const isoDate = `${date}T00:00:00.000Z`;
   await postAvailableTimeValidation(req.body);
 
-  let interviewer = await Interviewer.find({ userId: _id });
-
-  const { languages, specialization } = interviewer[0];
-  interviewer = await Interviewer.find({
+  let interviewer: any = await Interviewer.find({
     userId: _id,
-    'schedule.date': date,
+    'schedule.date': isoDate,
     'schedule.time': time,
   });
 
@@ -35,43 +33,41 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
     throw new CustomError('Interviewer already scheduled for this time', 400);
   }
 
-  interviewer = await Interviewer.find({ userId: _id, 'schedule.date': date });
+  interviewer = await Interviewer.find({ userId: _id, 'schedule.date': new Date(isoDate) });
 
   if (!interviewer.length) {
-    const newInterview = await Interviewer.update({
+    const newInterview = await Interviewer.findOneAndUpdate({
       userId: _id,
     }, {
       $push: {
         schedule: {
-          date,
+          date: isoDate,
           time,
         },
       },
     });
 
-    if (newInterview.modifiedCount === 0) {
+    if (!newInterview) {
       throw new CustomError('No time added', 404);
     }
 
     const findSchedule = await Schedule.find({
       language: {
-        $in: languages,
+        $in: newInterview.languages,
       },
-      specialization: {
-        $in: specialization,
-      },
+      specialization: newInterview.specialization,
     });
 
     if (!findSchedule.length) {
-      languages.forEach(async (language:string) => {
+      interviewer[0].languages.forEach(async (language:string) => {
         await Schedule.insertMany([
           {
             language,
-            specialization: specialization[0],
+            specialization: newInterview.specialization,
             available: [
               {
                 interviewerId: _id,
-                date,
+                date: isoDate,
                 time,
               },
             ],
@@ -85,16 +81,14 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
     }
     const schedule = await Schedule.update({
       language: {
-        $in: languages,
+        $in: newInterview.languages,
       },
-      specialization: {
-        $in: specialization,
-      },
+      specialization: newInterview.specialization,
     }, {
       $push: {
         available: {
           interviewerId: _id,
-          date,
+          date: isoDate,
           time,
         },
       },
@@ -110,46 +104,21 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
   }
 
   const postedTime = await Interviewer.update(
-    { userId: _id, 'schedule.date': new Date(date) },
+    { userId: _id, 'schedule.date': new Date(isoDate) },
     { $push: { 'schedule.$.time': time } },
   );
 
   if (postedTime.modifiedCount === 0) {
     throw new CustomError('No time added', 404);
   }
-  const findSchedule = await Schedule.find({
-    language: {
-      $in: languages,
-    },
-    specialization: {
-      $in: specialization,
-    },
-  });
 
-  if (!findSchedule.length) {
-    const newSchedule = await Schedule.insertMany({
-      language: languages,
-      specialization,
-      available: [{
-        interviewerId: _id,
-        date,
-        time,
-      }],
-    });
-
-    if (!newSchedule) {
-      throw new CustomError('No time added', 404);
-    }
-  }
   const schedule = await Schedule.update({
     language: {
-      $in: languages,
+      $in: interviewer[0].languages,
     },
-    specialization: {
-      $in: specialization,
-    },
+    specialization: interviewer[0].specialization,
     'available.interviewerId': _id,
-    'available.date': new Date(date),
+    'available.$.date': new Date(isoDate),
   }, {
     $push: {
       'available.$.time': time,
