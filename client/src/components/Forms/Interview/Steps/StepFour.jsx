@@ -28,8 +28,7 @@ const StepFour = ({
               </p>
               )}
               {availableTime.length && availableTime.map((slot, i) => (
-                <>
-
+                <div className="column">
                   <Input
                     type="radio"
                     key={slot._id}
@@ -78,7 +77,7 @@ const StepFour = ({
                       />
                     ))}
                   </div>
-                </>
+                </div>
               ))}
             </div>
           </Group>

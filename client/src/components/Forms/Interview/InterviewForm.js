@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button, Modal, Form, Popconfirm, Steps, message,
 } from 'antd';
@@ -27,6 +27,16 @@ const InterviewForm = () => {
   const [progressPercent, setProgressPercent] = useState(0);
   const [availableTime, setAvailableTime] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      const doneBtn = document.getElementById('done');
+      if (doneBtn) doneBtn.disabled = true;
+    } else {
+      const doneBtn = document.getElementById('done') ? document.getElementById('done') : null;
+      if (doneBtn) doneBtn.disabled = false;
+    }
+  }, [loading]);
 
   const nextStep = () => {
     setFormData({ ...formData, step: step + 1 });
@@ -160,7 +170,7 @@ const InterviewForm = () => {
       };
     } if (step === 4) {
       return {
-        submit: <Button type="primary" onClick={() => setVisible(false)}> Done </Button>,
+        submit: <Button type="primary" id="done" onClick={() => setVisible(false)}> Done </Button>,
         cancel: CancelPop,
       };
     }
