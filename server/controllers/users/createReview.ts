@@ -34,6 +34,10 @@ const createReview = async (req: RequestType, res: Response) => {
   },
   ]);
 
+  if (findInterview.length === 0) {
+    throw new CustomError('No interview found', 400);
+  }
+
   return res.status(201).json({
     message: 'Review created successfully',
     data: findInterview,
