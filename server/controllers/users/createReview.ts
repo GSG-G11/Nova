@@ -2,17 +2,15 @@ import { Response } from 'express';
 import { ObjectId } from 'mongodb';
 import { Types } from 'mongoose';
 import Interviewee from '../../database/Models/Interviewee';
-import { createReviewValidation, RequestType } from '../../utils';
+import { createReviewValidation, CustomError, RequestType } from '../../utils';
 
 const createReview = async (req: RequestType, res: Response) => {
   const { id } = req.params;
   const isValid = Types.ObjectId.isValid(id);
   if (!isValid) {
-    return res.status(400).send({
-      message: 'Invalid ID',
-    });
+    throw new CustomError('Invalid ID', 400);
   }
-  const { message, saved }: any = await createReviewValidation(req.body);
+  const { message }: any = await createReviewValidation(req.body);
 
   const findInterview = await Interviewee.aggregate([{
     $unwind: '$interviews',
@@ -31,7 +29,6 @@ const createReview = async (req: RequestType, res: Response) => {
   {
     $addFields: {
       'interviews.review.message': message,
-      'interviews.review.saved': saved,
     },
   },
   ]);
