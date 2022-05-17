@@ -17,6 +17,7 @@ const createReview = async (req: RequestType, res: Response) => {
   }, {
     $match: {
       'interviews._id': new ObjectId(id),
+      'interviews.interviewerId': req.userInfo?.id,
     },
 
   }, {
