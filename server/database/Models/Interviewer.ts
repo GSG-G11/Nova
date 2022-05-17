@@ -12,7 +12,7 @@ const interviewer = new Schema({
     required: true,
   },
   specialization: {
-    type: [String],
+    type: String,
     enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
     required: true,
   },

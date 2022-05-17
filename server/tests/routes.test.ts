@@ -582,7 +582,6 @@ describe('Update Info', () => {
       });
   });
 });
-afterAll(() => mongoose.connection.close());
 
 describe('Get Available interview times', () => {
   test('Should throw an error if user not authenticated', (done) => {
@@ -671,3 +670,86 @@ describe('Get Available interview times', () => {
       });
   });
 });
+
+describe('Post interview time', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).post('/api/interviewer/schedule').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw a role error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`]).send({})
+      .expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid role!');
+        return done();
+      });
+  });
+
+  test('Should throw a required validation error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"date" is required. "time" is required');
+        return done();
+      });
+  });
+
+  test('Should throw a date validation error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: 'potato',
+      time: 12,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"date" must be a valid date');
+        return done();
+      });
+  });
+
+  test('Should throw already scheduled for this time', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: '2022-04-28',
+      time: 13,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interviewer already scheduled for this time');
+        return done();
+      });
+  });
+
+  test('Should schedule interview', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: '2022-04-28',
+      time: 12,
+    })
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Successfully added time');
+        return done();
+      });
+  });
+});
+
+afterAll(() => mongoose.connection.close());

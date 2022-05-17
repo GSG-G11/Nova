@@ -42,6 +42,36 @@
                     ]
                 }
             ]
+        },
+        {
+            "userId": "627c92140d0c3622573195ce",
+            "languages": [
+                "PYTHON","RUBY"
+            ],
+            "specialization": "BACKEND",
+            "interviews": [
+                {
+                    "intervieweeId": "627c92140d0c3622573195ca",
+                    "date": "2022-04-28",
+                    "time": 12,
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory":"Technical"
+
+                },
+                {
+                    "intervieweeId": "627c92140d0c3622573195ca",
+                    "date": "2022-04-29",
+                    "time": 12,
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical"
+
+                }
+            ],
+            "schedule": [
+               
+            ]
         }
     ]
 }

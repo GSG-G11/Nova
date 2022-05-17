@@ -1,7 +1,7 @@
 import { verifyToken, signToken } from './jwt';
 import mailSender from './sendEmailVerification/sendEmail';
 import signupValidation from './validation/signupValidation';
-import { loginValidation } from './validation';
+import { loginValidation, postAvailableTimeValidation } from './validation';
 import CustomError from './CustomError';
 import updateInfoValidation from './validation/updateInfoValidation';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
@@ -26,4 +26,5 @@ export {
   interviewValidation,
   emailTemplate,
   getInterviewTimeValidation,
+  postAvailableTimeValidation,
 };
