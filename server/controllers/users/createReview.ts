@@ -12,7 +12,7 @@ const createReview = async (req: RequestType, res: Response) => {
   }
   const { message }: any = await createReviewValidation(req.body);
 
-  const findInterview = await Interviewee.aggregate([{
+  const addReview = await Interviewee.aggregate([{
     $unwind: '$interviews',
   }, {
     $match: {
@@ -34,13 +34,13 @@ const createReview = async (req: RequestType, res: Response) => {
   },
   ]);
 
-  if (findInterview.length === 0) {
-    throw new CustomError('No interview found', 400);
+  if (addReview.length === 0) {
+    throw new CustomError('Failed to add review', 400);
   }
 
   return res.status(201).json({
     message: 'Review created successfully',
-    data: findInterview,
+    data: addReview,
   });
 };
 
