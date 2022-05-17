@@ -46,13 +46,15 @@ const interviewee = new Schema({
             saved: {
               type: Boolean,
               required: false,
+              default: false,
             },
             created_at: {
               type: Date,
-              default: Date.now,
-              required: true,
+              required: false,
             },
           },
+          required: false,
+          default: {},
         },
       },
     ],

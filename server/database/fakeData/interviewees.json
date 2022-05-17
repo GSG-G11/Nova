@@ -10,10 +10,6 @@
                     "language": "JS",
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
-                    "review": {
-                        "message": "He did a great job!",
-                        "saved": false
-                    },
                     "_id": "627d1d11f5243856362e8a8c"
                 },
                 {
@@ -23,9 +19,6 @@
                     "language": "JS",
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
-                    "review": {
-
-                    },
                     "_id": "627d1d11f5243856362e8a8f"
                 },
                 {
