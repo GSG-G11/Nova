@@ -8,7 +8,7 @@ import {
   getUserById,
   getInterviewerAvailableTime,
 } from '../controllers';
-import { userAuth } from '../middlewares/auth';
+import { checkInterviewer, userAuth } from '../middlewares/auth';
 
 const router: Router = Router();
 
@@ -20,5 +20,5 @@ router.delete('/interview/:id', userAuth, deleteInterview);
 router.get('/user/review', userAuth, getAllReviews);
 router.get('/user/info/:id', getUserById);
 router.get('/user/review', userAuth, getAllReviews);
-router.get('/users/interviewer/available', userAuth, getInterviewerAvailableTime);
+router.get('/users/interviewer/available', userAuth, checkInterviewer, getInterviewerAvailableTime);
 export default router;

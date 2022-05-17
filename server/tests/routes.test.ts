@@ -683,6 +683,17 @@ describe('Get Interviewer Available Time', () => {
     });
   });
 
+  test('Should throw an error if user not interviewer', (done) => {
+    request(app).get('/api/users/interviewer/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('You are not authorized to access this resource');
+        return done();
+      });
+  });
+
   test('Should Get Available Time', (done) => {
     request(app).get('/api/users/interviewer/available').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`])
       .end((err, res) => {
