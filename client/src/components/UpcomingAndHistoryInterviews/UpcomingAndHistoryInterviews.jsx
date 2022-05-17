@@ -1,12 +1,11 @@
 import {
-  Table, Space, Button, message,
+  Table, Space, Button, message, Modal,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './style.css';
 import PropTypes from 'prop-types';
-import PopUpConfirm from '../Common/PopUpConfirm';
 import AddReviewButton from './AddReviewButton';
 
 const { Column } = Table;
@@ -41,14 +40,13 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           const date = new Date(obj.interviews.date);
           const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
           setDataSource((prev) => [...prev, {
-            // eslint-disable-next-line no-underscore-dangle
             key: obj.interviews._id,
             Name: name,
             questionCategory: obj.interviews.questionCategory,
             language: obj.interviews.language,
             specialization: obj.interviews.specialization,
             date: dateStr,
-            time: `${obj.interviews.time}-${obj.interviews.time + 1}`,
+            time: `${`${obj.interviews.time}:00`}-${obj.interviews.time + 1}:00`,
           },
           ]);
         });
@@ -56,9 +54,9 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
         setDataSource([]);
         message.error(error);
       }
+      return () => source.cancel();
     };
     fetchData();
-    // source.cancel();
   }, [page]);
 
   return (
@@ -106,19 +104,23 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           render={(text, record) => (
             <>
               <AddReviewButton />
-              <PopUpConfirm
-                config={
-              {
-                title: 'Delete interview?',
-                content: 'Are you sure you want to delete this interview?',
-                async onOk() {
-                  deleteInterview(record.key);
-                },
-              }
-            }
-                message="Delete"
-                key={record.key}
-              />
+              <Space>
+                <Button
+                  className="delete"
+                  key={record.key}
+                  onClick={() => {
+                    Modal.confirm({
+                      title: 'Delete interview?',
+                      content: 'Are you sure you want to delete this interview?',
+                      async onOk() {
+                        deleteInterview(record.key);
+                      },
+                    });
+                  }}
+                >
+                  Delete
+                </Button>
+              </Space>
             </>
           )}
         />

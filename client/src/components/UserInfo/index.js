@@ -6,7 +6,7 @@ import axios from 'axios';
 import {
   Button, Image, message, Typography,
 } from 'antd';
-import LoadingSpinner from '../Common/LoadingSpinner';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const { Text, Title } = Typography;
 const UserInfo = () => {

@@ -36,7 +36,12 @@ const AddReviewButton = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <TextArea className="textArea" value={review} placeholder="Add your review here." onChange={onChange} />
+        <TextArea
+          className="textArea"
+          value={review}
+          placeholder="Add your review here."
+          onChange={onChange}
+        />
       </Modal>
     </>
   );
