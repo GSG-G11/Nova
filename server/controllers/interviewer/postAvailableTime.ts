@@ -48,7 +48,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
     });
 
     if (!newInterview) {
-      throw new CustomError('No time added', 404);
+      throw new CustomError('No time added', 400);
     }
 
     const findSchedule = await Schedule.find({
@@ -95,7 +95,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
     });
 
     if (schedule.modifiedCount === 0) {
-      throw new CustomError('No time added to schedules', 404);
+      throw new CustomError('No time added to schedules', 400);
     }
 
     return res.json({
@@ -109,7 +109,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
   );
 
   if (postedTime.modifiedCount === 0) {
-    throw new CustomError('No time added', 404);
+    throw new CustomError('No time added', 400);
   }
 
   const schedule = await Schedule.update({
@@ -126,7 +126,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
   });
 
   if (schedule.modifiedCount === 0) {
-    throw new CustomError('No time added to schedule', 404);
+    throw new CustomError('No time added to schedule', 400);
   }
 
   return res.json({
