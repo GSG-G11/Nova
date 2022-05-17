@@ -20,8 +20,8 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
 
   const { date, time } = req.body;
 
-  const isoDate = `${date}T00:00:00.000Z`;
   await postAvailableTimeValidation(req.body);
+  const isoDate = `${date}T00:00:00.000Z`;
 
   let interviewer: any = await Interviewer.find({
     userId: _id,
@@ -59,7 +59,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
     });
 
     if (!findSchedule.length) {
-      interviewer[0].languages.forEach(async (language:string) => {
+      newInterview.languages.forEach(async (language:string) => {
         await Schedule.insertMany([
           {
             language,
@@ -76,7 +76,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
       });
 
       return res.json({
-        message: 'Interview added successfully',
+        message: 'Successfully added time',
       });
     }
     const schedule = await Schedule.update({

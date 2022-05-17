@@ -46,7 +46,7 @@
         {
             "userId": "627c92140d0c3622573195ce",
             "languages": [
-                "PYTHON"
+                "PYTHON","RUBY"
             ],
             "specialization": "BACKEND",
             "interviews": [
@@ -60,7 +60,7 @@
 
                 },
                 {
-                    "intervieweeId": "627c92140d0c3622573195ce",
+                    "intervieweeId": "627c92140d0c3622573195ca",
                     "date": "2022-04-29",
                     "time": 12,
                     "language": "PHP",
@@ -70,18 +70,7 @@
                 }
             ],
             "schedule": [
-                {
-                    "date": "2022-04-28",
-                    "time": [
-                        13, 14, 15, 16, 17, 18
-                    ]
-                },
-                {
-                    "date": "2022-04-29",
-                    "time": [
-                        13, 14, 15, 16, 17, 18
-                    ]
-                }
+               
             ]
         }
     ]
