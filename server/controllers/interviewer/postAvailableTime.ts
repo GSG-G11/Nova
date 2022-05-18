@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import User from '../../database/Models/User';
 import { CustomError, RequestType, postAvailableTimeValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
@@ -24,7 +25,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
   const isoDate = `${date}T00:00:00.000Z`;
 
   let interviewer: any = await Interviewer.find({
-    userId: _id,
+    userId: new ObjectId(_id),
     'schedule.date': isoDate,
     'schedule.time': time,
   });
@@ -33,11 +34,11 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
     throw new CustomError('Interviewer already scheduled for this time', 400);
   }
 
-  interviewer = await Interviewer.find({ userId: _id, 'schedule.date': new Date(isoDate) });
+  interviewer = await Interviewer.find({ userId: new ObjectId(_id), 'schedule.date': new Date(isoDate) });
 
   if (!interviewer.length) {
     const newInterview = await Interviewer.findOneAndUpdate({
-      userId: _id,
+      userId: new ObjectId(_id),
     }, {
       $push: {
         schedule: {
@@ -104,7 +105,7 @@ const postAvailableTime = async (req: RequestType, res: Response) => {
   }
 
   const postedTime = await Interviewer.update(
-    { userId: _id, 'schedule.date': new Date(isoDate) },
+    { userId: new ObjectId(_id), 'schedule.date': new Date(isoDate) },
     { $push: { 'schedule.$.time': time } },
   );
 
