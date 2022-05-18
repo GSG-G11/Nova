@@ -12,7 +12,7 @@ const createReview = async (req: RequestType, res: Response) => {
   }
   const { message }: any = await createReviewValidation(req.body);
 
-  const addReview = await Interviewee.aggregate([{
+  const checkReview = await Interviewee.aggregate([{
     $unwind: '$interviews',
   }, {
     $match: {
@@ -27,20 +27,39 @@ const createReview = async (req: RequestType, res: Response) => {
       'interviews.review': 1,
     },
   },
-  {
-    $addFields: {
-      'interviews.review.message': message,
-    },
-  },
   ]);
 
-  if (addReview.length === 0) {
+  if (checkReview.length === 0) {
+    throw new CustomError('Failed to add review', 400);
+  }
+  const review = checkReview[0];
+  const { interviews: { review: reviewExist } } = review;
+
+  if (reviewExist.message) {
+    throw new CustomError('You have already reviewed this interview', 400);
+  }
+
+  const updatedReview = await Interviewee.updateOne({
+    'interviews._id': new ObjectId(id),
+    'interviews.interviewerId': req.userInfo?.id,
+  }, {
+    $set: {
+      'interviews.$.review': {
+        message,
+        saved: false,
+        created_at: new Date(),
+
+      },
+
+    },
+  });
+
+  if (!updatedReview.acknowledged) {
     throw new CustomError('Failed to add review', 400);
   }
 
   return res.status(201).json({
     message: 'Review created successfully',
-    data: addReview,
   });
 };
 

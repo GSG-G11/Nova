@@ -754,7 +754,7 @@ describe('Create Review for a specific interview', () => {
   });
 
   test('Should create a review for the interview', (done) => {
-    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
       message: 'This is a review',
     })
       .expect(201)

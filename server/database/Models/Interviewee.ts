@@ -42,6 +42,7 @@ const interviewee = new Schema({
             message: {
               type: String,
               required: false,
+              default: '',
             },
             saved: {
               type: Boolean,
@@ -53,8 +54,11 @@ const interviewee = new Schema({
               required: false,
             },
           },
-          required: false,
-          default: {},
+          default: {
+            message: '',
+            saved: false,
+            created_at: new Date(),
+          },
         },
       },
     ],
