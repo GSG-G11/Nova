@@ -1,7 +1,8 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import Interviewee from '../../database/Models/Interviewee';
-import { RequestType } from '../../utils';
-import validateQuery from '../../utils/validation/queryValidation';
+import User from '../../database/Models/User';
+import { RequestType, validateQuery } from '../../utils';
 
 const getAllReviews = async (req: RequestType, res: Response) => {
   const { page = '1', saved } = req.query;
@@ -14,20 +15,22 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
 
   // filter reviews based on the saved parameter and paginate the results
-  const filteredReviews : any | undefined = await Interviewee.aggregate([{
+  const filteredReviewsWithIds : any | undefined = await Interviewee.aggregate([{
     $project: {
       _id: 0,
       userId: 1,
       'interviews.review': 1,
+      'interviews.interviewerId': 1,
     },
   },
 
   {
     $unwind: '$interviews',
   },
+
   {
     $match: {
-      userId: id,
+      userId: new ObjectId(id),
       'interviews.review.saved': savedBoolean,
     },
   },
@@ -37,15 +40,30 @@ const getAllReviews = async (req: RequestType, res: Response) => {
       review: {
         $first: '$interviews.review',
       },
+      interviewerId: {
+        $first: '$interviews.interviewerId',
+      },
     },
   },
   ]).skip((Number(page) - 1) * 3).limit(3);
 
+  // Get the names of the interviewers based on Interviewers Ids
+  const reviews = await Promise.all(filteredReviewsWithIds.map(async (review: any) => {
+    const { name } : any = await User.findById(review.interviewerId);
+
+    const finalReview = {
+      ...review,
+      interviewerName: name,
+    };
+
+    return finalReview;
+  }));
+
   return res.json({
     message: 'Reviews found',
     data: {
-      length: filteredReviews.length,
-      reviews: filteredReviews,
+      length: reviews.length,
+      reviews,
     },
   });
 };

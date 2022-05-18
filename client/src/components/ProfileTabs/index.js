@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
-import SettingTab from '../Setting/Setting';
+import SettingTab from '../Setting';
 import './style.css';
 
 const { TabPane } = Tabs;
@@ -11,7 +11,7 @@ const ProfileTabs = () => {
   const role = user?.role;
   return (
     role && (
-    <div className="profile-tabs-holder">
+    <div>
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
         <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
           Contents of Tab Pane 1

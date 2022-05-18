@@ -3,19 +3,21 @@ import axios from 'axios';
 import {
   Form, Input, Button, message, Radio,
 } from 'antd';
-import './setting.css';
+import './style.css';
 
 const SettingTab = () => {
   const { Item } = Form;
+  const { TextArea } = Input;
+  const { Group } = Radio;
+
   const [imgLink, setImgLink] = useState('');
   const [cvLink, setCVLink] = useState('');
   const [bio, setBio] = useState('');
   const [experenice, setExperenice] = useState('');
-
   const updateSetting = async () => {
     const source = axios.CancelToken.source();
     try {
-      const res = await axios.post('/api/user', {
+      const { message: successMsg } = await axios.post('/api/user', {
         imgLink,
         cvLink,
         bio,
@@ -23,7 +25,7 @@ const SettingTab = () => {
       }, {
         cancelToken: source.token,
       });
-      message.success(res.massage);
+      message.success(successMsg);
     } catch ({ Response: { data: { message: msg } } }) {
       message.error({ msg });
     }
@@ -42,16 +44,16 @@ const SettingTab = () => {
           <Input placeholder="Please input your CV Url" value={cvLink} />
         </Item>
         <Item name="bio" label="Bio" type="text" value={bio}>
-          <Input.TextArea placeholder="Please input your Bio" onChange={(e) => setBio(e.target.value)} value={bio} />
+          <TextArea placeholder="Please input your Bio" onChange={(e) => setBio(e.target.value)} value={bio} />
         </Item>
         <Item name="experenice" label="Level of Experenice">
-          <Radio.Group value={experenice} onChange={(e) => setExperenice(e.target.value)}>
+          <Group value={experenice} onChange={(e) => setExperenice(e.target.value)}>
             <Radio value="Junior">Junior</Radio>
             <Radio value="Mid-level">Mid-level</Radio>
             <Radio value="Senior">Senior</Radio>
             <Radio value="Internship">Internship</Radio>
             <Radio value="Expert">Expert</Radio>
-          </Radio.Group>
+          </Group>
         </Item>
       </Form>
       <div className="btn-save-holder">

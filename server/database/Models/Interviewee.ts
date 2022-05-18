@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const interviewee = new Schema({
   userId: {
     $ref: 'User',
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   interviews: {
@@ -46,6 +46,11 @@ const interviewee = new Schema({
             saved: {
               type: Boolean,
               required: false,
+            },
+            created_at: {
+              type: Date,
+              default: Date.now,
+              required: true,
             },
           },
         },
