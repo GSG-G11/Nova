@@ -1,9 +1,9 @@
 import { Response } from 'express';
-import { CustomError, RequestType, getUsersQueryValidation } from '../../utils';
+import { RequestType, getUsersQueryValidation } from '../../utils';
 import User from '../../database/Models/User';
 
 const getUsers = async (req: RequestType, res: Response) => {
-  const { role, page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
+  const { role = 'null', page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
 
   await getUsersQueryValidation({ role, page, limit });
 
@@ -11,18 +11,7 @@ const getUsers = async (req: RequestType, res: Response) => {
 
   const skip = (Number(page) - 1) * pageLimit;
 
-  let dataBaseInterview;
-
-  switch (role) {
-    case 'interviewer':
-      dataBaseInterview = 'interviewers';
-      break;
-    case 'interviewee':
-      dataBaseInterview = 'interviewees';
-      break;
-    default:
-      throw new CustomError('Please enter right role', 404);
-  }
+  const dataBaseInterview = (role === 'interviewer') ? 'interviewers' : 'interviewees';
 
   const user = await User.aggregate([
     {
