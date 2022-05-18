@@ -3,11 +3,7 @@ import { CustomError, RequestType, getUsersQueryValidation } from '../../utils';
 import User from '../../database/Models/User';
 
 const getUsers = async (req: RequestType, res: Response) => {
-  const { role, page, limit }: {role?: string, page?: string, limit?: string} = req.query;
-
-  if (!role || !limit) {
-    throw new CustomError('Invalid query!', 400);
-  }
+  const { role, page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
 
   await getUsersQueryValidation({ role, page, limit });
 
@@ -15,8 +11,7 @@ const getUsers = async (req: RequestType, res: Response) => {
 
   pageLimit = (pageLimit === 0) ? pageLimit = 3 : pageLimit;
 
-  const pageSkip = (Number(page));
-  const pageLimitMin = (pageSkip) ? (Number(page) - 1) * pageLimit : 0;
+  const pageLimitMin = (Number(page) - 1) * pageLimit;
 
   let dataBaseInterview;
 
