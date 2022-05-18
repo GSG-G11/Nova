@@ -26,6 +26,41 @@ describe('signup', () => {
       });
   });
 
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewee',
+      languages: ['J'],
+      specialization: 'Front',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"languages[0]" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]. "specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        return done();
+      });
+  });
+
+  test('Signup with interviewer role', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JS'],
+      specialization: 'FRONTEND',
+    }).expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please wait for the email');
+        return done();
+      });
+  });
   test('Signup with existing user', (done) => {
     request(app).post('/api/signup').send({
       name: 'Jack',
