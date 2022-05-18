@@ -33,6 +33,7 @@ const createReview = async (req: RequestType, res: Response) => {
     throw new CustomError('Failed to add review', 400);
   }
   const review = checkReview[0];
+  console.log(review);
   const { interviews: { review: reviewExist } } = review;
 
   if (reviewExist.message) {
