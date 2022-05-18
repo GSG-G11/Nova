@@ -14,8 +14,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
 
   const id = req.userInfo?.id;
 
-  console.log(savedBoolean, id, page);
-
   // filter reviews based on the saved parameter and paginate the results
   const filteredReviewsWithIds : any | undefined = await Interviewee.aggregate([{
     $project: {
@@ -48,8 +46,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     },
   },
   ]).skip((Number(page) - 1) * 3).limit(3);
-
-  console.log(filteredReviewsWithIds);
 
   // Get the names of the interviewers based on Interviewers Ids
   const reviews = await Promise.all(filteredReviewsWithIds.map(async (review: any) => {
