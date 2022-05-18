@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
 import './style.css';
+import CalenderTab from '../Calender/calender';
 
 const { TabPane } = Tabs;
 
@@ -25,7 +26,7 @@ const ProfileTabs = () => {
 
         ) : (
           <TabPane tab="Schedule" key="3">
-            Content of Tab Pane 3
+            <CalenderTab />
           </TabPane>
         )}
         <TabPane tab="Settings" key="4">

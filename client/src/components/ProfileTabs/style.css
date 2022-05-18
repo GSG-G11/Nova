@@ -9,3 +9,11 @@
     justify-content: center;
     align-items: center;
 }
+.profile-tabs-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.ant-tabs {
+    width: 70%;
+} 

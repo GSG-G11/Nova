@@ -1,0 +1,36 @@
+.calender-tab .ant-picker {
+    width: 90%;
+}
+.calender-tab{
+    display: flex;
+}
+.calender-tab .timePicker {
+    width: 60%;
+}
+.datepickerForm{
+    display: flex;
+}
+.calender-tab .tags-holder .dates-sec,.datepickerForm label {
+    color: #0A093D;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5% !important;
+}
+.calender-tab .ant-row.ant-form-item {
+    width: 60%;
+}
+.calender-tab .btn-save-holder {
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+}
+.calender-tab .ant-tag {
+    padding: 5px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+
