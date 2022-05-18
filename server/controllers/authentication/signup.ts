@@ -5,6 +5,7 @@ import {
   signToken, mailSender, signupValidation, CustomError, signupInterface,
 } from '../../utils';
 import User from '../../database/Models/User';
+import Interviewer from '../../database/Models/Interviewer';
 
 const signup = async (req: Request, res: Response) => {
   const {
@@ -29,9 +30,29 @@ const signup = async (req: Request, res: Response) => {
 
   const hashedPassword: string = await hash(password, 10);
 
-  await User.create({
+  const user = await User.create({
     email, password: hashedPassword, name, role,
   });
+
+  if (role === 'interviewer') {
+    const { _id } = user;
+    await Interviewer.create({
+      userId: _id,
+      languages,
+      specialization,
+    });
+    await mailSender(
+      email,
+      'Welcome in nove',
+      `<h1>Welcome ${name} in nova</h1>
+      <p>You have successfully signed up as an interviewer</p>
+      <p>We received your request and we will contact you soon</p>
+      <p>Thank you for choosing nova</p>`,
+    );
+    return res.status(201).json({
+      message: 'Account created successfully please please wait for the email',
+    });
+  }
 
   await mailSender(email, 'Verify your email', `<h1>${name} Thanks for registering</h1>
     <h2>Click the link below to verify your account</h2>
