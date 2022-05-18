@@ -6,19 +6,24 @@ import {
 import {
   StarOutlined, StarFilled,
 } from '@ant-design/icons';
-import './review.css';
+import './style.css';
 
 const ReviewCard = () => {
   const { Option } = Select;
   const [reviewsArr, setReviews] = useState([]);
-  const [saved, setSaved] = useState(false);
   const [filterVal, setFilterVal] = useState('all');
+  const starComponent = (save) => {
+    if (save) {
+      return <StarFilled />;
+    }
+    return <StarOutlined />;
+  };
 
   useEffect(() => {
     const source = axios.CancelToken.source();
     try {
       const getReviews = async () => {
-        const { data: { data: { reviews } } } = await axios.get('/api/user/review', { cancelToken: source.token });
+        const { data: { data: { reviews } } } = await axios.get(`/api/user/review?saved=${filterVal}`, { cancelToken: source.token });
         setReviews(reviews);
       };
       getReviews();
@@ -34,7 +39,7 @@ const ReviewCard = () => {
     try {
       const { message: savedMsg } = await axios.patch(`/api/user/interview/review/${interviewId}`);
       message.success(savedMsg);
-      setSaved(!saved);
+      starComponent(true);
     } catch ({ Response: { data: { message: msg } } }) {
       message.error(msg);
     }
@@ -42,33 +47,36 @@ const ReviewCard = () => {
 
   return (
     <div className="review-tab">
-      {reviewsArr.length > 0 ? reviewsArr.map((review) => (
+      {reviewsArr.length > 0 ? reviewsArr.map(({
+        interviewerName, interviewerImage, id, review,
+      }) => (
         <>
           <div className="filter-holder">
-            <Select defaultValue="all" style={{ width: 120 }} value={filterVal} onChange={(value) => setFilterVal(value)}>
+            <Select defaultValue="all" className="filter-select" value={filterVal} onChange={(value) => setFilterVal(value)}>
               <Option value="all">all</Option>
-              <Option value="saved">saved</Option>
+              <Option value="true">saved</Option>
+              <Option value="false">unsaved</Option>
             </Select>
           </div>
           <Comment
             actions={[
               <Tooltip key="comment-basic-like" title="Save">
-                <button type="button" onClick={() => handleSave(review.id)} className="saved-btn">
-                  {saved ? <StarFilled /> : <StarOutlined />}
+                <button type="button" onClick={() => handleSave(id)} className="saved-btn">
+                  {starComponent(false)}
                 </button>
               </Tooltip>,
             ]}
-            author={review.interviewerName}
-            avatar={<Avatar src={review.interviewerImage} alt="Han Solo" />}
+            author={interviewerName}
+            avatar={<Avatar src={interviewerImage} alt={review.interviewerName} />}
             content={(
               <p>
-                {review.review.message}
+                {review.message}
                 .
               </p>
             )}
             datetime={(
               <Tooltip>
-                <span>{review.review.created_at}</span>
+                <span>{review.created_at}</span>
               </Tooltip>
             )}
           />

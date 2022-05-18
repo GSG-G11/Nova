@@ -21,7 +21,7 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
 }
-button.saved-btn {
+.review-tab button.saved-btn {
     border: none;
     background: none;
     cursor: pointer;
@@ -64,4 +64,7 @@ button.saved-btn {
     width: 45px;
     height: 45px;
     border-radius: 50%;
+}
+.review-tab .filter-select{
+    width: 120px;
 }

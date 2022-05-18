@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
-import ReviewCard from '../Review/review';
+import ReviewCard from '../Review';
 import './style.css';
 
 const { TabPane } = Tabs;
