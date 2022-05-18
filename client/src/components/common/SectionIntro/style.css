@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.section-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.section-intro__action {
+    color: #432773;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.section-intro__title {
+    font-size: 2.2rem;
+    color: #0A093D;
+    font-weight: bold;
+}
+.section-intro__description {
+    color: #656464;
+    width: 20rem;
+}
