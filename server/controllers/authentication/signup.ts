@@ -8,11 +8,11 @@ import User from '../../database/Models/User';
 
 const signup = async (req: Request, res: Response) => {
   const {
-    name, email, password, role,
+    name, email, password, role, languages, specialization,
   }: signupInterface = req.body;
 
   await signupValidation({
-    name, email, password, role,
+    name, email, password, role, languages, specialization,
   });
 
   const checkEmail = await User.findOne({ email });
