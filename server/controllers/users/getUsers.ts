@@ -67,7 +67,7 @@ const getUsers = async (req: RequestType, res: Response) => {
     throw new CustomError('No users found', 404);
   }
 
-  res.status(200).json({
+  res.json({
     data: user,
     message: 'Users fetched successfully!',
   });
