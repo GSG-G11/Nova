@@ -15,6 +15,9 @@ const getUsers = async (req: RequestType, res: Response) => {
 
   pageLimit = (pageLimit === 0) ? pageLimit = 3 : pageLimit;
 
+  const pageSkip = (Number(page));
+  const pageLimitMin = (pageSkip) ? (Number(page) - 1) * pageLimit : 0;
+
   let dataBaseInterview;
 
   switch (role) {
@@ -34,6 +37,7 @@ const getUsers = async (req: RequestType, res: Response) => {
         _id: '$_id',
         name: { $first: '$name' },
         role: { $first: '$role' },
+        email: { $first: '$email' },
       },
     },
     {
@@ -46,10 +50,32 @@ const getUsers = async (req: RequestType, res: Response) => {
         from: dataBaseInterview,
         localField: '_id',
         foreignField: 'userId',
+        pipeline: [
+          {
+            $project: {
+              languages: 1,
+              specialization: 1,
+            },
+          },
+        ],
         as: role,
       },
     },
-  ]).limit(pageLimit);
+    // {
+    //   $replaceRoot: {
+    //     newRoot: {
+    //       $mergeObjects:
+    //           [{ $arrayElemAt: [`$${role}`, 0] }, '$$ROOT'],
+    //     },
+    //   },
+
+    // },
+    // {
+    //   $project: {
+    //     role: 0,
+    //   },
+    // },
+  ]).skip(pageLimitMin).limit(pageLimit);
 
   if (!user.length) {
     throw new CustomError('No users found', 404);
