@@ -1,28 +1,49 @@
 import React from 'react';
 import './style.css';
-import { Typography } from 'antd';
-import { LaptopOutlined } from '@ant-design/icons';
+import SectionIntro from '../common/SectionIntro';
+import icon0 from '../../assets/images/Resources/icon0.png';
+import icon1 from '../../assets/images/Resources/icon1.png';
+import icon2 from '../../assets/images/Resources/icon2.png';
+import icon3 from '../../assets/images/Resources/icon3.png';
+import ResourceCard from './ResourceCard';
 
-const { Title, Text } = Typography;
+const resourcesArray = [
+  {
+    image: icon0,
+    title: 'Interactive',
+    description: 'Practice job interviews anytime right with real-time collaborative environment.',
+  },
+  {
+    image: icon1,
+    title: 'Matching',
+    description: 'Each practice peer is picked especially for you, based on availability, topics and target companies.',
+  },
+  {
+    image: icon2,
+    title: 'Question Bank',
+    description: 'Full questions, answers and specific interviewing tips enable both you and your peer.',
+  },
+  {
+    image: icon3,
+    title: 'Tailored Reviews',
+    description: 'Candidates can get immediate feedback on performance, with specific advice for your answers.',
+  },
+];
 const Resources = () => (
   <section className="resources">
-    <div className="resources__text">
-      <Title className="resources__title" level={1}>Resources for you</Title>
-      <Text className="resources__text-content">Explore many websites, are some links for most useful resources</Text>
-    </div>
-    <div className="resources__box">
-      <LaptopOutlined className="resources__icon" />
-      <Text className="resources__box-text">InterviewCake</Text>
-    </div>
-
-    <div className="resources__box">
-      <LaptopOutlined className="resources__icon" />
-      <Text className="resources__box-text">Interviewing.io</Text>
-    </div>
-
-    <div className="resources__box">
-      <LaptopOutlined className="resources__icon" />
-      <Text className="resources__box-text">InterviewBit</Text>
+    <SectionIntro
+      action="We Provide"
+      title="Resources"
+      description="Why Nova, what is it characterized by, and what does it offer you."
+    />
+    <div className="resources__cards">
+      {resourcesArray.map(({ image, title, description }) => (
+        <ResourceCard
+          image={image}
+          title={title}
+          description={description}
+        />
+      ))}
     </div>
   </section>
 );
