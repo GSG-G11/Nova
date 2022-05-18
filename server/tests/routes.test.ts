@@ -437,7 +437,7 @@ describe('Create Interview', () => {
           return done(err);
         }
 
-        expect(res.body.message).toBe('Interview created successfully');
+        expect(res.body.message).toBe('Interview Booked Successfully');
         return done();
       });
   });
@@ -752,4 +752,4 @@ describe('Post interview time', () => {
   });
 });
 
-afterAll(async () => mongoose.connection.close());
+afterAll(() => mongoose.connection.close());

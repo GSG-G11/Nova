@@ -7,6 +7,7 @@ const template = (
   language: string,
   specialization: string,
   questionCategory: string,
+  meetingLink: string,
   name: string = '',
 ) => (`<!doctype html>
     <html>
@@ -150,11 +151,6 @@ const template = (
               margin-left: 5px; 
           }
     
-          a {
-            color: #3498db;
-            text-decoration: underline; 
-          }
-    
     
           /* -------------------------------------
               OTHER STYLES THAT MIGHT BE USEFUL
@@ -212,6 +208,29 @@ const template = (
             border: 0;
             border-bottom: 1px solid #f6f6f6;
             margin: 20px 0; 
+          }
+
+          .btn-email {
+            background: #3498db;
+            border: solid 1px #3498db;
+            border-radius: 5px;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 1.8rem;
+            padding: 12px 25px;
+
+            text-decoration: none;
+            text-transform: capitalize;
+          }
+
+          .btn-email:hover{
+            background: #2283bf;
+            border: solid 1px #2283bf;
           }
     
           /* -------------------------------------
@@ -337,10 +356,11 @@ const template = (
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
                             ${name ? `<p>${interviewerTemplate(name)}</p>` : ''}
-                            <p> Your interview will be scheduled on <strong>${date}</strong> at <strong>${time}</strong>. The details as follows</p>
+                            <p> Your interview will be scheduled on <strong>${date.toString().split('').slice(0, 16).join('')}</strong> at <strong>${time.toString().length === 1 ? `0${time}:00` : `${time}:00`}</strong>. The details as follows</p>
                             <p>Language: ${language}</p>
                             <p>Specialty: ${specialization}</p>
                             <p>Questions Category: ${questionCategory}</p>
+                            <p>Please be on time. Here is the link to your interview: <a href="${meetingLink}" target="_blank" class="btn-email">Join Interview!</a></p>
                             <p>If you have any questions, please contact us at <a href="mailto:nova.interviewe@gmail.com">Nova</a>
                             <p>Sincerely,</p>
                             <p>Nova Team</p>
@@ -370,13 +390,14 @@ const emailTemplate = (
   language: string,
   specialization: string,
   questionCategory: string,
+  meetingLink: string,
   name: string = '',
 ) => {
   if (name) {
-    return template(date, time, language, specialization, questionCategory, name);
+    return template(date, time, language, specialization, questionCategory, meetingLink, name);
   }
 
-  return template(date, time, language, specialization, questionCategory);
+  return template(date, time, language, specialization, questionCategory, meetingLink);
 };
 
 export default emailTemplate;

@@ -17,21 +17,10 @@ const createInterview = async (req: RequestType, res: Response) => {
   } : any = await interviewValidation(req.body);
 
   // Get the interviewee and interviewer emails and Meet Link
-  const [meetingLink, { email: intervieweeEmail },
+  const [{ email: intervieweeEmail },
     { email: interviewerEmail },
     interviewersSchedule] : any = await Promise
       .all([
-        // Get Google Meet Link
-        Meeting({
-          clientId: process.env.CLIENT_ID,
-          clientSecret: process.env.CLIENT_SECRET,
-          refreshToken: process.env.REFRESH_TOKEN,
-          date: date.toISOString().slice(0, 10),
-          time: time.length === 1 ? `0${time}:00` : `${time}:00`,
-          summary: 'Interview',
-          location: 'Online',
-          description: 'Interview',
-        }),
         User.findById(id), User.findById(interviewerId), Schedule.aggregate([{
           $project: {
             _id: 0,
@@ -75,6 +64,21 @@ const createInterview = async (req: RequestType, res: Response) => {
   const indexOfScheduleFreeTime = freeTime.indexOf(time);
   const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
+  // Get Google Meet Link
+  const meetingLink = await Meeting({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: process.env.REFRESH_TOKEN,
+    date: date.toISOString().slice(0, 10),
+    time: time.length === 1 ? `0${time}:00` : `${time}:00`,
+    summary: 'Interview',
+    location: 'Online',
+    description: 'Interview',
+  });
+
+  if (!meetingLink) {
+    throw new CustomError('Error creating the meeting, please try again later', 500);
+  }
   // // update the schedule for the interviewer
   const interview = {
     interviewerId,
@@ -144,6 +148,7 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
+        meetingLink,
         intervieweeEmail,
       ),
     ),
@@ -157,6 +162,7 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
+        meetingLink,
       ),
     ),
 
@@ -164,7 +170,7 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   // Return the interviewee interview
   res.status(201).json({
-    message: 'Interview created successfully',
+    message: 'Interview Booked Successfully',
     data: {
       interview,
       meetingLink,
