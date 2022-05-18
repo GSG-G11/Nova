@@ -10,7 +10,7 @@ import './review.css';
 
 const ReviewCard = () => {
   const { Option } = Select;
-  const [reviews, setReviews] = useState([]);
+  const [reviewsArr, setReviews] = useState([]);
   const [saved, setSaved] = useState(false);
   const [filterVal, setFilterVal] = useState('all');
 
@@ -18,8 +18,8 @@ const ReviewCard = () => {
     const source = axios.CancelToken.source();
     try {
       const getReviews = async () => {
-        const { data: { data } } = await axios.get('/api/user/review', { cancelToken: source.token });
-        setReviews(data.reviews);
+        const { data: { data: { reviews } } } = await axios.get('/api/user/review', { cancelToken: source.token });
+        setReviews(reviews);
       };
       getReviews();
     } catch ({ Response: { data: { message: msg } } }) {
@@ -28,14 +28,13 @@ const ReviewCard = () => {
     return () => {
       source.cancel();
     };
-  }, [reviews]);
+  }, []);
 
   const handleSave = async (interviewId) => {
     try {
       const { message: savedMsg } = await axios.patch(`/api/user/interview/review/${interviewId}`);
-      if (savedMsg === 'Successfully updated!') {
-        setSaved(!saved);
-      }
+      message.success(savedMsg);
+      setSaved(!saved);
     } catch ({ Response: { data: { message: msg } } }) {
       message.error(msg);
     }
@@ -43,7 +42,7 @@ const ReviewCard = () => {
 
   return (
     <div className="review-tab">
-      {reviews.length > 0 ? reviews.map((review) => (
+      {reviewsArr.length > 0 ? reviewsArr.map((review) => (
         <>
           <div className="filter-holder">
             <Select defaultValue="all" style={{ width: 120 }} value={filterVal} onChange={(value) => setFilterVal(value)}>
