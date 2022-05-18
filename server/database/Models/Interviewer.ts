@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const interviewer = new Schema({
   userId: {
     $ref: 'User',
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   languages: {
