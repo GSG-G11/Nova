@@ -12,7 +12,7 @@ const signup = async (req: Request, res: Response) => {
   }: signupInterface = req.body;
 
   await signupValidation({
-    name, email, password,
+    name, email, password, role,
   });
 
   const checkEmail = await User.findOne({ email });

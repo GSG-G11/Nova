@@ -5,6 +5,7 @@ const signupValidation = async (data: object) => {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/).required(),
+    role: Joi.string().valid('interviewer', 'interviewee').required(),
   });
 
   const result: object = await schema.validateAsync(data, { abortEarly: false });
