@@ -61,20 +61,6 @@ const getUsers = async (req: RequestType, res: Response) => {
         as: role,
       },
     },
-    // {
-    //   $replaceRoot: {
-    //     newRoot: {
-    //       $mergeObjects:
-    //           [{ $arrayElemAt: [`$${role}`, 0] }, '$$ROOT'],
-    //     },
-    //   },
-
-    // },
-    // {
-    //   $project: {
-    //     role: 0,
-    //   },
-    // },
   ]).skip(pageLimitMin).limit(pageLimit);
 
   if (!user.length) {
