@@ -7,9 +7,7 @@ const getUsers = async (req: RequestType, res: Response) => {
 
   await getUsersQueryValidation({ role, page, limit });
 
-  let pageLimit = (Number(limit));
-
-  pageLimit = (pageLimit === 0) ? pageLimit = 3 : pageLimit;
+  const pageLimit = (Number(limit));
 
   const skip = (Number(page) - 1) * pageLimit;
 
@@ -23,7 +21,7 @@ const getUsers = async (req: RequestType, res: Response) => {
       dataBaseInterview = 'interviewees';
       break;
     default:
-      throw new CustomError('Invalid role!', 401);
+      throw new CustomError('Please enter right role', 404);
   }
 
   const user = await User.aggregate([
@@ -57,10 +55,6 @@ const getUsers = async (req: RequestType, res: Response) => {
       },
     },
   ]).skip(skip).limit(pageLimit);
-
-  if (!user.length) {
-    throw new CustomError('No users found', 404);
-  }
 
   res.json({
     data: user,

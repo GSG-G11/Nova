@@ -11,8 +11,8 @@ const getInterviewsQueryValidation = async (data: object) => {
 };
 const getUsersQueryValidation = async (data: object) => {
   const schema = Joi.object({
-    role: Joi.string().required(),
-    limit: Joi.string().required(),
+    role: Joi.string().valid('interviewer', 'interviewee').required(),
+    limit: Joi.string().invalid('0').required(),
     page: Joi.string(),
   });
 
