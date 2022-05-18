@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import { RequestType, validateQuery } from '../../utils';
@@ -12,6 +13,8 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     : saved;
 
   const id = req.userInfo?.id;
+
+  console.log(savedBoolean, id, page);
 
   // filter reviews based on the saved parameter and paginate the results
   const filteredReviewsWithIds : any | undefined = await Interviewee.aggregate([{
@@ -29,7 +32,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
 
   {
     $match: {
-      userId: id,
+      userId: new ObjectId(id),
       'interviews.review.saved': savedBoolean,
     },
   },
@@ -45,6 +48,8 @@ const getAllReviews = async (req: RequestType, res: Response) => {
     },
   },
   ]).skip((Number(page) - 1) * 3).limit(3);
+
+  console.log(filteredReviewsWithIds);
 
   // Get the names of the interviewers based on Interviewers Ids
   const reviews = await Promise.all(filteredReviewsWithIds.map(async (review: any) => {
