@@ -43,7 +43,7 @@ const signup = async (req: Request, res: Response) => {
     });
     await mailSender(
       email,
-      'Welcome in nove',
+      'Welcome in nova',
       `<h1>Welcome ${name} in nova</h1>
       <p>You have successfully signed up as an interviewer</p>
       <p>We received your request and we will contact you soon</p>
