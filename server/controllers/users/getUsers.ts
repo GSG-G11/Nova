@@ -11,7 +11,7 @@ const getUsers = async (req: RequestType, res: Response) => {
 
   pageLimit = (pageLimit === 0) ? pageLimit = 3 : pageLimit;
 
-  const pageLimitMin = (Number(page) - 1) * pageLimit;
+  const skip = (Number(page) - 1) * pageLimit;
 
   let dataBaseInterview;
 
@@ -56,7 +56,7 @@ const getUsers = async (req: RequestType, res: Response) => {
         as: role,
       },
     },
-  ]).skip(pageLimitMin).limit(pageLimit);
+  ]).skip(skip).limit(pageLimit);
 
   if (!user.length) {
     throw new CustomError('No users found', 404);
