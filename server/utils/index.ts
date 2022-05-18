@@ -9,6 +9,7 @@ import {
   getInterviewsQueryValidation,
   signupValidation,
   updateInfoValidation,
+  getUsersQueryValidation,
 } from './validation';
 import CustomError from './CustomError';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
@@ -31,4 +32,5 @@ export {
   emailTemplate,
   getInterviewTimeValidation,
   postAvailableTimeValidation,
+  getUsersQueryValidation,
 };

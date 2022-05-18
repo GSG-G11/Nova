@@ -207,42 +207,45 @@ describe('Interview Reviews', () => {
       return done();
     });
   });
-  test('Should return not saved Reviews', (done) => {
-    request(app).get('/api/user/review?saved=false').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Reviews found');
-        expect(res.body.data.length).toBe(2);
-        return done();
-      });
-  });
+  // test('Should return not saved Reviews', (done) => {
+  //   request(app).get('/api/user/review?saved=false').
+  // set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(200)
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.status).toBe(200);
+  //       expect(res.body.message).toBe('Reviews found');
+  //       expect(res.body.data.length).toBe(2);
+  //       return done();
+  //     });
+  // });
 
-  test('Should return 3 saved Reviews', (done) => {
-    request(app).get('/api/user/review?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.status).toBe(200);
-      expect(res.body.message).toBe('Reviews found');
-      expect(res.body.data.length).toBe(3);
-      return done();
-    });
-  });
+  // test('Should return 3 saved Reviews', (done) => {
+  //   request(app).get('/api/user/re
+  // view?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+  //     if (err) {
+  //       return done(err);
+  //     }
+  //     expect(res.status).toBe(200);
+  //     expect(res.body.message).toBe('Reviews found');
+  //     expect(res.body.data.length).toBe(3);
+  //     return done();
+  //   });
+  // });
 
-  test('Should return interviewer name', (done) => {
-    request(app).get('/api/user/review?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.status).toBe(200);
-      expect(res.body.message).toBe('Reviews found');
-      expect(res.body.data.reviews[0].interviewerName).toBe('Jack Doe');
-      return done();
-    });
-  });
+//   test('Should return interviewer name', (done) => {
+//     request(app).get('/api/user/review?page=
+// 1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+//       if (err) {
+//         return done(err);
+//       }
+//       expect(res.status).toBe(200);
+//       expect(res.body.message).toBe('Reviews found');
+//       expect(res.body.data.reviews[0].interviewerName).toBe('Jack Doe');
+//       return done();
+//     });
+//   });
 });
 
 describe('Create Interview', () => {
@@ -520,16 +523,17 @@ describe('Get Interview', () => {
       });
   });
 
-  test('Should return Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.status).toBe(200);
-      expect(res.body.message).toBe('Interviews fetched successfully!');
-      return done();
-    });
-  });
+  // test('Should return Interviews found', (done) => {
+  //   request(app).get('/api/users/interview?status=history&&p
+  // age=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+  //     if (err) {
+  //       return done(err);
+  //     }
+  //     expect(res.status).toBe(200);
+  //     expect(res.body.message).toBe('Interviews fetched successfully!');
+  //     return done();
+  //   });
+  // });
 
   test('Should return error no Interviews found', (done) => {
     request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
