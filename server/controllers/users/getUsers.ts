@@ -20,6 +20,8 @@ const getUsers = async (req: RequestType, res: Response) => {
         name: { $first: '$name' },
         role: { $first: '$role' },
         email: { $first: '$email' },
+        level: { $first: '$level' },
+        image: { $first: '$profile_picture' },
       },
     },
     {
