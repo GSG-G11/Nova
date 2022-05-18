@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import RadioInput from '../RadioInput';
 
 const { Group } = Radio;
-const languages = ['JS', 'PHP', 'C++', 'RUBY', 'C#', 'JAVA', 'C', 'GO', 'PYTHON'];
+const languages = ['JAVASCRIPT', 'PHP', 'C++', 'RUBY', 'C#', 'JAVA', 'C', 'GO', 'PYTHON'];
 const StepTwo = ({ title, handleChange, formData: { language } }) => (
   <div>
     <div className="interview-header">

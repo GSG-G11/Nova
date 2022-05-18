@@ -294,7 +294,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'BACKEND',
       questionCategory: 'potato',
     })
@@ -313,7 +313,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'POTATO',
       questionCategory: 'Technical',
     })
@@ -341,7 +341,7 @@ describe('Create Interview', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        expect(res.body.message).toBe('"language" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
         return done();
       });
   });
@@ -351,7 +351,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 'LOL',
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -370,7 +370,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: 'aha12',
       time: 12,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -389,7 +389,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-01',
       time: 12,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -408,7 +408,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 20,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -427,7 +427,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -617,14 +617,14 @@ describe('Get Available interview times', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        expect(res.body.message).toBe('"language" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
         return done();
       });
   });
 
   test('Should throw a specialization validation error', (done) => {
     request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'potato',
     })
       .expect(400)
@@ -639,7 +639,7 @@ describe('Get Available interview times', () => {
 
   test('Should Get Available interview times', (done) => {
     request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
     })
       .end((err, res) => {

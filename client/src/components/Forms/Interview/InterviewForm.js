@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button, Modal, Form, Popconfirm, Steps, message,
 } from 'antd';
@@ -12,8 +12,8 @@ import StepFive from './Steps/StepFive';
 
 const { Step } = Steps;
 const InterviewForm = () => {
-  const [visible, setVisible] = React.useState(true);
-  const [formData, setFormData] = React.useState({
+  const [visible, setVisible] = useState(true);
+  const [formData, setFormData] = useState({
     step: 0,
     specialization: '',
     language: '',
@@ -27,16 +27,6 @@ const InterviewForm = () => {
   const [progressPercent, setProgressPercent] = useState(0);
   const [availableTime, setAvailableTime] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (loading) {
-      const doneBtn = document.getElementById('done');
-      if (doneBtn) doneBtn.disabled = true;
-    } else {
-      const doneBtn = document.getElementById('done') ? document.getElementById('done') : null;
-      if (doneBtn) doneBtn.disabled = false;
-    }
-  }, [loading]);
 
   const nextStep = () => {
     setFormData({ ...formData, step: step + 1 });
@@ -61,8 +51,8 @@ const InterviewForm = () => {
       });
       setAvailableTime(data);
       setLoading(false);
-    } catch (err) {
-      message.error(err.response.data.message);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
     }
   };
 
@@ -79,10 +69,10 @@ const InterviewForm = () => {
       setLoading(true);
       nextStep();
       const { step: stepIgnored, ...rest } = formData;
-      const response = await axios.post('/api/interview', {
+      const { data: { message: msg } } = await axios.post('/api/interview', {
         ...rest,
       });
-      message.success(response.data.message);
+      message.success(msg);
       setLoading(false);
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -158,7 +148,7 @@ const InterviewForm = () => {
       };
     } if (step === 2) {
       return {
-        next: <Button type="primary" onClick={handleFirstStepSubmit}> Next </Button>,
+        next: <Button type="primary" disabled={loading} onClick={handleFirstStepSubmit}> Next </Button>,
         previous: <Button type="primary" onClick={prevStep}> Previous </Button>,
         cancel: CancelPop,
       };
@@ -170,7 +160,7 @@ const InterviewForm = () => {
       };
     } if (step === 4) {
       return {
-        submit: <Button type="primary" id="done" onClick={() => setVisible(false)}> Done </Button>,
+        submit: <Button type="primary" id="done" disabled={loading} onClick={() => setVisible(false)}> Done </Button>,
         cancel: CancelPop,
       };
     }

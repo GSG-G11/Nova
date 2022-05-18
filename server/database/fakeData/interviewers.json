@@ -3,7 +3,7 @@
         {
             "userId": "627c92140d0c3622573195cb",
             "languages": [
-                "JS",
+                "JAVASCRIPT",
                 "PHP"
             ],
             "specialization": "FRONTEND",
@@ -12,7 +12,7 @@
                     "intervieweeId": "627c92140d0c3622573195ca",
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JS",
+                    "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"

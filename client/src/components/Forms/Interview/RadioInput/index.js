@@ -16,7 +16,7 @@ const RadioInput = ({
       checked={value === option}
     />
     <label htmlFor={option}>
-      {option === 'JS' ? 'JavaScript' : option}
+      {option}
     </label>
 
   </>
