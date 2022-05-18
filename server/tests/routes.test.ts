@@ -753,6 +753,19 @@ describe('Create Review for a specific interview', () => {
       });
   });
 
+  test('Should throw an error if interviewer reviewed the interview before', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8d').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: 'Hi',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('You have already reviewed this interview');
+        return done();
+      });
+  });
   test('Should create a review for the interview', (done) => {
     request(app).post('/api/user/review/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
       message: 'This is a review',
