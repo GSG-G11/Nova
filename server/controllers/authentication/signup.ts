@@ -50,7 +50,7 @@ const signup = async (req: Request, res: Response) => {
       <p>Thank you for choosing nova</p>`,
     );
     return res.status(201).json({
-      message: 'Account created successfully please please wait for the email',
+      message: 'Account created successfully please wait for the email',
     });
   }
 
