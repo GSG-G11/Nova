@@ -1,0 +1,53 @@
+.head{
+  background-color: white;
+}
+
+.right-left{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right{
+  display: flex;
+  align-items: center;
+  height: 4rem;
+}
+
+.btn{
+  border: none ;
+  margin-left: 1rem;
+}
+
+.btn:hover{
+  color: #673ab7;
+}
+
+.btn:focus{
+  color: #673ab7;
+}
+
+.btn:active{
+  color: #673ab7;
+}
+
+.btn::after{
+  display: none;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15rem;
+  margin-top: .4rem;
+}
+
+.right-left .right .ant-menu{
+  border-bottom: none;
+}
+
+.allBtn{
+  margin-top: .4rem;
+  margin-left: 1rem;
+  border: none;
+}

@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
+import Navbar from './components/Navbar/Navbar';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,13 +17,11 @@ const App = () => {
   return (
     <>
       <div className="App">
-        <SignupButton />
         {loading ? 'Loading...' : (
           <div>
-            hi
+            <Navbar />
           </div>
         )}
-        <LoginButton />
         <ProfileTabs />
 
       </div>
