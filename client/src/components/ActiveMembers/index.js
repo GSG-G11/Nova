@@ -20,7 +20,7 @@ const ActiveMembers = () => {
         if (axios.isCancel(msg)) {
           console.log('Request canceled', msg);
         }
-        message.error(msg.data.message);
+        message.error(msg);
       }
     };
     getMembers();
