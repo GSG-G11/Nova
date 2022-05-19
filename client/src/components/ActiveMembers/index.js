@@ -40,7 +40,7 @@ const ActiveMembers = () => {
       <div className="active-members__members">
 
         {members.map(({
-          _id, name, level, image,
+          _id, name, interviewer, image,
         }) => (
           <div
             key={_id}
@@ -64,7 +64,7 @@ const ActiveMembers = () => {
             </Text>
             <Text className="active-members__member-position">
               {' '}
-              {level}
+              {interviewer[0].specialization}
               {' '}
             </Text>
           </div>

@@ -6,7 +6,7 @@
                 "JS",
                 "PHP"
             ],
-            "specialization": "FRONTEND",
+            "specialization": "BACKEND",
             "interviews": [
                 {
                     "intervieweeId": "627c92140d0c3622573195ca",
@@ -70,7 +70,18 @@
                 }
             ],
             "schedule": [
-               
+                {
+                    "date": "2022-04-28",
+                    "time": [
+                       13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
             ]
         },
         {
