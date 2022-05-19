@@ -6,6 +6,7 @@ import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
+import Challenges from './components/Challenges';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const App = () => {
         )}
         <LoginButton />
         <ProfileTabs />
+        <Challenges />
 
       </div>
       <Routes>
