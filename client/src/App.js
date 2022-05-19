@@ -6,6 +6,7 @@ import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
+import ClientReviews from './components/ClientReviews';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const App = () => {
         )}
         <LoginButton />
         <ProfileTabs />
-
+        <ClientReviews />
       </div>
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
