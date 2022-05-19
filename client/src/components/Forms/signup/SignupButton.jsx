@@ -19,7 +19,7 @@ const SignupButton = () => {
 
   return (
     <>
-      <Button className="signUpBtn" type="primary" onClick={showModal}>
+      <Button className="signUpBtn sign" type="primary" onClick={showModal}>
         Sign Up
       </Button>
       <Modal

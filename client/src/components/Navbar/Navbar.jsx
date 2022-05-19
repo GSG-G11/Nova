@@ -18,18 +18,20 @@ const Navbar = () => {
       items={[
         {
           label: (
-            <Button className="btn">
-              <UserOutlined />
+            // must link to profile page
+            <Menu.Item onClick={() => console.log(1)} className="profile">
+              <UserOutlined className="icon" />
               Profile
-            </Button>
+            </Menu.Item>
           ),
         },
         {
           label: (
-            <Button className="btn">
-              <LogoutOutlined />
+          // must link to logout
+            <Menu.Item onClick={() => console.log(2)} className="logout">
+              <LogoutOutlined className="icon" />
               Logout
-            </Button>
+            </Menu.Item>
           ),
         },
       ]}
@@ -68,9 +70,12 @@ const Navbar = () => {
           <div className="left">
             {!user && <SignupButton />}
             {!user && <LoginButton />}
-            <Dropdown overlay={menu} placement="bottom">
+            {user && (
+            <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
+              {/* Must link profile pic to src */}
               <Avatar src="https://joeschmoe.io/api/v1/random" />
             </Dropdown>
+            )}
           </div>
         </div>
       </Header>
