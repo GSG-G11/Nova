@@ -11,6 +11,7 @@ import signup from './authentication/signup';
 import validateEmail from './authentication/validateEmail';
 import getAvailableTime from './interview/getAvailableTime';
 import createReview from './users/createReview';
+import getUsers from './users/getUsers';
 
 export {
   signup,
@@ -26,4 +27,5 @@ export {
   getUserById,
   getAvailableTime,
   createReview,
+  getUsers,
 };
