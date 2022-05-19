@@ -72,6 +72,136 @@
             "schedule": [
                
             ]
+        },
+        {
+            "userId": "a27c92140d0c3622573195ce",
+            "languages": [
+                "JS",
+                "PHP"
+            ],
+            "specialization": "FRONTEND",
+            "interviews": [
+                {
+                    "intervieweeId": "a27c92140d0c3622573195ce",
+                    "date": "2022-04-28",
+                    "time": 12,
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory":"Technical",
+                    "_id": "627d1d11f5243856362e8a8c"
+
+                },
+                {
+                    "intervieweeId": "627c92140d0c3622573195ce",
+                    "date": "2022-04-29",
+                    "time": 12,
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical"
+
+                }
+            ],
+            "schedule": [
+                {
+                    "date": "2022-04-28",
+                    "time": [
+                       13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "userId": "b27c92140d0c3622573195ce",
+            "languages": [
+                "JS",
+                "PHP"
+            ],
+            "specialization": "FULL STACK",
+            "interviews": [
+                {
+                    "intervieweeId": "a27c92140d0c3622573195ce",
+                    "date": "2022-04-28",
+                    "time": 12,
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory":"Technical",
+                    "_id": "627d1d11f5243856362e8a8c"
+
+                },
+                {
+                    "intervieweeId": "627c92140d0c3622573195ce",
+                    "date": "2022-04-29",
+                    "time": 12,
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical"
+
+                }
+            ],
+            "schedule": [
+                {
+                    "date": "2022-04-28",
+                    "time": [
+                       13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "userId": "c27c92140d0c3622573195ce",
+            "languages": [
+                "JS",
+                "PHP"
+            ],
+            "specialization": "BACKEND",
+            "interviews": [
+                {
+                    "intervieweeId": "a27c92140d0c3622573195ce",
+                    "date": "2022-04-28",
+                    "time": 12,
+                    "language": "JS",
+                    "specialization": "FRONTEND",
+                    "questionCategory":"Technical",
+                    "_id": "627d1d11f5243856362e8a8c"
+
+                },
+                {
+                    "intervieweeId": "627c92140d0c3622573195ce",
+                    "date": "2022-04-29",
+                    "time": 12,
+                    "language": "PHP",
+                    "specialization": "BACKEND",
+                    "questionCategory":"Technical"
+
+                }
+            ],
+            "schedule": [
+                {
+                    "date": "2022-04-28",
+                    "time": [
+                       13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "date": "2022-04-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
         }
     ]
 }
+
