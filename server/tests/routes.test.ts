@@ -582,7 +582,6 @@ describe('Update Info', () => {
       });
   });
 });
-afterAll(() => mongoose.connection.close());
 
 describe('Get Available interview times', () => {
   test('Should throw an error if user not authenticated', (done) => {
@@ -672,9 +671,9 @@ describe('Get Available interview times', () => {
   });
 });
 
-describe('Get Interviewer Available Time', () => {
+describe('Post interview time', () => {
   test('Should throw an error if user not authenticated', (done) => {
-    request(app).get('/api/users/interviewer/available').expect(401).end((err, res) => {
+    request(app).post('/api/interviewer/schedule').expect(401).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -683,28 +682,117 @@ describe('Get Interviewer Available Time', () => {
     });
   });
 
-  test('Should throw an error if user not interviewer', (done) => {
-    request(app).get('/api/users/interviewer/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).expect(401)
+  test('Should throw a role error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`]).send({})
+      .expect(401)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('You are not authorized to access this resource');
+        expect(res.body.message).toBe('Invalid role!');
         return done();
       });
   });
 
-  test('Should Get Available Time', (done) => {
-    request(app).get('/api/users/interviewer/available').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`])
+  test('Should throw a required validation error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+      .expect(400)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
-        expect(res.status).toBe(200);
-        expect(res.body.message).toBe('Schedule fetched successfully');
-        expect(res.body.data.length).toBe(2);
+        expect(res.body.message).toBe('"date" is required. "time" is required');
+        return done();
+      });
+  });
 
+  test('Should throw a date validation error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: 'potato',
+      time: 12,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"date" must be a valid date');
+        return done();
+      });
+  });
+
+  test('Should throw already scheduled for this time', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: '2022-04-28',
+      time: 13,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interviewer already scheduled for this time');
+        return done();
+      });
+  });
+
+  test('Should schedule interview', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: '2022-04-28',
+      time: 12,
+    })
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Successfully added time');
         return done();
       });
   });
 });
+
+describe('Get users', () => {
+  test('Should throw validation error', (done) => {
+    request(app).get('/api/users?role=interview&limit=1&page=3').expect(400).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('"role" must be one of [interviewer, interviewee]');
+      return done();
+    });
+  });
+
+  test('Should throw validation error', (done) => {
+    request(app).get('/api/users?role=interviewer&limit=0&page=3').expect(400).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('"limit" contains an invalid value');
+      return done();
+    });
+  });
+
+  test('Should return all interviewees', (done) => {
+    request(app).get('/api/users?role=interviewee&limit=1&page=1').expect(200).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Users fetched successfully!');
+      expect(res.body.data.length).toBe(1);
+      return done();
+    });
+  });
+
+  test('Should return all interviewers', (done) => {
+    request(app).get('/api/users?role=interviewer&limit=1&page=1').expect(200).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Users fetched successfully!');
+      expect(res.body.data.length).toBe(1);
+      return done();
+    });
+  });
+});
+afterAll(() => mongoose.connection.close());
