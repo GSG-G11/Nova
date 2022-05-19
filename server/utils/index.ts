@@ -10,6 +10,7 @@ import {
   signupValidation,
   updateInfoValidation,
   getUsersQueryValidation,
+  signupInterviewerValidation,
 } from './validation';
 import CustomError from './CustomError';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
@@ -33,4 +34,5 @@ export {
   getInterviewTimeValidation,
   postAvailableTimeValidation,
   getUsersQueryValidation,
+  signupInterviewerValidation,
 };

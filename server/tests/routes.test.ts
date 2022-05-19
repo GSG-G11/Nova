@@ -31,15 +31,57 @@ describe('signup', () => {
       name: 'Jack',
       email: 'mahmoud@gmail.com',
       password: 'Abed@123',
-      role: 'interviewee',
+      role: 'interviewer',
       languages: ['J'],
       specialization: 'Front',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
     }).expect(400)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
         expect(res.body.message).toBe('"languages[0]" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]. "specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        return done();
+      });
+  });
+
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JS', 'PHP'],
+      specialization: 'FRONTEND',
+      cv: 'cv',
+      level: 'JUNIOR',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"cv" must be a valid uri');
+        return done();
+      });
+  });
+
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JS', 'PHP'],
+      specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'J',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"level" must be one of [JUNIOR, MIDDLE, SENIOR, EXPERT, INTERNSHIP]');
         return done();
       });
   });
@@ -52,6 +94,8 @@ describe('signup', () => {
       role: 'interviewer',
       languages: ['JS'],
       specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
     }).expect(201)
       .end((err, res) => {
         if (err) {

@@ -5,6 +5,8 @@ interface Body {
   role: string;
   languages?: Array<string>;
   specialization?: string;
+  cv?: string;
+  level?: string;
   }
 
 export default Body;
