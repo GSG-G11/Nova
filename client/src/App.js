@@ -17,24 +17,22 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="App">
-        <SignupButton />
-        {loading ? 'Loading...' : (
-          <div>
-            hi
-          </div>
-        )}
-        <LoginButton />
-        <ProfileTabs />
-        <ActiveMembers />
-        <Footer />
-
-      </div>
+    <div className="App">
+      <SignupButton />
+      {loading ? 'Loading...' : (
+        <div>
+          hi
+        </div>
+      )}
+      <LoginButton />
+      <ProfileTabs />
+      <ActiveMembers />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
       </Routes>
-    </>
+      <Footer />
+
+    </div>
   );
 };
 
