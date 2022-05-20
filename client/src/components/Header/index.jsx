@@ -14,11 +14,6 @@ const Header = () => {
     <Layout>
       <Content
         className="site-layout-background headerContent"
-        style={{
-          padding: 24,
-          margin: 0,
-          minHeight: 280,
-        }}
       >
         <div className="allSec">
           <section className="rightSec">
