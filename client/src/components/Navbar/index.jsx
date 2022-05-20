@@ -1,5 +1,5 @@
 import {
-  Layout, Menu, Button, Avatar, Dropdown,
+  Layout, Menu, Avatar, Dropdown,
 } from 'antd';
 import {
   LogoutOutlined, UserOutlined,
@@ -11,7 +11,7 @@ import logo from '../../assets/images/logo.png';
 import { LoginButton, SignupButton } from '../Forms';
 
 const { Header } = Layout;
-
+const { Item } = Menu;
 const Navbar = () => {
   const menu = (
     <Menu
@@ -19,19 +19,19 @@ const Navbar = () => {
         {
           label: (
             // must link to profile page
-            <Menu.Item onClick={() => console.log(1)} className="profile">
+            <Item onClick={() => console.log(1)} className="profile">
               <UserOutlined className="icon" />
               Profile
-            </Menu.Item>
+            </Item>
           ),
         },
         {
           label: (
           // must link to logout
-            <Menu.Item onClick={() => console.log(2)} className="logout">
+            <Item onClick={() => console.log(2)} className="logout">
               <LogoutOutlined className="icon" />
               Logout
-            </Menu.Item>
+            </Item>
           ),
         },
       ]}
@@ -51,30 +51,33 @@ const Navbar = () => {
               defaultSelectedKeys={['1']}
             >
               <div className="allBtn">
-                <Button className="btn" ant-click-animating-without-extra-node="false">
+                <Item className="btn" ant-click-animating-without-extra-node="false">
                   Home
-                </Button>
-                <Button className="btn">
+                </Item>
+                <Item className="btn">
                   Team
-                </Button>
-                <Button className="btn">
+                </Item>
+                <Item className="btn">
                   Challenge
-                </Button>
-                <Button className="btn">
+                </Item>
+                <Item className="btn">
                   About
-                </Button>
+                </Item>
               </div>
             </Menu>
           </div>
 
           <div className="left">
-            {!user && <SignupButton />}
-            {!user && <LoginButton />}
-            {user && (
-            <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
-              {/* Must link profile pic to src */}
-              <Avatar src="https://joeschmoe.io/api/v1/random" />
-            </Dropdown>
+            {!user ? (
+              <div>
+                <SignupButton />
+                <LoginButton />
+              </div>
+            ) : (
+              <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
+                {/* Must link profile pic to src */}
+                <Avatar src="https://joeschmoe.io/api/v1/random" />
+              </Dropdown>
             )}
           </div>
         </div>

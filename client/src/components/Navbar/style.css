@@ -16,29 +16,30 @@
 .btn{
   border: none ;
   margin-left: 1rem;
+  color: rgb(0, 0, 0) !important;
 }
 
 .btn:hover{
-  color: #673ab7;
+  color: #673ab7 !important;
 }
 
 .btn:focus{
-  color: #673ab7;
+  color: #673ab7 !important;
 }
 
 .btn:active{
-  color: #673ab7;
+  color: #673ab7 !important;
+  background-color: white !important;
 }
 
 .btn::after{
-  display: none;
+  display: none !important;
 }
 
 .left{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* width: 15rem; */
   margin-top: .4rem;
 }
 
@@ -50,6 +51,7 @@
   margin-top: .4rem;
   margin-left: 1rem;
   border: none;
+  display: flex;
 }
 
 .profile-img{
@@ -81,4 +83,10 @@
 
 .sign{
   margin-right:1rem;
+}
+
+.navbar{
+  border-bottom: 1px solid #e8e9ff;
+  height: 5rem;
+  background-color: white;
 }
