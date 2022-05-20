@@ -14,22 +14,28 @@
 }
 
 .pNova{
-  margin-bottom: 0;
+  color: #432773 !important;
+  margin-bottom: 0 !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
 }
 
 .PracticeMakesPerfect{
   margin-top: 1rem;
   color: #0a093c;
-  font-size: 3rem;
+  font-size: 3rem !important;
   width: 21rem;
 }
 
 .pDescribe{
-  width: 23rem;
-  color: #656464
+  width: 23rem  !important;
+  color: #656464 !important;; 
+  font-size: .8rem !important;
+  font-weight: 500 !important;
 }
 
 .btnAboutOurTeam, .btnStartPracticing, .btnBookInterview{
+  margin-top: 1rem;
   width: 9rem;
   height: 3rem;
   border-radius: 10px;

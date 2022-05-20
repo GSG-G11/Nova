@@ -1,4 +1,4 @@
-import { Layout, Button } from 'antd';
+import { Layout, Button, Typography } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { } from '@ant-design/icons';
@@ -6,6 +6,7 @@ import './style.css';
 import headerImg from '../../assets/images/header.png';
 
 const { Content } = Layout;
+const { Title } = Typography;
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
@@ -22,13 +23,13 @@ const Header = () => {
         <div className="allSec">
           <section className="rightSec">
             <div className="novaCommunity">
-              <p className="pNova">Nova Community</p>
+              <Title level={5} className="pNova">Nova Community</Title>
             </div>
-            <h1 className="PracticeMakesPerfect">Practice Makes Perfect</h1>
-            <p className="pDescribe">
+            <Title level={1} className="PracticeMakesPerfect">Practice Makes Perfect</Title>
+            <Title level={5} className="pDescribe">
               More than 2 billion people in over countries use Nova to
               practice with professional interviewer.
-            </p>
+            </Title>
             {!user ? (
               <Button className="btnStartPracticing" type="primary">
                 Start Practicing
