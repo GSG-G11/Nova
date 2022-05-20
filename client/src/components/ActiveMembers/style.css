@@ -28,6 +28,7 @@
     border: 1px solid #f1f1f1;
     padding: 1.8rem 1.2rem;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .active-members__member-card:hover {

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { message, Typography } from 'antd';
+import { message } from 'antd';
 import axios from 'axios';
 import SectionIntro from '../common/SectionIntro';
-import circle from '../../assets/images/circle.png';
 import './style.css';
+import Member from './Member';
 
-const { Text } = Typography;
 const ActiveMembers = () => {
   const [members, setMembers] = useState([]);
   useEffect(() => {
@@ -18,7 +17,7 @@ const ActiveMembers = () => {
         setMembers(data);
       } catch ({ response: { data: msg } }) {
         if (axios.isCancel(msg)) {
-          console.log('Request canceled', msg);
+          message.error(msg);
         }
         message.error(msg);
       }
@@ -42,32 +41,13 @@ const ActiveMembers = () => {
         {members.map(({
           _id, name, interviewer, image,
         }) => (
-          <div
+          <Member
             key={_id}
-            className="active-members__member-card"
-          >
-            <img
-              className="active-members__circle"
-              alt="circle"
-              src={circle}
-            />
-            <div className="active-members__member-image">
-              <img
-                src={image}
-                alt="member"
-              />
-            </div>
-            <Text strong className="active-members__member-name">
-              {' '}
-              {name}
-              {' '}
-            </Text>
-            <Text className="active-members__member-position">
-              {' '}
-              {interviewer[0].specialization}
-              {' '}
-            </Text>
-          </div>
+            _id={_id}
+            name={name}
+            interviewer={interviewer}
+            image={image}
+          />
         ))}
 
       </div>
