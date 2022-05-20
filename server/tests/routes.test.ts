@@ -820,20 +820,19 @@ describe('Create Review for a specific interview', () => {
       });
   });
 
-  // test('Should throw an error if failed to add the review', (done) => {
-  //   request(app).post('/api/user/review/627d1d11f5243856362e8a8f').s
-  // et('Cookie', [`token=${process.env.NO_INTERVIEWER_INTERVIEWS_TOKEN}`]).send({
-  //     message: 'Hi',
-  //   })
-  //     .expect(400)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       expect(res.body.message).toBe('Failed to add review');
-  //       return done();
-  //     });
-  // });
+  test('Should throw an error if failed to add the review', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.NO_INTERVIEWER_INTERVIEWS_TOKEN}`]).send({
+      message: 'Hi',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Failed to add review');
+        return done();
+      });
+  });
 
   test('Should throw an error if interviewer reviewed the interview before', (done) => {
     request(app).post('/api/user/review/627d1d11f5243856362e8a8d').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
