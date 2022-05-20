@@ -28,13 +28,13 @@
   color: #656464
 }
 
-.btnAboutOurTeam, .btnStartPracticing{
+.btnAboutOurTeam, .btnStartPracticing, .btnBookInterview{
   width: 9rem;
   height: 3rem;
   border-radius: 10px;
 }
 
-.btnStartPracticing{
+.btnStartPracticing, .btnBookInterview{
   background-color: #432773;
   color: #ece7f1;
   border: none;
@@ -46,7 +46,7 @@
   border: 1px solid #432773;
 }
 
-.btnStartPracticing:hover{
+.btnStartPracticing:hover , .btnBookInterview:hover{
   background-color: rgb(111, 45, 177);
 }
 
