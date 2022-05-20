@@ -9,7 +9,7 @@ const { Content } = Layout;
 const Header = () => (
   <Layout>
     <Content
-      className="site-layout-background"
+      className="site-layout-background headerContent"
       style={{
         padding: 24,
         margin: 0,
