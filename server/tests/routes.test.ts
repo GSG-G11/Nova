@@ -26,6 +26,85 @@ describe('signup', () => {
       });
   });
 
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['J'],
+      specialization: 'Front',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"languages[0]" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]. "specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        return done();
+      });
+  });
+
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JS', 'PHP'],
+      specialization: 'FRONTEND',
+      cv: 'cv',
+      level: 'JUNIOR',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"cv" must be a valid uri');
+        return done();
+      });
+  });
+
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JS', 'PHP'],
+      specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'J',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"level" must be one of [JUNIOR, MIDDLE, SENIOR, EXPERT, INTERNSHIP]');
+        return done();
+      });
+  });
+
+  test('Signup with interviewer role', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JS'],
+      specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
+    }).expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please wait for the email');
+        return done();
+      });
+  });
   test('Signup with existing user', (done) => {
     request(app).post('/api/signup').send({
       name: 'Jack',
@@ -101,7 +180,7 @@ describe('Login', () => {
 
   test('Login with non existent user', (done) => {
     request(app).post('/api/login').send({
-      email: 'potato@gmail.com',
+      email: 'potatoss@gmail.com',
       password: 'Abed@123',
     }).expect(404)
       .end((err, res) => {
@@ -240,7 +319,7 @@ describe('Interview Reviews', () => {
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Reviews found');
-      expect(res.body.data.reviews[0].interviewerName).toBe('Jack Doe');
+      expect(res.body.data.reviews[0].interviewerName).toBe('Raghad Mezied');
       return done();
     });
   });
@@ -739,8 +818,8 @@ describe('Post interview time', () => {
 
   test('Should schedule interview', (done) => {
     request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      date: '2022-04-28',
-      time: 12,
+      date: '2022-09-28',
+      time: 2,
     })
       .expect(200)
       .end((err, res) => {
