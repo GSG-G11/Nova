@@ -7,22 +7,25 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './style.css';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { LoginButton, SignupButton } from '../Forms';
 
 const { Header } = Layout;
 const { Item } = Menu;
 const Navbar = () => {
+  const { user } = useSelector((state) => state.auth);
   const menu = (
     <Menu
       items={[
         {
           label: (
-            // must link to profile page
-            <Item onClick={() => console.log(1)} className="profile">
-              <UserOutlined className="icon" />
-              Profile
-            </Item>
+            <Link to={`/users/${user.id}`}>
+              <Item className="profile">
+                <UserOutlined className="icon" />
+                Profile
+              </Item>
+            </Link>
           ),
         },
         {
@@ -37,7 +40,6 @@ const Navbar = () => {
       ]}
     />
   );
-  const { user } = useSelector((state) => state.auth);
   return (
     <Layout className="layout navbar">
       <Header className="head">
