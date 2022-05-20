@@ -16,9 +16,6 @@ const ActiveMembers = () => {
         });
         setMembers(data);
       } catch ({ response: { data: msg } }) {
-        if (axios.isCancel(msg)) {
-          message.error(msg);
-        }
         message.error(msg);
       }
     };
