@@ -10,23 +10,27 @@ import ResourceCard from './ResourceCard';
 const resourcesArray = [
   {
     image: icon0,
-    title: 'Interactive',
-    description: 'Practice job interviews anytime right with real-time collaborative environment.',
+    title: 'Interview Guides',
+    description: 'We have a collection of interview guides to help you prepare for your interview.',
+    link: 'https://www.techinterviewhandbook.org/software-engineering-interview-guide/',
   },
   {
     image: icon1,
-    title: 'Matching',
-    description: 'Each practice peer is picked especially for you, based on availability, topics and target companies.',
+    title: 'All Problems',
+    description: 'Full questions, answers and specific interviewing tips. All in one place.',
+    link: 'https://www.fullstack.cafe/blog/coding-challenges-interview-questions',
   },
   {
     image: icon2,
-    title: 'Question Bank',
-    description: 'Full questions, answers and specific interviewing tips enable both you and your peer.',
+    title: 'Fast Track Courses',
+    description: 'Learn to be a better programmer faster with our recommended fast track courses.',
+    link: 'https://www.coursera.org/learn/cs-tech-interview',
   },
   {
     image: icon3,
-    title: 'Tailored Reviews',
-    description: 'Candidates can get immediate feedback on performance, with specific advice for your answers.',
+    title: 'Blog',
+    description: 'Read our recommended blog to learn about the latest news and updates.',
+    link: 'https://skillcrush.com/blog/technical-interviews/',
   },
 ];
 const Resources = () => (
@@ -37,11 +41,14 @@ const Resources = () => (
       description="Why Nova, what is it characterized by, and what does it offer you."
     />
     <div className="resources__cards">
-      {resourcesArray.map(({ image, title, description }) => (
+      {resourcesArray.map(({
+        image, title, description, link,
+      }) => (
         <ResourceCard
           image={image}
           title={title}
           description={description}
+          link={link}
         />
       ))}
     </div>
