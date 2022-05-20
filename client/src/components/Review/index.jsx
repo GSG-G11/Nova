@@ -39,7 +39,6 @@ const ReviewCard = () => {
     try {
       const { message: savedMsg } = await axios.patch(`/api/user/interview/review/${interviewId}`);
       message.success(savedMsg);
-      starComponent(true);
     } catch ({ Response: { data: { message: msg } } }) {
       message.error(msg);
     }
@@ -62,7 +61,7 @@ const ReviewCard = () => {
             actions={[
               <Tooltip key="comment-basic-like" title="Save">
                 <button type="button" onClick={() => handleSave(id)} className="saved-btn">
-                  {starComponent(false)}
+                  {starComponent(review.saved)}
                 </button>
               </Tooltip>,
             ]}
