@@ -100,7 +100,7 @@ describe('Login', () => {
 
   test('Login with non existent user', (done) => {
     request(app).post('/api/login').send({
-      email: 'potato@gmail.com',
+      email: 'potatoss@gmail.com',
       password: 'Abed@123',
     }).expect(404)
       .end((err, res) => {
@@ -239,7 +239,7 @@ describe('Interview Reviews', () => {
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Reviews found');
-      expect(res.body.data.reviews[0].interviewerName).toBe('Jack Doe');
+      expect(res.body.data.reviews[0].interviewerName).toBe('Raghad Mezied');
       return done();
     });
   });

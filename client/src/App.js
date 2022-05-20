@@ -7,6 +7,7 @@ import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
+import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
 
 const App = () => {
@@ -17,24 +18,23 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="App">
-        <SignupButton />
-        {loading ? 'Loading...' : (
-          <div>
-            hi
-          </div>
-        )}
-        <LoginButton />
-        <ProfileTabs />
-        <Footer />
-
-        <Resources />
-      </div>
+    <div className="App">
+      <SignupButton />
+      {loading ? 'Loading...' : (
+        <div>
+          hi
+        </div>
+      )}
+      <LoginButton />
+      <ProfileTabs />
+      <ActiveMembers />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
       </Routes>
-    </>
+      <Resources />
+      <Footer />
+    </div>
+
   );
 };
 
