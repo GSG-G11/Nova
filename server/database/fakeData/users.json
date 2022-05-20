@@ -102,6 +102,19 @@
             "role": "interviewer",
             "is_verified": true
 
+        },
+                {
+            "_id": "627c92140d0c3622573195af",
+            "name": "Muhammed Ali",
+            "email": "ali@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm Muhammed Ali",
+            "cv": "link to cv",
+            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "level": "INTERNSHIP",
+            "role": "interviewer",
+            "is_verified": true
+
         }
 
     ]

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import Footer from './components/common/Footer';
 import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
@@ -27,6 +28,7 @@ const App = () => {
         <LoginButton />
         <ProfileTabs />
         <ActiveMembers />
+        <Footer />
 
       </div>
       <Routes>

@@ -14,6 +14,7 @@ import {
 import CustomError from './CustomError';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
 import emailTemplate from './email/interviewEmailTemplate';
+import createReviewValidation from './validation/createReviewValidation';
 
 export {
   getInterviewsQueryValidation,
@@ -31,6 +32,7 @@ export {
   interviewValidation,
   emailTemplate,
   getInterviewTimeValidation,
+  createReviewValidation,
   postAvailableTimeValidation,
   getUsersQueryValidation,
 };
