@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar';
 
 const App = () => {
   const dispatch = useDispatch();
