@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { Typography, Button } from 'antd';
-import ScreenImg from '../../assets/images/354a3d4a-d2a6-4cc8-8cdd-16bd7a66a18c-removebg-preview.png';
+import ScreenImg from '../../assets/images/joinus.png';
 
 const { Title } = Typography;
 

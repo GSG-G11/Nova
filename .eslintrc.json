@@ -27,7 +27,8 @@
         "linebreak-style": [
             "error",
             "unix"
-        ]
+        ],
+        "no-underscore-dangle": "off"
         
     },
     "settings": {
