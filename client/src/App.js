@@ -6,6 +6,9 @@ import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
 import Navbar from './components/Navbar';
+import Footer from './components/common/Footer';
+import ActiveMembers from './components/ActiveMembers';
+import Resources from './components/Resources';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,20 +18,22 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="App">
-        {loading ? 'Loading...' : (
-          <div>
-            <Navbar />
-          </div>
-        )}
-        <ProfileTabs />
-
-      </div>
+    <div className="App">
+      {loading ? 'Loading...' : (
+        <div>
+          <Navbar />
+          hi
+        </div>
+      )}
+      <ProfileTabs />
+      <ActiveMembers />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
       </Routes>
-    </>
+      <Resources />
+      <Footer />
+    </div>
+
   );
 };
 

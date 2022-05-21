@@ -7,7 +7,7 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './style.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { LoginButton, SignupButton } from '../Forms';
 
@@ -20,12 +20,12 @@ const Navbar = () => {
       items={[
         {
           label: (
-            <Link to={`/users/${user.id}`}>
-              <Item className="profile">
-                <UserOutlined className="icon" />
-                Profile
-              </Item>
-            </Link>
+          // <Link to={`/users/${user.id}`}>
+            <Item className="profile">
+              <UserOutlined className="icon" />
+              Profile
+            </Item>
+          // </Link>
           ),
         },
         {
