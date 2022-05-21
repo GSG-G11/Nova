@@ -1,0 +1,10 @@
+.btn-save-holder {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
+}
+.setting-tab .ant-col.ant-form-item-label label{
+    font-size: 15px;
+    color: #148ded;
+    font-weight: 500;
+}
