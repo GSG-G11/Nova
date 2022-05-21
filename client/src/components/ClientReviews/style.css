@@ -4,22 +4,6 @@
     flex-direction: column;
     align-items: center;
 } 
-.ClientReviews h2.ant-typography.sub-title {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 29px;
-    line-height: 5px;
-    text-align: center;
-    color: #070558;
-}
-.ClientReviews h5.ant-typography.description-title {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
-    text-align: center;
-    color: #656464;
-    width: 27%;
-}
 .ClientReviews .partner-content-img img.clientImg {
     width: 60%;
 }
@@ -30,7 +14,7 @@
     margin-top: 2%;
 }
 .ClientReviews .carsouel-holder {
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,13 +30,13 @@
     color: #6D6D6D;
 }
 
-.slide-content h3 {
+.slide-content h3.clientName {
     font-weight: 700;
     font-size: 16px;
     line-height: 30px;
     color: #1C1C1D;
 }
-.slide-content h4 {
+.slide-content h4.clientTitle {
     font-weight: 400;
     font-size: 15px;
     line-height: 21px;
@@ -65,6 +49,7 @@
 .ClientReviews .partner-content-img {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .ClientReviews img.bgImg {
     width: 40%;

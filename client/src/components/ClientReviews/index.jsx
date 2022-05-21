@@ -1,20 +1,20 @@
 import React from 'react';
 import './style.css';
-import { Typography, Carousel } from 'antd';
-import clientReviewImg from '../../assets/images/904a4a83-28ae-4e34-b53b-0e4c7d09809a-removebg-preview.png';
-import bgImg from '../../assets/images/3d1d398e-30b4-4cfa-9b11-10f312ebfab8-removebg-preview.png';
+import { Carousel, Typography } from 'antd';
+import clientReviewImg from '../../assets/images/client.png';
+import bgImg from '../../assets/images/square.png';
+import SectionIntro from '../common/SectionIntro';
 
 const { Title } = Typography;
 
 const ClientReviews = () => (
   <div className="ClientReviews">
     <div className="heading">
-      <Title level={2} className="sub-title">
-        Happy Clients
-      </Title>
-      <Title level={5} className="description-title">
-        What do our customers say?
-      </Title>
+      <SectionIntro
+        action="What say"
+        title="Happy Clients"
+        description="What do our customers say?"
+      />
     </div>
     <div className="partner-content">
       <div className="carsouel-holder">
@@ -36,8 +36,8 @@ const ClientReviews = () => (
               a mock interview session done before they sit for their actual
               interviews. Trust me, it will do wonders!.
             </p>
-            <h3>Rohit Mohan</h3>
-            <h4>CEO, Foreclosure</h4>
+            <Title level={3} className="clientName">Rohit Mohan</Title>
+            <Title level={3} className="clientTitle">CEO, Foreclosure</Title>
           </div>
           <div className="slide-content">
             <p>
