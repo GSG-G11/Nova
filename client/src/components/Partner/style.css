@@ -13,26 +13,3 @@
     align-items: center;
     margin-top: 2%;
 }
-.partner h4.ant-typography.main-title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 18px;
-    text-align: center;
-    color: #432773;
-}
-.partner h2.ant-typography.sub-title {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 29px;
-    line-height: 5px;
-    text-align: center;
-    color: #070558;
-}
-.partner h5.ant-typography.description-title {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
-    text-align: center;
-    color: #656464;
-    width: 27%;
-}
