@@ -77,8 +77,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
-                {/* Must link profile pic to src */}
-                <Avatar src="https://joeschmoe.io/api/v1/random" />
+                {user && <Avatar src={user.profile_picture} />}
               </Dropdown>
             )}
           </div>
