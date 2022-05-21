@@ -22,7 +22,7 @@
 .ClientReviews .ant-carousel .slick-dots li button {
     background: #3b4b9e !important;
 }
-.ClientReviews .slide-content p{
+.ClientReviews .slide-content .slide-desc{
     font-style: italic;
     font-weight: 500;
     font-size: 17px;
@@ -30,13 +30,13 @@
     color: #6D6D6D;
 }
 
-.slide-content h3.clientName {
+.slide-content .clientName {
     font-weight: 700;
     font-size: 16px;
     line-height: 30px;
     color: #1C1C1D;
 }
-.slide-content h4.clientTitle {
+.slide-content .clientTitle {
     font-weight: 400;
     font-size: 15px;
     line-height: 21px;
