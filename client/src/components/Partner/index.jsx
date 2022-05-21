@@ -1,15 +1,15 @@
 import React from 'react';
-import { Typography } from 'antd';
+import SectionIntro from '../common/SectionIntro';
+import brandImg from '../../assets/images/brands.png';
 import './style.css';
-import brandImg from '../../assets/images/083adf8b-2a2d-4e54-abf5-05853368fe0e-removebg-preview.png';
-
-const { Title } = Typography;
 
 const Partner = () => (
   <div className="partner">
-    <Title level={4} className="main-title">OUR PARTNERS</Title>
-    <Title level={2} className="sub-title">Get Interview questions from real companies</Title>
-    <Title level={5} className="description-title">Practice in real time with questions directly taken from their official questions banks.</Title>
+    <SectionIntro
+      action="Our Partner"
+      title="Get Interview questions from real companies"
+      description="Practice in real time with questions directly taken from their official questions banks."
+    />
 
     <div className="partner-content">
       <div className="partner-content-item">
