@@ -9,6 +9,7 @@ import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
 import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
+import VerifyAccount from './components/VerifyAccount';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const App = () => {
       <LoginButton />
       <ProfileTabs />
       <ActiveMembers />
+      <VerifyAccount />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
       </Routes>
