@@ -817,7 +817,7 @@ describe('Post interview time', () => {
 
   test('Should schedule interview', (done) => {
     request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      date: '2022-04-28',
+      date: '2022-07-28',
       time: 12,
     })
       .expect(200)
