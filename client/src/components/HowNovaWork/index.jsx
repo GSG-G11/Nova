@@ -3,7 +3,7 @@ import React from 'react';
 import './style.css';
 import union from '../../assets/images/Union.png';
 import getPaired from '../../assets/images/Image.png';
-// import practice from '../../assets/images/pexels-cottonbro-6140202.png';
+import practice from '../../assets/images/pexels-cottonbro-6140202.png';
 // import actIt from '../../assets/images/pexels-pixabay-163064.png';
 
 const { Content } = Layout;
@@ -14,8 +14,8 @@ const HowNovaWork = () => (
     <Content
       className="site-layout-background HowNovaWork"
     >
-      <div>
-        <Title className="titleForHowNovaPractice" level={5}>How Nova Practicing Works</Title>
+      <Title className="titleForHowNovaPractice" level={5}>How Nova Practicing Works</Title>
+      <div className="allImg">
         <div className="getPairedDivText">
           <div className="getPairedDivImg">
             <img className="union" src={union} alt="union" />
@@ -27,6 +27,17 @@ const HowNovaWork = () => (
           </div>
           <Title className="desc" level={5}>Tell us when and what you want to pracice and we’ll pair you with an optimal peer.</Title>
         </div>
+        <div className="getPairedDivText">
+          <div className="getPairedDivImg">
+            <img className="getPaired" src={practice} alt="practice" />
+          </div>
+          <div className="titleHrDiv">
+            <hr className="new1" />
+            <Title className="titleForAll" level={2}>Practice</Title>
+          </div>
+          <Title className="desc" level={5}>Interviews are conducted using a collaborative environment over video. You and your peer will interview each other for 30-40 min.</Title>
+        </div>
+
       </div>
     </Content>
   </Layout>
