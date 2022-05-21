@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/common/Footer';

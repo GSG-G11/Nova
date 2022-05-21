@@ -14,6 +14,7 @@ const ActiveMembers = () => {
         const { data: { data } } = await axios.get('/api/users?role=interviewer&limit=4', {
           cancelToken: cancelToken.token,
         });
+        console.log(data);
         setMembers(data);
       } catch ({ response: { data: msg } }) {
         message.error(msg);

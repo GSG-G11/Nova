@@ -46,9 +46,9 @@ const Member = ({
 Member.propTypes = {
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  interviewer: PropTypes.shape({
+  interviewer: PropTypes.arrayOf(PropTypes.shape({
     specialization: PropTypes.string.isRequired,
-  }).isRequired,
+  })).isRequired,
   image: PropTypes.string.isRequired,
 };
 export default Member;
