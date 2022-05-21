@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import { RequestType, validateQuery } from '../../utils';
@@ -29,7 +30,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
 
   {
     $match: {
-      userId: id,
+      userId: new ObjectId(id),
       'interviews.review.saved': savedBoolean,
     },
   },

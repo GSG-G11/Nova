@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  Comment, Avatar, Tooltip, message, Select,
+  Comment, Avatar, Tooltip, message, Select, Empty,
 } from 'antd';
 import {
   StarOutlined, StarFilled,
@@ -21,19 +21,19 @@ const ReviewCard = () => {
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-    try {
-      const getReviews = async () => {
+    const getReviews = async () => {
+      try {
         const { data: { data: { reviews } } } = await axios.get(`/api/user/review?saved=${filterVal}`, { cancelToken: source.token });
         setReviews(reviews);
-      };
-      getReviews();
-    } catch ({ Response: { data: { message: msg } } }) {
-      message.error(msg);
-    }
+      } catch ({ Response: { data: { message: msg } } }) {
+        message.error(msg);
+      }
+    };
+    getReviews();
     return () => {
       source.cancel();
     };
-  }, []);
+  }, [filterVal]);
 
   const handleSave = async (interviewId) => {
     try {
@@ -81,7 +81,12 @@ const ReviewCard = () => {
           />
 
         </>
-      )) : (<div className="alert alert-primary"> There is no reviews until now </div>) }
+      )) : (<Empty     
+        description={
+        <span>
+          No Reviews have been created yet!
+        </span>
+      }/>) }
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import {
@@ -94,7 +95,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     //   // Update interviewee interviews
     Interviewee.findOneAndUpdate({
       where: {
-        userId: id,
+        userId: new ObjectId(id),
       },
     }, {
       $push: {

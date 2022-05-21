@@ -1,7 +1,7 @@
-// eslint-disable-next-line import/no-named-as-default
+import SettingTab from './Setting';
 import ReviewCard from './Review';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
+  SettingTab,
   ReviewCard,
 };

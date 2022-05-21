@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
 import ReviewCard from '../Review';
+import SettingTab from '../Setting';
 import './style.css';
 
 const { TabPane } = Tabs;
@@ -30,7 +31,7 @@ const ProfileTabs = () => {
           </TabPane>
         )}
         <TabPane tab="Settings" key="4">
-          Content of Tab Pane 4
+          <SettingTab />
         </TabPane>
       </Tabs>
     </div>
