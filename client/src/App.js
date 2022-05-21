@@ -10,6 +10,7 @@ import ProfileTabs from './components/ProfileTabs';
 import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
 import HowNovaWork from './components/HowNovaWork';
+import Header from './components/Header';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,12 @@ const App = () => {
   return (
     <div className="App">
       <SignupButton />
+      <LoginButton />
+      <Header />
       {loading ? 'Loading...' : (
         <div>
-          hi
+          <ProfileTabs />
+          <Resources />
         </div>
       )}
       <HowNovaWork />
@@ -36,7 +40,6 @@ const App = () => {
       <Resources />
       <Footer />
     </div>
-
   );
 };
 
