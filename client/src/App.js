@@ -22,7 +22,6 @@ const App = () => {
       {loading ? 'Loading...' : (
         <div>
           <Navbar />
-          hi
         </div>
       )}
       <ProfileTabs />
