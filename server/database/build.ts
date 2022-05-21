@@ -29,7 +29,7 @@ const createFakeData = async () => {
 
     await setTimeout(() => {
       mongoose.connection.close();
-    }, 1000);
+    }, 10000);
 
     console.log('Fake data created successfully');
   } catch (err: any) {
