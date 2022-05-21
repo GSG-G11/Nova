@@ -1,9 +1,9 @@
 import { Layout, Typography } from 'antd';
 import React from 'react';
 import './style.css';
-import getPaired from '../../assets/images/Image.png';
-import practice from '../../assets/images/pexels-cottonbro-6140202.png';
-import actIt from '../../assets/images/pexels-pixabay-163064.png';
+import getPaired from '../../assets/images/getPaired.png';
+import practice from '../../assets/images/practice.png';
+import actIt from '../../assets/images/actIt.png';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -29,14 +29,14 @@ const HowNovaWork = () => {
       >
         <Title className="titleForHowNovaPractice" level={5}>How Nova Practicing Works</Title>
         <div className="allImg">
-          {arrImg.map((item) => (
-            <div className="getPairedDivText" key={item.title}>
-              <img className="getPaired" src={item.img} alt={item.title} />
+          {arrImg.map(({ title, img, desc }) => (
+            <div className="getPairedDivText" key={title}>
+              <img className="getPaired" src={img} alt={title} />
               <div className="titleHrDiv">
                 <hr className="new1" />
-                <Title className="titleForAll" level={2}>{item.title}</Title>
+                <Title className="titleForAll" level={2}>{title}</Title>
               </div>
-              <Title className="desc" level={5}>{item.desc}</Title>
+              <Title className="desc" level={5}>{desc}</Title>
             </div>
           ))}
         </div>
