@@ -21,7 +21,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
       userId: 1,
       'interviews.review': 1,
       'interviews.interviewerId': 1,
-      'interviews._id': 1,
     },
   },
 
@@ -38,9 +37,6 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   {
     $group: {
       _id: '$interviews.review._id',
-      interviewId: {
-        $first: '$interviews._id',
-      },
       review: {
         $first: '$interviews.review',
       },
