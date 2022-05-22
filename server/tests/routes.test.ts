@@ -134,8 +134,8 @@ describe('signup', () => {
   //       if (err) {
   //         return done(err);
   //       }
-  //       expect(res.body.message).toBe('Account created successfully
-  //  please check your email to verify your account');
+  //       expect(res.body.message).toBe('Account created
+  // successfully please check your email to verify your account');
   //       return done();
   //     });
   // });
@@ -503,7 +503,10 @@ describe('Create Interview', () => {
   });
 
   // test('Should create an interview', (done) => {
-  //   request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+  //   request(app).post('/api/interview').set(
+  //     'Cookie',
+  //     [`token=${process.env.TEST_TOKEN}`],
+  //   ).send({
   //     interviewerId: '627c92140d0c3622573195cb',
   //     date: '2022-04-28',
   //     time: 14,
