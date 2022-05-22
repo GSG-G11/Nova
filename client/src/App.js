@@ -9,6 +9,7 @@ import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
 import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
+import Partner from './components/Partner';
 import HowNovaWork from './components/HowNovaWork';
 import Header from './components/Header';
 
@@ -33,6 +34,7 @@ const App = () => {
       <HowNovaWork />
       <LoginButton />
       <ProfileTabs />
+      <Partner />
       <ActiveMembers />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
