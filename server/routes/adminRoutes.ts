@@ -7,6 +7,6 @@ const router: Router = Router();
 
 router.delete('/users/:id', userAuth, adminAuth, deleteUser);
 router.patch('/approval/:id', acceptInterviewer);
-router.get('/users', getUsersAdmin);
+router.get('/users', userAuth, adminAuth, getUsersAdmin);
 
 export default router;
