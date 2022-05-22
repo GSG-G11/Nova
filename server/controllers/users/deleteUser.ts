@@ -14,9 +14,8 @@ const deleteUser = async (req: RequestType, res: Response) => {
 
   const user: any = await User.findByIdAndDelete(id);
 
-  console.log(user);
   if (!user) {
-    throw new CustomError('User not found', 404);
+    throw new CustomError('Can not delete this user', 400);
   }
 
   res.json({
