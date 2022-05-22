@@ -18,17 +18,18 @@ const VerifyAccount = () => {
     const { accessToken } = Object.fromEntries(searchParams);
     const verify = async () => {
       try {
-        const { data: { message: incomingMessage } } = axios.patch('/api/auth/verify', {
+        await axios.patch('/api/auth/verify', {
           token: accessToken,
         }, {
           cancelToken: cancelToken.token,
         });
 
-        message.success(incomingMessage);
         setVerified(true);
         setLoading(false);
       } catch ({ response: { data: msg } }) {
         message.error(msg);
+        setVerified(false);
+        setLoading(false);
       }
     };
 
@@ -45,23 +46,23 @@ const VerifyAccount = () => {
         {loading ? (
           <LoadingSpinner />
         )
-          : verified && (
+          : (
             <Result
-              status="success"
+              status={verified ? 'success' : 'error'}
               title={(
                 <Title level={3}>
                   <Text>
-                    Your account has been verified.
+                    {verified ? 'Your account has been verified' : 'Your account could not be verified'}
                   </Text>
                 </Title>
         )}
               subTitle={(
                 <div className="verify-account__login">
                   <Text>
-                    You can now login to your account.
+                    {verified ? 'You can now login' : 'Please try again'}
                   </Text>
                   <Button type="primary">
-                    Login
+                    {verified ? 'Login' : 'Try Again'}
                   </Button>
                 </div>
         )}
