@@ -1,6 +1,6 @@
-import SettingTab from './Setting';
+/* eslint-disable import/prefer-default-export */
+import SettingTab from './Resources/Setting';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
   SettingTab,
 };

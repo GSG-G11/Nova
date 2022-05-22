@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/common/Footer';
@@ -9,6 +9,7 @@ import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
 import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
+import VerifyAccount from './components/VerifyAccount';
 import IntreviewerApp from './components/IntreviewerApp';
 import ClientReviews from './components/ClientReviews';
 import Partner from './components/Partner';
@@ -42,6 +43,7 @@ const App = () => {
       <ClientReviews />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
+        <Route path="/auth/verify" element={<VerifyAccount />} />
       </Routes>
       <Resources />
       <Footer />
