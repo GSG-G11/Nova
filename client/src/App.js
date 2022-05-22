@@ -7,7 +7,7 @@ import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
 import ProfileTabs from './components/ProfileTabs';
-import ActiveMembers from './components/ActiveMembers';
+// import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
       )}
       <LoginButton />
       <ProfileTabs />
-      <ActiveMembers />
+      {/* <ActiveMembers /> */}
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
       </Routes>

@@ -3,29 +3,72 @@ import axios from 'axios';
 import {
   Comment, Avatar, Tooltip, message, Select, Empty,
 } from 'antd';
-import {
-  StarOutlined, StarFilled,
-} from '@ant-design/icons';
+import { StarOutlined, StarFilled } from '@ant-design/icons';
 import './style.css';
 
 const ReviewCard = () => {
   const { Option } = Select;
   const [reviewsArr, setReviews] = useState([]);
-  const [filterVal, setFilterVal] = useState('all');
-  const starComponent = (save) => {
-    if (save) {
-      return <StarFilled />;
+  const [filterVal, setFilterVal] = useState(null);
+
+  const handleSave = async (InterviewId) => {
+    try {
+      await axios.patch(
+        `/api/user/interview/review/${InterviewId}`,
+      );
+
+      const newReview = reviewsArr.map((item) => {
+        if (item.InterviewId === InterviewId) {
+          // eslint-disable-next-line no-param-reassign
+          (item.review.saved = !item.review.saved);
+        }
+        return item;
+      });
+      setReviews(newReview);
+    } catch ({
+      response: {
+        data: { message: msg },
+      },
+    }) {
+      message.error(msg);
     }
-    return <StarOutlined />;
+  };
+
+  const starComponent = (save, InterviewId) => {
+    if (save) {
+      return (
+        <StarFilled
+          onClick={() => handleSave(InterviewId)}
+          className="saved-btn"
+        />
+      );
+    }
+    return (
+      <StarOutlined
+        onClick={() => handleSave(InterviewId)}
+        className="unsaved-btn"
+      />
+    );
   };
 
   useEffect(() => {
     const source = axios.CancelToken.source();
     const getReviews = async () => {
+      const url = filterVal
+        ? `/api/user/review?saved=${filterVal}`
+        : '/api/user/review';
       try {
-        const { data: { data: { reviews } } } = await axios.get(`/api/user/review?saved=${filterVal}`, { cancelToken: source.token });
+        const {
+          data: {
+            data: { reviews },
+          },
+        } = await axios.get(url, { cancelToken: source.token });
         setReviews(reviews);
-      } catch ({ Response: { data: { message: msg } } }) {
+      } catch ({
+        response: {
+          data: { message: msg },
+        },
+      }) {
         message.error(msg);
       }
     };
@@ -35,58 +78,51 @@ const ReviewCard = () => {
     };
   }, [filterVal]);
 
-  const handleSave = async (interviewId) => {
-    try {
-      const { message: savedMsg } = await axios.patch(`/api/user/interview/review/${interviewId}`);
-      message.success(savedMsg);
-    } catch ({ Response: { data: { message: msg } } }) {
-      message.error(msg);
-    }
-  };
-
   return (
     <div className="review-tab">
-      {reviewsArr.length > 0 ? reviewsArr.map(({
-        interviewerName, interviewerImage, id, review,
-      }) => (
-        <>
-          <div className="filter-holder">
-            <Select defaultValue="all" className="filter-select" value={filterVal} onChange={(value) => setFilterVal(value)}>
-              <Option value="all">all</Option>
-              <Option value="true">saved</Option>
-              <Option value="false">unsaved</Option>
-            </Select>
-          </div>
-          <Comment
-            actions={[
-              <Tooltip key="comment-basic-like" title="Save">
-                <button type="button" onClick={() => handleSave(id)} className="saved-btn">
-                  {starComponent(review.saved)}
-                </button>
-              </Tooltip>,
-            ]}
-            author={interviewerName}
-            avatar={<Avatar src={interviewerImage} alt={review.interviewerName} />}
-            content={(
-              <p>
-                {review.message}
-                .
-              </p>
-            )}
-            datetime={(
-              <Tooltip>
-                <span>{review.created_at}</span>
-              </Tooltip>
-            )}
-          />
-
-        </>
-      )) : (<Empty     
-        description={
-        <span>
-          No Reviews have been created yet!
-        </span>
-      }/>) }
+      <div className="filter-holder">
+        <Select
+          defaultValue="all"
+          className="filter-select"
+          value={filterVal}
+          onChange={(value) => setFilterVal(value)}
+        >
+          <Option>all</Option>
+          <Option value="true">saved</Option>
+          <Option value="false">unsaved</Option>
+        </Select>
+      </div>
+      {reviewsArr.length > 0 ? (
+        reviewsArr.map(
+          ({
+            interviewerName, interviewerImage, review, InterviewId,
+          }) => (
+            <Comment
+              key={InterviewId}
+              author={interviewerName}
+              avatar={
+                <Avatar src={interviewerImage} alt={interviewerName} />
+              }
+              content={(
+                <>
+                  <p>
+                    { review.message }
+                    .
+                  </p>
+                  {starComponent(review.saved, InterviewId)}
+                </>
+              )}
+              datetime={(
+                <Tooltip>
+                  <span>{review.created_at}</span>
+                </Tooltip>
+              )}
+            />
+          ),
+        )
+      ) : (
+        <Empty description={<span>No Reviews have been created yet!</span>} />
+      )}
     </div>
   );
 };

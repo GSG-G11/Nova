@@ -21,13 +21,13 @@ const getAllReviews = async (req: RequestType, res: Response) => {
       userId: 1,
       'interviews.review': 1,
       'interviews.interviewerId': 1,
+      'interviews._id': 1,
     },
   },
 
   {
     $unwind: '$interviews',
   },
-
   {
     $match: {
       userId: new ObjectId(id),
@@ -40,12 +40,15 @@ const getAllReviews = async (req: RequestType, res: Response) => {
       review: {
         $first: '$interviews.review',
       },
+      InterviewId: {
+        $first: '$interviews._id',
+      },
       interviewerId: {
         $first: '$interviews.interviewerId',
       },
     },
   },
-  ]).skip((Number(page) - 1) * 3).limit(3);
+  ]).skip((Number(page) - 1) * 4).limit(4);
 
   // Get the names of the interviewers based on Interviewers Ids
   const reviews = await Promise.all(filteredReviewsWithIds.map(async (review: any) => {

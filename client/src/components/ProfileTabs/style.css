@@ -13,6 +13,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 5%;
 }
 .profile-tabs-holder .ant-tabs {
     width: 70%;
