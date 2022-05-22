@@ -48,13 +48,18 @@
     padding-bottom: 3.2rem;
 }
 
-.interview-form__radio-group-second {
+.interview-step-content.language .interview-form__radio-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.8rem;
     padding: 1rem;
     padding-bottom: 3.2rem;   
 }
+
+.interview-step-content.questionCategory .interview-form__radio-group {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+} 
 
 .interview-form__radio-group-third {
     display: grid;
@@ -94,7 +99,6 @@
 }
 
 .interview-form__radio-group label, 
-.interview-form__radio-group-second label,
 .interview-form__radio-group-third label,
 .interview-form__radio-group-fourth label {
     font-size: 1rem;
@@ -120,6 +124,7 @@
     background-color: #432773;
     color: white;
 }
+
 
 .interview-step-content .interview-form__radio-input:checked + label {
     background-color: #432773;

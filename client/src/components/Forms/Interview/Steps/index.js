@@ -1,8 +1,9 @@
 import StepFour from './StepFour';
-import StepOne from './StepOne';
-import StepThree from './StepThree';
-import StepTwo from './StepTwo';
+import StepFive from './StepFive';
+import Step from './Step';
 
 export {
-  StepFour, StepOne, StepThree, StepTwo,
+  StepFour,
+  StepFive,
+  Step,
 };

@@ -5,10 +5,9 @@ import {
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import {
-  StepOne, StepTwo, StepThree, StepFour,
+  StepFour, StepFive, Step as FormSteps,
 } from './Steps';
 import './InterviewForm.css';
-import StepFive from './Steps/StepFive';
 
 const { Step } = Steps;
 const InterviewForm = () => {
@@ -69,10 +68,9 @@ const InterviewForm = () => {
       setLoading(true);
       nextStep();
       const { step: stepIgnored, ...rest } = formData;
-      const { data: { message: msg } } = await axios.post('/api/interview', {
+      await axios.post('/api/interview', {
         ...rest,
       });
-      message.success(msg);
       setLoading(false);
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -110,11 +108,11 @@ const InterviewForm = () => {
   const renderSwitch = () => {
     switch (step) {
       case 0:
-        return <StepOne handleChange={handleChange} formData={formData} title="Specialization" />;
+        return <FormSteps handleChange={handleChange} formData={formData} title="Specialization" />;
       case 1:
-        return <StepTwo handleChange={handleChange} formData={formData} title="Language" />;
+        return <FormSteps handleChange={handleChange} formData={formData} title="Language" />;
       case 2:
-        return <StepThree handleChange={handleChange} formData={formData} title="Question Category" />;
+        return <FormSteps handleChange={handleChange} formData={formData} title="Question Category" />;
       case 3:
         return (
           <StepFour
@@ -130,7 +128,7 @@ const InterviewForm = () => {
       case 4:
         return <StepFive title="Congratulations" loading={loading} />;
       default:
-        return <StepOne handleChange={handleChange} title="Specialization" />;
+        return <FormSteps handleChange={handleChange} formData={formData} title="Specialization" />;
     }
   };
 
