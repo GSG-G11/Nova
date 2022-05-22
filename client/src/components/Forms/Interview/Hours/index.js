@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-// eslint-disable-next-line react/prop-types
 import React from 'react';
 import { Input } from 'antd';
+import PropTypes from 'prop-types';
 
 const Hours = ({
   hour, time, handleChange, toggleHours, i, date,
@@ -28,4 +27,13 @@ const Hours = ({
   </div>
 );
 
+Hours.propTypes = {
+  hour: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  toggleHours: PropTypes.number.isRequired,
+  i: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
+
+};
 export default Hours;
