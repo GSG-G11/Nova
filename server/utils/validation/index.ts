@@ -5,6 +5,7 @@ import interviewValidation from './interviewValidation';
 import { validateQuery, getInterviewsQueryValidation, getUsersQueryValidation } from './queryValidation';
 import { signupValidation, signupInterviewerValidation } from './signupValidation';
 import updateInfoValidation from './updateInfoValidation';
+import acceptInterviewerValidation from './acceptInterviewerValidation';
 
 export {
   loginValidation,
@@ -17,4 +18,5 @@ export {
   updateInfoValidation,
   getUsersQueryValidation,
   signupInterviewerValidation,
+  acceptInterviewerValidation,
 };
