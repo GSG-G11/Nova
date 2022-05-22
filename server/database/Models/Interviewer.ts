@@ -16,7 +16,7 @@ const interviewer = new Schema({
     enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
     required: true,
   },
-  approved: {
+  status: {
     type: String,
     enum: ['PENDING', 'APPROVED', 'REJECTED'],
     default: 'PENDING',
