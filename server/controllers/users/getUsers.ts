@@ -3,7 +3,7 @@ import { RequestType, getUsersQueryValidation } from '../../utils';
 import User from '../../database/Models/User';
 
 const getUsers = async (req: RequestType, res: Response) => {
-  const { role = '', page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
+  const { role, page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
 
   await getUsersQueryValidation({ role, page, limit });
 
@@ -20,6 +20,7 @@ const getUsers = async (req: RequestType, res: Response) => {
         name: { $first: '$name' },
         role: { $first: '$role' },
         email: { $first: '$email' },
+        image: { $first: '$profile_picture' },
       },
     },
     {
@@ -40,7 +41,7 @@ const getUsers = async (req: RequestType, res: Response) => {
             },
           },
         ],
-        as: role,
+        as: 'userInfo',
       },
     },
   ]).skip(skip).limit(pageLimit);
