@@ -26,7 +26,7 @@ const LoginForm = ({ handleOk }) => {
   const onFinish = async () => {
     try {
       const { data: { data: { user } } } = await axios.post('/api/login', { email, password });
-      dispatch(setUser(user));
+      dispatch(setUser({ isAuthenticated: true, user }));
       handleOk();
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {

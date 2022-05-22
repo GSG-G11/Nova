@@ -4,16 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
-import ProfileTabs from './components/ProfileTabs';
 import Navbar from './components/Navbar';
 import Footer from './components/common/Footer';
-import ActiveMembers from './components/ActiveMembers';
-import Resources from './components/Resources';
-import IntreviewerApp from './components/IntreviewerApp';
-import ClientReviews from './components/ClientReviews';
-import Partner from './components/Partner';
-import HowNovaWork from './components/HowNovaWork';
-import Header from './components/Header';
+import Landing from './components/Landing';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,25 +17,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
       {loading ? 'Loading...' : (
         <div>
           <Navbar />
-          <ProfileTabs />
-          <Resources />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+          </Routes>
+          <Routes>
+            <Route path="/users/:id" element={<UserInfo />} />
+          </Routes>
+          <Footer />
         </div>
       )}
-      <HowNovaWork />
-      <ProfileTabs />
-      <Partner />
-      <ActiveMembers />
-      <IntreviewerApp />
-      <ClientReviews />
-      <Routes>
-        <Route path="/users/:id" element={<UserInfo />} />
-      </Routes>
-      <Resources />
-      <Footer />
     </div>
   );
 };

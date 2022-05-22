@@ -5,17 +5,20 @@ import {
   LogoutOutlined, UserOutlined,
 } from '@ant-design/icons';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import logo from '../../assets/images/logo.png';
 import { LoginButton, SignupButton } from '../Forms';
+import { setUser } from '../../redux/features/auth/authSlice';
 
 const { Header } = Layout;
 const { Item } = Menu;
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menu = (
     <Menu
       items={[
@@ -31,8 +34,15 @@ const Navbar = () => {
         },
         {
           label: (
-          // must link to logout
-            <Item onClick={() => console.log(2)} className="logout">
+
+            <Item
+              onClick={async () => {
+                await axios.post('/api/logout');
+                dispatch(setUser({ isAuthenticated: false, user: null }));
+                navigate('/');
+              }}
+              className="logout"
+            >
               <LogoutOutlined className="icon" />
               Logout
             </Item>
