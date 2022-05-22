@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Typography, Result, Button,
-} from 'antd';
 import './style.css';
 import axios from 'axios';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
-import { LoginButton } from '../Forms';
+import VerifyResult from './VerifyResult';
 
-const { Text, Title } = Typography;
 const VerifyAccount = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -44,41 +39,12 @@ const VerifyAccount = () => {
   return (
     <section className="verify-account">
       <div className="verify-account__container">
-        {loading ? (
-          <LoadingSpinner />
-        )
-          : (
-            <Result
-              status={verified ? 'success' : 'error'}
-              title={(
-                <Title level={3}>
-                  <Text>
-                    {verified ? 'Your account has been verified' : 'Your account could not be verified'}
-                  </Text>
-                </Title>
-        )}
-              subTitle={(
-                <div className="verify-account__login">
-                  <Text>
-                    {verified ? 'You can now login' : 'Please try again'}
-                  </Text>
-                  {
-                    verified ? (
-                      <LoginButton />
-                    )
-                      : (
-                        <Button
-                          type="primary"
-                          onClick={() => navigate('/')}
-                        >
-                          Back to home
-                        </Button>
-                      )
-                  }
-                </div>
-        )}
-            />
-          )}
+        {loading
+          && <LoadingSpinner />}
+        <VerifyResult
+          verified={verified}
+        />
+
       </div>
 
     </section>
