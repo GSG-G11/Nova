@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { LoginButton, SignupButton } from './components/Forms';
 import { checkUser } from './redux/features/auth/authSlice';
 import InterviewForm from './components/Forms/Interview/InterviewForm';
 import UserInfo from './components/UserInfo';
-import ProfileTabs from './components/ProfileTabs';
+import Navbar from './components/Navbar';
+import Footer from './components/common/Footer';
+import Landing from './components/Landing';
+import Resources from './components/Resources';
+import VerifyAccount from './components/VerifyAccount';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -16,23 +19,22 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="App">
-        <SignupButton />
-        {loading ? 'Loading...' : (
-          <div>
-            hi
-          </div>
-        )}
-        <LoginButton />
-        <InterviewForm />
-        <ProfileTabs />
-
-      </div>
-      <Routes>
-        <Route path="/users/:id" element={<UserInfo />} />
-      </Routes>
-    </>
+    <div className="App">
+      {loading ? 'Loading...' : (
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/users/:id" element={<UserInfo />} />
+            <Route path="/auth/verify" element={<VerifyAccount />} />
+          </Routes>
+          <Footer />
+        </div>
+      )}
+      <Resources />
+      <InterviewForm />
+      <Footer />
+    </div>
   );
 };
 

@@ -1,6 +1,20 @@
 import loginValidation from './loginValidation';
+import postAvailableTimeValidation from './postAvailableTimeValidation';
+import getInterviewTimeValidation from './getInterviewTimeValidation';
+import interviewValidation from './interviewValidation';
+import { validateQuery, getInterviewsQueryValidation, getUsersQueryValidation } from './queryValidation';
+import { signupValidation, signupInterviewerValidation } from './signupValidation';
+import updateInfoValidation from './updateInfoValidation';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
   loginValidation,
+  postAvailableTimeValidation,
+  getInterviewTimeValidation,
+  interviewValidation,
+  validateQuery,
+  getInterviewsQueryValidation,
+  signupValidation,
+  updateInfoValidation,
+  getUsersQueryValidation,
+  signupInterviewerValidation,
 };

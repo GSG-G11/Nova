@@ -10,11 +10,20 @@
                     "language": "JAVASCRIPT",
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
-                    "review": {
-                        "message": "He did a great job!",
-                        "saved": false
-                    },
                     "_id": "627d1d11f5243856362e8a8c"
+                },
+                {
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-04-28",
+                    "time": 12,
+                    "language": "JAVASCRIPT",
+                    "specialization": "BACKEND",
+                    "questionCategory": "Technical",
+                    "review": {
+                        "message": "Great",
+                        "saved": true
+                    },
+                    "_id": "627d1d11f5243856362e8a8f"
                 },
                 {
                     "id": "2",
@@ -25,8 +34,8 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "He did a great job!",
-                        "saved": false
+                        "message": "Great",
+                        "saved": true
                     }
                 },
                 {
@@ -38,8 +47,8 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "He did a great job!",
-                        "saved": false
+                        "message": "Great",
+                        "saved": true
                     }
                 },
                 {
@@ -51,8 +60,7 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "He did a great job!",
-                        "saved": false
+                      
                     }
                 },
                 {
@@ -64,8 +72,7 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "He did a great job!",
-                        "saved": false
+                       
                     }
                 },
                 {
@@ -77,8 +84,7 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "He did a great job!",
-                        "saved": false
+                     
                     }
                 },
                 {
@@ -90,8 +96,7 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "He did a great job!",
-                        "saved": false
+                     
                     }
                 },
                 {
@@ -118,10 +123,6 @@
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
-                    "review": {
-                        "message": "More than expected",
-                        "saved": false
-                    },
                     "_id": "627d1d11f5243856362e8a8c"
 
                 },
@@ -133,9 +134,10 @@
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
                     "review": {
-                        "message": "More than expected",
-                        "saved": false
-                    }
+                        "message": "test"
+                    },
+                    "_id": "627d1d11f5243856362e8a8d"
+
                 },
                 {
                     "interviewerId": "627c92140d0c3622573195cb",
@@ -145,7 +147,7 @@
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
                     "review": {
-                        "message": "More than expected",
+                        "message": "Great",
                         "saved": true
                     }
                 },
@@ -157,7 +159,7 @@
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
                     "review": {
-                        "message": "More than expected",
+                        "message": "Great",
                         "saved": true
                     }
                 },
@@ -169,7 +171,7 @@
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
                     "review": {
-                        "message": "More than expected",
+                        "message": "Great",
                         "saved": true
                     }
                 }

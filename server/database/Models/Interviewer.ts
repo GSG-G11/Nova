@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const interviewer = new Schema({
   userId: {
     $ref: 'User',
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   languages: {
@@ -12,7 +12,7 @@ const interviewer = new Schema({
     required: true,
   },
   specialization: {
-    type: [String],
+    type: String,
     enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
     required: true,
   },
