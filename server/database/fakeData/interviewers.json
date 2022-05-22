@@ -7,6 +7,7 @@
                 "PHP"
             ],
             "specialization": "BACKEND",
+            "approved": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "627c92140d0c3622573195ca",
@@ -49,6 +50,7 @@
                 "PYTHON","RUBY"
             ],
             "specialization": "BACKEND",
+            "approved": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "627c92140d0c3622573195ca",
@@ -91,6 +93,7 @@
                 "PHP"
             ],
             "specialization": "FRONTEND",
+            "approved": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "a27c92140d0c3622573195ce",
@@ -134,6 +137,7 @@
                 "PHP"
             ],
             "specialization": "FULL STACK",
+            "approved": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "a27c92140d0c3622573195ce",
@@ -177,6 +181,7 @@
                 "PHP"
             ],
             "specialization": "BACKEND",
+            "approved": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "a27c92140d0c3622573195ce",
@@ -211,6 +216,18 @@
                         13, 14, 15, 16, 17, 18
                     ]
                 }
+            ]
+        },
+        {
+            "userId": "c27c92140d0c3622573195ce",
+            "languages": [
+                "JAVA",
+                "PHP"
+            ],
+            "specialization": "BACKEND",
+            "interviews": [
+            ],
+            "schedule": [
             ]
         }
     ]
