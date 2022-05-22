@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Typography, Result, message, Button,
+  Typography, Result, Button,
 } from 'antd';
 import './style.css';
 import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
+import { LoginButton } from '../Forms';
 
 const { Text, Title } = Typography;
 const VerifyAccount = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,6 @@ const VerifyAccount = () => {
         setVerified(true);
         setLoading(false);
       } catch ({ response: { data: msg } }) {
-        message.error(msg);
         setVerified(false);
         setLoading(false);
       }
@@ -61,9 +62,19 @@ const VerifyAccount = () => {
                   <Text>
                     {verified ? 'You can now login' : 'Please try again'}
                   </Text>
-                  <Button type="primary">
-                    {verified ? 'Login' : 'Try Again'}
-                  </Button>
+                  {
+                    verified ? (
+                      <LoginButton />
+                    )
+                      : (
+                        <Button
+                          type="primary"
+                          onClick={() => navigate('/')}
+                        >
+                          Back to home
+                        </Button>
+                      )
+                  }
                 </div>
         )}
             />
