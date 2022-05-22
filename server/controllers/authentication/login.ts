@@ -22,7 +22,7 @@ const login = async (req: Request, res: Response) => {
   }
 
   const {
-    id, role, is_verified: isVerified, profile_picture,
+    id, role, is_verified: isVerified, profile_picture: profilePicture,
   } = user;
 
   if (!isVerified) {
@@ -33,7 +33,7 @@ const login = async (req: Request, res: Response) => {
     id,
     isVerified,
     role,
-    profile_picture,
+    profilePicture,
   };
 
   const token: any = await signToken(payload);

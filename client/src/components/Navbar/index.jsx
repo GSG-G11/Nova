@@ -77,7 +77,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
-                {user && <Avatar src={user.profile_picture} />}
+                {user && <Avatar src={user.profilePicture} />}
               </Dropdown>
             )}
           </div>

@@ -15,7 +15,6 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "camelcase": "off",
         "import/no-unresolved": "off",
         "import/extensions": [
             "error",
