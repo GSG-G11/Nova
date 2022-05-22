@@ -21,6 +21,10 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
 }
+.review-tab .pagination-holder{
+    display: flex;
+    justify-content: flex-end;
+}
 .review-tab button.saved-btn {
     border: none;
     background: none;

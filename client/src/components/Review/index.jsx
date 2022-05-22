@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  Comment, Avatar, Tooltip, message, Select, Empty,
+  Comment, Avatar, Tooltip, message, Select, Empty, Pagination,
 } from 'antd';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
 import './style.css';
@@ -10,6 +10,11 @@ const ReviewCard = () => {
   const { Option } = Select;
   const [reviewsArr, setReviews] = useState([]);
   const [filterVal, setFilterVal] = useState(null);
+  const [current, setCurrent] = useState(1);
+
+  const onChange = (page) => {
+    setCurrent(page);
+  };
 
   const handleSave = async (InterviewId) => {
     try {
@@ -55,7 +60,7 @@ const ReviewCard = () => {
     const source = axios.CancelToken.source();
     const getReviews = async () => {
       const url = filterVal
-        ? `/api/user/review?saved=${filterVal}`
+        ? `/api/user/review?saved=${filterVal}&&page=${current}`
         : '/api/user/review';
       try {
         const {
@@ -76,7 +81,7 @@ const ReviewCard = () => {
     return () => {
       source.cancel();
     };
-  }, [filterVal]);
+  }, [filterVal, current]);
 
   return (
     <div className="review-tab">
@@ -106,7 +111,7 @@ const ReviewCard = () => {
               content={(
                 <>
                   <p>
-                    { review.message }
+                    { review.message ? review.message : 'No review for this interview !' }
                     .
                   </p>
                   {starComponent(review.saved, InterviewId)}
@@ -123,6 +128,10 @@ const ReviewCard = () => {
       ) : (
         <Empty description={<span>No Reviews have been created yet!</span>} />
       )}
+      <div className="pagination-holder">
+        <Pagination defaultCurrent={1} total={50} current={current} onChange={onChange} />
+      </div>
+      ;
     </div>
   );
 };
