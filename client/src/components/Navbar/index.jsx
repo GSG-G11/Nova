@@ -19,6 +19,11 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const logout = async () => {
+    await axios.post('/api/logout');
+    dispatch(clearUser());
+    navigate('/');
+  };
   const menu = (
     <Menu
       items={[
@@ -36,11 +41,7 @@ const Navbar = () => {
           label: (
 
             <Item
-              onClick={async () => {
-                await axios.post('/api/logout');
-                dispatch(clearUser());
-                navigate('/');
-              }}
+              onClick={() => logout()}
               className="logout"
             >
               <LogoutOutlined className="icon" />
