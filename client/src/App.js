@@ -3,11 +3,11 @@ import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
+import InterviewForm from './components/Forms/Interview/InterviewForm';
 import UserInfo from './components/UserInfo';
 import Navbar from './components/Navbar';
 import Footer from './components/common/Footer';
 import Landing from './components/Landing';
-import Resources from './components/Resources';
 import VerifyAccount from './components/VerifyAccount';
 
 const App = () => {
@@ -27,10 +27,9 @@ const App = () => {
             <Route path="/users/:id" element={<UserInfo />} />
             <Route path="/auth/verify" element={<VerifyAccount />} />
           </Routes>
-          <Footer />
         </div>
       )}
-      <Resources />
+      <InterviewForm />
       <Footer />
     </div>
   );
