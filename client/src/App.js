@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/common/Footer';
 import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
+import Header from './components/Header';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,12 +20,14 @@ const App = () => {
 
   return (
     <div className="App">
+      <Header />
       {loading ? 'Loading...' : (
         <div>
           <Navbar />
+          <ProfileTabs />
+          <Resources />
         </div>
       )}
-      <ProfileTabs />
       <ActiveMembers />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
@@ -32,7 +35,6 @@ const App = () => {
       <Resources />
       <Footer />
     </div>
-
   );
 };
 
