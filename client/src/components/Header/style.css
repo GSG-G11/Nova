@@ -1,0 +1,77 @@
+.headerContent{
+  background: linear-gradient(to right bottom, #ffffff, #faf5ff, #f7edff, #f3e0ff, #ebcbfe);
+}
+
+.novaCommunity{
+  background-color: #ece7f1;
+  color: #432773;
+  width: 9rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pNova{
+  color: #432773 !important;
+  margin-bottom: 0 !important;
+  font-size: .9rem !important;
+  font-weight: 440 !important;
+}
+
+.PracticeMakesPerfect{
+  margin-top: 1rem;
+  color: #0a093c;
+  font-size: 3rem !important;
+  width: 21rem;
+}
+
+.pDescribe{
+  width: 23rem  !important;
+  color: #656464 !important;; 
+  font-size: .8rem !important;
+  font-weight: 500 !important;
+}
+
+.btnAboutOurTeam, .btnStartPracticing, .btnBookInterview{
+  margin-top: 1rem;
+  width: 9rem;
+  height: 3rem;
+  border-radius: 10px;
+}
+
+.btnStartPracticing, .btnBookInterview{
+  background-color: #432773;
+  color: #ece7f1;
+  border: none;
+  margin-right: 1rem;
+}
+.btnAboutOurTeam{
+  background-color: #f7edff;
+  color: #432773;
+  border: 1px solid #432773;
+}
+
+.btnStartPracticing:hover , .btnBookInterview:hover{
+  background-color: rgb(111, 45, 177);
+}
+
+.btnAboutOurTeam:hover{
+  background-color: #e4cafa;
+  border: 1px solid #432773;
+  color: #432773;
+}
+
+.allSec{
+  display: flex;  
+  justify-content: space-around;
+}
+
+.rightSec{
+  margin-top: 7rem;
+}
+
+.headerImg{
+  height: 30rem;
+}
