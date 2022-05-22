@@ -1,0 +1,15 @@
+.partner img.brandImg {
+    width: 70%;
+}
+.partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6%;
+}
+.partner .partner-content-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
