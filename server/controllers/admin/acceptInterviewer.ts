@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 import { ObjectId } from 'mongodb';
 import { CustomError, acceptInterviewerValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
+import User from '../../database/Models/User';
 
 const acceptInterviewer = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -18,6 +19,14 @@ const acceptInterviewer = async (req: Request, res: Response) => {
   await Interviewer.updateOne({ userId: new ObjectId(id) }, {
     $set: {
       approved: status,
+    },
+  });
+
+  const verify = (status === 'APPROVED') ? 'true' : 'false';
+
+  await User.updateOne({ _id: new ObjectId(id) }, {
+    $set: {
+      is_verified: verify,
     },
   });
 
