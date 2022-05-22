@@ -8,7 +8,7 @@ const interviewer = new Schema({
   },
   languages: {
     type: [String],
-    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
+    enum: ['JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
     required: true,
   },
   specialization: {
@@ -39,7 +39,7 @@ const interviewer = new Schema({
         },
         language: {
           type: String,
-          enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
+          enum: ['JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
           required: true,
         },
         specialization: {

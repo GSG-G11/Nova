@@ -7,6 +7,7 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": [
+    "Popconfirm",
     "happyclient"
   ]
 }

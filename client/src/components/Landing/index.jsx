@@ -6,6 +6,7 @@ import Partner from '../Partner';
 import ActiveMembers from '../ActiveMembers';
 import IntreviewerApp from '../IntreviewerApp';
 import ClientReviews from '../ClientReviews';
+import Challenges from '../Challenges';
 
 const Landing = () => (
   <>
@@ -15,6 +16,7 @@ const Landing = () => (
     <Partner />
     <ActiveMembers />
     <IntreviewerApp />
+    <Challenges />
     <ClientReviews />
   </>
 );
