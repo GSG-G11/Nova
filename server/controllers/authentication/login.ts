@@ -49,6 +49,7 @@ const login = async (req: Request, res: Response) => {
         id,
         isVerified,
         role,
+        profilePicture,
       },
     },
   });

@@ -15,6 +15,7 @@ const { Header } = Layout;
 const { Item } = Menu;
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
+
   const menu = (
     <Menu
       items={[
@@ -77,7 +78,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
-                {user && <Avatar src={user.profilePicture} />}
+                <Avatar src={user.profilePicture} />
               </Dropdown>
             )}
           </div>
