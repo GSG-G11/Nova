@@ -27,15 +27,17 @@ const StepFour = ({
                 Sorry, no available interviewers for this date.
               </p>
               )}
-              {availableTime.length && availableTime.map((slot, i) => (
+              {availableTime.length && availableTime.map(({
+                _id: id, date, time, interviewerId,
+              }, i) => (
                 <div className="column">
                   <Input
                     type="radio"
-                    key={slot._id}
-                    value={slot.date.split('T')[0]}
+                    key={id}
+                    value={date.split('T')[0]}
                     onChange={handleChange}
                     onClick={() => {
-                      setHours(slot.time);
+                      setHours(time);
                       setToggleHours((prevState) => {
                         if (prevState === i) {
                           return null;
@@ -45,21 +47,21 @@ const StepFour = ({
                     }}
                     className="interview-form__radio-input"
                     name="date"
-                    id={slot._id}
-                    checked={slot.date.split('T')[0] === formData.date}
+                    id={id}
+                    checked={date.split('T')[0] === formData.date}
                   />
                   <label
-                    htmlFor={slot._id}
+                    htmlFor={id}
                     onClick={() => {
                       setFormData({
                         ...formData,
-                        interviewerId: slot.interviewerId,
+                        interviewerId,
                       });
                     }}
                     aria-hidden="true"
                     className="interview-form__radio-label"
                   >
-                    {slot.date.split('T')[0]}
+                    {date.split('T')[0]}
                   </label>
 
                   <div
