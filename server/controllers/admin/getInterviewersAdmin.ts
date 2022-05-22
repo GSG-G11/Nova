@@ -2,13 +2,13 @@ import { Response } from 'express';
 import { RequestType, getUsersAdminQueryValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
 
-const getUsersAdmin = async (req: RequestType, res: Response) => {
+const getInterviewersAdmin = async (req: RequestType, res: Response) => {
   const {
-    role, page = '1', limit, status,
-  }: {role?: string, page?: string, limit?: string, status?: string} = req.query;
+    page = '1', limit, status,
+  }: { page?: string, limit?: string, status?: string} = req.query;
 
   await getUsersAdminQueryValidation({
-    role, page, limit, status,
+    page, limit, status,
   });
 
   const pageLimit = (Number(limit));
@@ -58,4 +58,4 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
   });
 };
 
-export default getUsersAdmin;
+export default getInterviewersAdmin;

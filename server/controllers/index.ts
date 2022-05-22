@@ -15,7 +15,7 @@ import createReview from './users/createReview';
 import getUsers from './users/getUsers';
 import logout from './authentication/logout';
 import acceptInterviewer from './admin/acceptInterviewer';
-import getUsersAdmin from './admin/getUsersAdmin';
+import getInterviewersAdmin from './admin/getInterviewersAdmin';
 
 export {
   signup,
@@ -35,5 +35,5 @@ export {
   getUsers,
   logout,
   acceptInterviewer,
-  getUsersAdmin,
+  getInterviewersAdmin,
 };
