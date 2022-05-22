@@ -12,6 +12,7 @@ import {
   getUsersQueryValidation,
   signupInterviewerValidation,
   acceptInterviewerValidation,
+  getUsersAdminQueryValidation,
 } from './validation';
 import CustomError from './CustomError';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
@@ -39,4 +40,5 @@ export {
   getUsersQueryValidation,
   signupInterviewerValidation,
   acceptInterviewerValidation,
+  getUsersAdminQueryValidation,
 };
