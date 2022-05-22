@@ -17,18 +17,8 @@
     gap: 3.2rem;
 }
 
-.verify-account__container-image {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
+.verify-account__login {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.verify-account__container-image img {
-    width: 100%;
-    height: auto;
-    max-width: 45rem;
-    max-height: 100%;
+    flex-direction: column;
+    gap: 1.2rem;
 }

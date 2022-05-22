@@ -29,9 +29,9 @@ const App = () => {
       <LoginButton />
       <ProfileTabs />
       <ActiveMembers />
-      <VerifyAccount />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
+        <Route path="/auth/verify" element={<VerifyAccount />} />
       </Routes>
       <Resources />
       <Footer />
