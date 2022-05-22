@@ -11,7 +11,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/images/logo.png';
 import { LoginButton, SignupButton } from '../Forms';
-import { setUser } from '../../redux/features/auth/authSlice';
+import { clearUser } from '../../redux/features/auth/authSlice';
 
 const { Header } = Layout;
 const { Item } = Menu;
@@ -38,7 +38,7 @@ const Navbar = () => {
             <Item
               onClick={async () => {
                 await axios.post('/api/logout');
-                dispatch(setUser({ isAuthenticated: false, user: null }));
+                dispatch(clearUser());
                 navigate('/');
               }}
               className="logout"
