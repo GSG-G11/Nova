@@ -13,6 +13,7 @@ import getAvailableTime from './interview/getAvailableTime';
 import getInterviewerAvailableTime from './interview/getTimeInterviewer';
 import createReview from './users/createReview';
 import getUsers from './users/getUsers';
+import logout from './authentication/logout';
 
 export {
   signup,
@@ -30,4 +31,5 @@ export {
   getInterviewerAvailableTime,
   createReview,
   getUsers,
+  logout,
 };
