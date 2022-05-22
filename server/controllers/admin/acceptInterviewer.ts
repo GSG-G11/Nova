@@ -22,14 +22,13 @@ const acceptInterviewer = async (req: Request, res: Response) => {
     },
   });
 
-  const verify = (status === 'APPROVED') ? 'true' : 'false';
-
-  await User.updateOne({ _id: new ObjectId(id) }, {
-    $set: {
-      is_verified: verify,
-    },
-  });
-
+  if (status === 'APPROVED') {
+    await User.updateOne({ _id: new ObjectId(id) }, {
+      $set: {
+        is_verified: true,
+      },
+    });
+  }
   res.json({
     message: 'Application updated successfully!',
   });
