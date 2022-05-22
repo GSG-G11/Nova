@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import startDb from './config';
 import usersData from './fakeData/users.json';
 import intervieweesData from './fakeData/interviewees.json';
@@ -25,6 +26,10 @@ const createFakeData = async () => {
       Interviewee.insertMany(intervieweesData.interviewee),
       Interviewer.insertMany(interviewersData.interviewer),
     ]);
+
+    await setTimeout(() => {
+      mongoose.connection.close();
+    }, 10000);
 
     console.log('Fake data created successfully');
   } catch (err: any) {
