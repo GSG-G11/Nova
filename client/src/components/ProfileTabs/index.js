@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
-import SettingTab from '../Setting';
+import SettingTab from '../Resources/Setting';
 import './style.css';
 
 const { TabPane } = Tabs;

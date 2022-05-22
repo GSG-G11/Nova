@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
@@ -7,6 +7,8 @@ import UserInfo from './components/UserInfo';
 import Navbar from './components/Navbar';
 import Footer from './components/common/Footer';
 import Landing from './components/Landing';
+import Resources from './components/Resources';
+import VerifyAccount from './components/VerifyAccount';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,13 +24,14 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Landing />} />
-          </Routes>
-          <Routes>
             <Route path="/users/:id" element={<UserInfo />} />
+            <Route path="/auth/verify" element={<VerifyAccount />} />
           </Routes>
           <Footer />
         </div>
       )}
+      <Resources />
+      <Footer />
     </div>
   );
 };

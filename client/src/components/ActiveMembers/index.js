@@ -36,13 +36,13 @@ const ActiveMembers = () => {
       <div className="active-members__members">
 
         {members.map(({
-          _id, name, role, image,
+          _id, name, userInfo, image,
         }) => (
           <Member
             key={_id}
             _id={_id}
             name={name}
-            interviewer={role}
+            userInfo={userInfo}
             image={image}
           />
         ))}
