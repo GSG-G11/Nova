@@ -18,7 +18,7 @@ const acceptInterviewer = async (req: Request, res: Response) => {
 
   await Interviewer.updateOne({ userId: new ObjectId(id) }, {
     $set: {
-      approved: status,
+      status,
     },
   });
 
