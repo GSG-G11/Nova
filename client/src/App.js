@@ -10,6 +10,7 @@ import ProfileTabs from './components/ProfileTabs';
 import ActiveMembers from './components/ActiveMembers';
 import Resources from './components/Resources';
 import VerifyAccount from './components/VerifyAccount';
+import Header from './components/Header';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,13 +22,14 @@ const App = () => {
   return (
     <div className="App">
       <SignupButton />
+      <LoginButton />
+      <Header />
       {loading ? 'Loading...' : (
         <div>
-          hi
+          <ProfileTabs />
+          <Resources />
         </div>
       )}
-      <LoginButton />
-      <ProfileTabs />
       <ActiveMembers />
       <Routes>
         <Route path="/users/:id" element={<UserInfo />} />
@@ -36,7 +38,6 @@ const App = () => {
       <Resources />
       <Footer />
     </div>
-
   );
 };
 
