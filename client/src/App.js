@@ -31,6 +31,7 @@ const App = () => {
       )}
       <InterviewForm />
       <Footer />
+
     </div>
   );
 };
