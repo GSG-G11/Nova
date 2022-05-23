@@ -7,6 +7,7 @@ import {
 } from '../../utils';
 import Schedule from '../../database/Models/Schedule';
 import Interviewer from '../../database/Models/Interviewer';
+import createMeeting from '../../zoom/createMeeting';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -63,6 +64,11 @@ const createInterview = async (req: RequestType, res: Response) => {
   const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
   // // update the schedule for the interviewer
+  const { joinUrl, password, meetingId } = await createMeeting();
+
+  if (!joinUrl || !password || !meetingId) {
+    throw new CustomError('Something went wrong', 500);
+  }
 
   const interview = {
     interviewerId,
@@ -71,6 +77,11 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
+    meeting: {
+      joinUrl,
+      password,
+      meetingId,
+    },
   };
 
   const interviewerInterview = {

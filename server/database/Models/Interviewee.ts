@@ -53,6 +53,11 @@ const interviewee = new Schema({
             },
           },
           required: true,
+          default: {
+            joinUrl: '',
+            password: '',
+            meetingId: '',
+          },
         },
         review: {
           type: {

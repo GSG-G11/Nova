@@ -1,17 +1,15 @@
-/* eslint-disable no-unused-vars */
 import jwt from 'jsonwebtoken';
-import config from './config';
 import { CustomError } from '../utils';
 
 const rp = require('request-promise');
 
 const payload = {
-  iss: config.APIKey,
+  iss: process.env.API_KEY,
   exp: new Date().getTime() + 5000,
 };
-const token = jwt.sign(payload, config.APISecret);
-const createMeeting = async (req: any, res: any) => {
-  const { email } = req.body;
+const token = jwt.sign(payload, process.env.API_SECRET ?? '');
+const createMeeting = async () => {
+  const email = process.env.EMAIL;
   const options = {
     method: 'POST',
     uri: `https://api.zoom.us/v2/users/${email}/meetings`,
@@ -37,8 +35,6 @@ const createMeeting = async (req: any, res: any) => {
   };
 
   const response = await rp(options);
-  console.log(response);
-  console.log('response url', response.join_url);
   if (!response) {
     throw new CustomError('Something went wrong', 500);
   }
