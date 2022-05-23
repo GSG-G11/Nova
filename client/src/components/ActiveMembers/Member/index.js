@@ -7,7 +7,7 @@ import circle from '../../../assets/images/circle.png';
 const { Text } = Typography;
 
 const Member = ({
-  _id, specialization, userInfo,
+  _id, specialization, userInfo: { name, profile_picture: profilePic },
 }) => {
   const navigate = useNavigate();
   return (
@@ -24,13 +24,13 @@ const Member = ({
       />
       <div className="active-members__member-image">
         <img
-          src={userInfo.profile_picture}
+          src={profilePic}
           alt="member"
         />
       </div>
       <Text strong className="active-members__member-name">
         {' '}
-        {userInfo.name}
+        {name}
         {' '}
       </Text>
       <Text className="active-members__member-position">
