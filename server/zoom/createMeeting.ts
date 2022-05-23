@@ -1,0 +1,56 @@
+/* eslint-disable no-unused-vars */
+import jwt from 'jsonwebtoken';
+import config from './config';
+import { CustomError } from '../utils';
+
+const rp = require('request-promise');
+
+const payload = {
+  iss: config.APIKey,
+  exp: new Date().getTime() + 5000,
+};
+const token = jwt.sign(payload, config.APISecret);
+const createMeeting = async (req: any, res: any) => {
+  const { email } = req.body;
+  const options = {
+    method: 'POST',
+    uri: `https://api.zoom.us/v2/users/${email}/meetings`,
+    body: {
+      topic: 'Meeting',
+      type: 2,
+      settings: {
+        host_video: 'true',
+        participant_video: 'true',
+        join_before_host: 'true',
+        approval_type: 1,
+      },
+      pre_schedule: 'true',
+    },
+    auth: {
+      bearer: token,
+    },
+    headers: {
+      'content-type': 'application/json',
+      'User-Agent': 'Zoom-api-Jwt-Request',
+    },
+    json: true,
+  };
+
+  const response = await rp(options);
+  console.log(response);
+  console.log('response url', response.join_url);
+  if (!response) {
+    throw new CustomError('Something went wrong', 500);
+  }
+
+  const { join_url: joinUrl, password, id } = response;
+  const dataRes = {
+    joinUrl,
+    password,
+    meetingId: id,
+  };
+
+  return dataRes;
+};
+
+export default createMeeting;
