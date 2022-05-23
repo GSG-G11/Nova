@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
+import SettingTab from '../Resources/Setting';
 import './style.css';
 import CalenderTab from '../Calender/calender';
 
@@ -11,7 +12,7 @@ const ProfileTabs = () => {
   const role = user?.role;
   return (
     role && (
-    <div>
+    <div className="profile-tabs-holder">
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
         <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
           Contents of Tab Pane 1
@@ -30,7 +31,7 @@ const ProfileTabs = () => {
           </TabPane>
         )}
         <TabPane tab="Settings" key="4">
-          Content of Tab Pane 4
+          <SettingTab />
         </TabPane>
       </Tabs>
     </div>

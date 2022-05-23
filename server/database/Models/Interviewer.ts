@@ -3,18 +3,23 @@ import { Schema, model } from 'mongoose';
 const interviewer = new Schema({
   userId: {
     $ref: 'User',
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   languages: {
     type: [String],
-    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
+    enum: ['JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
     required: true,
   },
   specialization: {
     type: String,
     enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
     required: true,
+  },
+  status: {
+    type: String,
+    enum: ['PENDING', 'APPROVED', 'REJECTED'],
+    default: 'PENDING',
   },
   interviews: {
     type: [
@@ -34,7 +39,7 @@ const interviewer = new Schema({
         },
         language: {
           type: String,
-          enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
+          enum: ['JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
           required: true,
         },
         specialization: {

@@ -1,35 +1,55 @@
 .calender-tab .ant-picker {
     width: 90%;
 }
-.calender-tab{
+/* .calender-tab{
     display: flex;
-}
-.calender-tab .timePicker {
+} */
+/* .calender-tab .timePicker {
     width: 60%;
-}
+} */
 .datepickerForm{
     display: flex;
+    align-items: center;
 }
 .calender-tab .tags-holder .dates-sec,.datepickerForm label {
     color: #0A093D;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
+}
+.datepickerForm label{
     margin-bottom: 5% !important;
+}
+.calender-tab .tags-holder {
+    margin-top: 3%;
 }
 .calender-tab .ant-row.ant-form-item {
     width: 60%;
 }
-.calender-tab .btn-save-holder {
+.calender-tab .btn-save-holder{
     display: flex;
-    align-items: center;
-    margin-top: 3%;
+    margin-top: 2%;
+}
+.calender-tab .btn-save-holder .ant-btn-primary{
+    padding: 2px 26px;
+    height: 33px;
+    color: #fff;
+    border-color: #1890ff;
+    background: #1890ff;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
 }
 .calender-tab .ant-tag {
     padding: 5px 14px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+}
+.ant-picker-cell-disabled {
+    color: #2196f3;
+    pointer-events: none;
+    background-color: #2196f330;
+    font-size: 17px;
 }
 
 
