@@ -14,6 +14,8 @@ const { confirm } = Modal;
 
 const AdminTables = () => {
   const [dataSource, setDataSource] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const showDeleteConfirm = () => {
     confirm({
@@ -26,15 +28,20 @@ const AdminTables = () => {
       onOk() {
         console.log('OK');
       },
-      onCancel() {
-        console.log('Cancel');
-      },
     });
   };
   useEffect(() => {
+    const cancelToken = axios.CancelToken;
+    const source = cancelToken.source();
     try {
       const fetchData = async () => {
-        const { data: { data } } = await axios.get('/api/admin/users?role=interviewer&limit=3&status=APPROVED');
+        const { data: { data, count } } = await axios.get(`/api/admin/users?role=interviewer&limit=3&status=APPROVED&page=${page}`, {
+          cancelToken: source.token,
+        });
+        if (page === 1) {
+          setPageNumber(count);
+        }
+        setDataSource([]);
         data.forEach((obj) => {
           setDataSource((prev) => [...prev, {
             key: obj.userId,
@@ -51,11 +58,24 @@ const AdminTables = () => {
       };
       fetchData();
     } catch (error) {
+      setDataSource([]);
       message.error(error);
     }
-  }, []);
+    return () => source.cancel();
+  }, [page]);
   return (
-    <Table dataSource={dataSource} className="table">
+    <Table
+      dataSource={dataSource}
+      className="table"
+      pagination={{
+        current: page,
+        pageSize: 3,
+        total: pageNumber,
+        onChange: (pageCh) => {
+          setPage(pageCh);
+        },
+      }}
+    >
       <Column title="Name" dataIndex="Name" key="Name" />
       <Column title="email" dataIndex="email" key="email" />
       <Column
