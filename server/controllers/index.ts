@@ -12,7 +12,7 @@ import validateEmail from './authentication/validateEmail';
 import getAvailableTime from './interview/getAvailableTime';
 import getInterviewerAvailableTime from './interview/getTimeInterviewer';
 import createReview from './users/createReview';
-import getUsers from './users/getUsers';
+import getInterviewers from './users/getInterviewers';
 import logout from './authentication/logout';
 import acceptInterviewer from './admin/acceptInterviewer';
 import getUsersAdmin from './admin/getUsersAdmin';
@@ -32,7 +32,7 @@ export {
   getAvailableTime,
   getInterviewerAvailableTime,
   createReview,
-  getUsers,
+  getInterviewers,
   logout,
   acceptInterviewer,
   getUsersAdmin,

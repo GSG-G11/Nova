@@ -11,7 +11,7 @@ const ActiveMembers = () => {
     const cancelToken = axios.CancelToken.source();
     const getMembers = async () => {
       try {
-        const { data: { data } } = await axios.get('/api/users', {
+        const { data: { data } } = await axios.get('/api/interviewers', {
           cancelToken: cancelToken.token,
         });
         setMembers(data);
