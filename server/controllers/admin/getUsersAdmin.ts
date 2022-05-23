@@ -3,7 +3,7 @@ import { RequestType, getUsersAdminQueryValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
 import Interviewee from '../../database/Models/Interviewee';
 
-const getInterviewersAdmin = async (req: RequestType, res: Response) => {
+const getUsersAdmin = async (req: RequestType, res: Response) => {
   const {
     role, page = '1', limit, status,
   }: { role?: string, page?: string, limit?: string, status?: string} = req.query;
@@ -59,4 +59,4 @@ const getInterviewersAdmin = async (req: RequestType, res: Response) => {
   });
 };
 
-export default getInterviewersAdmin;
+export default getUsersAdmin;
