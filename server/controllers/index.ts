@@ -13,6 +13,9 @@ import getAvailableTime from './interview/getAvailableTime';
 import getInterviewerAvailableTime from './interview/getTimeInterviewer';
 import createReview from './users/createReview';
 import getUsers from './users/getUsers';
+import logout from './authentication/logout';
+import acceptInterviewer from './admin/acceptInterviewer';
+import getUsersAdmin from './admin/getUsersAdmin';
 
 export {
   signup,
@@ -30,4 +33,7 @@ export {
   getInterviewerAvailableTime,
   createReview,
   getUsers,
+  logout,
+  acceptInterviewer,
+  getUsersAdmin,
 };

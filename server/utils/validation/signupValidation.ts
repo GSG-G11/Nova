@@ -14,7 +14,7 @@ const signupValidation = async (data: object) => {
 
 const signupInterviewerValidation = async (data: object) => {
   const schema = Joi.object({
-    languages: Joi.array().items(Joi.string().valid('JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO')).required(),
+    languages: Joi.array().items(Joi.string().valid('JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO')).required(),
     specialization: Joi.string().valid('FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK').required(),
     cv: Joi.string().uri().required(),
     level: Joi.string().valid('JUNIOR', 'MIDDLE', 'SENIOR', 'EXPERT', 'INTERNSHIP').required(),

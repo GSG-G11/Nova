@@ -41,7 +41,7 @@ describe('signup', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"languages[0]" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]. "specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        expect(res.body.message).toBe('"languages[0]" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]. "specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
         return done();
       });
   });
@@ -52,7 +52,7 @@ describe('signup', () => {
       email: 'mahmoud@gmail.com',
       password: 'Abed@123',
       role: 'interviewer',
-      languages: ['JS', 'PHP'],
+      languages: ['JAVASCRIPT', 'PHP'],
       specialization: 'FRONTEND',
       cv: 'cv',
       level: 'JUNIOR',
@@ -72,7 +72,7 @@ describe('signup', () => {
       email: 'mahmoud@gmail.com',
       password: 'Abed@123',
       role: 'interviewer',
-      languages: ['JS', 'PHP'],
+      languages: ['JAVASCRIPT', 'PHP'],
       specialization: 'FRONTEND',
       cv: 'http://www.cv.com',
       level: 'J',
@@ -92,7 +92,7 @@ describe('signup', () => {
       email: 'mahmoud@gmail.com',
       password: 'Abed@123',
       role: 'interviewer',
-      languages: ['JS'],
+      languages: ['JAVASCRIPT'],
       specialization: 'FRONTEND',
       cv: 'http://www.cv.com',
       level: 'JUNIOR',
@@ -121,23 +121,24 @@ describe('signup', () => {
       });
   });
 
-  test('Signup with non existent user', (done) => {
-    request(app)
-      .post('/api/signup')
-      .send({
-        name: 'Jack',
-        email: 'mahmoud@gmail.com',
-        password: 'Abed@123',
-        role: 'interviewee',
-      })
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
-        return done();
-      });
-  });
+  // test('Signup with non existent user', (done) => {
+  //   request(app)
+  //     .post('/api/signup')
+  //     .send({
+  //       name: 'Jack',
+  //       email: 'mahmoud@gmail.com',
+  //       password: 'Abed@123',
+  //       role: 'interviewee',
+  //     })
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Account created
+  // successfully please check your email to verify your account');
+  //       return done();
+  //     });
+  // });
 
   test('Verify Email failed', (done) => {
     request(app).patch('/api/auth/verify').expect(401)
@@ -373,7 +374,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'BACKEND',
       questionCategory: 'potato',
     })
@@ -392,7 +393,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'POTATO',
       questionCategory: 'Technical',
     })
@@ -420,7 +421,7 @@ describe('Create Interview', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        expect(res.body.message).toBe('"language" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
         return done();
       });
   });
@@ -430,7 +431,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 'LOL',
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -449,7 +450,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: 'aha12',
       time: 12,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -468,7 +469,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-01',
       time: 12,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -487,7 +488,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 20,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -506,7 +507,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -695,14 +696,14 @@ describe('Get Available interview times', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        expect(res.body.message).toBe('"language" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
         return done();
       });
   });
 
   test('Should throw a specialization validation error', (done) => {
     request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'potato',
     })
       .expect(400)
@@ -717,7 +718,7 @@ describe('Get Available interview times', () => {
 
   test('Should Get Available interview times', (done) => {
     request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
     })
       .end((err, res) => {
@@ -817,8 +818,8 @@ describe('Post interview time', () => {
 
   test('Should schedule interview', (done) => {
     request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      date: '2022-04-28',
-      time: 12,
+      date: '2022-09-28',
+      time: 2,
     })
       .expect(200)
       .end((err, res) => {
@@ -941,44 +942,24 @@ describe('Create Review for a specific interview', () => {
 });
 
 describe('Get users', () => {
-  test('Should throw validation error', (done) => {
-    request(app).get('/api/users?role=interview&limit=1&page=3').expect(400).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.body.message).toBe('"role" must be one of [interviewer, interviewee]');
-      return done();
-    });
-  });
-
-  test('Should throw validation error', (done) => {
-    request(app).get('/api/users?role=interviewer&limit=0&page=3').expect(400).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.body.message).toBe('"limit" contains an invalid value');
-      return done();
-    });
-  });
-
   test('Should return all interviewees', (done) => {
-    request(app).get('/api/users?role=interviewee&limit=1&page=1').expect(200).end((err, res) => {
+    request(app).get('/api/users').expect(200).end((err, res) => {
       if (err) {
         return done(err);
       }
       expect(res.body.message).toBe('Users fetched successfully!');
-      expect(res.body.data.length).toBe(1);
+      expect(res.body.data.length).toBe(4);
       return done();
     });
   });
 
   test('Should return all interviewers', (done) => {
-    request(app).get('/api/users?role=interviewer&limit=1&page=1').expect(200).end((err, res) => {
+    request(app).get('/api/users').expect(200).end((err, res) => {
       if (err) {
         return done(err);
       }
       expect(res.body.message).toBe('Users fetched successfully!');
-      expect(res.body.data.length).toBe(1);
+      expect(res.body.data.length).toBe(4);
       return done();
     });
   });

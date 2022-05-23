@@ -2,7 +2,7 @@ import Joi, { ValidationResult } from 'joi';
 
 const getInterviewTimeValidation = async (data: object) => {
   const interviewSchema = Joi.object({
-    language: Joi.string().valid('JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO').required(),
+    language: Joi.string().valid('JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO').required(),
     specialization: Joi.string().valid('FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK').required(),
   });
 

@@ -11,6 +11,7 @@ const ReviewCard = () => {
   const [reviewsArr, setReviews] = useState([]);
   const [filterVal, setFilterVal] = useState(null);
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState();
 
   const onChange = (value) => {
     setPage(value);
@@ -22,14 +23,14 @@ const ReviewCard = () => {
         `/api/user/interview/review/${InterviewId}`,
       );
 
-      const newReview = reviewsArr.map((item) => {
-        if (item.InterviewId === InterviewId) {
-          // eslint-disable-next-line no-param-reassign
-          (item.review.saved = !item.review.saved);
-        }
-        return item;
+      setReviews((prevReview) => {
+        prevReview.map((item) => {
+          if (item.InterviewId === InterviewId) {
+            (item.review.saved = !item.review.saved);
+          }
+          return item;
+        });
       });
-      setReviews(newReview);
     } catch ({
       response: {
         data: { message: msg },
@@ -65,11 +66,11 @@ const ReviewCard = () => {
       try {
         const {
           data: {
-            data: { reviews },
+            data: { reviews, length },
           },
         } = await axios.get(url, { cancelToken: source.token });
-        const reviewArr = reviews.filter((item) => item.review.message !== '');
-        setReviews(reviewArr);
+        setReviews(reviews);
+        setTotal(length);
       } catch ({
         response: {
           data: { message: msg },
@@ -130,7 +131,7 @@ const ReviewCard = () => {
         <Empty description={<span>No Reviews have been created yet!</span>} />
       )}
       <div className="pagination-holder">
-        <Pagination defaultCurrent={1} total={50} current={page} onChange={onChange} />
+        <Pagination defaultCurrent={1} total={total} current={page} onChange={onChange} />
       </div>
       ;
     </div>

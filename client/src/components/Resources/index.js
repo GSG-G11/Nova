@@ -9,24 +9,28 @@ import ResourceCard from './ResourceCard';
 
 const resourcesArray = [
   {
+    id: 1,
     image: icon0,
     title: 'Interview Guides',
     description: 'We have a collection of interview guides to help you prepare for your interview.',
     link: 'https://www.techinterviewhandbook.org/software-engineering-interview-guide/',
   },
   {
+    id: 2,
     image: icon1,
     title: 'All Problems',
     description: 'Full questions, answers and specific interviewing tips. All in one place.',
     link: 'https://www.fullstack.cafe/blog/coding-challenges-interview-questions',
   },
   {
+    id: 3,
     image: icon2,
     title: 'Fast Track Courses',
     description: 'Learn to be a better programmer faster with our recommended fast track courses.',
     link: 'https://www.coursera.org/learn/cs-tech-interview',
   },
   {
+    id: 4,
     image: icon3,
     title: 'Blog',
     description: 'Read our recommended blog to learn about the latest news and updates.',
@@ -42,13 +46,14 @@ const Resources = () => (
     />
     <div className="resources__cards">
       {resourcesArray.map(({
-        image, title, description, link,
+        image, title, description, link, id,
       }) => (
         <ResourceCard
           image={image}
           title={title}
           description={description}
           link={link}
+          key={id}
         />
       ))}
     </div>

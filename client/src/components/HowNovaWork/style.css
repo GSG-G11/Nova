@@ -1,0 +1,56 @@
+.HowNovaWork{
+  background-color: rgb(255, 255, 255);
+  min-height: 280px;
+}
+
+.titleForHowNovaPractice{
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  color: #0a093d;
+  text-align: center;
+}
+
+.getPaired{
+  width: 18rem;
+  height: 18rem;
+  border-radius: 20px;
+}
+
+.getPairedDivText{
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  align-items: center;
+}
+
+.new1{
+  width: 4rem;
+  border: #ffaf2f solid;
+  margin: 0 !important;
+}
+
+.titleHrDiv{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 20rem;
+}
+
+.titleForAll{
+  margin: 0% !important;
+  color: #2f2c4a !important;
+  margin-left: 1rem !important;
+}
+
+.desc{
+  margin: 1rem !important;
+  color: #656464 !important;
+}
+
+.allImg{
+display: flex !important;   
+justify-content: space-around !important;
+margin-top: 3rem;
+}

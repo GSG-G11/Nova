@@ -3,16 +3,17 @@
         {
             "userId": "627c92140d0c3622573195cb",
             "languages": [
-                "JS",
+                "JAVASCRIPT",
                 "PHP"
             ],
             "specialization": "BACKEND",
+            "status": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "627c92140d0c3622573195ca",
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JS",
+                    "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
@@ -49,12 +50,13 @@
                 "PYTHON","RUBY"
             ],
             "specialization": "BACKEND",
+            "status": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "627c92140d0c3622573195ca",
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JS",
+                    "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical"
 
@@ -87,16 +89,17 @@
         {
             "userId": "a27c92140d0c3622573195ce",
             "languages": [
-                "JS",
+                "JAVASCRIPT",
                 "PHP"
             ],
             "specialization": "FRONTEND",
+            "status": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "a27c92140d0c3622573195ce",
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JS",
+                    "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
@@ -130,16 +133,17 @@
         {
             "userId": "b27c92140d0c3622573195ce",
             "languages": [
-                "JS",
+                "JAVASCRIPT",
                 "PHP"
             ],
             "specialization": "FULL STACK",
+            "status": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "a27c92140d0c3622573195ce",
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JS",
+                    "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
@@ -173,16 +177,17 @@
         {
             "userId": "c27c92140d0c3622573195ce",
             "languages": [
-                "JS",
+                "JAVASCRIPT",
                 "PHP"
             ],
             "specialization": "BACKEND",
+            "status": "APPROVED",
             "interviews": [
                 {
                     "intervieweeId": "a27c92140d0c3622573195ce",
                     "date": "2022-04-28",
                     "time": 12,
-                    "language": "JS",
+                    "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
@@ -212,7 +217,18 @@
                     ]
                 }
             ]
+        },
+        {
+            "userId": "627c92140d0c3622573195ad",
+            "languages": [
+                "JAVA",
+                "PHP"
+            ],
+            "specialization": "BACKEND",
+            "interviews": [
+            ],
+            "schedule": [
+            ]
         }
     ]
 }
-
