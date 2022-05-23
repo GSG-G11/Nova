@@ -17,7 +17,6 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
   const skip = (Number(page) - 1) * pageLimit;
 
   const dataBaseInterview = (role === 'interviewer') ? Interviewer : Interviewee;
-
   const user = await dataBaseInterview.aggregate([{
     $group: {
       _id: '$_id',
@@ -52,7 +51,18 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
     },
   }]).skip(skip).limit(pageLimit);
 
-  res.json({
+  if (page === '1') {
+    const count = await dataBaseInterview.countDocuments({
+      status,
+    });
+    return res.json({
+      count,
+      data: user,
+      message: 'Users fetched successfully!',
+    });
+  }
+
+  return res.json({
     data: user,
     message: 'Users fetched successfully!',
   });
