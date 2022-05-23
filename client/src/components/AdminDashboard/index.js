@@ -19,7 +19,7 @@ const items = [
     key: '1',
     icon: UserOutlined,
     label: 'Interviewers',
-    content: <AdminTables />,
+    content: <AdminTables status="APPROVED" />,
   },
   {
     key: '2',
@@ -31,7 +31,7 @@ const items = [
     key: '3',
     icon: BookOutlined,
     label: 'Applications',
-    content: <div>Applications</div>,
+    content: <AdminTables status="PENDING" />,
   },
   {
     key: '4',

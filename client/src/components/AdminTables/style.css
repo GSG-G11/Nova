@@ -6,6 +6,12 @@
   color: red;
 }
 
-.deleteIcon:hover{
-  
+.accept{
+  background-color: green;
+  color: white;
+}
+
+.reject{
+  background-color: rgb(222, 16, 16);
+  color: white;
 }

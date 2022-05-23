@@ -4,7 +4,7 @@ import Header from '../Header';
 import Resources from '../Resources';
 import HowNovaWork from '../HowNovaWork';
 import Partner from '../Partner';
-// import ActiveMembers from '../ActiveMembers';
+import ActiveMembers from '../ActiveMembers';
 import IntreviewerApp from '../IntreviewerApp';
 import ClientReviews from '../ClientReviews';
 import Challenges from '../Challenges';
@@ -17,7 +17,7 @@ const Landing = () => (
     <Resources />
     <HowNovaWork />
     <Partner />
-    {/* <ActiveMembers /> */}
+    <ActiveMembers />
     <IntreviewerApp />
     <Challenges />
     <ClientReviews />

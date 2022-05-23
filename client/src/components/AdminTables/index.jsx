@@ -1,9 +1,10 @@
 import {
-  message, Space, Table, Tag, Modal,
+  message, Space, Table, Tag, Modal, Button,
 } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './style.css';
+import PropTypes from 'prop-types';
 import {
   DeleteOutlined,
   ExclamationCircleOutlined,
@@ -12,7 +13,7 @@ import {
 const { Column } = Table;
 const { confirm } = Modal;
 
-const AdminTables = () => {
+const AdminTables = ({ status }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -25,7 +26,17 @@ const AdminTables = () => {
       message.error(error);
     }
   };
-  const showDeleteConfirm = (id) => {
+
+  const acceptUser = async (id, state) => {
+    try {
+      await axios.patch(`/api/admin/approval/${id}`, { status: state });
+      setDataSource((prev) => prev.filter((item) => item.key !== id));
+    } catch (error) {
+      message.error(error);
+    }
+  };
+
+  const showDeleteConfirm = (id, state) => {
     confirm({
       title: 'Delete user',
       icon: <ExclamationCircleOutlined />,
@@ -34,16 +45,31 @@ const AdminTables = () => {
       okType: 'danger',
       cancelText: 'No',
       onOk: async () => {
-        await deleteUser(id);
+        if (!state) {
+          return deleteUser(id);
+        }
+        return acceptUser(id, state);
       },
     });
   };
+
+  const showAcceptConfirm = (id, state) => {
+    confirm({
+      title: 'Accept user',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Are you sure you want to accept this user?',
+      onOk: async () => {
+        acceptUser(id, state);
+      },
+    });
+  };
+
   useEffect(() => {
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
     try {
       const fetchData = async () => {
-        const { data: { data, count } } = await axios.get(`/api/admin/users?role=interviewer&limit=3&status=APPROVED&page=${page}`, {
+        const { data: { data, count } } = await axios.get(`/api/admin/users?role=interviewer&limit=3&status=${status}&page=${page}`, {
           cancelToken: source.token,
         });
         if (page === 1) {
@@ -70,7 +96,8 @@ const AdminTables = () => {
       message.error(error);
     }
     return () => source.cancel();
-  }, [page]);
+  }, [page, status]);
+
   return (
     <Table
       dataSource={dataSource}
@@ -121,12 +148,27 @@ const AdminTables = () => {
         key="action"
         render={(text, { key }) => (
           <Space size="middle">
-            <DeleteOutlined className="deleteIcon" onClick={() => showDeleteConfirm(key)} type="dashed" key={key} />
+            {status === 'PENDING' ? (
+              <>
+                <Button className="accept" onClick={() => showAcceptConfirm(key, 'APPROVED')}>
+                  Accept
+                </Button>
+                <Button className="reject" onClick={() => showAcceptConfirm(key, 'REJECTED')}>
+                  Reject
+                </Button>
+              </>
+            ) : (
+              <DeleteOutlined className="deleteIcon" onClick={() => showDeleteConfirm(key)} type="dashed" key={key} />
+            )}
           </Space>
         )}
       />
     </Table>
   );
+};
+
+AdminTables.propTypes = {
+  status: PropTypes.string.isRequired,
 };
 
 export default AdminTables;
