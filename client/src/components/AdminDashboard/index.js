@@ -2,6 +2,7 @@ import {
   BookOutlined,
   TeamOutlined,
   UserOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Typography } from 'antd';
 import React, { useState, createElement } from 'react';
@@ -30,6 +31,12 @@ const items = [
     icon: BookOutlined,
     label: 'Applications',
     content: <div>Applications</div>,
+  },
+  {
+    key: '4',
+    icon: LogoutOutlined,
+    label: 'Logout',
+    content: <div>Logout</div>,
   },
 ];
 
