@@ -13,7 +13,7 @@ import {
 const { Column } = Table;
 const { confirm } = Modal;
 
-const AdminTables = ({ status }) => {
+const AdminTables = ({ status, roles }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -69,25 +69,39 @@ const AdminTables = ({ status }) => {
     const source = cancelToken.source();
     try {
       const fetchData = async () => {
-        const { data: { data, count } } = await axios.get(`/api/admin/users?role=interviewer&limit=3&status=${status}&page=${page}`, {
+        const { data: { data, count } } = (roles === 'interviewer') ? await axios.get(`/api/admin/users?role=${roles}&limit=3&status=${status}&page=${page}`, {
+          cancelToken: source.token,
+        }) : await axios.get(`/api/admin/users?role=${roles}&limit=3&page=${page}`, {
           cancelToken: source.token,
         });
+
         if (page === 1) {
           setPageNumber(count);
         }
         setDataSource([]);
         data.forEach((obj) => {
-          setDataSource((prev) => [...prev, {
-            key: obj.userId,
-            languages: obj.languages,
-            specialization: obj.specialization,
-            status: obj.status,
-            Name: obj.userInfo[0].name,
-            email: obj.userInfo[0].email,
-            cv: obj.userInfo[0].cv,
-            level: obj.userInfo[0].level,
-            img: obj.userInfo[0].profile_picture,
-          }]);
+          if (roles === 'interviewer') {
+            setDataSource((prev) => [...prev, {
+              key: obj.userId,
+              languages: obj.languages,
+              specialization: obj.specialization,
+              status: obj.status,
+              Name: obj.userInfo[0].name,
+              email: obj.userInfo[0].email,
+              cv: obj.userInfo[0].cv,
+              level: obj.userInfo[0].level,
+              img: obj.userInfo[0].profile_picture,
+            }]);
+          } else {
+            setDataSource((prev) => [...prev, {
+              key: obj.userId,
+              Name: obj.userInfo[0].name,
+              email: obj.userInfo[0].email,
+              cv: obj.userInfo[0].cv,
+              level: obj.userInfo[0].level,
+              img: obj.userInfo[0].profile_picture,
+            }]);
+          }
         });
       };
       fetchData();
@@ -96,7 +110,7 @@ const AdminTables = ({ status }) => {
       message.error(error);
     }
     return () => source.cancel();
-  }, [page, status]);
+  }, [page, status, roles]);
 
   return (
     <Table
@@ -113,25 +127,29 @@ const AdminTables = ({ status }) => {
     >
       <Column title="Name" dataIndex="Name" key="Name" />
       <Column title="email" dataIndex="email" key="email" />
-      <Column
-        title="specialization"
-        dataIndex="specialization"
-        key="specialization"
-      />
-      <Column
-        title="languages"
-        dataIndex="languages"
-        key="languages"
-        render={(tags) => (
-          <>
-            {tags.map((tag) => (
-              <Tag color="blue" key={tag}>
-                {tag}
-              </Tag>
-            ))}
-          </>
-        )}
-      />
+      {(roles === 'interviewer') && (
+        <>
+          <Column
+            title="specialization"
+            dataIndex="specialization"
+            key="specialization"
+          />
+          <Column
+            title="languages"
+            dataIndex="languages"
+            key="languages"
+            render={(tags) => (
+              <>
+                {tags.map((tag) => (
+                  <Tag color="blue" key={tag}>
+                    {tag}
+                  </Tag>
+                ))}
+              </>
+            )}
+          />
+        </>
+      )}
       <Column
         title="cv"
         dataIndex="cv"
@@ -169,6 +187,7 @@ const AdminTables = ({ status }) => {
 
 AdminTables.propTypes = {
   status: PropTypes.string.isRequired,
+  roles: PropTypes.string.isRequired,
 };
 
 export default AdminTables;

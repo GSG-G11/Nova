@@ -19,19 +19,19 @@ const items = [
     key: '1',
     icon: UserOutlined,
     label: 'Interviewers',
-    content: <AdminTables status="APPROVED" />,
+    content: <AdminTables roles="interviewer" status="APPROVED" />,
   },
   {
     key: '2',
     icon: TeamOutlined,
     label: 'Interviewees',
-    content: <div>Interviewees</div>,
+    content: <AdminTables roles="interviewee" status="" />,
   },
   {
     key: '3',
     icon: BookOutlined,
     label: 'Applications',
-    content: <AdminTables status="PENDING" />,
+    content: <AdminTables roles="interviewer" status="PENDING" />,
   },
   {
     key: '4',
