@@ -9,15 +9,6 @@ const getInterviewsQueryValidation = async (data: object) => {
   const result: object = await schema.validateAsync(data, { abortEarly: false });
   return result;
 };
-const getUsersQueryValidation = async (data: object) => {
-  const schema = Joi.object({
-    limit: Joi.string().invalid('0').required(),
-    page: Joi.string(),
-  });
-
-  const result: object = await schema.validateAsync(data, { abortEarly: false });
-  return result;
-};
 
 const getUsersAdminQueryValidation = async (data: object) => {
   const schema = Joi.object({
@@ -41,6 +32,6 @@ const validateQuery = async (query: any) => {
 };
 
 export {
-  validateQuery, getInterviewsQueryValidation, getUsersQueryValidation,
+  validateQuery, getInterviewsQueryValidation,
   getUsersAdminQueryValidation,
 };
