@@ -7,6 +7,7 @@ import {
   Button, Image, message, Typography,
 } from 'antd';
 import LoadingSpinner from '../common/LoadingSpinner';
+import Navbar from '../Navbar';
 
 const { Text, Title } = Typography;
 const UserInfo = () => {
@@ -49,6 +50,7 @@ const UserInfo = () => {
         <LoadingSpinner />
       ) : (
         <>
+          <Navbar />
           <div className="user__primary">
             <div className="user__image-container">
               <Image src={profilePicture} alt="profile" />
