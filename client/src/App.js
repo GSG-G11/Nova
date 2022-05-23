@@ -3,13 +3,11 @@ import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
-import InterviewForm from './components/Forms/Interview/InterviewForm';
 import UserInfo from './components/UserInfo';
-import Navbar from './components/Navbar';
-import Footer from './components/common/Footer';
-import ProfileTabs from './components/ProfileTabs';
 import Landing from './components/Landing';
 import VerifyAccount from './components/VerifyAccount';
+import AdminDashboard from './components/AdminDashboard';
+import ProfileTabs from './components/ProfileTabs';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,18 +20,15 @@ const App = () => {
     <div className="App">
       {loading ? 'Loading...' : (
         <div>
-          <Navbar />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/users/:id" element={<UserInfo />} />
             <Route path="/auth/verify" element={<VerifyAccount />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
+          <ProfileTabs />
         </div>
       )}
-      <InterviewForm />
-      <ProfileTabs />
-      <Footer />
-
     </div>
   );
 };
