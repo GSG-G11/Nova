@@ -42,7 +42,6 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
           $project: {
             name: 1,
             email: 1,
-            role: 1,
             profile_picture: 1,
             cv: 1,
             level: 1,

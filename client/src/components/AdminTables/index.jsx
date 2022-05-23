@@ -1,0 +1,103 @@
+import {
+  message, Space, Table, Tag, Modal,
+} from 'antd';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import './style.css';
+import {
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons';
+
+const { Column } = Table;
+const { confirm } = Modal;
+
+const AdminTables = () => {
+  const [dataSource, setDataSource] = useState([]);
+
+  const showDeleteConfirm = () => {
+    confirm({
+      title: 'Delete user',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Are you sure to delete this user?',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK');
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const { data: { data } } = await axios.get('/api/admin/users?role=interviewer&limit=3&status=APPROVED');
+        data.forEach((obj) => {
+          setDataSource((prev) => [...prev, {
+            key: obj.userId,
+            languages: obj.languages,
+            specialization: obj.specialization,
+            status: obj.status,
+            Name: obj.userInfo[0].name,
+            email: obj.userInfo[0].email,
+            cv: obj.userInfo[0].cv,
+            level: obj.userInfo[0].level,
+            img: obj.userInfo[0].profile_picture,
+          }]);
+        });
+      };
+      fetchData();
+    } catch (error) {
+      message.error(error);
+    }
+  }, []);
+  return (
+    <Table dataSource={dataSource} className="table">
+      <Column title="Name" dataIndex="Name" key="Name" />
+      <Column title="email" dataIndex="email" key="email" />
+      <Column
+        title="specialization"
+        dataIndex="specialization"
+        key="specialization"
+      />
+      <Column
+        title="languages"
+        dataIndex="languages"
+        key="languages"
+        render={(tags) => (
+          <>
+            {tags.map((tag) => (
+              <Tag color="blue" key={tag}>
+                {tag}
+              </Tag>
+            ))}
+          </>
+        )}
+      />
+      <Column
+        title="cv"
+        dataIndex="cv"
+        key="cv"
+        render={(text, { cv }) => (
+          <a href={cv} target="_blank" rel="noreferrer">
+            {cv}
+          </a>
+        )}
+      />
+      <Column title="level" dataIndex="level" key="level" />
+      <Column
+        title="Action"
+        key="action"
+        render={(text, { key }) => (
+          <Space size="middle">
+            <DeleteOutlined className="deleteIcon" onClick={() => showDeleteConfirm()} type="dashed" key={key} />
+          </Space>
+        )}
+      />
+    </Table>
+  );
+};
+export default AdminTables;

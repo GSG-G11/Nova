@@ -7,6 +7,7 @@ import {
 import { Layout, Menu, Typography } from 'antd';
 import React, { useState, createElement } from 'react';
 import './style.css';
+import AdminTables from '../AdminTables';
 
 const {
   Header, Content, Footer, Sider,
@@ -18,7 +19,7 @@ const items = [
     key: '1',
     icon: UserOutlined,
     label: 'Interviewers',
-    content: <div>Interviewers</div>,
+    content: <AdminTables />,
   },
   {
     key: '2',
