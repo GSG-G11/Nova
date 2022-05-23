@@ -56,6 +56,7 @@ const SignupForm = ({ setIsModalVisible }) => {
       wrapperCol={{
         span: 25,
       }}
+      className="signup-form"
       initialValues={{
         remember: true,
       }}
