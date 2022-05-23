@@ -1,50 +1,39 @@
 import { Response } from 'express';
-import { RequestType, getUsersQueryValidation } from '../../utils';
-import User from '../../database/Models/User';
+import { RequestType } from '../../utils';
+import Interviewer from '../../database/Models/Interviewer';
 
 const getUsers = async (req: RequestType, res: Response) => {
-  const { role, page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
-
-  await getUsersQueryValidation({ role, page, limit });
-
-  const pageLimit = (Number(limit));
-
-  const skip = (Number(page) - 1) * pageLimit;
-
-  const dataBaseInterview = (role === 'interviewer') ? 'interviewers' : 'interviewees';
-
-  const user = await User.aggregate([
+  const user = await Interviewer.aggregate([
     {
       $group: {
         _id: '$_id',
-        name: { $first: '$name' },
-        role: { $first: '$role' },
-        email: { $first: '$email' },
-        image: { $first: '$profile_picture' },
+        userId: { $first: '$userId' },
+        specialization: { $first: '$specialization' },
+        status: { $first: '$status' },
       },
     },
     {
       $match: {
-        role,
+        status: 'APPROVED',
       },
     },
     {
       $lookup: {
-        from: dataBaseInterview,
-        localField: '_id',
-        foreignField: 'userId',
+        from: 'users',
+        localField: 'userId',
+        foreignField: '_id',
         pipeline: [
           {
             $project: {
-              languages: 1,
-              specialization: 1,
+              name: 1,
+              profile_picture: 1,
             },
           },
         ],
         as: 'userInfo',
       },
     },
-  ]).skip(skip).limit(pageLimit);
+  ]).limit(4);
 
   res.json({
     data: user,
