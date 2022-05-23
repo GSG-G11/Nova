@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import { Types } from 'mongoose';
 import Interviewee from '../../database/Models/Interviewee';
 import Interviewer from '../../database/Models/Interviewer';
@@ -21,9 +22,9 @@ const deleteUser = async (req: RequestType, res: Response) => {
   }
 
   if (user.role === 'interviewer') {
-    await Interviewer.findOneAndDelete({ userId: user._id });
+    await Interviewer.findOneAndDelete({ userId: new ObjectId(id) });
   } else {
-    await Interviewee.findOneAndDelete({ userId: user._id });
+    await Interviewee.findOneAndDelete({ userId: new ObjectId(id) });
   }
 
   res.json({
