@@ -7,10 +7,9 @@ import circle from '../../../assets/images/circle.png';
 const { Text } = Typography;
 
 const Member = ({
-  _id, name, userInfo, image,
+  _id, specialization, userInfo: { name, profile_picture: profilePic },
 }) => {
   const navigate = useNavigate();
-
   return (
     <div
       key={_id}
@@ -25,7 +24,7 @@ const Member = ({
       />
       <div className="active-members__member-image">
         <img
-          src={image}
+          src={profilePic}
           alt="member"
         />
       </div>
@@ -36,7 +35,7 @@ const Member = ({
       </Text>
       <Text className="active-members__member-position">
         {' '}
-        {userInfo[0].specialization}
+        {specialization}
         {' '}
       </Text>
     </div>
@@ -45,10 +44,10 @@ const Member = ({
 
 Member.propTypes = {
   _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  userInfo: PropTypes.arrayOf(PropTypes.shape({
-    specialization: PropTypes.string.isRequired,
-  })).isRequired,
-  image: PropTypes.string.isRequired,
+  userInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    profile_picture: PropTypes.string.isRequired,
+  }).isRequired,
+  specialization: PropTypes.string.isRequired,
 };
 export default Member;

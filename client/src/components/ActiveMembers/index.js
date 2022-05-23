@@ -11,7 +11,7 @@ const ActiveMembers = () => {
     const cancelToken = axios.CancelToken.source();
     const getMembers = async () => {
       try {
-        const { data: { data } } = await axios.get('/api/users?role=interviewer&limit=4', {
+        const { data: { data } } = await axios.get('/api/interviewers', {
           cancelToken: cancelToken.token,
         });
         setMembers(data);
@@ -35,15 +35,14 @@ const ActiveMembers = () => {
       />
       <div className="active-members__members">
 
-        {members.map(({
-          _id, name, userInfo, image,
+        {members.length && members.map(({
+          _id, userInfo, specialization,
         }) => (
           <Member
             key={_id}
             _id={_id}
-            name={name}
-            userInfo={userInfo}
-            image={image}
+            userInfo={userInfo[0]}
+            specialization={specialization}
           />
         ))}
 

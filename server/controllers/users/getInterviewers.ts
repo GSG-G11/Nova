@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { RequestType } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
 
-const getUsers = async (req: RequestType, res: Response) => {
+const getInterviewers = async (req: RequestType, res: Response) => {
   const user = await Interviewer.aggregate([
     {
       $group: {
@@ -41,4 +41,4 @@ const getUsers = async (req: RequestType, res: Response) => {
   });
 };
 
-export default getUsers;
+export default getInterviewers;
