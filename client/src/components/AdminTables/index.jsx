@@ -17,7 +17,15 @@ const AdminTables = () => {
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const showDeleteConfirm = () => {
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`/api/admin/users/${id}`);
+      setDataSource((prev) => prev.filter((item) => item.key !== id));
+    } catch (error) {
+      message.error(error);
+    }
+  };
+  const showDeleteConfirm = (id) => {
     confirm({
       title: 'Delete user',
       icon: <ExclamationCircleOutlined />,
@@ -25,8 +33,8 @@ const AdminTables = () => {
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        console.log('OK');
+      onOk: async () => {
+        await deleteUser(id);
       },
     });
   };
@@ -113,11 +121,12 @@ const AdminTables = () => {
         key="action"
         render={(text, { key }) => (
           <Space size="middle">
-            <DeleteOutlined className="deleteIcon" onClick={() => showDeleteConfirm()} type="dashed" key={key} />
+            <DeleteOutlined className="deleteIcon" onClick={() => showDeleteConfirm(key)} type="dashed" key={key} />
           </Space>
         )}
       />
     </Table>
   );
 };
+
 export default AdminTables;
