@@ -48,7 +48,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
       },
     },
   },
-  ]).skip((Number(page) - 1) * 4).limit(4);
+  ]).skip((Number(page) - 1) * 3).limit(3);
 
   // Get the names of the interviewers based on Interviewers Ids
   const reviews = await Promise.all(filteredReviewsWithIds.map(async (review: any) => {
