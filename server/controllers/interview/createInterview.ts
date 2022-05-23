@@ -64,9 +64,9 @@ const createInterview = async (req: RequestType, res: Response) => {
   const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
   // // update the schedule for the interviewer
-  const { joinUrl, password, meetingId } = await createMeeting();
+  const { join_url: finalUrl, password, meetingId } = await createMeeting();
 
-  if (!joinUrl || !password || !meetingId) {
+  if (!finalUrl || !password || !meetingId) {
     throw new CustomError('Something went wrong', 500);
   }
 
@@ -78,7 +78,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     specialization,
     questionCategory,
     meeting: {
-      joinUrl,
+      join_url: finalUrl,
       password,
       meetingId,
     },
