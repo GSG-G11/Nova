@@ -943,17 +943,7 @@ describe('Create Review for a specific interview', () => {
 
 describe('Get users', () => {
   test('Should throw validation error', (done) => {
-    request(app).get('/api/users?role=interview&limit=1&page=3').expect(400).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.body.message).toBe('"role" must be one of [interviewer, interviewee]');
-      return done();
-    });
-  });
-
-  test('Should throw validation error', (done) => {
-    request(app).get('/api/users?role=interviewer&limit=0&page=3').expect(400).end((err, res) => {
+    request(app).get('/api/users?limit=0&page=3').expect(400).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -963,7 +953,7 @@ describe('Get users', () => {
   });
 
   test('Should return all interviewees', (done) => {
-    request(app).get('/api/users?role=interviewee&limit=1&page=1').expect(200).end((err, res) => {
+    request(app).get('/api/users?limit=1&page=1').expect(200).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -974,7 +964,7 @@ describe('Get users', () => {
   });
 
   test('Should return all interviewers', (done) => {
-    request(app).get('/api/users?role=interviewer&limit=1&page=1').expect(200).end((err, res) => {
+    request(app).get('/api/users?limit=1&page=1').expect(200).end((err, res) => {
       if (err) {
         return done(err);
       }

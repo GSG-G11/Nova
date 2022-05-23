@@ -3,15 +3,13 @@ import { RequestType, getUsersQueryValidation } from '../../utils';
 import User from '../../database/Models/User';
 
 const getUsers = async (req: RequestType, res: Response) => {
-  const { role, page = '1', limit }: {role?: string, page?: string, limit?: string} = req.query;
+  const { page = '1', limit }: { page?: string, limit?: string} = req.query;
 
-  await getUsersQueryValidation({ role, page, limit });
+  await getUsersQueryValidation({ page, limit });
 
   const pageLimit = (Number(limit));
 
   const skip = (Number(page) - 1) * pageLimit;
-
-  const dataBaseInterview = (role === 'interviewer') ? 'interviewers' : 'interviewees';
 
   const user = await User.aggregate([
     {
@@ -19,24 +17,22 @@ const getUsers = async (req: RequestType, res: Response) => {
         _id: '$_id',
         name: { $first: '$name' },
         role: { $first: '$role' },
-        email: { $first: '$email' },
         image: { $first: '$profile_picture' },
       },
     },
     {
       $match: {
-        role,
+        role: 'interviewer',
       },
     },
     {
       $lookup: {
-        from: dataBaseInterview,
+        from: 'interviewers',
         localField: '_id',
         foreignField: 'userId',
         pipeline: [
           {
             $project: {
-              languages: 1,
               specialization: 1,
             },
           },
