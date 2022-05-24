@@ -295,7 +295,7 @@ describe('Interview Reviews', () => {
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Reviews found');
-        expect(res.body.data.length).toBe(2);
+        expect(res.body.data.length).toBe(1);
         return done();
       });
   });
