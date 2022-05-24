@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { message } from 'antd';
+import { message, Skeleton } from 'antd';
 import axios from 'axios';
 import SectionIntro from '../common/SectionIntro';
 import './style.css';
@@ -7,16 +7,20 @@ import Member from './Member';
 
 const ActiveMembers = () => {
   const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     const getMembers = async () => {
       try {
-        const { data: { data } } = await axios.get('/api/users?role=interviewer&limit=4', {
+        setLoading(true);
+        const { data: { data } } = await axios.get('/api/interviewers', {
           cancelToken: cancelToken.token,
         });
         setMembers(data);
+        setLoading(false);
       } catch ({ response: { data: msg } }) {
         message.error(msg);
+        setLoading(false);
       }
     };
     getMembers();
@@ -35,17 +39,28 @@ const ActiveMembers = () => {
       />
       <div className="active-members__members">
 
-        {members.map(({
-          _id, name, userInfo, image,
-        }) => (
-          <Member
-            key={_id}
-            _id={_id}
-            name={name}
-            userInfo={userInfo}
-            image={image}
-          />
-        ))}
+        {loading && (
+          <>
+            <Skeleton loading={loading} active avatar />
+            <Skeleton loading={loading} active avatar />
+            <Skeleton loading={loading} active avatar />
+            <Skeleton loading={loading} active avatar />
+          </>
+        )}
+        {
+      members.length && members.map(({
+        _id, userInfo, specialization, userId,
+      }) => (
+        <Member
+          key={_id}
+          _id={_id}
+          userInfo={userInfo[0]}
+          specialization={specialization}
+          userId={userId}
+        />
+      ))
+
+    }
 
       </div>
     </section>
