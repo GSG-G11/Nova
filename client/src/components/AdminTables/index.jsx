@@ -65,6 +65,10 @@ const AdminTables = ({ status, roles }) => {
   };
 
   useEffect(() => {
+    setPage(1);
+  }, [status, roles]);
+
+  useEffect(() => {
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
     try {
