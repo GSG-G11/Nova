@@ -7,14 +7,14 @@ import circle from '../../../assets/images/circle.png';
 const { Text } = Typography;
 
 const Member = ({
-  _id, specialization, userInfo: { name, profile_picture: profilePic },
+  _id, specialization, userInfo: { name, profile_picture: profilePic }, userId,
 }) => {
   const navigate = useNavigate();
   return (
     <div
       key={_id}
       className="active-members__member-card"
-      onClick={() => navigate(`/users/${_id}`)}
+      onClick={() => navigate(`/users/${userId}`)}
       aria-hidden
     >
       <img
@@ -49,5 +49,6 @@ Member.propTypes = {
     profile_picture: PropTypes.string.isRequired,
   }).isRequired,
   specialization: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 export default Member;
