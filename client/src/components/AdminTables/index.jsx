@@ -71,11 +71,10 @@ const AdminTables = ({ status, roles }) => {
   useEffect(() => {
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
+    const endPoint = (roles === 'interviewer') ? `/api/admin/users?role=${roles}&limit=7&status=${status}&page=${page}` : `/api/admin/users?role=${roles}&limit=3&page=${page}`;
     try {
       const fetchData = async () => {
-        const { data: { data, count } } = (roles === 'interviewer') ? await axios.get(`/api/admin/users?role=${roles}&limit=3&status=${status}&page=${page}`, {
-          cancelToken: source.token,
-        }) : await axios.get(`/api/admin/users?role=${roles}&limit=3&page=${page}`, {
+        const { data: { data, count } } = await axios.get(endPoint, {
           cancelToken: source.token,
         });
 
@@ -83,19 +82,17 @@ const AdminTables = ({ status, roles }) => {
           setPageNumber(count);
         }
         setDataSource([]);
-        data.forEach((obj) => {
-          setDataSource((prev) => [...prev, {
-            key: obj.userId,
-            languages: obj?.languages || [],
-            specialization: obj.specialization,
-            status: obj.status,
-            Name: obj.userInfo[0].name,
-            email: obj.userInfo[0].email,
-            cv: obj.userInfo[0].cv,
-            level: obj.userInfo[0].level,
-            img: obj.userInfo[0].profile_picture,
-          }]);
-        });
+        setDataSource(data.map((obj) => ({
+          key: obj.userId,
+          languages: obj?.languages || [],
+          specialization: obj.specialization,
+          status: obj.status,
+          Name: obj.userInfo[0].name,
+          email: obj.userInfo[0].email,
+          cv: obj.userInfo[0].cv,
+          level: obj.userInfo[0].level,
+          img: obj.userInfo[0].profile_picture,
+        })));
       };
       fetchData();
     } catch (error) {
@@ -111,7 +108,7 @@ const AdminTables = ({ status, roles }) => {
       className="table"
       pagination={{
         current: page,
-        pageSize: 3,
+        pageSize: 7,
         total: pageNumber,
         onChange: (pageCh) => {
           setPage(pageCh);
