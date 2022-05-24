@@ -8,7 +8,6 @@ const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const validId: boolean = Types.ObjectId.isValid(id);
 
-  console.log(id);
   if (!validId) {
     throw new CustomError('Invalid user', 400);
   }
