@@ -1,5 +1,5 @@
 import {
-  message, Space, Table, Tag, Modal, Button, Avatar,
+  message, Space, Table, Tag, Modal, Button, Avatar, Typography,
 } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -12,8 +12,9 @@ import {
 
 const { Column } = Table;
 const { confirm } = Modal;
+const { Title } = Typography;
 
-const AdminTables = ({ status, roles }) => {
+const AdminTables = ({ pageLocation, roles }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -30,7 +31,16 @@ const AdminTables = ({ status, roles }) => {
   const acceptUser = async (id, state) => {
     try {
       await axios.patch(`/api/admin/approval/${id}`, { status: state });
-      setDataSource((prev) => prev.filter((item) => item.key !== id));
+      setDataSource((prev) => prev.filter((item) => {
+        if (item.key !== id) {
+          return item;
+        }
+
+        return {
+          ...item,
+          status: 'REJECTED',
+        };
+      }));
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
     }
@@ -63,12 +73,25 @@ const AdminTables = ({ status, roles }) => {
 
   useEffect(() => {
     setPage(1);
-  }, [status, roles]);
+  }, [pageLocation, roles]);
 
   useEffect(() => {
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
-    const endPoint = (roles === 'interviewer') ? `/api/admin/users?role=${roles}&limit=7&status=${status}&page=${page}` : `/api/admin/users?role=${roles}&limit=3&page=${page}`;
+    let endPoint;
+
+    switch (pageLocation) {
+      case 'Interviewers':
+        endPoint = `/api/admin/users?role=${roles}&status=APPROVED&page=${page}`;
+        break;
+      case 'Interviewees':
+        endPoint = `/api/admin/users?role=${roles}&page=${page}`;
+        break;
+      default:
+        endPoint = `/api/admin/users?role=${roles}&status=PENDING&status=REJECTED&page=${page}`;
+        break;
+    }
+
     try {
       const fetchData = async () => {
         const { data: { data, count } } = await axios.get(endPoint, {
@@ -98,7 +121,7 @@ const AdminTables = ({ status, roles }) => {
       message.error(msg);
     }
     return () => source.cancel();
-  }, [page, status, roles]);
+  }, [page, pageLocation, roles]);
 
   return (
     <Table
@@ -173,9 +196,9 @@ const AdminTables = ({ status, roles }) => {
       <Column
         title="Action"
         key="action"
-        render={(text, { key }) => (
+        render={(text, { key, status }) => (
           <Space size="middle">
-            {status === 'PENDING' ? (
+            {(pageLocation === 'Applications' && status === 'PENDING') && (
               <>
                 <Button
                   className="accept"
@@ -190,15 +213,18 @@ const AdminTables = ({ status, roles }) => {
                   Reject
                 </Button>
               </>
-            ) : (
-              <DeleteOutlined
-                className="deleteIcon"
-                onClick={() => showDeleteConfirm(key)}
-                type="dashed"
-                key={key}
-              />
             )}
+            {(pageLocation !== 'Applications') && (
+            <DeleteOutlined
+              className="deleteIcon"
+              onClick={() => showDeleteConfirm(key)}
+              type="dashed"
+              key={key}
+            />
+            )}
+            {(pageLocation === 'Applications' && status !== 'PENDING') && <Title className="rejectAdmin" level={5}>{status}</Title>}
           </Space>
+
         )}
       />
     </Table>
@@ -206,7 +232,7 @@ const AdminTables = ({ status, roles }) => {
 };
 
 AdminTables.propTypes = {
-  status: PropTypes.string.isRequired,
+  pageLocation: PropTypes.string.isRequired,
   roles: PropTypes.string.isRequired,
 };
 

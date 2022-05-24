@@ -19,19 +19,19 @@ const items = [
     key: '1',
     icon: UserOutlined,
     label: 'Interviewers',
-    content: <AdminTables roles="interviewer" status="APPROVED" />,
+    content: <AdminTables pageLocation="Interviewers" roles="interviewer" />,
   },
   {
     key: '2',
     icon: TeamOutlined,
     label: 'Interviewees',
-    content: <AdminTables roles="interviewee" status="" />,
+    content: <AdminTables pageLocation="Interviewees" roles="interviewee" />,
   },
   {
     key: '3',
     icon: BookOutlined,
     label: 'Applications',
-    content: <AdminTables roles="interviewer" status="PENDING" />,
+    content: <AdminTables pageLocation="Applications" roles="interviewer" />,
   },
   {
     key: '4',
