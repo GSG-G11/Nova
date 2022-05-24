@@ -4,7 +4,7 @@ import getInterviewTimeValidation from './getInterviewTimeValidation';
 import interviewValidation from './interviewValidation';
 import {
   validateQuery, getInterviewsQueryValidation,
-  getUsersAdminQueryValidation,
+  getUsersAdminQueryValidation, getUsersArrayStatusAdminQueryValidation,
 } from './queryValidation';
 import { signupValidation, signupInterviewerValidation } from './signupValidation';
 import updateInfoValidation from './updateInfoValidation';
@@ -22,4 +22,5 @@ export {
   signupInterviewerValidation,
   acceptInterviewerValidation,
   getUsersAdminQueryValidation,
+  getUsersArrayStatusAdminQueryValidation,
 };

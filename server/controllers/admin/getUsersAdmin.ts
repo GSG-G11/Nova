@@ -1,20 +1,35 @@
 import { Response } from 'express';
-import { RequestType, getUsersAdminQueryValidation } from '../../utils';
+import { RequestType, getUsersAdminQueryValidation, getUsersArrayStatusAdminQueryValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
 import Interviewee from '../../database/Models/Interviewee';
 
 const getUsersAdmin = async (req: RequestType, res: Response) => {
   const {
-    role, page = '1', limit, status,
-  }: { role?: string, page?: string, limit?: string, status?: string} = req.query;
+    role, page = '1', status,
+  }: { role?: string, page?: string, status?: string} = req.query;
 
-  await getUsersAdminQueryValidation({
-    role, page, limit, status,
-  });
+  let query: any;
+  if (typeof status === 'string') {
+    await getUsersAdminQueryValidation({
+      role, page, status,
+    });
+    query = {
+      $match: {
+        status,
+      },
+    };
+  } else {
+    await getUsersArrayStatusAdminQueryValidation({ role, page, status });
+    query = {
+      $match: {
+        status: {
+          $in: status,
+        },
+      },
+    };
+  }
 
-  const pageLimit = (Number(limit));
-
-  const skip = (Number(page) - 1) * pageLimit;
+  const skip = (Number(page) - 1) * 7;
 
   const dataBaseInterview = (role === 'interviewer') ? Interviewer : Interviewee;
   const user = await dataBaseInterview.aggregate([{
@@ -26,11 +41,7 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
       status: { $first: '$status' },
     },
   },
-  {
-    $match: {
-      status,
-    },
-  },
+  query,
   {
     $lookup: {
       from: 'users',
@@ -49,7 +60,7 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
       ],
       as: 'userInfo',
     },
-  }]).skip(skip).limit(pageLimit);
+  }]).skip(skip).limit(7);
 
   if (page === '1') {
     const count = await dataBaseInterview.countDocuments({
