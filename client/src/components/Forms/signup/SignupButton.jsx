@@ -32,7 +32,9 @@ const SignupButton = () => {
         visible={isModalVisible}
         footer={null}
       >
-        <SignupForm />
+        <SignupForm
+          setIsModalVisible={setIsModalVisible}
+        />
       </Modal>
     </>
   );

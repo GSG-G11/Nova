@@ -58,7 +58,9 @@ const Navbar = () => {
         <div className="right-left">
           <div className="right">
             <div className="logo">
-              <img src={logo} alt="logo" className="logo-img" />
+              <Link to="/">
+                <img src={logo} alt="logo" className="logo-img" />
+              </Link>
             </div>
             <Menu
               mode="horizontal"

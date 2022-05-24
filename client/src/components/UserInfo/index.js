@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
-  Button, Image, message, Typography,
+  Button, Image, message, Skeleton, Typography,
 } from 'antd';
-import LoadingSpinner from '../common/LoadingSpinner';
 import Navbar from '../Navbar';
 
 const { Text, Title } = Typography;
@@ -46,11 +45,11 @@ const UserInfo = () => {
 
   return (
     <div className="user__info-section">
+      <Navbar />
       {loading ? (
-        <LoadingSpinner />
+        <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
       ) : (
         <>
-          <Navbar />
           <div className="user__primary">
             <div className="user__image-container">
               <Image src={profilePicture} alt="profile" />
