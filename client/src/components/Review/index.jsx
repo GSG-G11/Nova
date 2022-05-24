@@ -17,20 +17,18 @@ const ReviewCard = () => {
     setPage(value);
   };
 
-  const handleSave = async (InterviewId) => {
+  const handleSave = async (interviewId) => {
     try {
       await axios.patch(
-        `/api/user/interview/review/${InterviewId}`,
+        `/api/user/interview/review/${interviewId}`,
       );
 
-      setReviews((prevReview) => {
-        prevReview.map((item) => {
-          if (item.InterviewId === InterviewId) {
-            (item.review.saved = !item.review.saved);
-          }
-          return item;
-        });
-      });
+      setReviews((prevReview) => prevReview.map((item) => {
+        if (item.interviewId === interviewId) {
+          (item.review.saved = !item.review.saved);
+        }
+        return item;
+      }));
     } catch ({
       response: {
         data: { message: msg },
@@ -40,22 +38,26 @@ const ReviewCard = () => {
     }
   };
 
-  const starComponent = (save, InterviewId) => {
+  const starComponent = (save, interviewId) => {
     if (save) {
       return (
         <StarFilled
-          onClick={() => handleSave(InterviewId)}
+          onClick={() => handleSave(interviewId)}
           className="saved-btn"
         />
       );
     }
     return (
       <StarOutlined
-        onClick={() => handleSave(InterviewId)}
+        onClick={() => handleSave(interviewId)}
         className="unsaved-btn"
       />
     );
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [filterVal]);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -99,13 +101,13 @@ const ReviewCard = () => {
           <Option value="false">unsaved</Option>
         </Select>
       </div>
-      {reviewsArr.length > 0 ? (
+      {reviewsArr.length ? (
         reviewsArr.map(
           ({
-            interviewerName, interviewerImage, review, InterviewId,
+            interviewerName, interviewerImage, review, interviewId,
           }) => (
             <Comment
-              key={InterviewId}
+              key={interviewId}
               author={interviewerName}
               avatar={
                 <Avatar src={interviewerImage} alt={interviewerName} />
@@ -116,7 +118,7 @@ const ReviewCard = () => {
                     { review.message }
                     .
                   </p>
-                  {starComponent(review.saved, InterviewId)}
+                  {starComponent(review.saved, interviewId)}
                 </>
               )}
               datetime={(
@@ -131,7 +133,15 @@ const ReviewCard = () => {
         <Empty description={<span>No Reviews have been created yet!</span>} />
       )}
       <div className="pagination-holder">
-        <Pagination defaultCurrent={1} total={total} current={page} onChange={onChange} />
+        { total > 3 && (
+        <Pagination
+          defaultCurrent={1}
+          total={total}
+          pageSize="3"
+          current={page}
+          onChange={onChange}
+        />
+        )}
       </div>
       ;
     </div>

@@ -39,7 +39,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
       review: {
         $first: '$interviews.review',
       },
-      InterviewId: {
+      interviewId: {
         $first: '$interviews._id',
       },
       interviewerId: {
@@ -49,20 +49,21 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   },
   ];
 
-  const [filteredReviewsWithIds, user] = await Promise.all([
-    Interviewee.aggregate(condition).skip(Number(page) * 3).limit(3),
+  const [filteredReviewsWithIds, count] = await Promise.all([
+    Interviewee.aggregate(condition).skip((Number(page) - 1) * 3).limit(3),
     Interviewee.aggregate(condition)]);
-
-  // const user = await ;
 
   // Get the names of the interviewers based on Interviewers Ids
   const reviews = await Promise.all(filteredReviewsWithIds.map(async (review: any) => {
-    const { name, profile_picture: userImg } : any = await User.findById(review.interviewerId);
+    const {
+      name,
+      profile_picture: interviewerImage,
+    } : any = await User.findById(review.interviewerId);
 
     const finalReview = {
       ...review,
       interviewerName: name,
-      interviewerImage: userImg,
+      interviewerImage,
     };
 
     return finalReview;
@@ -71,7 +72,7 @@ const getAllReviews = async (req: RequestType, res: Response) => {
   return res.json({
     message: 'Reviews found',
     data: {
-      length: user.length,
+      length: count.length,
       reviews,
     },
   });
