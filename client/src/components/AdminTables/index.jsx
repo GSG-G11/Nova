@@ -31,7 +31,7 @@ const AdminTables = ({ pageLocation, roles }) => {
   const acceptUser = async (id, state) => {
     try {
       await axios.patch(`/api/admin/approval/${id}`, { status: state });
-      setDataSource((prev) => prev.filter((item) => {
+      setDataSource((prev) => prev.map((item) => {
         if (item.key !== id) {
           return item;
         }
