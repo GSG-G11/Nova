@@ -1,5 +1,5 @@
 import {
-  message, Space, Table, Tag, Modal, Button,
+  message, Space, Table, Tag, Modal, Button, Avatar,
 } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -80,28 +80,17 @@ const AdminTables = ({ status, roles }) => {
         }
         setDataSource([]);
         data.forEach((obj) => {
-          if (roles === 'interviewer') {
-            setDataSource((prev) => [...prev, {
-              key: obj.userId,
-              languages: obj.languages,
-              specialization: obj.specialization,
-              status: obj.status,
-              Name: obj.userInfo[0].name,
-              email: obj.userInfo[0].email,
-              cv: obj.userInfo[0].cv,
-              level: obj.userInfo[0].level,
-              img: obj.userInfo[0].profile_picture,
-            }]);
-          } else {
-            setDataSource((prev) => [...prev, {
-              key: obj.userId,
-              Name: obj.userInfo[0].name,
-              email: obj.userInfo[0].email,
-              cv: obj.userInfo[0].cv,
-              level: obj.userInfo[0].level,
-              img: obj.userInfo[0].profile_picture,
-            }]);
-          }
+          setDataSource((prev) => [...prev, {
+            key: obj.userId,
+            languages: obj?.languages || [],
+            specialization: obj.specialization,
+            status: obj.status,
+            Name: obj.userInfo[0].name,
+            email: obj.userInfo[0].email,
+            cv: obj.userInfo[0].cv,
+            level: obj.userInfo[0].level,
+            img: obj.userInfo[0].profile_picture,
+          }]);
         });
       };
       fetchData();
@@ -125,31 +114,40 @@ const AdminTables = ({ status, roles }) => {
         },
       }}
     >
+      <Column
+        title="Photo"
+        dataIndex="img"
+        key="img"
+        render={(img) => (
+          <Avatar src={img} />
+        )}
+      />
       <Column title="Name" dataIndex="Name" key="Name" />
       <Column title="email" dataIndex="email" key="email" />
-      {(roles === 'interviewer') && (
-        <>
-          <Column
-            title="specialization"
-            dataIndex="specialization"
-            key="specialization"
-          />
-          <Column
-            title="languages"
-            dataIndex="languages"
-            key="languages"
-            render={(tags) => (
-              <>
-                {tags.map((tag) => (
-                  <Tag color="blue" key={tag}>
-                    {tag}
-                  </Tag>
-                ))}
-              </>
-            )}
-          />
-        </>
-      )}
+      {(roles === 'interviewer')
+          && (
+            <>
+              <Column
+                title="specialization"
+                dataIndex="specialization"
+                key="specialization"
+              />
+              <Column
+                title="languages"
+                dataIndex="languages"
+                key="languages"
+                render={(tags) => (
+                  <>
+                    {tags.map((tag) => (
+                      <Tag color="blue" key={tag}>
+                        {tag}
+                      </Tag>
+                    ))}
+                  </>
+                )}
+              />
+            </>
+          )}
       <Column
         title="cv"
         dataIndex="cv"
