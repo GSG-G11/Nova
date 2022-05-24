@@ -133,7 +133,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     //   // Send Emails to both interviewee and interviewer
 
     mailSender(
-      interviewerEmail,
+      'ab.shamia96@gmail.com',
       'Interview Request',
       emailTemplate(
         date,
@@ -141,6 +141,8 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
+        finalUrl,
+        password,
         intervieweeEmail,
       ),
     ),
@@ -154,6 +156,8 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
+        finalUrl,
+        password,
       ),
     ),
 

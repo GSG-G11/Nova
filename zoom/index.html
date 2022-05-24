@@ -60,8 +60,8 @@
             <div id="navbar" class="websdktest">
                 <form class="navbar-form navbar-right" id="meeting_form">
                     <div class="form-group">
-                        <input type="text" name="display_name" id="display_name" value="2.4.0#Local" maxLength="100"
-                            placeholder="Name" class="form-control" required>
+                        <input type="text" name="display_name" id="display_name" maxLength="100"
+                            placeholder="Your Name" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="meeting_number" id="meeting_number" value="" maxLength="200"
@@ -118,7 +118,20 @@
     <div id="show-test-tool">
         <button type="submit" style="display: none;" class="btn btn-primary" id="show-test-tool-btn" title="show or hide top test tool">Show</button>
     </div>
+   
+    <script src="node_modules/react/umd/react.production.min.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.production.min.js"></script>
+    <script src="node_modules/redux/dist/redux.min.js"></script>
+    <script src="node_modules/redux-thunk/dist/redux-thunk.min.js"></script>
+    <script src="node_modules/lodash/lodash.min.js"></script>
+
+    <script src="./js/tool.js"></script>
+    <script src="./static/index.min.js"></script>
     <script>
+        // get meeting id from url 
+        const meetingId = window.location.href.split('?')[1]
+
+        document.getElementById('meeting_number').value = meetingId
         document.getElementById('show-test-tool-btn').addEventListener("click", function(e){
             var textContent = e.target.textContent;
             if (textContent === 'Show') {
@@ -131,15 +144,6 @@
             }
         })
     </script>
-    <script src="node_modules/react/umd/react.production.min.js"></script>
-    <script src="node_modules/react-dom/umd/react-dom.production.min.js"></script>
-    <script src="node_modules/redux/dist/redux.min.js"></script>
-    <script src="node_modules/redux-thunk/dist/redux-thunk.min.js"></script>
-    <script src="node_modules/lodash/lodash.min.js"></script>
-
-    <script src="./js/tool.js"></script>
-    <script src="./static/index.min.js"></script>
-
 </body>
 
 </html>

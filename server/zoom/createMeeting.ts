@@ -41,7 +41,7 @@ const createMeeting = async () => {
 
   const { join_url: joinUrl, password, id } : any = response;
 
-  const finalUrl = `${joinUrl.replaceAll('https://us05.zoom.us/j/', 'http://localhost:9998/?')
+  const finalUrl = `${joinUrl.replaceAll('https://us05web.zoom.us/j/', 'http://localhost:9998/?')
   }?role=1`;
   console.log(finalUrl);
   const dataRes = {

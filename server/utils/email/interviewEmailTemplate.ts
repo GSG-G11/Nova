@@ -7,6 +7,8 @@ const template = (
   language: string,
   specialization: string,
   questionCategory: string,
+  finalUrl: string,
+  password: string,
   name: string = '',
 ) => (`<!doctype html>
     <html>
@@ -341,6 +343,10 @@ const template = (
                             <p>Language: ${language}</p>
                             <p>Specialty: ${specialization}</p>
                             <p>Questions Category: ${questionCategory}</p>
+
+                            <p>Your interview link: <a target="_blank" href="${finalUrl}">${finalUrl}</a></p>
+                            <p>Please click on the link above when you are ready to join the interview.</p>
+                            <p>Your interview password is: <strong> ${password} </strong></p>
                             <p>If you have any questions, please contact us at <a href="mailto:nova.interviewe@gmail.com">Nova</a>
                             <p>Sincerely,</p>
                             <p>Nova Team</p>
@@ -370,13 +376,24 @@ const emailTemplate = (
   language: string,
   specialization: string,
   questionCategory: string,
+  finalUrl: string,
+  password: string,
   name: string = '',
 ) => {
   if (name) {
-    return template(date, time, language, specialization, questionCategory, name);
+    return template(
+      date,
+      time,
+      language,
+      specialization,
+      questionCategory,
+      finalUrl,
+      password,
+      name,
+    );
   }
 
-  return template(date, time, language, specialization, questionCategory);
+  return template(date, time, language, specialization, questionCategory, finalUrl, password);
 };
 
 export default emailTemplate;
