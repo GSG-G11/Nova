@@ -49,13 +49,14 @@ const ActiveMembers = () => {
         )}
         {
       members.length && members.map(({
-        _id, userInfo, specialization,
+        _id, userInfo, specialization, userId,
       }) => (
         <Member
           key={_id}
           _id={_id}
           userInfo={userInfo[0]}
           specialization={specialization}
+          userId={userId}
         />
       ))
 
