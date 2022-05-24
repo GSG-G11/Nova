@@ -295,7 +295,7 @@ describe('Interview Reviews', () => {
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Reviews found');
-        expect(res.body.data.length).toBe(2);
+        expect(res.body.data.length).toBe(1);
         return done();
       });
   });
@@ -943,7 +943,7 @@ describe('Create Review for a specific interview', () => {
 
 describe('Get users', () => {
   test('Should return all interviewees', (done) => {
-    request(app).get('/api/users').expect(200).end((err, res) => {
+    request(app).get('/api/interviewers').expect(200).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -954,7 +954,7 @@ describe('Get users', () => {
   });
 
   test('Should return all interviewers', (done) => {
-    request(app).get('/api/users').expect(200).end((err, res) => {
+    request(app).get('/api/interviewers').expect(200).end((err, res) => {
       if (err) {
         return done(err);
       }

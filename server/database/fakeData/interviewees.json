@@ -10,11 +10,6 @@
                     "language": "JAVASCRIPT",
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
-                    "review": {
-                        "message": "Great",
-                        "saved": true,
-                        "_id": "6289f0d50c60eaedf116c8e0"
-                    },
                     "_id": "627d1d11f5243856362e8a8c"
                 },
                 {
@@ -25,9 +20,8 @@
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "Great again",
-                        "saved": true,
-                        "_id": "6289f0d50c60eaedf116c8e0"
+                        "message": "Great",
+                        "saved": true
                     },
                     "_id": "627d1d11f5243856362e8a8f"
                 },
@@ -40,14 +34,12 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "Nice Work !",
-                        "saved": true,
-                        "_id": "6289f0d50c60eaedf116c8dd"
-                    },
-                    "_id": "628a06ce8a38414be5dd4de9"
+                        "message": "Great",
+                        "saved": true
+                    }
                 },
                 {
-                    "_id": "628a09784ad806b510ac6ce4",
+                    "id": "3",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-10T14:30:21.892Z",
                     "time": 12,
@@ -55,13 +47,60 @@
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "",
-                        "saved": false,
-                        "_id": "628a09784ad806b510ac6ce5"
-                      }
+                        "message": "Great",
+                        "saved": true
+                    }
                 },
                 {
-                    "_id": "628a09784ad806b510ac6ced",
+                    "id": "1",
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-04-10T14:30:21.892Z",
+                    "time": 12,
+                    "language": "JAVASCRIPT",
+                    "specialization": "FRONTEND",
+                    "questionCategory": "Technical",
+                    "review": {
+                      
+                    }
+                },
+                {
+                    "id": "1",
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-04-10T14:30:21.892Z",
+                    "time": 12,
+                    "language": "JAVASCRIPT",
+                    "specialization": "FRONTEND",
+                    "questionCategory": "Technical",
+                    "review": {
+                       
+                    }
+                },
+                {
+                    "id": "1",
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-04-10T14:30:21.892Z",
+                    "time": 12,
+                    "language": "JAVASCRIPT",
+                    "specialization": "FRONTEND",
+                    "questionCategory": "Technical",
+                    "review": {
+                     
+                    }
+                },
+                {
+                    "id": "1",
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-04-10T14:30:21.892Z",
+                    "time": 12,
+                    "language": "JAVASCRIPT",
+                    "specialization": "FRONTEND",
+                    "questionCategory": "Technical",
+                    "review": {
+                     
+                    }
+                },
+                {
+                    "id": "2",
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-06-10T14:30:21.892Z",
                     "time": 1,
@@ -69,10 +108,8 @@
                     "specialization": "BACKEND",
                     "questionCategory": "Algorithms",
                     "review": {
-                        "message": "",
-                        "saved": false,
-                        "_id": "628a09784ad806b510ac6cee"
-                      }
+                        
+                    }
                 }
             ]
         },
