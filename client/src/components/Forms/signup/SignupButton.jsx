@@ -19,7 +19,7 @@ const SignupButton = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button className="signUpBtn sign" type="primary" onClick={showModal}>
         Sign Up
       </Button>
       <Modal
@@ -32,7 +32,9 @@ const SignupButton = () => {
         visible={isModalVisible}
         footer={null}
       >
-        <SignupForm />
+        <SignupForm
+          setIsModalVisible={setIsModalVisible}
+        />
       </Modal>
     </>
   );

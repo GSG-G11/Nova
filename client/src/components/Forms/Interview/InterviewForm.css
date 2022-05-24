@@ -1,0 +1,202 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2.4rem;
+    align-items: center;
+}
+
+.btns Button, .btns Button:focus {
+    width: 6.4rem;
+    background-color: #432773;
+    border: none;
+    outline: none;
+}
+
+.btns Button:hover, .btns Button:active {
+    background-color: #6f38ce;
+
+}
+
+.interview-header {
+    background-color: #432773;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.2rem;
+    text-align: center;
+    padding-top: 0.8rem;
+    font-size: 1rem;
+    color: white;
+}
+
+.interview-form {
+    width: 55rem !important;
+}
+
+.interview-form__radio-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+    padding: 1rem;
+    padding-bottom: 3.2rem;
+}
+
+.interview-step-content.language .interview-form__radio-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    padding: 1rem;
+    padding-bottom: 3.2rem;   
+}
+
+.interview-step-content.questionCategory .interview-form__radio-group {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+} 
+
+.interview-form__radio-group-third {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.8rem;
+    padding: 1rem;
+    padding-bottom: 2.4rem;
+    
+}
+
+.interview-form__radio-group-fourth {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+}
+.interview-form__radio-group-fourth .date-column {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding-bottom: 3.2rem;
+}
+
+.interview-form__radio-group-fourth .date-column p {
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: #432773 solid 1px;
+    padding: 0.8rem;
+    border-radius: 10px;
+    align-self: center;
+    background-color: #3d0d8b;
+    color: white;
+}
+
+.interview-form__radio-group label, 
+.interview-form__radio-group-third label,
+.interview-form__radio-group-fourth label {
+    font-size: 1rem;
+    color: #432773;
+    font-weight: bold;
+    padding: 0.8rem;
+    border: 1px solid #432773;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3.2rem;
+    transition: all 0.3s;
+    
+}
+.interview-step-content .interview-form__radio-input {
+    display: none;
+}
+
+.interview-step-content .interview-form__radio-input + label:hover {
+    background-color: #432773;
+    color: white;
+}
+
+
+.interview-step-content .interview-form__radio-input:checked + label {
+    background-color: #432773;
+    color: white;
+}
+
+
+.form-steps {
+    padding: 1.8rem;
+}
+
+.interview-form__radio-group-fourth-hours  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.2rem;
+}
+
+.interview-form__radio-group-fifth-check-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.8rem;
+    height: 10rem;
+    transition: all 0.3s;
+    font-size: 8.4rem;
+    margin-bottom: 3.2rem;
+    animation: makeIcon 2.5s;
+}
+
+.interview-form__radio-group-fifth-check {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.8rem;
+    margin-bottom: 3.2rem;
+}
+.interview-step-content.fourth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.8rem;
+    margin-bottom: 3.2rem;
+}
+
+.date-column  {
+    display: flex;
+    flex-direction: row;
+}
+@keyframes makeIcon {
+    0% {
+        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+    }
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+}
+
+.step__five-success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0.8rem;
+    margin-bottom: 3.2rem;
+}

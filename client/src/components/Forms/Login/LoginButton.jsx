@@ -22,7 +22,7 @@ const LoginButton = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button className="loginBtn" type="primary" onClick={showModal}>
         Log in
       </Button>
       <Modal title={(
@@ -35,7 +35,9 @@ const LoginButton = () => {
         onCancel={handleCancel}
         footer={null}
       >
-        <LoginForm />
+        <LoginForm
+          handleOk={handleOk}
+        />
       </Modal>
     </>
   );

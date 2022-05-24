@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { LoginButton, SignupButton } from './components/Forms';
+import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
+import UserInfo from './components/UserInfo';
+import Landing from './components/Landing';
+import VerifyAccount from './components/VerifyAccount';
+import AdminDashboard from './components/AdminDashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -13,13 +17,17 @@ const App = () => {
 
   return (
     <div className="App">
-      <SignupButton />
       {loading ? 'Loading...' : (
         <div>
-          hi
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/users/:id" element={<UserInfo />} />
+            <Route path="/auth/verify" element={<VerifyAccount />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Routes>
         </div>
       )}
-      <LoginButton />
+
     </div>
   );
 };

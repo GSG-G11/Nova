@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.Tab__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-tabs-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.ant-tabs {
+    width: 70%;
+}

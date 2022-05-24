@@ -1,10 +1,10 @@
 import { Schema, model } from 'mongoose';
 
 const schedule = new Schema({
-  languages: {
+  language: {
     type: String,
     required: false,
-    enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
+    enum: ['JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
   },
   specialization: {
     type: String,

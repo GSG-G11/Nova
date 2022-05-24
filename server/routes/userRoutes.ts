@@ -1,21 +1,26 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import {
+  updateReview,
   updateInfo,
   getInterviews,
   deleteInterview,
   getAllReviews,
   getUserById,
   cancalInterview,
+  getInterviewerAvailableTime,
+  getInterviewers,
 } from '../controllers';
-import { userAuth } from '../middleWares/auth';
+import { checkInterviewer, userAuth } from '../middlewares/auth';
 
-const router: Router = express.Router();
+const router: Router = Router();
 
-router.get('/interview', userAuth, getInterviews);
-router.get('/review', userAuth, getAllReviews);
+router.patch('/user/interview/review/:interviewId', userAuth, updateReview);
+router.get('/interviewers', getInterviewers);
+router.patch('/user', userAuth, updateInfo);
+router.get('/users/interview', userAuth, getInterviews);
 router.delete('/interview/:id', userAuth, deleteInterview);
-router.patch('/', userAuth, updateInfo);
+router.get('/user/info/:id', getUserById);
+router.get('/user/review', userAuth, getAllReviews);
+router.get('/users/interviewer/available', userAuth, checkInterviewer, getInterviewerAvailableTime);
 router.patch('/:interviewId', userAuth, cancalInterview);
-router.get('/info/:id', getUserById);
-
 export default router;

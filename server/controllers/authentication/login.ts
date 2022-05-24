@@ -21,7 +21,9 @@ const login = async (req: Request, res: Response) => {
     throw new CustomError('Invalid password', 400);
   }
 
-  const { id, role, is_verified: isVerified } = user;
+  const {
+    id, role, is_verified: isVerified, profile_picture: profilePicture,
+  } = user;
 
   if (!isVerified) {
     throw new CustomError('Please Verify your email', 401);
@@ -31,13 +33,13 @@ const login = async (req: Request, res: Response) => {
     id,
     isVerified,
     role,
+    profilePicture,
   };
 
   const token: any = await signToken(payload);
 
   res.cookie('token', token, {
     httpOnly: true,
-    maxAge: 1000 * 60 * 60,
   });
 
   return res.json({
@@ -47,6 +49,7 @@ const login = async (req: Request, res: Response) => {
         id,
         isVerified,
         role,
+        profilePicture,
       },
     },
   });
