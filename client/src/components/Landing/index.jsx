@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Footer } from 'antd/lib/layout/layout';
 import Header from '../Header';
@@ -13,16 +12,16 @@ import Navbar from '../Navbar';
 
 const Landing = () => (
   <>
-    {/* <Navbar />
+    <Navbar />
     <Header />
     <Resources />
     <HowNovaWork />
-    <Partner /> */}
+    <Partner />
     <ActiveMembers />
-    {/* <IntreviewerApp />
+    <IntreviewerApp />
     <Challenges />
     <ClientReviews />
-    <Footer /> */}
+    <Footer />
   </>
 );
 
