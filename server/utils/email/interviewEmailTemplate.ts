@@ -339,7 +339,8 @@ const template = (
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
                             ${name ? `<p>${interviewerTemplate(name)}</p>` : ''}
-                            <p> Your interview will be scheduled on <strong>${date}</strong> at <strong>${time}</strong>. The details as follows</p>
+                            <p> Your interview will be scheduled on <strong>${date.toString().slice(0, 15)}</strong> at <strong>${time.toString().length === 1 ? `0${time}:00` : `${time}:00`}</strong>.</p>
+                            The details as follows</p>
                             <p>Language: ${language}</p>
                             <p>Specialty: ${specialization}</p>
                             <p>Questions Category: ${questionCategory}</p>

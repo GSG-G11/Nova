@@ -133,7 +133,7 @@ const createInterview = async (req: RequestType, res: Response) => {
     //   // Send Emails to both interviewee and interviewer
 
     mailSender(
-      'ab.shamia96@gmail.com',
+      interviewerEmail,
       'Interview Request',
       emailTemplate(
         date,
