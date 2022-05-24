@@ -6,6 +6,7 @@ import axios from 'axios';
 import {
   Button, Image, message, Skeleton, Typography,
 } from 'antd';
+import InterviewForm from '../Forms/Interview/InterviewForm';
 import Navbar from '../Navbar';
 
 const { Text, Title } = Typography;
@@ -13,6 +14,7 @@ const UserInfo = () => {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const { user: loggedInUser } = useSelector((state) => state.auth);
 
   const loggedInUserId = loggedInUser?.id;
@@ -58,9 +60,19 @@ const UserInfo = () => {
               <Title level={2} className="user__name">{name}</Title>
               <Text className="user__level">{level}</Text>
               {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
-              <Button type="primary" className="user__start-interview">
-                Start a Practice Interview
-              </Button>
+                <>
+                  <InterviewForm
+                    setVisible={setVisible}
+                    visible={visible}
+                  />
+                  <Button
+                    type="primary"
+                    className="user__start-interview"
+                    onClick={() => setVisible(true)}
+                  >
+                    Start a Practice Interview
+                  </Button>
+                </>
               )}
             </div>
           </div>
