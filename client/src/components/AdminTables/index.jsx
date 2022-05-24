@@ -22,8 +22,8 @@ const AdminTables = ({ status, roles }) => {
     try {
       await axios.delete(`/api/admin/users/${id}`);
       setDataSource((prev) => prev.filter((item) => item.key !== id));
-    } catch (error) {
-      message.error(error);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
     }
   };
 
@@ -31,12 +31,12 @@ const AdminTables = ({ status, roles }) => {
     try {
       await axios.patch(`/api/admin/approval/${id}`, { status: state });
       setDataSource((prev) => prev.filter((item) => item.key !== id));
-    } catch (error) {
-      message.error(error);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
     }
   };
 
-  const showDeleteConfirm = (id, state) => {
+  const showDeleteConfirm = (id) => {
     confirm({
       title: 'Delete user',
       icon: <ExclamationCircleOutlined />,
@@ -45,10 +45,7 @@ const AdminTables = ({ status, roles }) => {
       okType: 'danger',
       cancelText: 'No',
       onOk: async () => {
-        if (!state) {
-          return deleteUser(id);
-        }
-        return acceptUser(id, state);
+        deleteUser(id);
       },
     });
   };
@@ -81,23 +78,24 @@ const AdminTables = ({ status, roles }) => {
         if (page === 1) {
           setPageNumber(count);
         }
-        setDataSource([]);
-        setDataSource(data.map((obj) => ({
-          key: obj.userId,
-          languages: obj?.languages || [],
-          specialization: obj.specialization,
-          status: obj.status,
-          Name: obj.userInfo[0].name,
-          email: obj.userInfo[0].email,
-          cv: obj.userInfo[0].cv,
-          level: obj.userInfo[0].level,
-          img: obj.userInfo[0].profile_picture,
+        setDataSource(data.map(({
+          userId, languages, specialization, status: sts, userInfo,
+        }) => ({
+          key: userId,
+          languages: languages || [],
+          specialization,
+          status: sts,
+          Name: userInfo[0].name,
+          email: userInfo[0].email,
+          cv: userInfo[0].cv,
+          level: userInfo[0].level,
+          img: userInfo[0].profile_picture,
         })));
       };
       fetchData();
-    } catch (error) {
+    } catch ({ response: { data: { message: msg } } }) {
       setDataSource([]);
-      message.error(error);
+      message.error(msg);
     }
     return () => source.cancel();
   }, [page, status, roles]);
@@ -123,8 +121,16 @@ const AdminTables = ({ status, roles }) => {
           <Avatar src={img} />
         )}
       />
-      <Column title="Name" dataIndex="Name" key="Name" />
-      <Column title="email" dataIndex="email" key="email" />
+      <Column
+        title="Name"
+        dataIndex="Name"
+        key="Name"
+      />
+      <Column
+        title="email"
+        dataIndex="email"
+        key="email"
+      />
       {(roles === 'interviewer')
           && (
             <>
@@ -159,7 +165,11 @@ const AdminTables = ({ status, roles }) => {
           </a>
         )}
       />
-      <Column title="level" dataIndex="level" key="level" />
+      <Column
+        title="level"
+        dataIndex="level"
+        key="level"
+      />
       <Column
         title="Action"
         key="action"
@@ -167,15 +177,26 @@ const AdminTables = ({ status, roles }) => {
           <Space size="middle">
             {status === 'PENDING' ? (
               <>
-                <Button className="accept" onClick={() => showAcceptConfirm(key, 'APPROVED')}>
+                <Button
+                  className="accept"
+                  onClick={() => showAcceptConfirm(key, 'APPROVED')}
+                >
                   Accept
                 </Button>
-                <Button className="reject" onClick={() => showAcceptConfirm(key, 'REJECTED')}>
+                <Button
+                  className="reject"
+                  onClick={() => showAcceptConfirm(key, 'REJECTED')}
+                >
                   Reject
                 </Button>
               </>
             ) : (
-              <DeleteOutlined className="deleteIcon" onClick={() => showDeleteConfirm(key)} type="dashed" key={key} />
+              <DeleteOutlined
+                className="deleteIcon"
+                onClick={() => showDeleteConfirm(key)}
+                type="dashed"
+                key={key}
+              />
             )}
           </Space>
         )}
