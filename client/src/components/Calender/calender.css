@@ -1,17 +1,23 @@
 .calender-tab .ant-picker {
     width: 90%;
 }
-/* .calender-tab{
-    display: flex;
-} */
-/* .calender-tab .timePicker {
-    width: 60%;
-} */
+html {
+    scroll-behavior: smooth;
+}
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #1890FF;
+    border-radius: 50px;
+}
 .datepickerForm{
     display: flex;
     align-items: center;
 }
-.calender-tab .tags-holder .dates-sec,.datepickerForm label {
+.calender-tab .dateTimeCalender-holder .dates-sec,.datepickerForm label {
     color: #0A093D;
     font-style: normal;
     font-weight: 600;
@@ -20,7 +26,7 @@
 .datepickerForm label{
     margin-bottom: 5% !important;
 }
-.calender-tab .tags-holder {
+.calender-tab .dateTimeCalender-holder {
     margin-top: 3%;
 }
 .calender-tab .ant-row.ant-form-item {
@@ -52,8 +58,6 @@
     font-size: 17px;
 }
 
-
-
 .events {
     margin: 0;
     padding: 0;
@@ -72,4 +76,14 @@
   }
   .notes-month section {
     font-size: 28px;
+  }
+  .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content {
+    height: 51px;
+  }
+  /* .calenders-holder {
+    width: 68%;
+  } */
+  .dateTimeCalender-holder{
+      display: flex;
+      flex-direction: column;
   }

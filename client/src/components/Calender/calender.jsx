@@ -1,27 +1,39 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable consistent-return */
-/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
 import {
-  DatePicker, Button, Form, message, Alert, Calendar, Badge,
+  DatePicker, Button, Form, message, Calendar, Badge,
 } from 'antd';
 import './calender.css';
-// Tag, Tooltip,
+
 const { Item } = Form;
 
 const CalenderTab = () => {
-  const [value, setValue] = useState();
+  const [dateTime, setDateTime] = useState('');
   const [availableDates, setAvailableDates] = useState([]);
-  let day = '';
-  let time = 0;
 
-  if (value) {
-    day = value.format('YYYY-MM-DD HH').split(' ')[0].toString();
-    time = value.format('YYYY-MM-DD HH').split(' ')[1].toString();
-  }
+  const onOk = (value) => {
+    setDateTime(value.format('YYYY-MM-DD HH'));
+  };
+  const postDate = async () => {
+    const source = axios.CancelToken.source();
+    const date = dateTime.split(' ')[0].toString();
+    const time = Number(dateTime.split(' ')[1]);
+    try {
+      axios.post('/api/interviewer/schedule', {
+        date,
+        time,
+      }, {
+        cancelToken: source.token,
+      });
+      message.success('date added successfully to your schedule');
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error({ msg });
+    }
+    return () => {
+      source.cancel();
+    };
+  };
   const disabledDates = availableDates.length > 0 ? availableDates.map(({ date }) => date.split('T')[0]) : [];
   const disabledDate = (current) => disabledDates.find((date) => date === moment(current).format('YYYY-MM-DD'));
   const dayArr = disabledDates.map((date) => parseInt(date.split('-')[2], 10));
@@ -41,11 +53,7 @@ const CalenderTab = () => {
     return listData || [];
   };
 
-  const getMonthData = (val) => {
-    if (val.month() === 8) {
-      return 1394;
-    }
-  };
+  const getMonthData = (val) => (val.month() === 8 ? 1394 : null);
 
   const monthCellRender = (val) => {
     const num = getMonthData(val);
@@ -69,26 +77,6 @@ const CalenderTab = () => {
     );
   };
 
-  const postDate = async () => {
-    const source = axios.CancelToken.source();
-    try {
-      await axios.post('/api/interviewer/schedule', {
-        day,
-        time,
-      }, {
-        cancelToken: source.token,
-      });
-        <Alert
-          message={`You selected date: ${value.format('YYYY-MM-DD HH')}`}
-        />;
-    } catch ({ Response: { data: { message: msg } } }) {
-      message.error({ msg });
-    }
-    return () => {
-      source.cancel();
-    };
-  };
-
   useEffect(() => {
     const source = axios.CancelToken.source();
     const getAvailableDate = async () => {
@@ -108,16 +96,18 @@ const CalenderTab = () => {
     };
   }, []);
 
+  const disabledDay = (current) => current && current < moment().endOf('day');
   return (
     <div className="calender-tab">
       <div className="timePicker">
         <Form layout="vertical" autoComplete="off" className="datepickerForm">
           <Item name="name" label="Select your available time" type="url">
             <DatePicker
-              value={value}
+              value={dateTime}
               format="YYYY-MM-DD HH"
               showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
-              onChange={(val) => setValue(val)}
+              disabledDate={disabledDay}
+              onOk={onOk}
             />
           </Item>
           <div className="btn-save-holder">
@@ -127,10 +117,15 @@ const CalenderTab = () => {
           </div>
         </Form>
       </div>
-      <div className="tags-holder">
+      <div className="dateTimeCalender-holder">
         <h3 className="dates-sec">Your Available Dates</h3>
-
-        <Calendar disabledDate={disabledDate} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
+        <div className="calenders-holder">
+          <Calendar
+            disabledDate={disabledDate}
+            dateCellRender={dateCellRender}
+            monthCellRender={monthCellRender}
+          />
+        </div>
       </div>
     </div>
   );
