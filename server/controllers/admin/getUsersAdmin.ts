@@ -9,22 +9,22 @@ const getUsersAdmin = async (req: RequestType, res: Response) => {
   }: { role?: string, page?: string, status?: string} = req.query;
 
   let query: any;
-  if (typeof status === 'string') {
-    await getUsersAdminQueryValidation({
-      role, page, status,
-    });
-    query = {
-      $match: {
-        status,
-      },
-    };
-  } else {
+  if (Array.isArray(status)) {
     await getUsersArrayStatusAdminQueryValidation({ role, page, status });
     query = {
       $match: {
         status: {
           $in: status,
         },
+      },
+    };
+  } else {
+    await getUsersAdminQueryValidation({
+      role, page, status,
+    });
+    query = {
+      $match: {
+        status,
       },
     };
   }
