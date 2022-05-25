@@ -12,8 +12,6 @@ const createReview = async (req: RequestType, res: Response) => {
   }
   const { message }: any = await createReviewValidation(req.body);
 
-  console.log(id);
-
   const checkReview = await Interviewee.aggregate([{
     $unwind: '$interviews',
   }, {
