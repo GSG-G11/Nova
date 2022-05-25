@@ -151,7 +151,11 @@ describe('signup', () => {
   });
 
   test('Verify Email', (done) => {
-    request(app).patch('/api/auth/verify?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhcnJ5QGdtYWlsLmNvbSIsImlhdCI6MTY1MjE4ODM2M30.W80qvkj96eqcTReiG7pgXMHW5Ij-ipoPJkVtwFaDOTg').expect(200)
+    request(app).patch('/api/auth/verify').send(
+      {
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhcnJ5QGdtYWlsLmNvbSIsImlhdCI6MTY1MjE4ODM2M30.W80qvkj96eqcTReiG7pgXMHW5Ij-ipoPJkVtwFaDOTg',
+      },
+    ).expect(200)
       .end((err, res) => {
         if (err) {
           return done(err);
