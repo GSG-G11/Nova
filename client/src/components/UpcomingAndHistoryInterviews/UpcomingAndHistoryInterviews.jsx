@@ -24,6 +24,20 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
     }
   };
 
+  const cancelInterview = async (id) => {
+    try {
+      await axios.patch(`/api/${id}`);
+      setDataSource((prev) => prev.map((item) => {
+        if (item.key === id) {
+          item.status = 'true';
+        }
+        return item;
+      }));
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
+    }
+  };
+
   useEffect(() => {
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
@@ -46,6 +60,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
             language: obj.interviews.language,
             specialization: obj.interviews.specialization,
             date: dateStr,
+            is_cancelled: String(obj.interviews.is_cancelled),
             time: `${`${obj.interviews.time}:00`}-${obj.interviews.time + 1}:00`,
           },
           ]);
@@ -84,13 +99,32 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
       <Column title="Specialization" dataIndex="specialization" key="specialization" />
       <Column title="Date" dataIndex="date" key="date" />
       <Column title="Time" dataIndex="time" key="time" />
+      <Column
+        title="Cancelled"
+        dataIndex="is_cancelled"
+        key="is_cancelled"
+      />
       {(status === 'upcoming') ? (
         <Column
           title="Action"
           key="action"
           render={(text, record) => (
             <Space size="middle">
-              <Button type="primary" key={record.key} danger>
+              <Button
+                type="primary"
+                key={record.key}
+                danger
+                onClick={() => {
+                  Modal.confirm({
+                    title: 'Are you sure to cancel this interview?',
+                    content: 'This action cannot be undone',
+                    okText: 'Yes',
+                    okType: 'danger',
+                    cancelText: 'No',
+                    onOk: () => cancelInterview(record.key),
+                  });
+                }}
+              >
                 {/* Here we must send to backend when the route is ready */}
                 Cancel Interview
               </Button>
