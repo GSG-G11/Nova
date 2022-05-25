@@ -12,7 +12,6 @@ const signup = async (req: Request, res: Response) => {
   const {
     name, email, password, role, languages, specialization, cv, level,
   }: signupInterface = req.body;
-
   await signupValidation({
     name, email, password, role,
   });

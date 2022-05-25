@@ -19,7 +19,7 @@ const confirmPasswordHandel = (getFieldValue) => ({
   },
 });
 
-const SignupForm = ({ setIsModalVisible }) => {
+const SignupForm = ({ setIsModalVisible, disabled }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -144,19 +144,19 @@ const SignupForm = ({ setIsModalVisible }) => {
           >
             <Password />
           </Item>
-          <Item>
-            <div className="form-group-btn">
-              <Button type="primary" htmlType="submit" className="signup">
-                Register
-              </Button>
-            </div>
-          </Item>
-          <Item>
-            <div className="have-account">
-              Do you have an account?
-              <a href="/api/login">Log in</a>
-            </div>
-          </Item>
+          {disabled === false ? (null) : (
+            <>
+              <Item>
+                <div className="form-group-btn"><Button type="primary" htmlType="submit" className="signup"> Register </Button></div>
+              </Item>
+              <Item>
+                <div className="have-account">
+                  Do you have an account?
+                  <a href="/api/login">Log in</a>
+                </div>
+              </Item>
+            </>
+          )}
         </>
       )}
     </Form>
@@ -165,6 +165,7 @@ const SignupForm = ({ setIsModalVisible }) => {
 
 SignupForm.propTypes = {
   setIsModalVisible: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default SignupForm;

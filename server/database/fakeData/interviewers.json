@@ -11,10 +11,11 @@
             "interviews": [
                 {
                     "intervieweeId": "627c92140d0c3622573195ca",
-                    "date": "2022-04-28",
+                    "date": "2032-10-28",
                     "time": 12,
                     "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
+<<<<<<< Updated upstream
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
 
@@ -103,6 +104,11 @@
                     "specialization": "FRONTEND",
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
+=======
+                    "is_cancelled": false,
+                    "questionCategory":"Technical",
+                    "_id": "627d1d11f5243856362e8a8c"
+>>>>>>> Stashed changes
 
                 },
                 {
@@ -111,6 +117,10 @@
                     "time": 12,
                     "language": "PHP",
                     "specialization": "BACKEND",
+<<<<<<< Updated upstream
+=======
+                    "is_cancelled": false,
+>>>>>>> Stashed changes
                     "questionCategory":"Technical"
 
                 }

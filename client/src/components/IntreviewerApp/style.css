@@ -49,3 +49,12 @@
     justify-content: flex-start;
     margin-top: 6%;
 }
+.interviewerApp-holder .ant-steps {
+    margin-bottom: 4%;
+}
+.secondStep-holder .displaynon-control .ant-col.ant-col-25.ant-form-item-control {
+    display: none;
+}
+.modal-App{
+    width: 615px !important;
+}
