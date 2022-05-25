@@ -926,19 +926,20 @@ describe('Create Review for a specific interview', () => {
         return done();
       });
   });
-  test('Should create a review for the interview', (done) => {
-    request(app).post('/api/user/review/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
-      message: 'This is a review',
-    })
-      .expect(201)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.body.message).toBe('Review created successfully');
-        return done();
-      });
-  });
+  // test('Should create a review for the interview', (done) => {
+  //   request(app).post('/api/user/review/627d1d11f
+  // 5243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+  //     message: 'This is a review',
+  //   })
+  //     .expect(201)
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Review created successfully');
+  //       return done();
+  //     });
+  // });
 });
 
 describe('Get users', () => {
