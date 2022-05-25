@@ -20,7 +20,8 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
   const [loading, setLoading] = useState(true);
   const deleteInterview = async (id) => {
     try {
-      await axios.delete(`/api/interview/${id}`);
+      const { data: { message: msg } } = await axios.delete(`/api/interview/${id}`);
+      message.success(msg);
       setDataSource((prev) => prev.filter((item) => item.key !== id));
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -29,7 +30,8 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
 
   const cancelInterview = async (id) => {
     try {
-      await axios.patch(`/api/${id}`);
+      const { data: { message: msg } } = await axios.patch(`/api/${id}`);
+      message.success(msg);
       setDataSource((prev) => prev.map((item) => {
         if (item.key === id) {
           item.status = 'true';
@@ -71,6 +73,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
         });
         setLoading(false);
       } catch ({ response: { data: { message: msg } } }) {
+        setLoading(false);
         setDataSource([]);
         message.error(msg);
       }
@@ -106,9 +109,9 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
       <Column title="Date" dataIndex="date" key="date" />
       <Column title="Time" dataIndex="time" key="time" />
       <Column
-        title="Cancelled"
-        dataIndex="is_cancelled"
-        key="is_cancelled"
+        title="Zoom Link"
+        dataIndex=""
+        key=""
       />
       {(status === 'upcoming') ? (
         <Column

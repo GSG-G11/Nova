@@ -22,12 +22,17 @@ const AddReviewButton = ({ id }) => {
 
   const handleOk = async () => {
     setIsModalVisible(false);
-    setReview('');
     try {
-      await axios.post(`/api/user/review/${id}`, { message: review });
+      if (review.length > 0) {
+        const { data: { message: msg } } = await axios.post(`/api/user/review/${id}`, { message: review });
+        setReview('');
+        return message.success(msg);
+      }
+      return message.error('Please enter your review');
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
     }
+    return setReview('');
   };
 
   const handleCancel = () => {
