@@ -6,11 +6,12 @@ import LoginForm from './LoginForm';
 import logo from '../../../assets/images/logo.png';
 import '../style.css';
 
-const LoginButton = ({ title, className }) => {
+const LoginButton = ({ title, className, signUpForm }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
+    signUpForm();
   };
 
   const handleOk = () => {
@@ -47,6 +48,7 @@ const LoginButton = ({ title, className }) => {
 LoginButton.propTypes = {
   title: PropTypes.string.isRequired,
   className: PropTypes.string,
+  signUpForm: PropTypes.func.isRequired,
 };
 
 LoginButton.defaultProps = {
