@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import {
   Button,
@@ -8,6 +9,7 @@ import {
 import '../style.css';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import LoginForm from '../Login/LoginForm';
 import LoadingSpinner from '../../common/LoadingSpinner';
 
 const confirmPasswordHandel = (getFieldValue) => ({
@@ -25,6 +27,7 @@ const SignupForm = ({ setIsModalVisible }) => {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loginForm, setLoginForm] = useState(false);
 
   const signup = async () => {
     try {
@@ -47,120 +50,125 @@ const SignupForm = ({ setIsModalVisible }) => {
 
   const { Item } = Form;
   const { Password } = Input;
-  return (
-    <Form
-      name="basic"
-      labelCol={{
-        span: 20,
-      }}
-      wrapperCol={{
-        span: 25,
-      }}
-      className="signup-form"
-      initialValues={{
-        remember: true,
-      }}
-      autoComplete="off"
-      onFinish={() => signup()}
-    >
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
+  return loginForm ? (
+    <LoginForm setLoginForm={setLoginForm} />
+  )
+    : (
+      <Form
+        name="basic"
+        labelCol={{
+          span: 20,
+        }}
+        wrapperCol={{
+          span: 25,
+        }}
+        className="signup-form"
+        initialValues={{
+          remember: true,
+        }}
+        autoComplete="off"
+        onFinish={() => signup()}
+      >
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
 
-          <Item
-            name="fullName"
-            label="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            rules={[
-              {
-                type: 'text',
-                message: 'The input is not valid Full Name!',
-              },
-              {
-                required: true,
-                message: 'Please input your Full Name',
-              },
-            ]}
-          >
-            <Input />
-          </Item>
+            <Item
+              name="fullName"
+              label="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              rules={[
+                {
+                  type: 'text',
+                  message: 'The input is not valid Full Name!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your Full Name',
+                },
+              ]}
+            >
+              <Input />
+            </Item>
 
-          <Item
-            name="email"
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input />
-          </Item>
+            <Item
+              name="email"
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                },
+              ]}
+            >
+              <Input />
+            </Item>
 
-          <Item
-            name="Password"
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            rules={[
-              {
+            <Item
+              name="Password"
+              label="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              rules={[
+                {
                 // password Should be combination of numbers & alphabets and one special character
-                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,
-                message: 'Password must contain at least one lowercase letter, uppercase letter, number, and special character',
-              },
-              {
-                required: true,
-                message: 'Please input your Passsword',
-              },
-            ]}
-            hasFeedback
-          >
-            <Password />
-          </Item>
+                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/,
+                  message: 'Password must contain at least one lowercase letter, uppercase letter, number, and special character',
+                },
+                {
+                  required: true,
+                  message: 'Please input your Passsword',
+                },
+              ]}
+              hasFeedback
+            >
+              <Password />
+            </Item>
 
-          <Item
-            name="confirm"
-            label="Confirm Password"
-            dependencies={['Password']}
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'Please confirm your password!',
-              },
-              ({ getFieldValue }) => confirmPasswordHandel(getFieldValue),
-            ]}
-          >
-            <Password />
-          </Item>
-          <Item>
-            <div className="form-group-btn">
-              <Button type="primary" htmlType="submit" className="signup">
-                Register
-              </Button>
-            </div>
-          </Item>
-          <Item>
-            <div className="have-account">
-              Do you have an account?
-              <a href="/api/login">Log in</a>
-            </div>
-          </Item>
-        </>
-      )}
-    </Form>
-  );
+            <Item
+              name="confirm"
+              label="Confirm Password"
+              dependencies={['Password']}
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => confirmPasswordHandel(getFieldValue),
+              ]}
+            >
+              <Password />
+            </Item>
+            <Item>
+              <div className="form-group-btn">
+                <Button type="primary" htmlType="submit" className="signup">
+                  Register
+                </Button>
+              </div>
+            </Item>
+            <Item>
+              <div className="have-account">
+                Already have an account?
+                <Button type="link" onClick={() => setLoginForm(!loginForm)}>
+                  Login
+                </Button>
+              </div>
+            </Item>
+          </>
+        )}
+      </Form>
+    );
 };
 
 SignupForm.propTypes = {
