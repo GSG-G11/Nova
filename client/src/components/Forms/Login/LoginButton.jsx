@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-first-prop-new-line */
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import PropTypes from 'prop-types';
@@ -27,10 +27,11 @@ const LoginButton = ({ title, className, signUpForm }) => {
       <Button className={className || 'loginBtn'} type="primary" onClick={showModal}>
         {title}
       </Button>
-      <Modal title={(
-        <div className="modal-logo-img">
-          <img src={logo} alt="logo" className="logo-img" />
-        </div>
+      <Modal
+        title={(
+          <div className="modal-logo-img">
+            <img src={logo} alt="logo" className="logo-img" />
+          </div>
         )}
         visible={isModalVisible}
         onOk={handleOk}

@@ -1,7 +1,6 @@
 import { Button, Layout, Typography } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { } from '@ant-design/icons';
 import './style.css';
 import { Link } from 'react-router-dom';
 import headerImg from '../../assets/images/header.png';
