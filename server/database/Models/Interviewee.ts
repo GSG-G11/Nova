@@ -37,7 +37,7 @@ const interviewee = new Schema({
           enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
-        is_cancalled: {
+        is_cancelled: {
           type: Boolean,
           default: false,
           required: true,

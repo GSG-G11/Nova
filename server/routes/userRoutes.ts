@@ -6,7 +6,7 @@ import {
   deleteInterview,
   getAllReviews,
   getUserById,
-  cancalInterview,
+  cancelInterview,
   getInterviewerAvailableTime,
   getInterviewers,
 } from '../controllers';
@@ -22,5 +22,5 @@ router.delete('/interview/:id', userAuth, deleteInterview);
 router.get('/user/info/:id', getUserById);
 router.get('/user/review', userAuth, getAllReviews);
 router.get('/users/interviewer/available', userAuth, checkInterviewer, getInterviewerAvailableTime);
-router.patch('/:interviewId', userAuth, cancalInterview);
+router.patch('/:interviewId', userAuth, cancelInterview);
 export default router;

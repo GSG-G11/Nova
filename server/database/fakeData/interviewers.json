@@ -15,7 +15,7 @@
                     "time": 12,
                     "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
-                    "is_cancalled": false,
+                    "is_cancelled": false,
                     "questionCategory":"Technical",
                     "_id": "627d1d11f5243856362e8a8c"
 
@@ -26,7 +26,7 @@
                     "time": 12,
                     "language": "PHP",
                     "specialization": "BACKEND",
-                    "is_cancalled": false,
+                    "is_cancelled": false,
                     "questionCategory":"Technical"
 
                 }

@@ -7,7 +7,7 @@ import Interviewer from '../../database/Models/Interviewer';
 import User from '../../database/Models/User';
 import postAvailableGlobal from '../interviewer/postAvailableGlobal';
 
-const cancalInterview = async (req: RequestType, res: Response) => {
+const cancelInterview = async (req: RequestType, res: Response) => {
   const { interviewId }: any = req.params;
   const { userInfo } = req;
 
@@ -86,11 +86,11 @@ const cancalInterview = async (req: RequestType, res: Response) => {
   const [{ modifiedCount }, { modifiedCount: modifiedCount2 }] = await Promise.all([
     Interviewer.updateOne(
       { userId: new ObjectId(String(interviewerId)), 'interviews._id': interviewId },
-      { $set: { 'interviews.$.is_cancalled': true } },
+      { $set: { 'interviews.$.is_cancelled': true } },
     ),
     Interviewee.updateOne(
       { userId: new ObjectId(String(intervieweeId)), 'interviews._id': interviewId },
-      { $set: { 'interviews.$.is_cancalled': true } },
+      { $set: { 'interviews.$.is_cancelled': true } },
     ),
   ]);
 
@@ -124,4 +124,4 @@ const cancalInterview = async (req: RequestType, res: Response) => {
   }
   throw new CustomError('Interview not found', 404);
 };
-export default cancalInterview;
+export default cancelInterview;
