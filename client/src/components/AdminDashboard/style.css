@@ -39,3 +39,13 @@
     margin-left: 200,
 
 }
+
+.tableAdmin {
+    margin-left: 12rem;
+    min-height: 100vh;
+}
+
+.rejectAdmin {
+    color: red !important;
+    font-weight: 500 !important;
+}
