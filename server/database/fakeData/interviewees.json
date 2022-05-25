@@ -41,6 +41,7 @@
                     "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
+                    "is_cancelled": false,
                     "review": {
                         "message": "Nice",
                         "saved": true,
@@ -52,6 +53,7 @@
                     "interviewerId": "627c92140d0c3622573195cb",
                     "date": "2022-04-10T14:30:21.892Z",
                     "time": 12,
+                    "is_cancelled": false,
                     "language": "JAVASCRIPT",
                     "specialization": "FRONTEND",
                     "questionCategory": "Technical",
