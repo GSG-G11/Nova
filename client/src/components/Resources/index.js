@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.css';
+import { useLocation } from 'react-router-dom';
 import SectionIntro from '../common/SectionIntro';
 import icon0 from '../../assets/images/Resources/icon0.png';
 import icon1 from '../../assets/images/Resources/icon1.png';
@@ -37,27 +38,43 @@ const resourcesArray = [
     link: 'https://skillcrush.com/blog/technical-interviews/',
   },
 ];
-const Resources = () => (
-  <section className="resources">
-    <SectionIntro
-      action="We Provide"
-      title="Resources"
-      description="Why Nova, what is it characterized by, and what does it offer you."
-    />
-    <div className="resources__cards">
-      {resourcesArray.map(({
-        image, title, description, link, id,
-      }) => (
-        <ResourceCard
-          image={image}
-          title={title}
-          description={description}
-          link={link}
-          key={id}
-        />
-      ))}
-    </div>
-  </section>
-);
+const Resources = () => {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        element.scrollIntoView();
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
 
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, [location]);
+  return (
+    <section className="resources" id="resources">
+      <SectionIntro
+        action="We Provide"
+        title="Resources"
+        description="Why Nova, what is it characterized by, and what does it offer you."
+      />
+      <div className="resources__cards">
+        {resourcesArray.map(({
+          image, title, description, link, id,
+        }) => (
+          <ResourceCard
+            image={image}
+            title={title}
+            description={description}
+            link={link}
+            key={id}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 export default Resources;

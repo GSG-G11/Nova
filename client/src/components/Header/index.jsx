@@ -16,7 +16,7 @@ const Header = () => {
       <Content
         className="site-layout-background headerContent"
       >
-        <div className="allSec">
+        <div className="allSec" id="home">
           <section className="rightSec">
             <div className="novaCommunity">
               <Title level={5} className="pNova">Nova Community</Title>
