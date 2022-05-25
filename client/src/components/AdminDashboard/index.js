@@ -68,7 +68,6 @@ const AdminDashboard = () => {
           <Title level={4} className="dashboard__title">Admin Dashboard</Title>
         </Header>
         <Menu
-          className="hi"
           theme="dark"
           mode="inline"
           defaultSelectedKeys={[selectedTab]}
