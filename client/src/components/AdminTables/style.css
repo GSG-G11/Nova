@@ -1,9 +1,6 @@
-.table{
-  /* width: 100%; */
-}
-
 .deleteIcon{
   color: red;
+  font-size: 1.5rem; 
 }
 
 .accept{

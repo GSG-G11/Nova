@@ -1,5 +1,5 @@
 import {
-  message, Space, Table, Tag, Modal, Button, Avatar, Typography,
+  message, Space, Table, Tag, Modal, Button, Avatar,
 } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -8,11 +8,13 @@ import PropTypes from 'prop-types';
 import {
   DeleteOutlined,
   ExclamationCircleOutlined,
+  CheckCircleOutlined,
+  SyncOutlined,
+  CloseCircleOutlined,
 } from '@ant-design/icons';
 
 const { Column } = Table;
 const { confirm } = Modal;
-const { Title } = Typography;
 
 const AdminTables = ({ pageLocation, roles }) => {
   const [dataSource, setDataSource] = useState([]);
@@ -176,6 +178,30 @@ const AdminTables = ({ pageLocation, roles }) => {
                   </>
                 )}
               />
+              <Column
+                title="status"
+                dataIndex="status"
+                key="status"
+                render={(state) => (
+                  <>
+                    {(state === 'APPROVED') && (
+                    <Tag icon={<CheckCircleOutlined />} color="success">
+                      {state}
+                    </Tag>
+                    )}
+                    {(state === 'PENDING') && (
+                    <Tag icon={<SyncOutlined spin />} color="processing">
+                      {state}
+                    </Tag>
+                    )}
+                    {(state === 'REJECTED') && (
+                    <Tag icon={<CloseCircleOutlined />} color="error">
+                      {state}
+                    </Tag>
+                    )}
+                  </>
+                )}
+              />
             </>
           )}
       <Column
@@ -214,15 +240,12 @@ const AdminTables = ({ pageLocation, roles }) => {
                 </Button>
               </>
             )}
-            {(pageLocation !== 'Applications') && (
             <DeleteOutlined
               className="deleteIcon"
               onClick={() => showDeleteConfirm(key)}
               type="dashed"
               key={key}
             />
-            )}
-            {(pageLocation === 'Applications' && status !== 'PENDING') && <Title className="rejectAdmin" level={5}>{status}</Title>}
           </Space>
 
         )}
