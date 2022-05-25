@@ -53,15 +53,15 @@ const cancalInterview = async (req: RequestType, res: Response) => {
     { _id: secondUserId },
   );
 
-  // deruct the interviewerId or intervieweeId object to got the interviews array
+  // destructur the interviewerId or intervieweeId object to got the interviews array
   const { interviews } = interview;
-  const { date, specilaization } = interviews[0];
+  const { date, specialization } = interviews[0];
 
   await mailSender(
     email,
     'Cancel Interview',
     `<h1> Cancel Interview </h1>
-    <h2>We inform you that your interview, scheduled for ${date}, which was an ${specilaization} specilaization, has been cancelled </h2>
+    <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specilaization, has been cancelled </h2>
     <br> <h4>Thank you for your cooperation</h4>`,
   );
 
@@ -69,7 +69,7 @@ const cancalInterview = async (req: RequestType, res: Response) => {
     secondUserEmail,
     'Cancel Interview',
     `<h1> Cancel Interview </h1>
-  <h2>We inform you that your interview, scheduled for ${date}, which was an ${specilaization} specilaization, has been cancelled </h2>
+  <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specilaization, has been cancelled </h2>
   <br> <h4>Thank you for your cooperation</h4>`,
   );
 
