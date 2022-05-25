@@ -4,7 +4,7 @@ import axios from 'axios';
 import {
   DatePicker, Button, Form, message, Calendar, Badge,
 } from 'antd';
-import './calender.css';
+import './style.css';
 
 const { Item } = Form;
 
@@ -16,25 +16,19 @@ const CalenderTab = () => {
     setDateTime(value.format('YYYY-MM-DD HH'));
   };
   const postDate = async () => {
-    const source = axios.CancelToken.source();
     const date = dateTime.split(' ')[0].toString();
     const time = Number(dateTime.split(' ')[1]);
     try {
       axios.post('/api/interviewer/schedule', {
         date,
         time,
-      }, {
-        cancelToken: source.token,
       });
       message.success('date added successfully to your schedule');
     } catch ({ response: { data: { message: msg } } }) {
       message.error({ msg });
     }
-    return () => {
-      source.cancel();
-    };
   };
-  const disabledDates = availableDates.length > 0 ? availableDates.map(({ date }) => date.split('T')[0]) : [];
+  const disabledDates = availableDates.length ? availableDates.map(({ date }) => date.split('T')[0]) : [];
   const disabledDate = (current) => disabledDates.find((date) => date === moment(current).format('YYYY-MM-DD'));
   const dayArr = disabledDates.map((date) => parseInt(date.split('-')[2], 10));
 
@@ -57,12 +51,12 @@ const CalenderTab = () => {
 
   const monthCellRender = (val) => {
     const num = getMonthData(val);
-    return num ? (
+    return num && (
       <div className="notes-month">
         <section>{num}</section>
         <span>Backlog number</span>
       </div>
-    ) : null;
+    );
   };
   const dateCellRender = (val) => {
     const listData = getListData(val);
@@ -94,7 +88,7 @@ const CalenderTab = () => {
     return () => {
       source.cancel();
     };
-  }, []);
+  }, [dateTime]);
 
   const disabledDay = (current) => current && current < moment().endOf('day');
   return (

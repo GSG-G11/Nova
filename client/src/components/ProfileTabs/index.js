@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ReviewCard from '../Review';
 import SettingTab from '../Setting';
 import './style.css';
-import CalenderTab from '../Calender/calender';
+import CalenderTab from '../Calender';
 
 const { TabPane } = Tabs;
 
