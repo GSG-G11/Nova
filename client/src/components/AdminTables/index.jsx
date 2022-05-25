@@ -20,6 +20,7 @@ const AdminTables = ({ pageLocation, roles }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const deleteUser = async (id) => {
     try {
@@ -116,6 +117,7 @@ const AdminTables = ({ pageLocation, roles }) => {
           level: userInfo[0].level,
           img: userInfo[0].profile_picture,
         })));
+        setLoading(false);
       };
       fetchData();
     } catch ({ response: { data: { message: msg } } }) {
@@ -129,6 +131,7 @@ const AdminTables = ({ pageLocation, roles }) => {
     <Table
       dataSource={dataSource}
       className="table"
+      loading={loading}
       pagination={{
         current: page,
         pageSize: 7,
