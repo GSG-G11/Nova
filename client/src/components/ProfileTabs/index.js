@@ -1,7 +1,8 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
-import SettingTab from '../Resources/Setting';
+import ReviewCard from '../Review';
+import SettingTab from '../Setting';
 import './style.css';
 import CalenderTab from '../Calender/calender';
 
@@ -22,7 +23,7 @@ const ProfileTabs = () => {
         </TabPane>
         {role === 'interviewee' ? (
           <TabPane tab="Reviews" key="3">
-            Content of Tab Pane 3
+            <ReviewCard />
           </TabPane>
 
         ) : (

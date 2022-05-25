@@ -6,7 +6,7 @@ import { acceptInterviewer, getUsersAdmin } from '../controllers';
 const router: Router = Router();
 
 router.delete('/users/:id', userAuth, adminAuth, deleteUser);
-router.patch('/approval/:id', acceptInterviewer);
+router.patch('/approval/:id', userAuth, adminAuth, acceptInterviewer);
 router.get('/users', userAuth, adminAuth, getUsersAdmin);
 
 export default router;

@@ -7,6 +7,7 @@ import {
 import { Layout, Menu, Typography } from 'antd';
 import React, { useState, createElement } from 'react';
 import './style.css';
+import AdminTables from '../AdminTables';
 
 const {
   Header, Content, Footer, Sider,
@@ -18,19 +19,19 @@ const items = [
     key: '1',
     icon: UserOutlined,
     label: 'Interviewers',
-    content: <div>Interviewers</div>,
+    content: <AdminTables pageLocation="Interviewers" roles="interviewer" />,
   },
   {
     key: '2',
     icon: TeamOutlined,
     label: 'Interviewees',
-    content: <div>Interviewees</div>,
+    content: <AdminTables pageLocation="Interviewees" roles="interviewee" />,
   },
   {
     key: '3',
     icon: BookOutlined,
     label: 'Applications',
-    content: <div>Applications</div>,
+    content: <AdminTables pageLocation="Applications" roles="interviewer" />,
   },
   {
     key: '4',
@@ -75,7 +76,7 @@ const AdminDashboard = () => {
         />
       </Sider>
       <Layout
-        className="site-layout"
+        className="site-layout tableAdmin"
       >
         <Header
           className="site-layout-background"
