@@ -79,6 +79,33 @@ const postAvailableGlobal = async (userId: string, time: string, isoDate: string
     throw new CustomError('No time added', 400);
   }
 
+  const findSchedule = await Schedule.find({
+    language: {
+      $in: interviewer[0].languages,
+    },
+    specialization: interviewer[0].specialization,
+  });
+
+  if (!findSchedule.length) {
+    interviewer[0].languages.forEach(async (language:string) => {
+      await Schedule.insertMany([
+        {
+          language,
+          specialization: interviewer[0].specialization,
+          available: [
+            {
+              interviewerId: userId,
+              date: isoDate,
+              time,
+            },
+          ],
+        },
+      ]);
+    });
+
+    return 'Successfully added time';
+  }
+
   const schedule = await Schedule.update({
     language: {
       $in: interviewer[0].languages,

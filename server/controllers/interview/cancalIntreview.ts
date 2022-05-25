@@ -4,6 +4,7 @@ import { RequestType, mailSender, CustomError } from '../../utils';
 import Interviewee from '../../database/Models/Interviewee';
 import Interviewer from '../../database/Models/Interviewer';
 import User from '../../database/Models/User';
+import postAvailableGlobal from '../interviewer/postAvailableGlobal';
 
 const cancalInterview = async (req: RequestType, res: Response) => {
   const { interviewId }: any = req.params;
@@ -17,6 +18,7 @@ const cancalInterview = async (req: RequestType, res: Response) => {
 
   let collectionName: any; // the name of the collection (intrviewee or interviewer)
   let secondUserId; // the id of the second user (interviewee or interviewer)
+  let interviewerId; // the id of the interviewer
 
   // // query about role by _id
   if (userInfo?.role === 'interviewee') {
@@ -25,12 +27,14 @@ const cancalInterview = async (req: RequestType, res: Response) => {
     // get intervieweeId to find his email
     const interview = await Interviewer.findOne({ 'interviews._id': interviewId });
     secondUserId = interview.interviews[0].interviewerId;
+    interviewerId = interview.userId;
   } else if (userInfo?.role === 'interviewer') {
     collectionName = Interviewer;
 
     // get intervieweeId to find his email
     const interview = await Interviewer.findOne({ 'interviews._id': interviewId });
     secondUserId = interview.interviews[0].intervieweeId;
+    interviewerId = interview.userId;
   }
 
   const result = await collectionName.updateOne(
@@ -53,9 +57,9 @@ const cancalInterview = async (req: RequestType, res: Response) => {
     { _id: secondUserId },
   );
 
-  // destructur the interviewerId or intervieweeId object to got the interviews array
+  // destructure the interviewerId or intervieweeId object to got the interviews array
   const { interviews } = interview;
-  const { date, specialization } = interviews[0];
+  const { date, specialization, time } = interviews[0];
 
   await mailSender(
     email,
@@ -74,8 +78,10 @@ const cancalInterview = async (req: RequestType, res: Response) => {
   );
 
   if (result.modifiedCount > 0) {
+    const resultGlobal = await postAvailableGlobal(String(interviewerId), time, date);
     return res.json({
       data: result,
+      postInterviewee: resultGlobal,
       message: 'Interviews canceled successfully',
     });
   }
