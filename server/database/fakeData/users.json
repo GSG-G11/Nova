@@ -12,14 +12,15 @@
             "role": "interviewee",
             "is_verified": true
         },
+        
         {
             "_id": "627c92140d0c3622573195cb",
-            "name": "Jack Doe",
+            "name": "Raghad Mezied",
             "email": "jack@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "I'm an interviewer",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "profile_picture": "https://avatars.githubusercontent.com/u/76119348?v=4",
             "level": "EXPERT",
             "role": "interviewer",
             "is_verified": true
@@ -65,15 +66,15 @@
 
         },
         {
-            "_id": "627c92140d0c3622573195ce",
-            "name": "Larry Doe",
-            "email": "larrys@gmail.com",
+            "_id": "a27c92140d0c3622573195ce",
+            "name": "Manar Abedalhadi",
+            "email": "potato@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "I'm a web developer",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-            "level": "INTERNSHIP",
-            "role": "interviewee",
+            "profile_picture": "https://avatars.githubusercontent.com/u/79801554?v=4",
+            "level": "EXPERT",
+            "role": "interviewer",
             "is_verified": true
 
         },
@@ -88,7 +89,70 @@
             "level": "INTERNSHIP",
             "role": "interviewee",
             "is_verified": true
+            
+        },
+        {
+            "_id": "b27c92140d0c3622573195ce",
+            "name": "ِAbed Shamia",
+            "email": "larrysa@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm a web developer",
+            "cv": "link to cv",
+            "profile_picture": "https://avatars.githubusercontent.com/u/73759748?v=4",
+            "level": "EXPERT",
+            "role": "interviewer",
+            "is_verified": true
+            
+        },
+        {
+            "_id": "627c92140d0c3622573195ce",
+            "name": "Mahmoud Alhato",
+            "email": "larrys@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm a web developer",
+            "cv": "link to cv",
+            "profile_picture": "https://avatars.githubusercontent.com/u/80840350?v=4",
+            "level": "SENIOR",
+            "role": "interviewer",
+            "is_verified": true
 
+        },
+        {
+            "_id": "627c92140d0c3622573195af",
+            "name": "Muhammed Ali",
+            "email": "ali@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm Muhammed Ali",
+            "cv": "link to cv",
+            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "level": "INTERNSHIP",
+            "role": "interviewee",
+            "is_verified": true
+
+        },
+        {
+            "_id": "627c92140d0c3622573195ad",
+            "name": "steve jobs",
+            "email": "steve@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm steve jobs",
+            "cv": "link to cv",
+            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "level": "INTERNSHIP",
+            "role": "interviewer",
+            "is_verified": false
+        },
+        {
+            "_id": "c27c92140d0c3622573195ce",
+            "name": "steve",
+            "email": "stev@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm steve jobs",
+            "cv": "link to cv",
+            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "level": "INTERNSHIP",
+            "role": "interviewer",
+            "is_verified": false
         }
     ]
 }

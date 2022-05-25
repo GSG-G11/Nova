@@ -21,7 +21,7 @@ const deleteData = async (role: string, userId: string, interviewId: string) => 
   }
   const firstCondition = {
     $match: {
-      userId,
+      userId: new ObjectId(userId),
     },
   };
   const secondCondition = {

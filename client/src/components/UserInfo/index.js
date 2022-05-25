@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
-  Button, Image, message, Typography,
+  Image, message, Skeleton, Typography,
 } from 'antd';
-import LoadingSpinner from '../common/LoadingSpinner';
+import Navbar from '../Navbar';
+import CreateInterviewButton from '../common/CreateInterviewButton';
 
 const { Text, Title } = Typography;
 const UserInfo = () => {
@@ -44,41 +45,42 @@ const UserInfo = () => {
   } = user;
 
   return (
-    <div className="user__info-section">
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          <div className="user__primary">
-            <div className="user__image-container">
-              <Image src={profilePicture} alt="profile" />
+    <>
+      <Navbar />
+      <div className="user__info-section">
+        {loading ? (
+          <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
+        ) : (
+          <>
+            <div className="user__primary">
+              <div className="user__image-container">
+                <Image src={profilePicture} alt="profile" />
+              </div>
+              <div className="user__primary-info">
+                <Title level={2} className="user__name">{name}</Title>
+                <Text className="user__level">{level}</Text>
+                {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
+                <CreateInterviewButton title="Start a Practice Interview" />
+                )}
+              </div>
             </div>
-            <div className="user__primary-info">
-              <Title level={2} className="user__name">{name}</Title>
-              <Text className="user__level">{level}</Text>
-              {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
-              <Button type="primary" className="user__start-interview">
-                Start a Practice Interview
-              </Button>
-              )}
+
+            <div className="user__secondary-info">
+              <Title level={4} className="user__about">About me</Title>
+              <Text className="user__about-description">
+                {bio}
+              </Text>
+              <p className="user__cv">
+                Link to CV:
+                {' '}
+                <a href={cv} download target="_blank" rel="noreferrer">{cv}</a>
+              </p>
+
             </div>
-          </div>
-
-          <div className="user__secondary-info">
-            <Title level={4} className="user__about">About me</Title>
-            <Text className="user__about-description">
-              {bio}
-            </Text>
-            <p className="user__cv">
-              Link to CV:
-              {' '}
-              <a href={cv} download target="_blank" rel="noreferrer">{cv}</a>
-            </p>
-
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </>
 
   );
 };

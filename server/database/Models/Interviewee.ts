@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const interviewee = new Schema({
   userId: {
     $ref: 'User',
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   interviews: {
@@ -24,7 +24,7 @@ const interviewee = new Schema({
         },
         language: {
           type: String,
-          enum: ['JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
+          enum: ['JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO'],
           required: true,
         },
         specialization: {
@@ -37,21 +37,32 @@ const interviewee = new Schema({
           enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
+        is_cancelled: {
+          type: Boolean,
+          default: false,
+          required: true,
+        },
         review: {
           type: {
             message: {
               type: String,
               required: false,
+              default: '',
             },
             saved: {
               type: Boolean,
               required: false,
+              default: false,
             },
             created_at: {
               type: Date,
-              default: Date.now,
-              required: true,
+              required: false,
             },
+          },
+          default: {
+            message: '',
+            saved: false,
+            created_at: new Date(),
           },
         },
       },

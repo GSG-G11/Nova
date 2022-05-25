@@ -20,6 +20,10 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload;
     },
+    clearUser: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(checkUser.fulfilled, (state, action) => {
@@ -38,5 +42,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, clearUser } = authSlice.actions;
 export default authSlice.reducer;

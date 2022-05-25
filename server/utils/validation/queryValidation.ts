@@ -10,6 +10,26 @@ const getInterviewsQueryValidation = async (data: object) => {
   return result;
 };
 
+const getUsersAdminQueryValidation = async (data: object) => {
+  const schema = Joi.object({
+    role: Joi.string().valid('interviewer', 'interviewee').required(),
+    page: Joi.string(),
+    status: Joi.string().valid('PENDING', 'APPROVED', 'REJECTED'),
+  });
+  const result: object = await schema.validateAsync(data, { abortEarly: false });
+  return result;
+};
+
+const getUsersArrayStatusAdminQueryValidation = async (data: object) => {
+  const schema = Joi.object({
+    role: Joi.string().valid('interviewer', 'interviewee').required(),
+    page: Joi.string(),
+    status: Joi.array().items(Joi.string().valid('PENDING', 'APPROVED', 'REJECTED')).required(),
+  });
+  const result: object = await schema.validateAsync(data, { abortEarly: false });
+  return result;
+};
+
 const validateQuery = async (query: any) => {
   const querySchema = Joi.object({
     page: Joi.number().integer().min(1).default(1),
@@ -21,4 +41,7 @@ const validateQuery = async (query: any) => {
   return result;
 };
 
-export { validateQuery, getInterviewsQueryValidation };
+export {
+  validateQuery, getInterviewsQueryValidation,
+  getUsersAdminQueryValidation, getUsersArrayStatusAdminQueryValidation,
+};

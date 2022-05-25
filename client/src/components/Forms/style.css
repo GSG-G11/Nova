@@ -48,3 +48,44 @@ button.ant-btn.ant-btn-primary.signup:hover {
   justify-content: center;
   align-items: center;
 }
+
+.loginBtn , .signUpBtn {
+  background-color: #432773;
+  border: none;
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 10px;
+}
+
+.loginBtn:hover , .signUpBtn:hover {
+  background-color: #673ab7;
+}
+
+.loginBtn:focus , .signUpBtn:focus {
+  background-color: #673ab7;
+}
+
+.loginBtn:active , .signUpBtn:active {
+  background-color: #673ab7;
+}
+
+.signup-form {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.btn-link {
+  margin: 0;
+  margin-left: 1.2rem;
+  padding: 0;
+  background-color: white;
+  border: none;
+  outline: none;
+  color: blue;
+}
+
+.btn-link:hover {
+  background-color: white;
+  color: blue !important;
+}

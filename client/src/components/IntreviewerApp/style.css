@@ -1,0 +1,51 @@
+.intreviewer-app {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    min-height: 70vh;
+    background: linear-gradient(0deg, rgba(253, 241, 253, 0) 1.63%, #FBF1FD 20.5%, #F8F4FF 58.57%, #FFFFFF 100%);
+}
+
+
+.intreviewer-app .joinUs-btn {
+    background: #432773;
+    box-shadow: 0px 7px 22px -6px rgb(186 190 197 / 34%);
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 4px 21px;
+    height: 42px;
+    text-align: center;
+    color: #FFFFFF;
+    border-color: #432773;
+    width: 35%;
+    margin-top: 3%;
+}
+.intreviewer-app h4.ant-typography.main-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    color: #432773;
+}
+.intreviewer-app h2.ant-typography.sub-title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 29px;
+    line-height: 5px;
+    color: #070558;
+}
+.intreviewer-app h5.ant-typography.description-title {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: #656464;
+    width: 77%;
+} 
+.intreviewer-app .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 6%;
+}

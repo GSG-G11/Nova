@@ -4,8 +4,17 @@
     box-sizing: border-box;
 }
 
-.Tab__header {
+.profile-tabs-holder .Tab__header {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.profile-tabs-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+.profile-tabs-holder .ant-tabs {
+    width: 70%;
 }

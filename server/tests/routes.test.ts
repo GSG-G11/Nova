@@ -26,6 +26,85 @@ describe('signup', () => {
       });
   });
 
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['J'],
+      specialization: 'Front',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"languages[0]" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]. "specialization" must be one of [FRONTEND, BACKEND, DEVOPS, SECURITY, DATA STRUCTURE, FULL STACK]');
+        return done();
+      });
+  });
+
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JAVASCRIPT', 'PHP'],
+      specialization: 'FRONTEND',
+      cv: 'cv',
+      level: 'JUNIOR',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"cv" must be a valid uri');
+        return done();
+      });
+  });
+
+  test('Should return error with validation', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JAVASCRIPT', 'PHP'],
+      specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'J',
+    }).expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"level" must be one of [JUNIOR, MIDDLE, SENIOR, EXPERT, INTERNSHIP]');
+        return done();
+      });
+  });
+
+  test('Signup with interviewer role', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JAVASCRIPT'],
+      specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
+    }).expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please wait for the email');
+        return done();
+      });
+  });
   test('Signup with existing user', (done) => {
     request(app).post('/api/signup').send({
       name: 'Jack',
@@ -42,23 +121,24 @@ describe('signup', () => {
       });
   });
 
-  test('Signup with non existent user', (done) => {
-    request(app)
-      .post('/api/signup')
-      .send({
-        name: 'Jack',
-        email: 'mahmoud@gmail.com',
-        password: 'Abed@123',
-        role: 'interviewee',
-      })
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
-        return done();
-      });
-  });
+  // test('Signup with non existent user', (done) => {
+  //   request(app)
+  //     .post('/api/signup')
+  //     .send({
+  //       name: 'Jack',
+  //       email: 'mahmoud@gmail.com',
+  //       password: 'Abed@123',
+  //       role: 'interviewee',
+  //     })
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Account created
+  // successfully please check your email to verify your account');
+  //       return done();
+  //     });
+  // });
 
   test('Verify Email failed', (done) => {
     request(app).patch('/api/auth/verify').expect(401)
@@ -100,7 +180,7 @@ describe('Login', () => {
 
   test('Login with non existent user', (done) => {
     request(app).post('/api/login').send({
-      email: 'potato@gmail.com',
+      email: 'potatoss@gmail.com',
       password: 'Abed@123',
     }).expect(404)
       .end((err, res) => {
@@ -215,7 +295,7 @@ describe('Interview Reviews', () => {
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Reviews found');
-        expect(res.body.data.length).toBe(2);
+        expect(res.body.data.length).toBe(1);
         return done();
       });
   });
@@ -239,7 +319,7 @@ describe('Interview Reviews', () => {
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Reviews found');
-      expect(res.body.data.reviews[0].interviewerName).toBe('Jack Doe');
+      expect(res.body.data.reviews[0].interviewerName).toBe('Raghad Mezied');
       return done();
     });
   });
@@ -294,7 +374,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'BACKEND',
       questionCategory: 'potato',
     })
@@ -313,7 +393,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'POTATO',
       questionCategory: 'Technical',
     })
@@ -341,7 +421,7 @@ describe('Create Interview', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        expect(res.body.message).toBe('"language" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
         return done();
       });
   });
@@ -351,7 +431,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 'LOL',
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -370,7 +450,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: 'aha12',
       time: 12,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -389,7 +469,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-01',
       time: 12,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -408,7 +488,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 20,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -427,7 +507,7 @@ describe('Create Interview', () => {
       interviewerId: '627c92140d0c3622573195cb',
       date: '2022-04-28',
       time: 14,
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
       questionCategory: 'Technical',
     })
@@ -532,7 +612,7 @@ describe('Get Interview', () => {
   });
 
   test('Should return error no Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).end((err, res) => {
+    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -616,14 +696,14 @@ describe('Get Available interview times', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('"language" must be one of [JS, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
+        expect(res.body.message).toBe('"language" must be one of [JAVASCRIPT, PHP, C++, C#, RUBY, PYTHON, JAVA, C, GO]');
         return done();
       });
   });
 
   test('Should throw a specialization validation error', (done) => {
     request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'potato',
     })
       .expect(400)
@@ -638,7 +718,7 @@ describe('Get Available interview times', () => {
 
   test('Should Get Available interview times', (done) => {
     request(app).post('/api/interview/available').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      language: 'JS',
+      language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
     })
       .end((err, res) => {
@@ -671,4 +751,218 @@ describe('Get Available interview times', () => {
   });
 });
 
+describe('Post interview time', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).post('/api/interviewer/schedule').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw a role error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.ADMIN_TOKEN}`]).send({})
+      .expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid role!');
+        return done();
+      });
+  });
+
+  test('Should throw a required validation error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"date" is required. "time" is required');
+        return done();
+      });
+  });
+
+  test('Should throw a date validation error', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: 'potato',
+      time: 12,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"date" must be a valid date');
+        return done();
+      });
+  });
+
+  test('Should throw already scheduled for this time', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: '2022-04-28',
+      time: 13,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Interviewer already scheduled for this time');
+        return done();
+      });
+  });
+
+  test('Should schedule interview', (done) => {
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      date: '2022-09-28',
+      time: 2,
+    })
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Successfully added time');
+        return done();
+      });
+  });
+});
+
+describe('Create Review for a specific interview', () => {
+  test('Should throw an error if user not authenticated', (done) => {
+    request(app).post('/api/user/review/12345').expect(401).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Login First!');
+      return done();
+    });
+  });
+
+  test('Should throw an error if user is not interviewer', (done) => {
+    request(app).post('/api/user/review/12345').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+      review: 'This is a review',
+    })
+      .expect(401)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('You are not authorized to access this resource');
+        return done();
+      });
+  });
+
+  test('Should throw an error if the interview Id is invalid', (done) => {
+    request(app).post('/api/user/review/12345').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      review: 'This is a review',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Invalid ID');
+        return done();
+      });
+  });
+
+  test('Should throw an error if the review message is empty', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: '',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"message" is not allowed to be empty');
+        return done();
+      });
+  });
+
+  test('Should throw an error if the review message is not string', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: 123,
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('"message" must be a string');
+        return done();
+      });
+  });
+
+  test('Should throw an error if failed to add the review', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8f').set('Cookie', [`token=${process.env.NO_INTERVIEWER_INTERVIEWS_TOKEN}`]).send({
+      message: 'Hi',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Failed to add review');
+        return done();
+      });
+  });
+
+  test('Should throw an error if interviewer reviewed the interview before', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e8a8d').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: 'Hi',
+    })
+      .expect(400)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('You have already reviewed this interview');
+        return done();
+      });
+  });
+  // test('Should create a review for the interview', (done) => {
+  //   request(app).post('/api/user/review/627d1d11f5
+  // 243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+  //     message: 'This is a review',
+  //   })
+  //     .expect(201)
+  //     .end((err, res) => {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       expect(res.body.message).toBe('Review created successfully');
+  //       return done();
+  //     });
+  // });
+});
+
+describe('Get users', () => {
+  test('Should return all interviewees', (done) => {
+    request(app).get('/api/interviewers').expect(200).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Users fetched successfully!');
+      expect(res.body.data.length).toBe(4);
+      return done();
+    });
+  });
+
+  test('Should return all interviewers', (done) => {
+    request(app).get('/api/interviewers').expect(200).end((err, res) => {
+      if (err) {
+        return done(err);
+      }
+      expect(res.body.message).toBe('Users fetched successfully!');
+      expect(res.body.data.length).toBe(4);
+      return done();
+    });
+  });
+});
 afterAll(() => mongoose.connection.close());

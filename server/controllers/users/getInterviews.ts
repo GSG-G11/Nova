@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import User from '../../database/Models/User';
 import { CustomError, RequestType, getInterviewsQueryValidation } from '../../utils';
 import Interviewer from '../../database/Models/Interviewer';
@@ -24,7 +25,7 @@ const getData = async (role: string, userId: string, status: string, page: strin
   const condition = [
     {
       $match: {
-        userId,
+        userId: new ObjectId(userId),
       },
     },
     { $unwind: '$interviews' },

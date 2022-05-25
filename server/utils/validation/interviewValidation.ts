@@ -5,7 +5,7 @@ const interviewValidation = async (data: object) => {
     interviewerId: Joi.string().required(),
     date: Joi.date().required(),
     time: Joi.number().required(),
-    language: Joi.string().valid('JS', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO').required(),
+    language: Joi.string().valid('JAVASCRIPT', 'PHP', 'C++', 'C#', 'RUBY', 'PYTHON', 'JAVA', 'C', 'GO').required(),
     specialization: Joi.string().valid('FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK').required(),
     questionCategory: Joi.string().valid('Technical', 'Analytical', 'Algorithms', 'System Design').required(),
   });

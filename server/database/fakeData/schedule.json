@@ -21,19 +21,19 @@
             ]
         },
         {
-            "language": "JS",
+            "language": "JAVASCRIPT",
             "specialization": "FRONTEND",
             "available": [
                 {
                     "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-05-28",
+                    "date": "2022-04-28",
                     "time": [
                         13, 14, 15, 16, 17, 18
                     ]
                 },
                 {
                     "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-05-29",
+                    "date": "2022-04-29",
                     "time": [
                         13, 14, 15, 16, 17, 18
                     ]

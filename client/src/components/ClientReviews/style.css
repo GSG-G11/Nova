@@ -1,0 +1,57 @@
+
+.ClientReviews .heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+.ClientReviews .partner-content-img img.clientImg {
+    width: 60%;
+}
+.ClientReviews .partner-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+}
+.ClientReviews .carsouel-holder {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ClientReviews .ant-carousel .slick-dots li button {
+    background: #3b4b9e !important;
+}
+.ClientReviews .slide-content .slide-desc{
+    font-style: italic;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 30px;
+    color: #6D6D6D;
+}
+
+.slide-content .clientName {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+    color: #1C1C1D;
+}
+.slide-content .clientTitle {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    color: #9C988F;
+}
+.ClientReviews .ant-carousel .slick-dots-bottom {
+    bottom: -52px;
+}
+
+.ClientReviews .partner-content-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ClientReviews img.bgImg {
+    width: 40%;
+    margin-bottom: -38%;
+}
