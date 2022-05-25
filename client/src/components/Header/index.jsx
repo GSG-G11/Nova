@@ -1,10 +1,12 @@
-import { Layout, Button, Typography } from 'antd';
+import { Button, Layout, Typography } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { } from '@ant-design/icons';
 import './style.css';
+import { Link } from 'react-router-dom';
 import headerImg from '../../assets/images/header.png';
 import CreateInterviewButton from '../common/CreateInterviewButton';
+import { LoginButton } from '../Forms';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -27,9 +29,7 @@ const Header = () => {
               practice with professional interviewer.
             </Title>
             {!user ? (
-              <Button className="btnStartPracticing" type="primary">
-                Start Practicing
-              </Button>
+              <LoginButton title="Start Practicing" className="btnStartPracticing" />
             )
               : (
                 <CreateInterviewButton
@@ -37,8 +37,10 @@ const Header = () => {
                 />
 
               )}
-            <Button className="btnAboutOurTeam" type="primary">
-              About our Team
+            <Button className="btnAboutOurTeam">
+              <Link to="/#team">
+                About Our Team
+              </Link>
             </Button>
           </section>
           <section className="leftSec">

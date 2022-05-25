@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-first-prop-new-line */
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
+import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import logo from '../../../assets/images/logo.png';
 import '../style.css';
 
-const LoginButton = () => {
+const LoginButton = ({ title, className }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -22,8 +23,8 @@ const LoginButton = () => {
 
   return (
     <>
-      <Button className="loginBtn" type="primary" onClick={showModal}>
-        Log in
+      <Button className={className || 'loginBtn'} type="primary" onClick={showModal}>
+        {title}
       </Button>
       <Modal title={(
         <div className="modal-logo-img">
@@ -43,4 +44,12 @@ const LoginButton = () => {
   );
 };
 
+LoginButton.propTypes = {
+  title: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+LoginButton.defaultProps = {
+  className: '',
+};
 export default LoginButton;

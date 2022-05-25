@@ -87,7 +87,7 @@ const Navbar = () => {
             {!user ? (
               <div>
                 <SignupButton />
-                <LoginButton />
+                <LoginButton title="Login" />
               </div>
             ) : (
               <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
