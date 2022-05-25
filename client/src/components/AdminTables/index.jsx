@@ -96,6 +96,7 @@ const AdminTables = ({ pageLocation, roles }) => {
     }
 
     try {
+      setLoading(true);
       const fetchData = async () => {
         const { data: { data, count } } = await axios.get(endPoint, {
           cancelToken: source.token,
@@ -121,6 +122,7 @@ const AdminTables = ({ pageLocation, roles }) => {
       };
       fetchData();
     } catch ({ response: { data: { message: msg } } }) {
+      setLoading(false);
       setDataSource([]);
       message.error(msg);
     }
