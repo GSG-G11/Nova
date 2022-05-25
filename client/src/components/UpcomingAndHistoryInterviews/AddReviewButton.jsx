@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {
-  Modal, Button, Input, message,
+  Modal, Button, Input, message, Form,
 } from 'antd';
 import './style.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const { TextArea } = Input;
+const { Item } = Form;
 
 const AddReviewButton = ({ id }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -50,12 +51,37 @@ const AddReviewButton = ({ id }) => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <TextArea
-          className="textArea"
-          value={review}
-          placeholder="Add your review here."
-          onChange={onChange}
-        />
+        <Form
+          name="basic"
+          labelCol={{
+            span: 20,
+          }}
+          wrapperCol={{
+            span: 25,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          autoComplete="off"
+        >
+          <Item
+            label="Review"
+            name="review"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your review!',
+              },
+            ]}
+          >
+            <TextArea
+              className="textArea"
+              value={review}
+              placeholder="Add your review here."
+              onChange={onChange}
+            />
+          </Item>
+        </Form>
       </Modal>
     </>
   );
