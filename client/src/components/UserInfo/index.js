@@ -8,6 +8,7 @@ import {
 } from 'antd';
 import Navbar from '../Navbar';
 import CreateInterviewButton from '../common/CreateInterviewButton';
+import ProfileTabs from '../ProfileTabs';
 
 const { Text, Title } = Typography;
 const UserInfo = () => {
@@ -80,6 +81,7 @@ const UserInfo = () => {
           </>
         )}
       </div>
+      <ProfileTabs />
     </>
 
   );

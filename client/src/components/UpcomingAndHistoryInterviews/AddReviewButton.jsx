@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Modal, Button, Input } from 'antd';
+import {
+  Modal, Button, Input, message,
+} from 'antd';
 import './style.css';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
 const { TextArea } = Input;
 
-const AddReviewButton = () => {
+const AddReviewButton = ({ id }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [review, setReview] = useState('');
 
@@ -16,9 +20,14 @@ const AddReviewButton = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  const handleOk = async () => {
     setIsModalVisible(false);
-    // Here we can send the review to the backend
+    setReview('');
+    try {
+      await axios.post(`/api/user/review/${id}`, { message: review });
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
+    }
   };
 
   const handleCancel = () => {
@@ -47,4 +56,7 @@ const AddReviewButton = () => {
   );
 };
 
+AddReviewButton.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 export default AddReviewButton;

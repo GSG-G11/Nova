@@ -19,8 +19,8 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
     try {
       await axios.delete(`/api/interview/${id}`);
       setDataSource((prev) => prev.filter((item) => item.key !== id));
-    } catch (error) {
-      message.error(error);
+    } catch ({ response: { data: { message: msg } } }) {
+      message.error(msg);
     }
   };
 
@@ -50,9 +50,9 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           },
           ]);
         });
-      } catch (error) {
+      } catch ({ response: { data: { message: msg } } }) {
         setDataSource([]);
-        message.error(error);
+        message.error(msg);
       }
       return () => source.cancel();
     };
@@ -103,7 +103,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           key="action"
           render={(text, record) => (
             <>
-              <AddReviewButton />
+              {(user.role === 'interviewer') && <AddReviewButton key={record.key} id={record.key} />}
               <Space>
                 <Button
                   className="delete"

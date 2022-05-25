@@ -12,10 +12,8 @@
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "Great",
-                        "saved": false,
-                        "_id": "628cfd8394c45e75c236f221"
-                        
+                        "message": "",
+                        "saved": false
                     }
                 },
                 {
@@ -27,10 +25,8 @@
                     "specialization": "BACKEND",
                     "questionCategory": "Technical",
                     "review": {
-                        "message": "Great Work",
-                        "saved": true,
-                        "_id": "628cfd8394c45e75c236f224"
-
+                        "message": "",
+                        "saved": false
                     }
                 },
                 {
@@ -176,7 +172,11 @@
                     "language": "PHP",
                     "specialization": "BACKEND",
                     "questionCategory":"Technical",
-                    "_id": "627d1d11f5243856362e8a8c"
+                    "_id": "627d1d11f5243856362e8a8c",
+                    "review": {
+                        "message": "",
+                        "saved": false
+                    }
 
                 },
                 {

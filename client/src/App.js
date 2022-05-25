@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
-import ProfileTabs from './components/ProfileTabs';
-
 import Landing from './components/Landing';
 import VerifyAccount from './components/VerifyAccount';
 import AdminDashboard from './components/AdminDashboard';
@@ -27,7 +25,6 @@ const App = () => {
             <Route path="/auth/verify" element={<VerifyAccount />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
-          <ProfileTabs />
         </div>
       )}
 
