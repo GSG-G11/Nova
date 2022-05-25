@@ -108,43 +108,46 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
       <Column title="Specialization" dataIndex="specialization" key="specialization" />
       <Column title="Date" dataIndex="date" key="date" />
       <Column title="Time" dataIndex="time" key="time" />
-      <Column
-        title="Zoom Link"
-        dataIndex=""
-        key=""
-      />
       {(status === 'upcoming') ? (
-        <Column
-          title="Action"
-          key="action"
-          render={(text, record) => (
-            <Space size="middle">
-              {(record.is_cancelled === 'false') ? (
-                <Button
-                  type="primary"
-                  key={record.key}
-                  danger
-                  onClick={() => {
-                    Modal.confirm({
-                      title: 'Are you sure to cancel this interview?',
-                      content: 'This action cannot be undone',
-                      okText: 'Yes',
-                      okType: 'danger',
-                      cancelText: 'No',
-                      onOk: () => cancelInterview(record.key),
-                    });
-                  }}
-                >
-                  Cancel Interview
-                </Button>
-              ) : (
-                <Tag icon={<CloseCircleOutlined />} color="error">
-                  Canceled
-                </Tag>
-              )}
-            </Space>
-          )}
-        />
+        <>
+          <Column
+            title="Zoom Link"
+            dataIndex=""
+            key=""
+          />
+          <Column
+            title="Action"
+            key="action"
+            render={(text, record) => (
+              <Space size="middle">
+                {(record.is_cancelled === 'false') ? (
+                  <Button
+                    type="primary"
+                    key={record.key}
+                    danger
+                    onClick={() => {
+                      Modal.confirm({
+                        title: 'Are you sure to cancel this interview?',
+                        content: 'This action cannot be undone',
+                        okText: 'Yes',
+                        okType: 'danger',
+                        cancelText: 'No',
+                        onOk: () => cancelInterview(record.key),
+                      });
+                    }}
+                  >
+                    Cancel Interview
+                  </Button>
+                ) : (
+                  <Tag icon={<CloseCircleOutlined />} color="error">
+                    Canceled
+                  </Tag>
+                )}
+              </Space>
+            )}
+          />
+
+        </>
       ) : (
         <Column
           title="Action"
