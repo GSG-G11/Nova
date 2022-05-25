@@ -1,11 +1,14 @@
 import {
-  Table, Space, Button, message, Modal,
+  Table, Space, Button, message, Modal, Tag,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './style.css';
 import PropTypes from 'prop-types';
+import {
+  CloseCircleOutlined,
+} from '@ant-design/icons';
 import AddReviewButton from './AddReviewButton';
 
 const { Column } = Table;
@@ -14,7 +17,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
   const [dataSource, setDataSource] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
-
+  const [loading, setLoading] = useState(true);
   const deleteInterview = async (id) => {
     try {
       await axios.delete(`/api/interview/${id}`);
@@ -39,6 +42,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
     const fetchData = async () => {
@@ -65,6 +69,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           },
           ]);
         });
+        setLoading(false);
       } catch ({ response: { data: { message: msg } } }) {
         setDataSource([]);
         message.error(msg);
@@ -77,6 +82,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
   return (
     <Table
       dataSource={dataSource}
+      loading={loading}
       pagination={{
         current: page,
         pageSize: 3,
@@ -110,24 +116,29 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           key="action"
           render={(text, record) => (
             <Space size="middle">
-              <Button
-                type="primary"
-                key={record.key}
-                danger
-                onClick={() => {
-                  Modal.confirm({
-                    title: 'Are you sure to cancel this interview?',
-                    content: 'This action cannot be undone',
-                    okText: 'Yes',
-                    okType: 'danger',
-                    cancelText: 'No',
-                    onOk: () => cancelInterview(record.key),
-                  });
-                }}
-              >
-                {/* Here we must send to backend when the route is ready */}
-                Cancel Interview
-              </Button>
+              {(record.is_cancelled === 'false') ? (
+                <Button
+                  type="primary"
+                  key={record.key}
+                  danger
+                  onClick={() => {
+                    Modal.confirm({
+                      title: 'Are you sure to cancel this interview?',
+                      content: 'This action cannot be undone',
+                      okText: 'Yes',
+                      okType: 'danger',
+                      cancelText: 'No',
+                      onOk: () => cancelInterview(record.key),
+                    });
+                  }}
+                >
+                  Cancel Interview
+                </Button>
+              ) : (
+                <Tag icon={<CloseCircleOutlined />} color="error">
+                  Canceled
+                </Tag>
+              )}
             </Space>
           )}
         />
