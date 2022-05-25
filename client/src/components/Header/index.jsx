@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { } from '@ant-design/icons';
 import './style.css';
 import headerImg from '../../assets/images/header.png';
+import CreateInterviewButton from '../common/CreateInterviewButton';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -15,7 +16,7 @@ const Header = () => {
       <Content
         className="site-layout-background headerContent"
       >
-        <div className="allSec">
+        <div className="allSec" id="home">
           <section className="rightSec">
             <div className="novaCommunity">
               <Title level={5} className="pNova">Nova Community</Title>
@@ -31,9 +32,10 @@ const Header = () => {
               </Button>
             )
               : (
-                <Button className="btnBookInterview" type="primary">
-                  Book Interview
-                </Button>
+                <CreateInterviewButton
+                  title="Book an Interview"
+                />
+
               )}
             <Button className="btnAboutOurTeam" type="primary">
               About our Team

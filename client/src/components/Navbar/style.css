@@ -1,5 +1,9 @@
 .head{
   background-color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  overflow-y: hidden;
 }
 
 .right-left{
@@ -48,11 +52,15 @@
 }
 
 .allBtn{
-  margin-top: .4rem;
-  margin-left: 1rem;
   border: none;
+  outline: none;
   display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  margin-top: 0.7rem;
 }
+
 
 .profile-img{
   width: 3rem;
@@ -77,6 +85,9 @@
   padding: 0;
 }
 
+.drop {
+  cursor: pointer;
+}
 .icon{
   margin-right: .5rem;
 }
@@ -90,3 +101,4 @@
   height: 5rem;
   background-color: white;
 }
+

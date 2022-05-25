@@ -36,10 +36,11 @@
 
 .btnAboutOurTeam, .btnStartPracticing, .btnBookInterview{
   margin-top: 1rem;
-  width: 9rem;
+  width: 12rem;
   height: 3rem;
   border-radius: 10px;
 }
+
 
 .btnStartPracticing, .btnBookInterview{
   background-color: #432773;
@@ -70,6 +71,10 @@
 
 .rightSec{
   margin-top: 7rem;
+}
+.btnAboutOurTeam:focus, .btnStartPracticing:focus, .btnBookInterview:focus {
+  background-color: 1#432773;
+  color: #ece7f1;
 }
 
 .headerImg{

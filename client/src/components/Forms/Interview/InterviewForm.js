@@ -4,14 +4,14 @@ import {
 } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import {
   StepFour, StepFive, Step as FormSteps,
 } from './Steps';
 import './InterviewForm.css';
 
 const { Step } = Steps;
-const InterviewForm = () => {
-  const [visible, setVisible] = useState(true);
+const InterviewForm = ({ visible, setVisible }) => {
   const [formData, setFormData] = useState({
     step: 0,
     specialization: '',
@@ -74,6 +74,8 @@ const InterviewForm = () => {
       setLoading(false);
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
+      setLoading(false);
+      setFormData({ ...formData, step: 0 });
     }
   };
 
@@ -101,7 +103,14 @@ const InterviewForm = () => {
       cancelText="No"
       icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
     >
-      <Button type="primary"> Cancel </Button>
+      <Button
+        type="primary"
+      >
+        {' '}
+        Cancel
+        {' '}
+
+      </Button>
     </Popconfirm>
   );
 
@@ -171,10 +180,10 @@ const InterviewForm = () => {
   };
   return (
     <Modal
-      visible={visible}
       footer={null}
       closable={false}
       className="interview-form"
+      visible={visible}
     >
       <p className="interview-modal-title">Create Interview</p>
       <Form onFinish={() => handleSubmit()}>
@@ -198,6 +207,11 @@ const InterviewForm = () => {
       </div>
     </Modal>
   );
+};
+
+InterviewForm.propTypes = {
+  setVisible: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
 };
 
 export default InterviewForm;
