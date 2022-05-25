@@ -21,7 +21,7 @@ const Header = () => {
             <div className="novaCommunity">
               <Title level={5} className="pNova">Nova Community</Title>
             </div>
-            <Title level={1} className="PracticeMakesPerfect">Practice Makes Perfect</Title>
+            <Title level={2} className="PracticeMakesPerfect">Practice Makes Perfect</Title>
             <Title level={5} className="pDescribe">
               More than 2 billion people in over countries use Nova to
               practice with professional interviewer.

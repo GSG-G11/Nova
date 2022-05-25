@@ -5,7 +5,8 @@
 .novaCommunity{
   background-color: #ece7f1;
   color: #432773;
-  width: 9rem;
+  font-weight: 300;
+  width: 11rem;
   height: 2.5rem;
   border-radius: 10px;
   display: flex;
@@ -79,4 +80,12 @@
 
 .headerImg{
   height: 30rem;
+}
+.rightSec h2.ant-typography {
+  margin-bottom: 0.5em;
+  color: rgba(0,0,0,.85);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.35;
+  color: #070558;
 }

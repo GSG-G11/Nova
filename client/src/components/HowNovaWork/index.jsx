@@ -4,6 +4,7 @@ import './style.css';
 import getPaired from '../../assets/images/getPaired.png';
 import practice from '../../assets/images/practice.png';
 import actIt from '../../assets/images/actIt.png';
+import SectionIntro from '../common/SectionIntro';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -27,7 +28,11 @@ const HowNovaWork = () => {
       <Content
         className="site-layout-background HowNovaWork"
       >
-        <Title className="titleForHowNovaPractice" level={5}>How Nova Practicing Works</Title>
+        <SectionIntro
+          action="How works "
+          title="How Nova Practicing Works"
+          description="We understand how important it is for you to find a good job and settle down. We will help you to find one by preparing you to change your job interview to a permanent career success story in just 3 EASY STEPS."
+        />
         <div className="allImg">
           {arrImg.map(({ title, img, desc }) => (
             <div className="getPairedDivText" key={title}>

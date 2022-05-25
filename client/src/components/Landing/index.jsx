@@ -3,21 +3,25 @@ import Header from '../Header';
 import Resources from '../Resources';
 import HowNovaWork from '../HowNovaWork';
 import Partner from '../Partner';
-import ActiveMembers from '../ActiveMembers';
+// import ActiveMembers from '../ActiveMembers';
 import IntreviewerApp from '../IntreviewerApp';
 import ClientReviews from '../ClientReviews';
 import Challenges from '../Challenges';
 import Navbar from '../Navbar';
 import Footer from '../common/Footer';
 
+import './style.css';
+
 const Landing = () => (
   <>
-    <Navbar />
-    <Header />
+    <div className="header-nav-holder">
+      <Navbar />
+      <Header />
+    </div>
     <Resources />
     <HowNovaWork />
     <Partner />
-    <ActiveMembers />
+    {/* <ActiveMembers /> */}
     <IntreviewerApp />
     <Challenges />
     <ClientReviews />

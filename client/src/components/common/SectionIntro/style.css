@@ -10,21 +10,30 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 4.2rem;
+    margin: 2% 0;
 }
 
-.section-intro__action {
-    color: #432773;
-    font-size: 1.1rem;
+.ant-typography.section-intro__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 29px;
+    line-height: 5px;
+    color: #070558;
+    margin-top: 2% !important;
+}
+.ant-typography.section-intro__action {
     font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    color: #432773;
 }
-
-.section-intro__title {
-    font-size: 2.2rem;
-    color: #0A093D;
-    font-weight: bold;
-}
-.section-intro__description {
+.ant-typography.section-intro__description{
+    margin-top: 2% !important;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
     color: #656464;
-    width: 20rem;
+    width: 50%;
+    min-width: 27%;                                                             
 }
