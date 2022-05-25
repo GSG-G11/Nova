@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Form, Input, Button, message, Radio,
+  Form, Input, Button, message, Radio, Upload,
 } from 'antd';
 import './style.css';
 
@@ -13,7 +13,7 @@ const SettingTab = () => {
   const [imgLink, setImgLink] = useState('');
   const [cvLink, setCVLink] = useState('');
   const [bio, setBio] = useState('');
-  const [experenice, setExperenice] = useState('');
+  const [level, setLevel] = useState('');
   const updateSetting = async () => {
     const source = axios.CancelToken.source();
     try {
@@ -21,7 +21,7 @@ const SettingTab = () => {
         imgLink,
         cvLink,
         bio,
-        experenice,
+        level,
       }, {
         cancelToken: source.token,
       });
@@ -37,8 +37,29 @@ const SettingTab = () => {
   return (
     <div className="setting-tab">
       <Form layout="vertical" autoComplete="off">
-        <Item name="name" label="Image Link" type="url" value={imgLink} onChange={(e) => setImgLink(e.target.value)}>
-          <Input placeholder="Please input your img Url" value={imgLink} />
+
+        <Item label="Avatar">
+
+          <Upload
+            name="profile_picture"
+            listType="picture-card"
+            className="avatar-uploader"
+            action="/api/user"
+            showUploadList={false}
+            beforeUpload={() => {
+              message.error('Please upload a profile picture');
+              return false;
+            }}
+            onChange={({ file }) => {
+              setImgLink(file.response.data);
+            }}
+          >
+            {imgLink ? <img src={imgLink} alt="avatar" /> : (
+              <div>
+                <div className="ant-upload-text">Upload</div>
+              </div>
+            )}
+          </Upload>
         </Item>
         <Item name="age" label="CV Link" type="url" value={cvLink} onChange={(e) => setCVLink(e.target.value)}>
           <Input placeholder="Please input your CV Url" value={cvLink} />
@@ -46,13 +67,13 @@ const SettingTab = () => {
         <Item name="bio" label="Bio" type="text" value={bio}>
           <TextArea placeholder="Please input your Bio" onChange={(e) => setBio(e.target.value)} value={bio} />
         </Item>
-        <Item name="experenice" label="Level of Experenice">
-          <Group value={experenice} onChange={(e) => setExperenice(e.target.value)}>
-            <Radio value="Junior">Junior</Radio>
-            <Radio value="Mid-level">Mid-level</Radio>
-            <Radio value="Senior">Senior</Radio>
-            <Radio value="Internship">Internship</Radio>
-            <Radio value="Expert">Expert</Radio>
+        <Item name="level" label="Level of Experience">
+          <Group value={level} onChange={(e) => setLevel(e.target.value)}>
+            <Radio value="JUNIOR">Junior</Radio>
+            <Radio value="MIDDLE">Mid-level</Radio>
+            <Radio value="SENIOR">Senior</Radio>
+            <Radio value="INTERNSHIP">Internship</Radio>
+            <Radio value="EXPERT">Expert</Radio>
           </Group>
         </Item>
       </Form>

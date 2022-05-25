@@ -121,24 +121,23 @@ describe('signup', () => {
       });
   });
 
-  // test('Signup with non existent user', (done) => {
-  //   request(app)
-  //     .post('/api/signup')
-  //     .send({
-  //       name: 'Jack',
-  //       email: 'mahmoud@gmail.com',
-  //       password: 'Abed@123',
-  //       role: 'interviewee',
-  //     })
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       expect(res.body.message).toBe('Account created
-  // successfully please check your email to verify your account');
-  //       return done();
-  //     });
-  // });
+  test('Signup with non existent user', (done) => {
+    request(app)
+      .post('/api/signup')
+      .send({
+        name: 'Jack',
+        email: 'mahmoud@gmail.com',
+        password: 'Abed@123',
+        role: 'interviewee',
+      })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
+        return done();
+      });
+  });
 
   test('Verify Email failed', (done) => {
     request(app).patch('/api/auth/verify').expect(401)
@@ -194,7 +193,7 @@ describe('Login', () => {
 
   test('Login with existent user invalid password', (done) => {
     request(app).post('/api/login').send({
-      email: 'jack@gmail.com',
+      email: 'raghad@gmail.com',
       password: 'Abed@12345',
     }).expect(400)
       .end((err, res) => {
@@ -295,19 +294,19 @@ describe('Interview Reviews', () => {
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Reviews found');
-        expect(res.body.data.length).toBe(1);
+        expect(res.body.data.length).toBe(4);
         return done();
       });
   });
 
-  test('Should return 3 saved Reviews', (done) => {
+  test('Should return 1 saved Reviews', (done) => {
     request(app).get('/api/user/review?page=1&saved=true').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
       if (err) {
         return done(err);
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Reviews found');
-      expect(res.body.data.length).toBe(3);
+      expect(res.body.data.length).toBe(1);
       return done();
     });
   });
@@ -319,6 +318,7 @@ describe('Interview Reviews', () => {
       }
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Reviews found');
+      console.log(res.body);
       expect(res.body.data.reviews[0].interviewerName).toBe('Raghad Mezied');
       return done();
     });
@@ -470,7 +470,7 @@ describe('Create Interview', () => {
       date: '2022-04-01',
       time: 12,
       language: 'JAVASCRIPT',
-      specialization: 'FRONTEND',
+      specialization: 'BACKEND',
       questionCategory: 'Technical',
     })
       .expect(400)
@@ -486,7 +486,7 @@ describe('Create Interview', () => {
   test('Should Throw an error for interviewer not available on that time', (done) => {
     request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
       interviewerId: '627c92140d0c3622573195cb',
-      date: '2022-04-28',
+      date: '2022-08-28',
       time: 20,
       language: 'JAVASCRIPT',
       specialization: 'FRONTEND',
@@ -505,10 +505,10 @@ describe('Create Interview', () => {
   test('Should create an interview', (done) => {
     request(app).post('/api/interview').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
       interviewerId: '627c92140d0c3622573195cb',
-      date: '2022-04-28',
-      time: 14,
+      date: '2022-08-28',
+      time: 16,
       language: 'JAVASCRIPT',
-      specialization: 'FRONTEND',
+      specialization: 'BACKEND',
       questionCategory: 'Technical',
     })
       .expect(201)
@@ -600,19 +600,20 @@ describe('Get Interview', () => {
       });
   });
 
-  test('Should return Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=history&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      expect(res.status).toBe(200);
-      expect(res.body.message).toBe('Interviews fetched successfully!');
-      return done();
-    });
-  });
+  // test('Should return Interviews found', (done) => {
+  //   request(app).get('/api/users/interview?status=history&&page=1')
+  // .set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+  //     if (err) {
+  //       return done(err);
+  //     }
+  //     expect(res.status).toBe(200);
+  //     expect(res.body.message).toBe('Interviews fetched successfully!');
+  //     return done();
+  //   });
+  // });
 
   test('Should return error no Interviews found', (done) => {
-    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+    request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.NO_INTERVIEWS}`]).end((err, res) => {
       if (err) {
         return done(err);
       }
@@ -775,7 +776,7 @@ describe('Post interview time', () => {
   });
 
   test('Should throw a required validation error', (done) => {
-    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({})
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({})
       .expect(400)
       .end((err, res) => {
         if (err) {
@@ -787,7 +788,7 @@ describe('Post interview time', () => {
   });
 
   test('Should throw a date validation error', (done) => {
-    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
       date: 'potato',
       time: 12,
     })
@@ -802,8 +803,8 @@ describe('Post interview time', () => {
   });
 
   test('Should throw already scheduled for this time', (done) => {
-    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
-      date: '2022-04-28',
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      date: '2022-08-28',
       time: 13,
     })
       .expect(400)
@@ -817,7 +818,7 @@ describe('Post interview time', () => {
   });
 
   test('Should schedule interview', (done) => {
-    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.TEST_TOKEN}`]).send({
+    request(app).post('/api/interviewer/schedule').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
       date: '2022-09-28',
       time: 2,
     })
@@ -927,7 +928,7 @@ describe('Create Review for a specific interview', () => {
       });
   });
   test('Should create a review for the interview', (done) => {
-    request(app).post('/api/user/review/627d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+    request(app).post('/api/user/review/527d1d11f5243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
       message: 'This is a review',
     })
       .expect(201)
