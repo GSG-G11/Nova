@@ -78,8 +78,8 @@ const InterviewerApp = ({ setIsModalVisible }) => {
   return (
     <div className="interviewerApp-holder">
       <Steps current={current}>
-        {steps.map((item) => (
-          <Step key={item.title} title={item.title} />
+        {steps.map(({ title }) => (
+          <Step key={title} title={title} />
         ))}
       </Steps>
       <div className="steps-content">

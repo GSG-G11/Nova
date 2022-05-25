@@ -8,6 +8,8 @@ const StepSecond = ({
   specialization, setSpecializations, languages, setLanguages, cv, setCVLink, level, setLevel,
 }) => {
   const { Item } = Form;
+  const { Group: RadioGroup } = Radio;
+  const { Group: CheckboxGroup } = Checkbox;
 
   const optionsSpecialization = [
     {
@@ -33,6 +35,36 @@ const StepSecond = ({
     {
       label: 'Full Stack',
       value: 'FULL STACK',
+    },
+  ];
+  const optionsLang = [
+    {
+      label: 'JavaScript',
+      value: 'JAVASCRIPT',
+    },
+    {
+      label: 'C#',
+      value: 'C#',
+    },
+    {
+      label: 'PHP',
+      value: 'PHP',
+    },
+    {
+      label: 'GO',
+      value: 'GO',
+    },
+    {
+      label: 'Java',
+      value: 'JAVA',
+    },
+    {
+      label: 'PYTHON',
+      value: 'PYTHON',
+    },
+    {
+      label: 'RUBY',
+      value: 'RUBY',
     },
   ];
   const optionsLevel = [
@@ -70,9 +102,9 @@ const StepSecond = ({
             },
           ]}
         />
-        <Radio.Group
+        <RadioGroup
           options={optionsSpecialization}
-          onChange={(e) => setSpecializations(e.target.value)}
+          onChange={({ target: { value } }) => setSpecializations(value)}
           value={specialization}
           optionType="button"
         />
@@ -83,13 +115,13 @@ const StepSecond = ({
           rules={[
             {
               required: true,
-              message: 'Please select your Level of expertise',
+              message: 'Please select your Level of experience',
             },
           ]}
         />
-        <Radio.Group
+        <RadioGroup
           options={optionsLevel}
-          onChange={(e) => setLevel(e.target.value)}
+          onChange={({ target: { value } }) => setLevel(value)}
           value={level}
           optionType="button"
         />
@@ -104,7 +136,7 @@ const StepSecond = ({
             },
           ]}
         />
-        <Checkbox.Group
+        <CheckboxGroup
           style={{
             width: '100%',
           }}
@@ -112,32 +144,13 @@ const StepSecond = ({
           value={languages}
         >
           <Row>
-            <Col span={8}>
-              <Checkbox value="javascript">javascript</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="C#">C#</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="GO">GO</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="C++">C++</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="JAVA">JAVA</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="PYTHON">PYTHON</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="RUBY">RUBY</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="PHP">PHP</Checkbox>
-            </Col>
+            {optionsLang.map(({ label, value }) => (
+              <Col span={8}>
+                <Checkbox value={value}>{label}</Checkbox>
+              </Col>
+            ))}
           </Row>
-        </Checkbox.Group>
+        </CheckboxGroup>
         <Item />
       </div>
       <Item
@@ -145,7 +158,7 @@ const StepSecond = ({
         label="CV Link"
         type="url"
         value={cv}
-        onChange={(e) => setCVLink(e.target.value)}
+        onChange={({ target: { value } }) => setCVLink(value)}
         rules={[
           {
             required: true,
