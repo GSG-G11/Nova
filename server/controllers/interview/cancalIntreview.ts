@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { Types } from 'mongoose';
+import { ObjectId } from 'mongodb';
 import { RequestType, mailSender, CustomError } from '../../utils';
 import Interviewee from '../../database/Models/Interviewee';
 import Interviewer from '../../database/Models/Interviewer';
@@ -10,77 +11,113 @@ const cancalInterview = async (req: RequestType, res: Response) => {
   const { interviewId }: any = req.params;
   const { userInfo } = req;
 
-  // use vaildation for params
   const validId = Types.ObjectId.isValid(interviewId);
   if (!validId) {
     throw new CustomError('Invalid interview id!', 400);
   }
 
-  let collectionName: any; // the name of the collection (intrviewee or interviewer)
-  let secondUserId; // the id of the second user (interviewee or interviewer)
-  let interviewerId; // the id of the interviewer
+  let interviews;
+  let intervieweeId;
+  let interviewerId;
 
-  // // query about role by _id
-  if (userInfo?.role === 'interviewee') {
-    collectionName = Interviewee;
+  if (userInfo?.role === 'interviewer') {
+    const interview = await Interviewer.aggregate([
+      {
+        $match: {
+          userId: new ObjectId(userInfo?.id),
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          userId: 1,
+          interviews: 1,
+        },
+      },
+      {
+        $unwind: '$interviews',
+      },
+      {
+        $match: {
+          'interviews._id': new ObjectId(interviewId),
+        },
+      },
+    ]);
 
-    // get intervieweeId to find his email
-    const interview = await Interviewer.findOne({ 'interviews._id': interviewId });
-    secondUserId = interview.interviews[0].interviewerId;
-    interviewerId = interview.userId;
-  } else if (userInfo?.role === 'interviewer') {
-    collectionName = Interviewer;
+    interviews = interview[0].interviews;
+    interviewerId = interview[0].userId;
+    intervieweeId = interviews.intervieweeId;
+  } else {
+    const interview = await Interviewee.aggregate([
+      {
+        $match: {
+          userId: new ObjectId(userInfo?.id),
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          userId: 1,
+          interviews: 1,
+        },
+      },
+      {
+        $unwind: '$interviews',
+      },
+      {
+        $match: {
+          'interviews._id': new ObjectId(interviewId),
+        },
+      },
+    ]);
 
-    // get intervieweeId to find his email
-    const interview = await Interviewer.findOne({ 'interviews._id': interviewId });
-    secondUserId = interview.interviews[0].intervieweeId;
-    interviewerId = interview.userId;
+    interviews = interview[0].interviews;
+    interviewerId = interviews.interviewerId;
+    intervieweeId = interview[0].userId;
   }
+  const interviewee = await User.find({ _id: new ObjectId(String(intervieweeId)) });
+  const intervieweeEmail = interviewee[0].email;
 
-  const result = await collectionName.updateOne(
-    { 'interviews._id': interviewId },
-    { $set: { 'interviews.$.is_cancalled': true } },
-  );
+  const interviewer = await User.find({ _id: new ObjectId(String(interviewerId)) });
+  const interviewerEmail = interviewer[0].email;
 
-  // query about interview info to use it when send email
-  const interview = await collectionName.findOne(
-    { 'interviews._id': interviewId },
-    { interviews: 1, _id: 0 },
-  );
+  const { date, specialization, time }: any = interviews;
 
-  // query about intreview email  to use it when send email
-  const { email } = await User.findOne(
-    { _id: userInfo?.id },
-  );
+  const [{ modifiedCount }, { modifiedCount: modifiedCount2 }] = await Promise.all([
+    Interviewer.updateOne(
+      { userId: new ObjectId(String(interviewerId)), 'interviews._id': interviewId },
+      { $set: { 'interviews.$.is_cancalled': true } },
+    ),
+    Interviewee.updateOne(
+      { userId: new ObjectId(String(intervieweeId)), 'interviews._id': interviewId },
+      { $set: { 'interviews.$.is_cancalled': true } },
+    ),
+  ]);
 
-  const { email: secondUserEmail } = await User.findOne(
-    { _id: secondUserId },
-  );
+  if (modifiedCount > 0 && modifiedCount2 > 0) {
+    await Promise.all([
+      mailSender(
+        intervieweeEmail,
+        'Cancel Interview',
+        `<h1> Cancel Interview </h1>
+        <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specialization, has been cancelled </h2>
+        <br> <h4>Thank you for your cooperation</h4>`,
+      ),
+      mailSender(
+        interviewerEmail,
+        'Cancel Interview',
+        `<h1> Cancel Interview </h1>
+      <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specialization, has been cancelled </h2>
+      <br> <h4>Thank you for your cooperation</h4>`,
+      ),
+    ]);
 
-  // destructure the interviewerId or intervieweeId object to got the interviews array
-  const { interviews } = interview;
-  const { date, specialization, time } = interviews[0];
-
-  await mailSender(
-    email,
-    'Cancel Interview',
-    `<h1> Cancel Interview </h1>
-    <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specilaization, has been cancelled </h2>
-    <br> <h4>Thank you for your cooperation</h4>`,
-  );
-
-  await mailSender(
-    secondUserEmail,
-    'Cancel Interview',
-    `<h1> Cancel Interview </h1>
-  <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specilaization, has been cancelled </h2>
-  <br> <h4>Thank you for your cooperation</h4>`,
-  );
-
-  if (result.modifiedCount > 0) {
-    const resultGlobal = await postAvailableGlobal(String(interviewerId), time, date);
+    const resultGlobal = await postAvailableGlobal(
+      String(interviewerId),
+      String(time),
+      String(date),
+    );
     return res.json({
-      data: result,
       postInterviewee: resultGlobal,
       message: 'Interviews canceled successfully',
     });
