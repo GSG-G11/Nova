@@ -19,10 +19,8 @@ const createMeeting = async () => {
       settings: {
         host_video: 'true',
         participant_video: 'true',
-        join_before_host: 'true',
-        approval_type: 1,
+        approval_type: 2,
       },
-      pre_schedule: 'true',
     },
     auth: {
       bearer: token,
@@ -41,8 +39,8 @@ const createMeeting = async () => {
 
   const { join_url: joinUrl, password, id } : any = response;
 
-  const finalUrl = `${joinUrl.replaceAll('https://us05web.zoom.us/j/', 'http://localhost:9998/?')
-  }?role=1`;
+  console.log(response);
+  const finalUrl = joinUrl.replaceAll('https://us05web.zoom.us/j/', 'http://localhost:9998/?');
   console.log(finalUrl);
   const dataRes = {
     join_url: finalUrl,

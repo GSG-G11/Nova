@@ -64,12 +64,14 @@ const createInterview = async (req: RequestType, res: Response) => {
   const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
   // // update the schedule for the interviewer
-  const { join_url: finalUrl, password, meetingId } = await createMeeting();
-
+  // eslint-disable-next-line prefer-const
+  let { join_url: finalUrl, password, meetingId } = await createMeeting();
+  finalUrl += '?role=1';
   if (!finalUrl || !password || !meetingId) {
     throw new CustomError('Something went wrong', 500);
   }
 
+  console.log('from createinterview', finalUrl);
   const interview = {
     interviewerId,
     date,
