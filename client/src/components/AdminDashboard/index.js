@@ -4,13 +4,11 @@ import {
   UserOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-import {
-  Button, Layout, Menu, message, Result, Typography,
-} from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 import React, { useState, createElement } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { clearUser } from '../../redux/features/auth/authSlice';
 import AdminTables from '../AdminTables';
@@ -45,7 +43,6 @@ const items = [
     label: 'Logout',
     logout: async () => {
       await axios.post('/api/logout');
-      message.success('Logged out successfully');
     },
   },
 ];
@@ -61,7 +58,6 @@ const tabs = items.map(({
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
   const [content, setContent] = useState(tabs[0].content);
   const [selectedTab, setSelectedTab] = useState(tabs[0].key);
 
@@ -75,7 +71,7 @@ const AdminDashboard = () => {
     }
     setContent(tabs.find((tab) => tab.key === key).content);
   };
-  return user?.role === 'admin' ? (
+  return (
     <Layout hasSider>
       <Sider
         className="dashboard__sider"
@@ -114,17 +110,6 @@ const AdminDashboard = () => {
         </Footer>
       </Layout>
     </Layout>
-  ) : (
-    <Result
-      status="404"
-      title="404"
-      subTitle="Sorry, the page you visited does not exist."
-      extra={(
-        <Button type="primary" onClick={() => navigate('/')}>
-          Back Home
-        </Button>
-      )}
-    />
   );
 };
 
