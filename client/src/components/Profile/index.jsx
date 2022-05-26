@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { message } from 'antd';
+import { useSelector } from 'react-redux';
 import ProfileTabs from '../ProfileTabs';
 import UserInfo from '../UserInfo';
+import Footer from '../common/Footer';
 
 const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const { user: { id: loggedInUserId } } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -34,7 +37,8 @@ const Profile = () => {
   return (
     <section className="profile-container">
       <UserInfo user={user} loading={loading} />
-      <ProfileTabs user={user} />
+      { loggedInUserId === id && <ProfileTabs user={user} /> }
+      <Footer />
     </section>
   );
 };
