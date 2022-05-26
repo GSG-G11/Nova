@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ReviewCard from '../Review';
 import SettingTab from '../Setting';
 import './style.css';
+import CalenderTab from '../Calender';
 import UpcomingAndHistoryInterviews from '../UpcomingAndHistoryInterviews/UpcomingAndHistoryInterviews';
 
 const { TabPane } = Tabs;
@@ -28,7 +29,7 @@ const ProfileTabs = () => {
 
         ) : (
           <TabPane tab="Schedule" key="3">
-            Content of Tab Pane 3
+            <CalenderTab />
           </TabPane>
         )}
         <TabPane tab="Settings" key="4">
