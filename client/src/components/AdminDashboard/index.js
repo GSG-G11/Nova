@@ -7,7 +7,7 @@ import {
 import {
   Button, Layout, Menu, message, Result, Typography,
 } from 'antd';
-import React, { useState, createElement, useEffect } from 'react';
+import React, { useState, createElement } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,16 +61,10 @@ const tabs = items.map(({
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user: { role } } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const [content, setContent] = useState(tabs[0].content);
   const [selectedTab, setSelectedTab] = useState(tabs[0].key);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (role !== 'admin') {
-      setError(true);
-    }
-  }, []);
   const handleClick = (e) => {
     const { key } = e;
     setSelectedTab(key);
@@ -81,7 +75,7 @@ const AdminDashboard = () => {
     }
     setContent(tabs.find((tab) => tab.key === key).content);
   };
-  return !error ? (
+  return user?.role === 'admin' ? (
     <Layout hasSider>
       <Sider
         className="dashboard__sider"
