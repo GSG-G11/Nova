@@ -24,6 +24,9 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    setImage: (state, action) => {
+      state.user.profilePicture = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(checkUser.fulfilled, (state, action) => {
@@ -42,5 +45,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser } = authSlice.actions;
+export const { setUser, clearUser, setImage } = authSlice.actions;
 export default authSlice.reducer;

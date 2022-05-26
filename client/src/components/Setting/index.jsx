@@ -5,12 +5,14 @@ import {
 } from 'antd';
 import propTypes from 'prop-types';
 import './style.css';
+import { useDispatch } from 'react-redux';
+import { setImage } from '../../redux/features/auth/authSlice';
 
 const SettingTab = ({ user }) => {
   const { Item } = Form;
   const { TextArea } = Input;
   const { Group } = Radio;
-
+  const dispatch = useDispatch();
   const [image, setImgLink] = useState('');
   const [cv, setCVLink] = useState('');
   const [bio, setBio] = useState('');
@@ -24,6 +26,7 @@ const SettingTab = ({ user }) => {
     setImgLink(profilePicture);
     setBio(userBio);
     setLevel(userLevel);
+    dispatch(setImage(profilePicture));
   }, []);
 
   const updateSetting = async () => {
@@ -31,6 +34,7 @@ const SettingTab = ({ user }) => {
       const { data: { message: successMsg } } = await axios.patch('/api/user', {
         image, cv, bio, level,
       });
+
       message.success(successMsg);
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
