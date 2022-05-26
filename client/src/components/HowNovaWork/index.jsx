@@ -24,7 +24,7 @@ const HowNovaWork = () => {
     desc: 'Learn from peers’ feedback, again confidence and master the art of interviewing. keep practicing until you interview like a rock star.',
   }];
   return (
-    <Layout>
+    <div className="howWork-holder">
       <Content
         className="site-layout-background HowNovaWork"
       >
@@ -46,7 +46,7 @@ const HowNovaWork = () => {
           ))}
         </div>
       </Content>
-    </Layout>
+    </div>
   );
 };
 export default HowNovaWork;

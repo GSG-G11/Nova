@@ -10,26 +10,26 @@
   text-align: center;
 }
 
-.getPaired{
+.howWork-holder .getPaired{
   width: 18rem;
   height: 18rem;
   border-radius: 20px;
 }
 
-.getPairedDivText{
+.howWork-holder .getPairedDivText{
   display: flex;
   flex-direction: column;
   width: 20rem;
   align-items: center;
 }
 
-.new1{
+.howWork-holder .new1{
   width: 4rem;
   border: #ffaf2f solid;
   margin: 0 !important;
 }
 
-.titleHrDiv{
+.howWork-holder .titleHrDiv{
   display: flex;
   align-items: center;
   justify-content: start;
@@ -38,19 +38,28 @@
   width: 20rem;
 }
 
-.titleForAll{
+.howWork-holder .titleForAll{
   margin: 0% !important;
   color: #2f2c4a !important;
   margin-left: 1rem !important;
+  font-size: 18px;
 }
 
-.desc{
+.howWork-holder .desc {
   margin: 1rem !important;
-  color: #656464 !important;
+  color: #443f4b !important;
+  font-size: 15px;
+  width: 100%;
+  font-weight: 400;
 }
 
-.allImg{
+.howWork-holder .allImg{
 display: flex !important;   
 justify-content: space-around !important;
 margin-top: 3rem;
+}
+.howWork-holder .howWork-holder {
+  width: 100%;
+  margin-top: 7%;
+  margin-bottom: 5%;
 }

@@ -49,7 +49,7 @@ button.ant-btn.ant-btn-primary.signup:hover {
   align-items: center;
 }
 
-.loginBtn , .signUpBtn {
+.loginBtn {
   background-color: #432773;
   border: none;
   width: 7rem;
@@ -57,7 +57,7 @@ button.ant-btn.ant-btn-primary.signup:hover {
   border-radius: 10px;
 }
 
-.loginBtn:hover , .signUpBtn:hover {
+.loginBtn:hover {
   background-color: #673ab7;
 }
 
@@ -70,7 +70,7 @@ button.ant-btn.ant-btn-primary.signup:hover {
 }
 
 .signup-form {
-display: flex;
-flex-direction: column;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

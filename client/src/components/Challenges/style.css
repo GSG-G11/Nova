@@ -11,18 +11,18 @@
     gap: 2.4rem;
     justify-content: center;
     align-items: center;
-    padding: 1.8rem 0 6.2rem 0;
+    padding: 2.8rem 0 7.2rem 0;
 }
 
 .top-challenges .top-challenges__title {
     color: white;
 }
-.top-challenges__cards {
+.top-challenges .top-challenges__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2.4rem;
 }
-.top-challenges__card {
+.top-challenges .top-challenges__card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -41,7 +41,7 @@
 }
 
 .top-challenges__card-title {
-    font-size: 1.8rem;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 0.8rem;
     position: relative;
@@ -58,14 +58,17 @@
     margin-top: 0.8rem;
 }
 .top-challenges__card-name {
-    font-size: 1.2rem;
+    font-size: 17px;
     font-weight: bold;
-    margin-top: 0.8rem;
+    padding: 7% 0;
 }
 
 .top-challenges__card-tag {
-    position: absolute;
-    bottom: 5%;
     font-size: 0.8rem;
     text-transform: uppercase;
+    height: 34px;
+    width: 93px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

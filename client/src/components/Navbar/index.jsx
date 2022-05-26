@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo-removebg-preview.png';
 import { LoginButton, SignupButton } from '../Forms';
 import { clearUser } from '../../redux/features/auth/authSlice';
 
