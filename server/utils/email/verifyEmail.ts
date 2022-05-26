@@ -3,7 +3,7 @@ const interviewerTemplate = (name: string) => `<h1>Verify Account</h1>
 
 const template = (
   name: string,
-  accessToken: string,
+  accessToken: string = '',
 ) => (`<!doctype html>
     <html>
       <head>
@@ -332,8 +332,9 @@ const template = (
                         <tr>
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
-                            ${name ? `<p>${interviewerTemplate(name)}</p>` : ''}
-                            <p>Click the link <a href="http://localhost:8000/api/auth/verify?accessToken=${accessToken}">here</a> to verify your account</p>
+                            <p>${interviewerTemplate(name)}</p>
+                            ${accessToken ? `<p>Click the link <a href="http://localhost:8000/api/auth/verify?accessToken=${accessToken}">here</a> to verify your account</p>`
+    : '<p>We will inform you when the admin see your application</p>'}
                             <p>If you have any questions, please contact us at <a href="mailto:nova.interviewe@gmail.com">Nova</a>
                             <p>Sincerely,</p>
                             <p>Nova Team</p>
@@ -359,7 +360,12 @@ const template = (
 
 const emailTemplate = (
   name: string,
-  accessToken: string,
-) => template(name, accessToken);
+  accessToken: string = '',
+) => {
+  if (accessToken) {
+    return template(name, accessToken);
+  }
+  return template(name);
+};
 
 export default emailTemplate;
