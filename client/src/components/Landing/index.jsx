@@ -3,7 +3,7 @@ import Header from '../Header';
 import Resources from '../Resources';
 import HowNovaWork from '../HowNovaWork';
 import Partner from '../Partner';
-// import ActiveMembers from '../ActiveMembers';
+import ActiveMembers from '../ActiveMembers';
 import IntreviewerApp from '../IntreviewerApp';
 import ClientReviews from '../ClientReviews';
 import Challenges from '../Challenges';
@@ -18,11 +18,11 @@ const Landing = () => (
       <Navbar />
       <Header />
     </div>
-    <Resources />
     <HowNovaWork />
+    <Resources />
     <Partner />
-    {/* <ActiveMembers /> */}
     <IntreviewerApp />
+    <ActiveMembers />
     <Challenges />
     <ClientReviews />
     <Footer />

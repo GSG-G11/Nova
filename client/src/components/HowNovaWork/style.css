@@ -1,6 +1,8 @@
 .HowNovaWork{
   background-color: rgb(255, 255, 255);
   min-height: 280px;
+  padding-top: 2.4rem;
+  position: relative;
 }
 
 .titleForHowNovaPractice{
@@ -10,13 +12,36 @@
   text-align: center;
 }
 
-.howWork-holder .getPaired{
+.getPaired-img {
   width: 18rem;
   height: 18rem;
   border-radius: 20px;
+  overflow: hidden;
+}
+.getPaired{
+  width: 18rem;
+  height: 18rem;
+  filter: brightness(0.9);
+  transition: all 1.2s ease-in-out;
+}
+.howWork-holder img.svgImgSec {
+  width: 148px;
+  position: absolute;
+  right: 45px;
+  bottom: -44px;
+}
+.howWork-holder img.svgImg {
+  width: 136px;
+  position: absolute;
+  top: 265px;
+  left: 41px;
 }
 
-.howWork-holder .getPairedDivText{
+.getPaired:hover {
+  transform: scale(1.1) rotate(8deg);
+  filter: brightness(1);
+}
+.getPairedDivText{
   display: flex;
   flex-direction: column;
   width: 20rem;

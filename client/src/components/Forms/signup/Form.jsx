@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import {
   Button,
@@ -9,6 +10,8 @@ import '../style.css';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import LoadingSpinner from '../../common/LoadingSpinner';
+// eslint-disable-next-line import/no-cycle
+import LoginButton from '../Login/LoginButton';
 
 const confirmPasswordHandel = (getFieldValue) => ({
   validator(_, value) {
@@ -153,8 +156,11 @@ const SignupForm = ({ setIsModalVisible }) => {
           </Item>
           <Item>
             <div className="have-account">
-              Do you have an account?
-              <a href="/api/login">Log in</a>
+              <span>
+                Do you have an account?
+              </span>
+
+              <LoginButton title="Login" className="btn-link" signUpForm={() => setIsModalVisible(false)} />
             </div>
           </Item>
         </>

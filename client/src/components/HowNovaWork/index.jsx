@@ -5,6 +5,7 @@ import getPaired from '../../assets/images/getPaired.png';
 import practice from '../../assets/images/practice.png';
 import actIt from '../../assets/images/actIt.png';
 import SectionIntro from '../common/SectionIntro';
+import svgImg from '../../assets/images/svg.png';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -33,10 +34,13 @@ const HowNovaWork = () => {
           title="How Nova Practicing Works"
           description="We understand how important it is for you to find a good job and settle down. We will help you to find one by preparing you to change your job interview to a permanent career success story in just 3 EASY STEPS."
         />
+        <img src={svgImg} alt="svg" className="svgImg" />
         <div className="allImg">
           {arrImg.map(({ title, img, desc }) => (
             <div className="getPairedDivText" key={title}>
-              <img className="getPaired" src={img} alt={title} />
+              <div className="getPaired-img">
+                <img className="getPaired" src={img} alt={title} />
+              </div>
               <div className="titleHrDiv">
                 <hr className="new1" />
                 <Title className="titleForAll" level={2}>{title}</Title>
@@ -45,6 +49,7 @@ const HowNovaWork = () => {
             </div>
           ))}
         </div>
+        <img src={svgImg} alt="svg" className="svgImgSec" />
       </Content>
     </div>
   );

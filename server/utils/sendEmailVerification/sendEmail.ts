@@ -15,7 +15,7 @@ const mailSender = async (email: string, title: string, body:string) => {
   });
 
   const mailOptions: any = {
-    from: `<${process.env.EMAIL}>`,
+    from: 'Nova',
     to: email,
     subject: title,
     html: body,

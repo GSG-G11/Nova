@@ -17,6 +17,7 @@ import {
 import CustomError from './CustomError';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
 import emailTemplate from './email/interviewEmailTemplate';
+import cancelEmail from './email/cancelEmail';
 import createReviewValidation from './validation/createReviewValidation';
 
 export {
@@ -41,4 +42,5 @@ export {
   acceptInterviewerValidation,
   getUsersAdminQueryValidation,
   getUsersArrayStatusAdminQueryValidation,
+  cancelEmail,
 };

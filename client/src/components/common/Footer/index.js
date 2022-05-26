@@ -5,6 +5,7 @@ import {
   TwitterCircleFilled,
   FacebookFilled, LinkedinFilled,
 } from '@ant-design/icons';
+import footerImg from '../../../assets/images/footerImg.png';
 
 const { Title, Text } = Typography;
 const Footer = () => (
@@ -25,6 +26,8 @@ const Footer = () => (
       <TwitterCircleFilled className="footer__icon" />
       <FacebookFilled className="footer__icon" />
       <LinkedinFilled className="footer__icon" />
+
+      <img src={footerImg} alt="footerImg" className="footer__img" />
     </div>
   </footer>
 );

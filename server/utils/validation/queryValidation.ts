@@ -14,6 +14,7 @@ const getUsersAdminQueryValidation = async (data: object) => {
   const schema = Joi.object({
     role: Joi.string().valid('interviewer', 'interviewee').required(),
     page: Joi.string(),
+    limit: Joi.string().invalid('0').required(),
     status: Joi.string().valid('PENDING', 'APPROVED', 'REJECTED'),
   });
   const result: object = await schema.validateAsync(data, { abortEarly: false });

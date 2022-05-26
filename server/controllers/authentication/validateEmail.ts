@@ -3,7 +3,8 @@ import { verifyToken, CustomError } from '../../utils';
 import User from '../../database/Models/User';
 
 const validateEmail = async (req: Request, res: Response) => {
-  const { accessToken }: { accessToken?: string } = req.query;
+  const { token: accessToken }: { token?: string } = req.body;
+
   if (!accessToken) {
     throw new CustomError('Access token not found', 401);
   }

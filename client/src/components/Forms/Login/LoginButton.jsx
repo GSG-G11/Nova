@@ -1,15 +1,17 @@
-/* eslint-disable react/jsx-first-prop-new-line */
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
+import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import logo from '../../../assets/images/logo.png';
 import '../style.css';
 
-const LoginButton = () => {
+const LoginButton = ({ title, className, signUpForm }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
+    signUpForm();
   };
 
   const handleOk = () => {
@@ -22,13 +24,14 @@ const LoginButton = () => {
 
   return (
     <>
-      <Button className="loginBtn" type="primary" onClick={showModal}>
-        Log in
+      <Button className={className || 'loginBtn'} type="primary" onClick={showModal}>
+        {title}
       </Button>
-      <Modal title={(
-        <div className="modal-logo-img">
-          <img src={logo} alt="logo" className="logo-img" />
-        </div>
+      <Modal
+        title={(
+          <div className="modal-logo-img">
+            <img src={logo} alt="logo" className="logo-img" />
+          </div>
         )}
         visible={isModalVisible}
         onOk={handleOk}
@@ -43,4 +46,13 @@ const LoginButton = () => {
   );
 };
 
+LoginButton.propTypes = {
+  title: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  signUpForm: PropTypes.func.isRequired,
+};
+
+LoginButton.defaultProps = {
+  className: '',
+};
 export default LoginButton;

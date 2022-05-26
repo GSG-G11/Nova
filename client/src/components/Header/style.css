@@ -62,6 +62,11 @@
 }
 
 
+.btnStartPracticing:active, .btnStartPracticing:focus, .btnBookInterview:active, .btnBookInterview:focus{
+  background-color: #432773;
+  color: #ece7f1;
+}
+
 .allSec{
   display: flex;  
   justify-content: space-evenly;
@@ -69,6 +74,33 @@
 
 .rightSec{
   margin-top: 7rem;
+  -webkit-animation: slide-in-fwd-center 2.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-fwd-center 2.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
 }
 .btnAboutOurTeam:focus, .btnStartPracticing:focus, .btnBookInterview:focus {
   background-color: #432773 !important;

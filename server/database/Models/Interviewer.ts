@@ -47,6 +47,11 @@ const interviewer = new Schema({
           enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
           required: true,
         },
+        is_cancelled: {
+          type: Boolean,
+          default: false,
+          required: true,
+        },
         questionCategory: {
           type: String,
           required: true,
