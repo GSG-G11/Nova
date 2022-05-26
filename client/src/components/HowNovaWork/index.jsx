@@ -31,7 +31,9 @@ const HowNovaWork = () => {
         <div className="allImg">
           {arrImg.map(({ title, img, desc }) => (
             <div className="getPairedDivText" key={title}>
-              <img className="getPaired" src={img} alt={title} />
+              <div className="getPaired-img">
+                <img className="getPaired" src={img} alt={title} />
+              </div>
               <div className="titleHrDiv">
                 <hr className="new1" />
                 <Title className="titleForAll" level={2}>{title}</Title>

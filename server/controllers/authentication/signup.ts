@@ -7,6 +7,7 @@ import {
 } from '../../utils';
 import User from '../../database/Models/User';
 import Interviewer from '../../database/Models/Interviewer';
+import verifyEmail from '../../utils/email/verifyEmail';
 
 const signup = async (req: Request, res: Response) => {
   const {
@@ -50,11 +51,8 @@ const signup = async (req: Request, res: Response) => {
 
     await mailSender(
       email,
-      'Welcome in nova',
-      `<h1>Welcome ${name} in nova</h1>
-      <p>You have successfully signed up as an interviewer</p>
-      <p>We received your request and we will contact you soon</p>
-      <p>Thank you for choosing nova</p>`,
+      'Welcome in Nova',
+      verifyEmail(name),
     );
 
     return res.status(201).json({
@@ -65,9 +63,11 @@ const signup = async (req: Request, res: Response) => {
   await User.create({
     email, password: hashedPassword, name, role,
   });
-  await mailSender(email, 'Verify your email', `<h1>${name} Thanks for registering</h1>
-    <h2>Click the link below to verify your account</h2>
-    <a href=http://localhost:3000/auth/verify?accessToken=${accessToken}>Verify Your Email</a>`);
+  await mailSender(
+    email,
+    'Welcome in Nova',
+    verifyEmail(name, accessToken),
+  );
 
   return res.status(201).json({
     message: 'Account created successfully please check your email to verify your account',
