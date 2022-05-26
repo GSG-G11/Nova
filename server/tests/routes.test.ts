@@ -749,7 +749,7 @@ describe('Get Available interview times', () => {
         }
         expect(res.status).toBe(200);
         expect(res.body.message).toBe('Success');
-        expect(res.body.data.length).toBe(0);
+        expect(res.body.data.length).toBe(2);
 
         return done();
       });
