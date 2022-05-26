@@ -54,23 +54,20 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           setPageNumber(count);
         }
         setDataSource([]);
-        data.forEach(async (obj) => {
-          const { data: { data: { name } } } = (user.role === 'interviewee') ? await axios.get(`/api/user/info/${obj.interviews.interviewerId}`, { cancelToken: source.token })
-            : await axios.get(`/api/user/info/${obj.interviews.intervieweeId}`, { cancelToken: source.token });
-          const date = new Date(obj.interviews.date);
-          const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
-          setDataSource((prev) => [...prev, {
-            key: obj.interviews._id,
-            Name: name,
-            questionCategory: obj.interviews.questionCategory,
-            language: obj.interviews.language,
-            specialization: obj.interviews.specialization,
-            date: dateStr,
-            is_cancelled: String(obj.interviews.is_cancelled),
-            time: `${`${obj.interviews.time}:00`}-${obj.interviews.time + 1}:00`,
-          },
-          ]);
-        });
+        setDataSource(data.map(({
+          interviews: {
+            _id, questionCategory, language, specialization, date, is_cancelled: isCancelled, time,
+          }, name,
+        }) => ({
+          key: _id,
+          Name: name,
+          questionCategory,
+          language,
+          specialization,
+          date: (`${new Date(date).getDate()}/${(new Date(date).getMonth() + 1)}/${new Date(date).getFullYear()}`),
+          is_cancelled: String(isCancelled),
+          time: `${`${time}:00`}-${time + 1}:00`,
+        })));
         setLoading(false);
       } catch ({ response: { data: { message: msg } } }) {
         setLoading(false);
