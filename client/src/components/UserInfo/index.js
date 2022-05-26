@@ -1,33 +1,38 @@
 import React from 'react';
 import './style.css';
 import propTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  Image, Skeleton, Typography,
+  Button,
+  Image, Result, Skeleton, Typography,
 } from 'antd';
 import Navbar from '../Navbar';
 import CreateInterviewButton from '../common/CreateInterviewButton';
 
 const { Text, Title } = Typography;
 
-const UserInfo = ({ user, loading }) => {
+const UserInfo = ({
+  user, loading, error, success,
+}) => {
   const {
-    name, bio, profilePicture, level, cv,
+    name, bio, level, cv,
   } = user;
+  const navigate = useNavigate();
   const { id } = useParams();
   const { user: loggedInUser } = useSelector((state) => state.auth);
 
   const loggedInUserId = loggedInUser?.id;
   const loggedInUserRole = loggedInUser?.role;
+  const profilePicture = loggedInUser?.profilePicture;
 
   return (
     <>
-      <Navbar />
+      <Navbar profilePicture={profilePicture} />
       <div className="user__info-section">
         {loading ? (
           <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
-        ) : (
+        ) : success && (
           <>
             <div className="user__primary">
               <div className="user__image-container">
@@ -57,6 +62,19 @@ const UserInfo = ({ user, loading }) => {
           </>
         )}
       </div>
+      {error && (
+      <Result
+        status="404"
+        title="404"
+        subTitle="Sorry, the user you are looking for does not exist."
+        extra={(
+          <Button onClick={() => navigate('/')} type="primary">
+            Back to Home
+          </Button>
+        )}
+      />
+      )}
+
     </>
 
   );
@@ -64,6 +82,8 @@ const UserInfo = ({ user, loading }) => {
 
 UserInfo.propTypes = {
   loading: propTypes.bool.isRequired,
+  error: propTypes.bool.isRequired,
+  success: propTypes.bool.isRequired,
   user: propTypes.shape({
     name: propTypes.string.isRequired,
     bio: propTypes.string.isRequired,

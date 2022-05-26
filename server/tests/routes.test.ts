@@ -219,7 +219,7 @@ describe('Login', () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.message).toBe('Please Verify your email');
+        expect(res.body.message).toBe('Please Verify your email to access our services');
         return done();
       });
   });

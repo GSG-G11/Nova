@@ -12,10 +12,11 @@ import LoadingHome from './components/LoadingHome';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(checkUser());
+    document.title = 'Nova | Home';
   }, []);
 
   return (
@@ -29,7 +30,11 @@ const App = () => {
               <Route path="/" element={<Landing />} />
               <Route path="/users/:id" element={<Profile />} />
               <Route path="/auth/verify" element={<VerifyAccount />} />
-              <Route path="/admin" element={<AdminDashboard />} />
+              {
+                user?.role === 'admin' && (
+                  <Route path="/admin" element={<AdminDashboard />} />
+                )
+              }
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
