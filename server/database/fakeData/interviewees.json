@@ -3,6 +3,25 @@
        {
            "userId": "627c92140d0c3622573195ca",
            "interviews": [
+            {
+                "interviewerId": "627c92140d0c3622573195cb",
+                "date": "2022-04-28",
+                "time": 13,
+                "language": "JAVASCRIPT",
+                "specialization": "BACKEND",
+                "is_cancelled": false,
+                "questionCategory":"Technical",
+                "_id": "627d1d11f5243856362e7a7c",
+                "review": {
+                    "message": "",
+                    "saved": false
+                },
+                "meeting": {
+                    "meetingId": "82569233756",
+                    "password": "asJ6Lp",
+                    "joinUrl":"https://us05web.zoom.us/j/82569233756?pwd=YkI1UVFoZnA4dWJRRVVIVTZnbVR5QT09"
+                }
+            },
                {
                    "_id": "627d1d11f5243856362e8a8c",
                    "interviewerId": "627c92140d0c3622573195cb",

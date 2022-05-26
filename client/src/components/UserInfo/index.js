@@ -85,6 +85,7 @@ const UserInfo = () => {
           </>
         )}
       </div>
+      <ProfileTabs />
     </>
 
   );
