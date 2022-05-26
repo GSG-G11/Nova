@@ -3,15 +3,18 @@ import {
   Button,
   Modal,
 } from 'antd';
+import PropTypes from 'prop-types';
 import logo from '../../../assets/images/logo.png';
+// eslint-disable-next-line import/no-cycle
 import SignupForm from './Form';
 import '../style.css';
 
-const SignupButton = () => {
+const SignupButton = ({ loginForm, className }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
+    loginForm();
   };
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -19,7 +22,7 @@ const SignupButton = () => {
 
   return (
     <>
-      <Button className="signUpBtn sign" type="primary" onClick={showModal}>
+      <Button className={className || 'signUpBtn sign'} type="primary" onClick={showModal}>
         Sign Up
       </Button>
       <Modal
@@ -32,10 +35,21 @@ const SignupButton = () => {
         visible={isModalVisible}
         footer={null}
       >
-        <SignupForm />
+        <SignupForm
+          setIsModalVisible={setIsModalVisible}
+        />
       </Modal>
     </>
   );
+};
+
+SignupButton.propTypes = {
+  loginForm: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+SignupButton.defaultProps = {
+  className: '',
 };
 
 export default SignupButton;

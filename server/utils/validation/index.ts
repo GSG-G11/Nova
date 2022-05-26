@@ -2,7 +2,10 @@ import loginValidation from './loginValidation';
 import postAvailableTimeValidation from './postAvailableTimeValidation';
 import getInterviewTimeValidation from './getInterviewTimeValidation';
 import interviewValidation from './interviewValidation';
-import { validateQuery, getInterviewsQueryValidation, getUsersQueryValidation } from './queryValidation';
+import {
+  validateQuery, getInterviewsQueryValidation,
+  getUsersAdminQueryValidation, getUsersArrayStatusAdminQueryValidation,
+} from './queryValidation';
 import { signupValidation, signupInterviewerValidation } from './signupValidation';
 import updateInfoValidation from './updateInfoValidation';
 import acceptInterviewerValidation from './acceptInterviewerValidation';
@@ -16,7 +19,8 @@ export {
   getInterviewsQueryValidation,
   signupValidation,
   updateInfoValidation,
-  getUsersQueryValidation,
   signupInterviewerValidation,
   acceptInterviewerValidation,
+  getUsersAdminQueryValidation,
+  getUsersArrayStatusAdminQueryValidation,
 };

@@ -59,6 +59,11 @@ const interviewee = new Schema({
             meetingId: '',
           },
         },
+        is_cancelled: {
+          type: Boolean,
+          default: false,
+          required: true,
+        },
         review: {
           type: {
             message: {
@@ -84,6 +89,7 @@ const interviewee = new Schema({
         },
       },
     ],
+
     required: false,
   },
 

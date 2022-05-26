@@ -1,0 +1,51 @@
+.dashboard__content {
+    margin: 24px 16px 0;
+    overflow: initial;
+}
+
+.dashboard__header {
+    display: flex;
+    margin-top: 1.2rem;
+    color: white;
+    align-items: center;
+    font-weight: 500;
+}
+
+.dashboard__header .dashboard__title {
+    font-size: 0.75rem;
+    color: #efefef;
+    font-weight: 500;
+    width: 100%;
+}
+
+.dashboard__layout {
+    padding: 24;
+    text-align:center;
+}
+
+.dashboard__footer {
+    text-align: center;
+}
+
+.dashboard__sider {
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.site-layout {
+    margin-left: 200,
+
+}
+
+.tableAdmin {
+    margin-left: 12rem;
+    min-height: 100vh;
+}
+
+.rejectAdmin {
+    color: red !important;
+    font-weight: 500 !important;
+}

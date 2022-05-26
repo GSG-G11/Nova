@@ -58,25 +58,27 @@ const Navbar = () => {
         <div className="right-left">
           <div className="right">
             <div className="logo">
-              <img src={logo} alt="logo" className="logo-img" />
+              <Link to="/">
+                <img src={logo} alt="logo" className="logo-img" />
+              </Link>
             </div>
             <Menu
               mode="horizontal"
               defaultSelectedKeys={['1']}
             >
               <div className="allBtn">
-                <Item className="btn" ant-click-animating-without-extra-node="false">
+                <Link to="/" className="btn" ant-click-animating-without-extra-node="false">
                   Home
-                </Item>
-                <Item className="btn">
+                </Link>
+                <Link to="/#team" className="btn">
                   Team
-                </Item>
-                <Item className="btn">
-                  Challenge
-                </Item>
-                <Item className="btn">
-                  About
-                </Item>
+                </Link>
+                <Link to="/#challenge" className="btn">
+                  Challenges
+                </Link>
+                <Link to="/#resources" className="btn">
+                  Resources
+                </Link>
               </div>
             </Menu>
           </div>
@@ -85,7 +87,7 @@ const Navbar = () => {
             {!user ? (
               <div>
                 <SignupButton />
-                <LoginButton />
+                <LoginButton title="Login" />
               </div>
             ) : (
               <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">

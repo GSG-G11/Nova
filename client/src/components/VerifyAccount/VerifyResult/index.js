@@ -24,7 +24,7 @@ const VerifyResult = ({ verified }) => {
           <Text>
             You can now login
           </Text>
-          <LoginButton />
+          <LoginButton title="Login" />
         </div>
       )}
     />

@@ -7,9 +7,12 @@ import ActiveMembers from '../ActiveMembers';
 import IntreviewerApp from '../IntreviewerApp';
 import ClientReviews from '../ClientReviews';
 import Challenges from '../Challenges';
+import Navbar from '../Navbar';
+import Footer from '../common/Footer';
 
 const Landing = () => (
   <>
+    <Navbar />
     <Header />
     <Resources />
     <HowNovaWork />
@@ -18,6 +21,7 @@ const Landing = () => (
     <IntreviewerApp />
     <Challenges />
     <ClientReviews />
+    <Footer />
   </>
 );
 

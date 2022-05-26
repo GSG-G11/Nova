@@ -1,9 +1,11 @@
-import { Layout, Button, Typography } from 'antd';
+import { Button, Layout, Typography } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { } from '@ant-design/icons';
 import './style.css';
+import { Link } from 'react-router-dom';
 import headerImg from '../../assets/images/header.png';
+import CreateInterviewButton from '../common/CreateInterviewButton';
+import { LoginButton } from '../Forms';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -15,7 +17,7 @@ const Header = () => {
       <Content
         className="site-layout-background headerContent"
       >
-        <div className="allSec">
+        <div className="allSec" id="home">
           <section className="rightSec">
             <div className="novaCommunity">
               <Title level={5} className="pNova">Nova Community</Title>
@@ -26,17 +28,18 @@ const Header = () => {
               practice with professional interviewer.
             </Title>
             {!user ? (
-              <Button className="btnStartPracticing" type="primary">
-                Start Practicing
-              </Button>
+              <LoginButton title="Start Practicing" className="btnStartPracticing" />
             )
               : (
-                <Button className="btnBookInterview" type="primary">
-                  Book Interview
-                </Button>
+                <CreateInterviewButton
+                  title="Book an Interview"
+                />
+
               )}
-            <Button className="btnAboutOurTeam" type="primary">
-              About our Team
+            <Button className="btnAboutOurTeam">
+              <Link to="/#team">
+                About Our Team
+              </Link>
             </Button>
           </section>
           <section className="leftSec">

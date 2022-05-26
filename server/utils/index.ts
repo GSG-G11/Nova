@@ -9,9 +9,10 @@ import {
   getInterviewsQueryValidation,
   signupValidation,
   updateInfoValidation,
-  getUsersQueryValidation,
   signupInterviewerValidation,
   acceptInterviewerValidation,
+  getUsersAdminQueryValidation,
+  getUsersArrayStatusAdminQueryValidation,
 } from './validation';
 import CustomError from './CustomError';
 import { RequestType, signupInterface, updateInfoInterface } from './interfaces';
@@ -36,7 +37,8 @@ export {
   getInterviewTimeValidation,
   createReviewValidation,
   postAvailableTimeValidation,
-  getUsersQueryValidation,
   signupInterviewerValidation,
   acceptInterviewerValidation,
+  getUsersAdminQueryValidation,
+  getUsersArrayStatusAdminQueryValidation,
 };

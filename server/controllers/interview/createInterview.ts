@@ -7,7 +7,7 @@ import {
 } from '../../utils';
 import Schedule from '../../database/Models/Schedule';
 import Interviewer from '../../database/Models/Interviewer';
-import createMeeting from '../../zoom/createMeeting';
+// import createMeeting from '../../zoom/createMeeting';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -65,13 +65,16 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   // // update the schedule for the interviewer
   // eslint-disable-next-line prefer-const
-  let { join_url: finalUrl, password, meetingId } = await createMeeting();
-  finalUrl += '?role=1';
-  if (!finalUrl || !password || !meetingId) {
-    throw new CustomError('Something went wrong', 500);
-  }
+  // let { join_url: finalUrl, password, meetingId } = await createMeeting();
+  // finalUrl += '?role=1';
+  // if (!finalUrl || !password || !meetingId) {
+  //   throw new CustomError('Something went wrong', 500);
+  // }
 
-  console.log('from createinterview', finalUrl);
+  const finalUrl = 'ss'; const
+    password = 'ss';
+
+  // console.log('from createinterview', finalUrl);
   const interview = {
     interviewerId,
     date,
@@ -79,11 +82,11 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
-    meeting: {
-      join_url: finalUrl,
-      password,
-      meetingId,
-    },
+    // meeting: {
+    //   join_url: finalUrl,
+    //   password,
+    //   meetingId,
+    // },
   };
 
   const interviewerInterview = {

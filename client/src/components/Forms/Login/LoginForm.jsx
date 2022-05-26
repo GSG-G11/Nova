@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import {
   Form, Input, Button,
@@ -8,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import '../style.css';
 import PropTypes from 'prop-types';
 import { setUser } from '../../../redux/features/auth/authSlice';
+import SignupButton from '../signup/SignupButton';
 
 const LoginForm = ({ handleOk }) => {
   const [email, setEmail] = useState('');
@@ -96,7 +98,7 @@ const LoginForm = ({ handleOk }) => {
       <Item>
         <div className="have-account">
           Don`t have an account?
-          <a href="/api/signup">Sign up</a>
+          <SignupButton className="btn-link" loginForm={() => handleOk()} />
         </div>
       </Item>
     </Form>

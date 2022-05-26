@@ -68,3 +68,24 @@ button.ant-btn.ant-btn-primary.signup:hover {
 .loginBtn:active , .signUpBtn:active {
   background-color: #673ab7;
 }
+
+.signup-form {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.btn-link {
+  margin: 0;
+  margin-left: 1.2rem;
+  padding: 0;
+  background-color: white;
+  border: none;
+  outline: none;
+  color: blue;
+}
+
+.btn-link:hover {
+  background-color: white;
+  color: blue !important;
+}
