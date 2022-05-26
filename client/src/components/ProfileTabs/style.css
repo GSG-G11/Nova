@@ -20,3 +20,7 @@
 .profile-tabs-holder .ant-tabs {
     width:100%;
 }
+
+.profile-container {
+    padding-bottom: 6.2rem;
+}
