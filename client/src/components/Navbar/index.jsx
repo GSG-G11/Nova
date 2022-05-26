@@ -24,12 +24,27 @@ const Navbar = () => {
     dispatch(clearUser());
     navigate('/');
   };
+
+  let role;
+  if (user) {
+    role = user.role;
+  }
+  let path;
+
+  if (role === 'admin') {
+    path = '/admin';
+  } else if (role === 'interviewer' || role === 'interviewee') {
+    path = `/users/${user.id}`;
+  } else {
+    path = '/';
+  }
+
   const menu = (
     <Menu
       items={[
         {
           label: (
-            <Link to={user ? (`/users/${user.id}`) : '/'}>
+            <Link to={path}>
               <Item className="profile">
                 <UserOutlined className="icon" />
                 Profile
