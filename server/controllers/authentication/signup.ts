@@ -65,7 +65,7 @@ const signup = async (req: Request, res: Response) => {
   });
   await mailSender(email, 'Verify your email', `<h1>${name} Thanks for registering</h1>
     <h2>Click the link below to verify your account</h2>
-    <a href=http://localhost:8000/api/auth/verify?accessToken=${accessToken}>Verify Your Email</a>`);
+    <a href=http://localhost:3000/auth/verify?accessToken=${accessToken}>Verify Your Email</a>`);
 
   return res.status(201).json({
     message: 'Account created successfully please check your email to verify your account',

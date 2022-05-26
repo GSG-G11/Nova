@@ -9,7 +9,7 @@ import SectionIntro from '../common/SectionIntro';
 const ClientReviews = () => (
   <div className="ClientReviews">
     <SectionIntro
-      action="What say"
+      action="Client Reviews"
       title="Happy Clients"
       description="What do our customers say?"
     />
