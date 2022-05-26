@@ -1,8 +1,11 @@
-
+.ClientReviews {
+    padding-bottom: 3.2rem;
+}
 .ClientReviews .heading {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 } 
 .ClientReviews .partner-content-img img.clientImg {
     width: 60%;

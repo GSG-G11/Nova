@@ -78,6 +78,10 @@ const UserInfo = () => {
               </p>
 
             </div>
+
+            {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
+              <ProfileTabs />
+            )}
           </>
         )}
       </div>
