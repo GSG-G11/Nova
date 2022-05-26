@@ -5,9 +5,9 @@
             "name": "Jane Doe",
             "email": "jane@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm a web developer",
+            "bio": "I'm a web developer with passion for building web applications. And I'm looking for a job as a web developer. Technology is my passion. I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
             "level": "JUNIOR",
             "role": "interviewee",
             "is_verified": true
@@ -16,24 +16,11 @@
         {
             "_id": "627c92140d0c3622573195cb",
             "name": "Raghad Mezied",
-            "email": "jack@gmail.com",
+            "email": "raghad@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm an interviewer",
+            "bio": "I'm an expert in web development. my passion is to help people to build their own websites.",
             "cv": "link to cv",
             "profile_picture": "https://avatars.githubusercontent.com/u/76119348?v=4",
-            "level": "EXPERT",
-            "role": "interviewer",
-            "is_verified": true
-
-        },
-        {
-            "_id": "507f1f77bcf86cd799439011",
-            "name": "Jone Doe",
-            "email": "Jone@gmail.com",
-            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm an interviewer",
-            "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
             "level": "EXPERT",
             "role": "interviewer",
             "is_verified": true
@@ -46,7 +33,7 @@
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
             "bio": "",
             "cv": "",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
             "level": "EXPERT",
             "role": "admin",
             "is_verified": true
@@ -57,10 +44,6 @@
             "name": "Larry Doe",
             "email": "larry@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm a web developer",
-            "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-            "level": "INTERNSHIP",
             "role": "interviewee",
             "is_verified": false
 
@@ -68,24 +51,23 @@
         {
             "_id": "a27c92140d0c3622573195ce",
             "name": "Manar Abedalhadi",
-            "email": "potato@gmail.com",
+            "email": "manar@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm a web developer",
+            "bio": "I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
             "profile_picture": "https://avatars.githubusercontent.com/u/79801554?v=4",
             "level": "EXPERT",
             "role": "interviewer",
             "is_verified": true
-
         },
         {
             "_id": "627c92140d0c3622573195cf",
             "name": "Abed Shamia",
             "email": "3boodshamia@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm a web developer",
+            "bio": "I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
             "level": "INTERNSHIP",
             "role": "interviewee",
             "is_verified": true
@@ -93,10 +75,10 @@
         },
         {
             "_id": "b27c92140d0c3622573195ce",
-            "name": "ِAbed Shamia",
-            "email": "larrysa@gmail.com",
+            "name": "ِAbedalrahman Shamia",
+            "email": "abedshamia@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm a web developer",
+            "bio": "I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
             "profile_picture": "https://avatars.githubusercontent.com/u/73759748?v=4",
             "level": "EXPERT",
@@ -107,9 +89,9 @@
         {
             "_id": "627c92140d0c3622573195ce",
             "name": "Mahmoud Alhato",
-            "email": "larrys@gmail.com",
+            "email": "hato@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm a web developer",
+            "bio": "I'm a web developer, Interviewer and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
             "profile_picture": "https://avatars.githubusercontent.com/u/80840350?v=4",
             "level": "SENIOR",
@@ -122,9 +104,9 @@
             "name": "Muhammed Ali",
             "email": "ali@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm Muhammed Ali",
+            "bio": "I'm Muhammed Ali, I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
             "level": "INTERNSHIP",
             "role": "interviewee",
             "is_verified": true
@@ -135,24 +117,36 @@
             "name": "steve jobs",
             "email": "steve@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm steve jobs",
+            "bio": "I'm steve jobs, I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-            "level": "INTERNSHIP",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
+            "level": "SENIOR",
             "role": "interviewer",
             "is_verified": false
         },
         {
             "_id": "c27c92140d0c3622573195ce",
-            "name": "steve",
-            "email": "stev@gmail.com",
+            "name": "Bill Gates",
+            "email": "Bill@gmail.com",
             "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
-            "bio": "I'm steve jobs",
+            "bio": "I'm Bill Gates, I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
             "cv": "link to cv",
-            "profile_picture": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
             "level": "INTERNSHIP",
             "role": "interviewer",
             "is_verified": false
+        },
+        {
+            "_id": "d27c92140d0c3622573195ce",
+            "name": "fawzi Gates",
+            "email": "fawzi@gmail.com",
+            "password": "$2a$10$nvvUrAyT6yyQp91soU..e.1.sESNfgeWsRpRecOrWKZX2NBHnNhJW",
+            "bio": "I'm Fawzi Gates, I'm a web developer, I love to learn new things and I'm always looking for new ways to improve myself.",
+            "cv": "link to cv",
+            "profile_picture": "https://avatars.githubusercontent.com/u/62077627?v=4",
+            "level": "INTERNSHIP",
+            "role": "interviewer",
+            "is_verified": true
         }
     ]
 }

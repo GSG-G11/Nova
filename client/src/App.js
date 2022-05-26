@@ -7,6 +7,7 @@ import UserInfo from './components/UserInfo';
 import Landing from './components/Landing';
 import VerifyAccount from './components/VerifyAccount';
 import AdminDashboard from './components/AdminDashboard';
+import NotFound from './components/NotFound';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/users/:id" element={<UserInfo />} />
             <Route path="/auth/verify" element={<VerifyAccount />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       )}
