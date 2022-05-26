@@ -6,7 +6,7 @@ dotenv.config();
 let URL:string | undefined;
 
 const {
-  NODE_ENV, DEV_DATABASE_URL, DATABASE_URL, TEST_DATABASE_URL,
+  NODE_ENV, DEV_DATABASE_URL, MONGODB_URI, TEST_DATABASE_URL,
 } = process.env;
 
 switch (NODE_ENV) {
@@ -14,7 +14,7 @@ switch (NODE_ENV) {
     URL = DEV_DATABASE_URL;
     break;
   case 'production':
-    URL = DATABASE_URL;
+    URL = MONGODB_URI;
     break;
   case 'test':
     URL = TEST_DATABASE_URL;

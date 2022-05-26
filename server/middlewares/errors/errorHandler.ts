@@ -10,6 +10,7 @@ const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
+  console.log(error);
   if (error.name === 'ValidationError') {
     return res.status(400).json({
       message: error.message,

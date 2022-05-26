@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=production npx tsc && node ./dist",
+    "start": "NODE_ENV=production npx tsc && node ./dist",
     "dev": "cross-env NODE_ENV=development nodemon ./server/index.ts",
     "test": "jest",
     "heroku-postbuild": "cd client && npm install && npm run build",
