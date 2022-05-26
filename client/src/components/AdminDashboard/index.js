@@ -7,6 +7,10 @@ import {
 import { Layout, Menu, Typography } from 'antd';
 import React, { useState, createElement } from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { clearUser } from '../../redux/features/auth/authSlice';
 import AdminTables from '../AdminTables';
 
 const {
@@ -37,7 +41,9 @@ const items = [
     key: '4',
     icon: LogoutOutlined,
     label: 'Logout',
-    content: <div>Logout</div>,
+    logout: async () => {
+      await axios.post('/api/logout');
+    },
   },
 ];
 
@@ -50,12 +56,19 @@ const tabs = items.map(({
   content,
 }));
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [content, setContent] = useState(tabs[0].content);
   const [selectedTab, setSelectedTab] = useState(tabs[0].key);
 
   const handleClick = (e) => {
     const { key } = e;
     setSelectedTab(key);
+    if (key === '4') {
+      dispatch(clearUser());
+      navigate('/');
+      items[3].logout();
+    }
     setContent(tabs.find((tab) => tab.key === key).content);
   };
   return (

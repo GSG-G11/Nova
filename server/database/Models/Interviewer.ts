@@ -47,6 +47,28 @@ const interviewer = new Schema({
           enum: ['FRONTEND', 'BACKEND', 'DEVOPS', 'SECURITY', 'DATA STRUCTURE', 'FULL STACK'],
           required: true,
         },
+        meeting: {
+          type: {
+            joinUrl: {
+              type: String,
+              required: true,
+            },
+            password: {
+              type: String,
+              required: true,
+            },
+            meetingId: {
+              type: String,
+              required: true,
+            },
+          },
+          required: true,
+          default: {
+            joinUrl: '',
+            password: '',
+            meetingId: '',
+          },
+        },
         is_cancelled: {
           type: Boolean,
           default: false,
