@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import 'antd/dist/antd.min.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
@@ -12,16 +12,15 @@ import LoadingHome from './components/LoadingHome';
 
 const App = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = React.useState(true);
+  const { loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(checkUser());
-    setIsLoading(false);
   }, []);
 
   return (
     <div className="App">
-      {isLoading ? (
+      {loading ? (
         <LoadingHome />
       )
         : (
