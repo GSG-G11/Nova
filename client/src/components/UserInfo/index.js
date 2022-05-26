@@ -16,7 +16,7 @@ const UserInfo = ({
   user, loading, error, success,
 }) => {
   const {
-    name, bio, profilePicture, level, cv,
+    name, bio, level, cv,
   } = user;
   const navigate = useNavigate();
   const { id } = useParams();
@@ -24,10 +24,11 @@ const UserInfo = ({
 
   const loggedInUserId = loggedInUser?.id;
   const loggedInUserRole = loggedInUser?.role;
+  const profilePicture = loggedInUser?.profilePicture;
 
   return (
     <>
-      <Navbar />
+      <Navbar profilePicture={profilePicture} />
       <div className="user__info-section">
         {loading ? (
           <Skeleton loading={loading} active avatar className="skeleton-userInfo" />

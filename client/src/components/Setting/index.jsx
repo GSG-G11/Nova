@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import propTypes from 'prop-types';
 import './style.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setImage } from '../../redux/features/auth/authSlice';
 
 const SettingTab = ({ user }) => {
@@ -13,6 +13,7 @@ const SettingTab = ({ user }) => {
   const { TextArea } = Input;
   const { Group } = Radio;
   const dispatch = useDispatch();
+  const { user: loggedInUser } = useSelector((state) => state.auth);
   const [image, setImgLink] = useState('');
   const [cv, setCVLink] = useState('');
   const [bio, setBio] = useState('');
@@ -33,8 +34,9 @@ const SettingTab = ({ user }) => {
       const { data: { message: successMsg } } = await axios.patch('/api/user', {
         image, cv, bio, level,
       });
+      console.log(loggedInUser);
       dispatch(setImage(image));
-
+      console.log(loggedInUser);
       message.success(successMsg);
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -113,10 +115,11 @@ const SettingTab = ({ user }) => {
 
 SettingTab.propTypes = {
   user: propTypes.shape({
-    bio: propTypes.string.isRequired,
-    profilePicture: propTypes.string.isRequired,
-    level: propTypes.string.isRequired,
-    cv: propTypes.string.isRequired,
+    profilePicture: propTypes.string,
+    level: propTypes.string,
+    bio: propTypes.string,
+    cv: propTypes.string,
   }).isRequired,
 };
+
 export default SettingTab;
