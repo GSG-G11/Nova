@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom';
 import { Typography } from 'antd';
 import { checkUser } from './redux/features/auth/authSlice';
 import UserInfo from './components/UserInfo';
-import ProfileTabs from './components/ProfileTabs';
 
 import Landing from './components/Landing';
 import VerifyAccount from './components/VerifyAccount';
@@ -47,7 +46,6 @@ const App = () => {
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-            <ProfileTabs />
           </div>
         )}
 
