@@ -8,7 +8,6 @@ import FirstStepForm from './StepFirst';
 import StepSecond from './StepSecond';
 
 const { Step } = Steps;
-
 const InterviewerApp = ({ setIsModalVisible }) => {
   const [current, setCurrent] = useState(0);
   const [fullName, setFullName] = useState('');
@@ -48,22 +47,26 @@ const InterviewerApp = ({ setIsModalVisible }) => {
     },
   ];
   const joinUs = async () => {
-    try {
-      const { data: { message: verifyMessage } } = await axios.post('/api/signup', {
-        name: fullName,
-        email,
-        password,
-        confirm,
-        role: 'interviewer',
-        specialization,
-        languages,
-        cv,
-        level,
-      });
-      message.success(`Welcome ${fullName}, ${verifyMessage}`);
-      setIsModalVisible(false);
-    } catch ({ response: { data: { message: msg } } }) {
-      message.error(msg);
+    if (fullName && email && password && confirm && specialization && languages && cv && level) {
+      try {
+        const { data: { message: verifyMessage } } = await axios.post('/api/signup', {
+          name: fullName,
+          email,
+          password,
+          confirm,
+          role: 'interviewer',
+          specialization,
+          languages,
+          cv,
+          level,
+        });
+        message.success(`Welcome ${fullName}, ${verifyMessage}`);
+        setIsModalVisible(false);
+      } catch ({ response: { data: { message: msg } } }) {
+        message.error(msg);
+      }
+    } else {
+      message.error('Please fill all fields');
     }
   };
 
