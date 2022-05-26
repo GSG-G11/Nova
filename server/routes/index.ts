@@ -9,9 +9,8 @@ const router: Router = Router();
 
 router.use(authRouter);
 router.use(interviewRouter);
-router.use('/user', userRouter);
+router.use(userRouter);
 router.use('/interviewer', interviewerRoutes);
 router.use('/admin', adminRouter);
-router.use(userRouter);
 
 export default router;

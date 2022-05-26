@@ -3,6 +3,20 @@
        {
            "userId": "627c92140d0c3622573195ca",
            "interviews": [
+            {
+                "interviewerId": "627c92140d0c3622573195cb",
+                "date": "2022-04-28",
+                "time": 13,
+                "language": "JAVASCRIPT",
+                "specialization": "BACKEND",
+                "is_cancelled": false,
+                "questionCategory":"Technical",
+                "_id": "627d1d11f5243856362e7a7c",
+                "review": {
+                    "message": "",
+                    "saved": false
+                }
+            },
                {
                    "_id": "627d1d11f5243856362e8a8c",
                    "interviewerId": "627c92140d0c3622573195cb",

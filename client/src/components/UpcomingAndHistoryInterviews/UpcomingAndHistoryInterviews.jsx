@@ -34,7 +34,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
       message.success(msg);
       setDataSource((prev) => prev.map((item) => {
         if (item.key === id) {
-          item.status = 'true';
+          item.is_cancelled = 'true';
         }
         return item;
       }));
@@ -111,6 +111,11 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
             title="Zoom Link"
             dataIndex=""
             key=""
+            render={(text, record) => (
+              <Button type="primary" key={record.key}>
+                Join
+              </Button>
+            )}
           />
           <Column
             title="Action"
