@@ -26,7 +26,6 @@ const SettingTab = ({ user }) => {
     setImgLink(profilePicture);
     setBio(userBio);
     setLevel(userLevel);
-    dispatch(setImage(profilePicture));
   }, []);
 
   const updateSetting = async () => {
@@ -34,6 +33,7 @@ const SettingTab = ({ user }) => {
       const { data: { message: successMsg } } = await axios.patch('/api/user', {
         image, cv, bio, level,
       });
+      dispatch(setImage(image));
 
       message.success(successMsg);
     } catch ({ response: { data: { message: msg } } }) {
