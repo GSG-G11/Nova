@@ -80,12 +80,11 @@ const UserInfo = () => {
             </div>
 
             {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
-              <ProfileTabs />
+            <ProfileTabs />
             )}
           </>
         )}
       </div>
-      <ProfileTabs />
     </>
 
   );
