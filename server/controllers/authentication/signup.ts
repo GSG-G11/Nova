@@ -7,6 +7,7 @@ import {
 } from '../../utils';
 import User from '../../database/Models/User';
 import Interviewer from '../../database/Models/Interviewer';
+import verifyEmail from '../../utils/email/verifyEmail';
 
 const signup = async (req: Request, res: Response) => {
   const {
@@ -50,11 +51,8 @@ const signup = async (req: Request, res: Response) => {
 
     await mailSender(
       email,
-      'Welcome in nova',
-      `<h1>Welcome ${name} in nova</h1>
-      <p>You have successfully signed up as an interviewer</p>
-      <p>We received your request and we will contact you soon</p>
-      <p>Thank you for choosing nova</p>`,
+      'Welcome in Nova',
+      verifyEmail(name, accessToken),
     );
 
     return res.status(201).json({
