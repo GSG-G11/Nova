@@ -6,6 +6,7 @@
 
 .profile-tabs-holder .Tab__header {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -17,5 +18,5 @@
     margin-top: 3rem;
 }
 .profile-tabs-holder .ant-tabs {
-    width: 70%;
+    width:100%;
 }
