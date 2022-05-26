@@ -62,22 +62,22 @@ const ActiveMembers = () => {
             <Skeleton loading={loading} active avatar />
             <Skeleton loading={loading} active avatar />
             <Skeleton loading={loading} active avatar />
-            {
-            members.length && members.map(({
-              _id, userInfo, specialization, userId,
-            }) => (
-              <Member
-                key={_id}
-                _id={_id}
-                userInfo={userInfo[0]}
-                specialization={specialization}
-                userId={userId}
-              />
-            ))
-
-        }
           </>
         )}
+        {
+      members.length && members.map(({
+        _id, userInfo, specialization, userId,
+      }) => (
+        <Member
+          key={_id}
+          _id={_id}
+          userInfo={userInfo[0]}
+          specialization={specialization}
+          userId={userId}
+        />
+      ))
+
+    }
 
       </div>
     </section>
