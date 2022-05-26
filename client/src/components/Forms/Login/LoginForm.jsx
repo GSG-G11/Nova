@@ -30,6 +30,7 @@ const LoginForm = ({ handleOk }) => {
       const { data: { data: { user } } } = await axios.post('/api/login', { email, password });
       dispatch(setUser(user));
       handleOk();
+      message.success('Login Successful');
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);

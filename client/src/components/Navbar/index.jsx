@@ -1,5 +1,5 @@
 import {
-  Layout, Menu, Avatar, Dropdown,
+  Layout, Menu, Avatar, Dropdown, message,
 } from 'antd';
 import {
   LogoutOutlined, UserOutlined,
@@ -22,6 +22,7 @@ const Navbar = () => {
   const logout = async () => {
     await axios.post('/api/logout');
     dispatch(clearUser());
+    message.success('Logged out successfully');
     navigate('/');
   };
 

@@ -5,7 +5,7 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import {
-  Button, Layout, Menu, Result, Typography,
+  Button, Layout, Menu, message, Result, Typography,
 } from 'antd';
 import React, { useState, createElement, useEffect } from 'react';
 import './style.css';
@@ -45,6 +45,7 @@ const items = [
     label: 'Logout',
     logout: async () => {
       await axios.post('/api/logout');
+      message.success('Logged out successfully');
     },
   },
 ];
