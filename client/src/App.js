@@ -3,8 +3,7 @@ import 'antd/dist/antd.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { checkUser } from './redux/features/auth/authSlice';
-import UserInfo from './components/UserInfo';
-import ProfileTabs from './components/ProfileTabs';
+import Profile from './components/Profile';
 
 import Landing from './components/Landing';
 import VerifyAccount from './components/VerifyAccount';
@@ -24,12 +23,11 @@ const App = () => {
         <div>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/users/:id" element={<UserInfo />} />
+            <Route path="/users/:id" element={<Profile />} />
             <Route path="/auth/verify" element={<VerifyAccount />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <ProfileTabs />
         </div>
       )}
 

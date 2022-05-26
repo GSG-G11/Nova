@@ -1,13 +1,14 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import ReviewCard from '../Review';
 import SettingTab from '../Setting';
 import './style.css';
 
 const { TabPane } = Tabs;
 
-const ProfileTabs = () => {
+const ProfileTabs = ({ user: userInfo }) => {
   const { user } = useSelector((state) => state.auth);
   const role = user?.role;
   return (
@@ -31,11 +32,19 @@ const ProfileTabs = () => {
           </TabPane>
         )}
         <TabPane tab="Settings" key="4">
-          <SettingTab />
+          <SettingTab user={userInfo} />
         </TabPane>
       </Tabs>
     </div>
     )
   );
+};
+ProfileTabs.propTypes = {
+  user: PropTypes.shape({
+    bio: PropTypes.string.isRequired,
+    profilePicture: PropTypes.string.isRequired,
+    level: PropTypes.string.isRequired,
+    cv: PropTypes.string.isRequired,
+  }).isRequired,
 };
 export default ProfileTabs;
