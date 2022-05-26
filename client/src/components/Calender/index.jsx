@@ -30,34 +30,23 @@ const CalenderTab = () => {
   };
   const disabledDates = availableDates.length ? availableDates.map(({ date }) => date.split('T')[0]) : [];
   const disabledDate = (current) => disabledDates.find((date) => date === moment(current).format('YYYY-MM-DD'));
-  const dayArr = disabledDates.map((date) => parseInt(date.split('-')[2], 10));
+  // const dayArr = disabledDates.map((date) => parseInt(date.split('-')[2], 10));
+
+  const dateFormat = (date) => (date.length === 1 ? `0${date}` : date);
 
   const getListData = (val) => {
     const listData = [];
-    dayArr.map((dayNum) => {
-      const availableTime = availableDates.filter((item) => (parseInt(item.date.split('T')[0].split('-')[2], 10) === dayNum)).map((item) => item.time);
-      switch (val.date()) {
-        case dayNum:
-          availableTime.forEach((h) => h.forEach((hour) => listData.push({ type: 'success', content: `${hour}:00` })));
-          break;
-        default:
+    const availableDate = availableDates.map((item) => item.date.split('T')[0]);
+    availableDate.map((date) => {
+      if (date === `${val.year()}-${dateFormat(`${val.month() + 1}`)}-${dateFormat(`${val.date()}`)}`) {
+        const availableTime = availableDates.filter((item) => item.date.split('T')[0] === date).map((item) => item.time);
+        availableTime.forEach((h) => h.forEach((hour) => listData.push({ type: 'success', content: `${hour}:00` })));
       }
       return listData;
     });
-    return listData || [];
+    return listData;
   };
 
-  const getMonthData = (val) => (val.month() === 8 ? 1394 : null);
-
-  const monthCellRender = (val) => {
-    const num = getMonthData(val);
-    return num && (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    );
-  };
   const dateCellRender = (val) => {
     const listData = getListData(val);
     return (
@@ -117,7 +106,6 @@ const CalenderTab = () => {
           <Calendar
             disabledDate={disabledDate}
             dateCellRender={dateCellRender}
-            monthCellRender={monthCellRender}
           />
         </div>
       </div>

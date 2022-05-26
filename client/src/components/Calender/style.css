@@ -52,12 +52,20 @@ html {
     cursor: pointer;
 }
 .ant-picker-cell-disabled {
-    color: #2196f3;
     pointer-events: none;
-    background-color: #2196f330;
     font-size: 17px;
 }
+.ant-picker-cell-disabled:nth-child(even) {
+    border-top: 2px solid #1890ff;
+    background-color: #2196f31c;
+    color: #2196f3;
+}
+.ant-picker-cell-disabled:nth-child(odd) {
+    border-top: 2px solid #be18ff;
+    background-color: #c844fc1f;
+    color: #be18ff;
 
+}
 .events {
     margin: 0;
     padding: 0;
