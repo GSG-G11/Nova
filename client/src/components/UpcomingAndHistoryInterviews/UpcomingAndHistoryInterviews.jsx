@@ -120,7 +120,9 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
                 onClick={() => {
                   const readyDate = new Date(record.date.split('/').reverse().join('-')).valueOf();
                   const today = new Date().valueOf();
-                  if (readyDate < today) {
+                  if ((readyDate
+                    + 60 * 60 * 1000
+                  ) < today) {
                     message.error('You cannot join the meeting because the interview has already passed');
                   } else
                   if (record.is_cancelled === 'true') {
