@@ -1,6 +1,7 @@
 .HowNovaWork{
   background-color: rgb(255, 255, 255);
   min-height: 280px;
+  padding-top: 5.4rem;
 }
 
 .titleForHowNovaPractice{
@@ -10,12 +11,23 @@
   text-align: center;
 }
 
-.getPaired{
+.getPaired-img {
   width: 18rem;
   height: 18rem;
   border-radius: 20px;
+  overflow: hidden;
+}
+.getPaired{
+  width: 18rem;
+  height: 18rem;
+  filter: brightness(0.9);
+  transition: all 1.2s ease-in-out;
 }
 
+.getPaired:hover {
+  transform: scale(1.1) rotate(8deg);
+  filter: brightness(1);
+}
 .getPairedDivText{
   display: flex;
   flex-direction: column;

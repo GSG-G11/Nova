@@ -7,11 +7,8 @@
 .resources {
     display: flex;
     flex-direction: column;
-    
 background: linear-gradient(0deg, rgba(253, 241, 253, 0) 1.63%, #FBF1FD 20.5%, #F8F4FF 58.57%, #FFFFFF 100%);
-padding: 3.2rem 0;
-
-
+padding: 1.2rem 0;
 }
 
 .resources__cards {
