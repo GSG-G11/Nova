@@ -1,7 +1,9 @@
 import { Response } from 'express';
 import { Types } from 'mongoose';
 import { ObjectId } from 'mongodb';
-import { RequestType, mailSender, CustomError } from '../../utils';
+import {
+  RequestType, mailSender, CustomError, cancelEmail,
+} from '../../utils';
 import Interviewee from '../../database/Models/Interviewee';
 import Interviewer from '../../database/Models/Interviewer';
 import User from '../../database/Models/User';
@@ -83,16 +85,18 @@ const cancelInterview = async (req: RequestType, res: Response) => {
       mailSender(
         intervieweeEmail,
         'Cancel Interview',
-        `<h1> Cancel Interview </h1>
-        <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specialization, has been cancelled </h2>
-        <br> <h4>Thank you for your cooperation</h4>`,
+        cancelEmail(
+          date,
+          specialization,
+        ),
       ),
       mailSender(
         interviewerEmail,
         'Cancel Interview',
-        `<h1> Cancel Interview </h1>
-      <h2>We inform you that your interview, scheduled for ${date}, which was an ${specialization} specialization, has been cancelled </h2>
-      <br> <h4>Thank you for your cooperation</h4>`,
+        cancelEmail(
+          date,
+          specialization,
+        ),
       ),
     ]);
 
