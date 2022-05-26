@@ -6,7 +6,7 @@ import './style.css';
 const Partner = () => (
   <div className="partner">
     <SectionIntro
-      action="Our Partner"
+      action="Our Partners"
       title="Get Interview questions from real companies"
       description="Practice in real time with questions directly taken from their official questions banks."
     />

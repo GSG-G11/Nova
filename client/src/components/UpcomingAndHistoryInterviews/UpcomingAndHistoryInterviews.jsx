@@ -56,7 +56,8 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
         setDataSource([]);
         setDataSource(data.map(({
           interviews: {
-            _id, questionCategory, language, specialization, date, is_cancelled: isCancelled, time,
+            _id, questionCategory, language, specialization, date,
+            is_cancelled: isCancelled, time, meeting: { joinUrl },
           }, name,
         }) => ({
           key: _id,
@@ -67,6 +68,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           date: (`${new Date(date).getDate()}/${(new Date(date).getMonth() + 1)}/${new Date(date).getFullYear()}`),
           is_cancelled: String(isCancelled),
           time: `${`${time}:00`}-${time + 1}:00`,
+          joinUrl,
         })));
         setLoading(false);
       } catch ({ response: { data: { message: msg } } }) {
@@ -112,7 +114,22 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
             dataIndex=""
             key=""
             render={(text, record) => (
-              <Button type="primary" key={record.key}>
+              <Button
+                type="primary"
+                key={record.key}
+                onClick={() => {
+                  const readyDate = new Date(record.date.split('/').reverse().join('-')).valueOf();
+                  const today = new Date().valueOf();
+                  if (readyDate < today) {
+                    message.error('You cannot join the meeting because the interview has already passed');
+                  } else
+                  if (record.is_cancelled === 'true') {
+                    message.error('You cannot join the meeting because the interview has been cancelled');
+                  } else {
+                    window.open(record.joinUrl);
+                  }
+                }}
+              >
                 Join
               </Button>
             )}
