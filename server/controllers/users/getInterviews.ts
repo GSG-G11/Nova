@@ -8,13 +8,16 @@ import Interviewee from '../../database/Models/Interviewee';
 const getData = async (role: string, userId: string, status: string, page: string) => {
   const pageLimitMin = (Number(page) - 1) * 3;
   let dataBaseInterview;
+  let roleFromDb:string;
 
   switch (role) {
     case 'interviewer':
       dataBaseInterview = Interviewer;
+      roleFromDb = 'intervieweeId';
       break;
     case 'interviewee':
       dataBaseInterview = Interviewee;
+      roleFromDb = 'interviewerId';
       break;
     default:
       throw new CustomError('Invalid role!', 401);
@@ -36,7 +39,26 @@ const getData = async (role: string, userId: string, status: string, page: strin
     },
   ];
 
-  const interviews = await dataBaseInterview.aggregate(condition).skip(pageLimitMin).limit(3);
+  let interviews = await dataBaseInterview.aggregate(condition).skip(pageLimitMin).limit(3);
+
+  const name = interviews.map(({ interviews: interview }) => User.aggregate([
+    {
+      $match: {
+        _id: new ObjectId(interview[roleFromDb]),
+      },
+    },
+    {
+      $project: {
+        name: 1,
+      },
+    },
+  ]));
+
+  const names = await Promise.all(name);
+  interviews = interviews.map((interview, index) => ({
+    ...interview,
+    name: names[index][0].name,
+  }));
 
   if (page === '1') {
     const interviewsCount = await dataBaseInterview.aggregate(condition);
