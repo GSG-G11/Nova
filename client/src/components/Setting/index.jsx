@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import propTypes from 'prop-types';
 import './style.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setImage } from '../../redux/features/auth/authSlice';
 
 const SettingTab = ({ user }) => {
