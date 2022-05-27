@@ -16,6 +16,7 @@ import getInterviewers from './users/getInterviewers';
 import logout from './authentication/logout';
 import acceptInterviewer from './admin/acceptInterviewer';
 import getUsersAdmin from './admin/getUsersAdmin';
+import createInterview from './interview/createInterview';
 
 export {
   signup,
@@ -36,4 +37,5 @@ export {
   logout,
   acceptInterviewer,
   getUsersAdmin,
+  createInterview,
 };
