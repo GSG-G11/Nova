@@ -71,7 +71,10 @@ const createInterview = async (req: RequestType, res: Response) => {
     throw new CustomError('Something went wrong', 500);
   }
 
+  // generate a random mongo id
+  const interviewId = new ObjectId();
   const interview = {
+    _id: interviewId,
     interviewerId,
     date,
     time,
@@ -86,6 +89,7 @@ const createInterview = async (req: RequestType, res: Response) => {
   };
 
   const interviewerInterview = {
+    _id: interviewId,
     intervieweeId: id,
     date,
     time,
@@ -110,17 +114,17 @@ const createInterview = async (req: RequestType, res: Response) => {
       },
     }),
     //   // Update interviewee interviews
-    Interviewee.findOneAndUpdate({
-      where: {
-        userId: new ObjectId(id),
+    Interviewee.findOneAndUpdate(
+      { userId: id },
+      {
+        $push: {
+          interviews: interview,
+        },
       },
-    }, {
-      $push: {
-        interviews: interview,
+      {
+        new: true,
       },
-    }, {
-      new: true,
-    }),
+    ),
     //   // Update interviewer interviews
     Interviewer.findOneAndUpdate({ userId: interviewerId }, {
       $push: {

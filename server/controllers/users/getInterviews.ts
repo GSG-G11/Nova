@@ -39,7 +39,8 @@ const getData = async (role: string, userId: string, status: string, page: strin
     },
   ];
 
-  let interviews = await dataBaseInterview.aggregate(condition).skip(pageLimitMin).limit(3);
+  let interviews = await dataBaseInterview.aggregate(condition).sort({ 'interviews.createdAt': -1 })
+    .skip(pageLimitMin).limit(3);
 
   const name = interviews.map(({ interviews: interview }) => User.aggregate([
     {
@@ -88,6 +89,7 @@ const getInterviews = async (req: RequestType, res: Response) => {
   if (!interviews.length) {
     throw new CustomError('No interviews found', 404);
   }
+
   res.json({
     data: interviews,
     count,

@@ -20,13 +20,15 @@
 .top-challenges .top-challenges__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    padding-left: 3.2rem;
     gap: 2.4rem;
 }
 .top-challenges .top-challenges__card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 28rem;
+    width: 90%;
     background-color: white;
     height: 14rem;
     border-radius: 10px;

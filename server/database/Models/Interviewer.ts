@@ -24,6 +24,10 @@ const interviewer = new Schema({
   interviews: {
     type: [
       {
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
         intervieweeId: {
           $ref: 'Interviewee',
           type: String,
