@@ -1,35 +1,57 @@
 import {
-  Layout, Menu, Avatar, Dropdown,
+  Layout, Menu, Avatar, Dropdown, message,
 } from 'antd';
 import {
   LogoutOutlined, UserOutlined,
 } from '@ant-design/icons';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import './style.css';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo-removebg-preview.png';
 import { LoginButton, SignupButton } from '../Forms';
 import { clearUser } from '../../redux/features/auth/authSlice';
 
 const { Header } = Layout;
 const { Item } = Menu;
-const Navbar = () => {
+const Navbar = ({ profilePicture }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logout = async () => {
     await axios.post('/api/logout');
     dispatch(clearUser());
+    message.success('Logged out successfully');
     navigate('/');
   };
+
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('.head');
+    header.classList.toggle('sticky', window.scrollY > 0);
+  });
+
+  let role;
+  if (user) {
+    role = user.role;
+  }
+  let path;
+
+  if (role === 'admin') {
+    path = '/admin';
+  } else if (role === 'interviewer' || role === 'interviewee') {
+    path = `/users/${user.id}`;
+  } else {
+    path = '/';
+  }
+
   const menu = (
     <Menu
       items={[
         {
           label: (
-            <Link to={user ? (`/users/${user.id}`) : '/'}>
+            <Link to={path}>
               <Item className="profile">
                 <UserOutlined className="icon" />
                 Profile
@@ -39,10 +61,9 @@ const Navbar = () => {
         },
         {
           label: (
-
             <Item
               onClick={() => logout()}
-              className="logout"
+              className="profile"
             >
               <LogoutOutlined className="icon" />
               Logout
@@ -67,18 +88,18 @@ const Navbar = () => {
               defaultSelectedKeys={['1']}
             >
               <div className="allBtn">
-                <Item className="btn" ant-click-animating-without-extra-node="false">
+                <Link to="/" className="btn" ant-click-animating-without-extra-node="false">
                   Home
-                </Item>
-                <Item className="btn">
+                </Link>
+                <Link to="/#team" className="btn">
                   Team
-                </Item>
-                <Item className="btn">
-                  Challenge
-                </Item>
-                <Item className="btn">
-                  About
-                </Item>
+                </Link>
+                <Link to="/#challenge" className="btn">
+                  Challenges
+                </Link>
+                <Link to="/#resources" className="btn">
+                  Resources
+                </Link>
               </div>
             </Menu>
           </div>
@@ -87,11 +108,11 @@ const Navbar = () => {
             {!user ? (
               <div>
                 <SignupButton />
-                <LoginButton />
+                <LoginButton title="Login" />
               </div>
             ) : (
               <Dropdown className="drop" overlay={menu} trigger={['click']} placement="bottom">
-                <Avatar src={user.profilePicture} />
+                <Avatar src={profilePicture} size="large" style={{ width: '45px', height: '45px' }} />
               </Dropdown>
             )}
           </div>
@@ -99,6 +120,10 @@ const Navbar = () => {
       </Header>
     </Layout>
   );
+};
+
+Navbar.propTypes = {
+  profilePicture: PropTypes.string.isRequired,
 };
 
 export default Navbar;

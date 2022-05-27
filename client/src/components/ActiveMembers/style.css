@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 3% 0;
 }
 
 .active-members__members {
@@ -54,7 +55,7 @@
 }
 
 .active-members__member-name {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: #2F2C4A;
 }

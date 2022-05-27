@@ -5,12 +5,9 @@
 
 .dashboard__header {
     display: flex;
-    margin-top: 1.2rem;
-    color: white;
     align-items: center;
-    font-weight: 500;
+    justify-content: center;
 }
-
 .dashboard__header .dashboard__title {
     font-size: 0.75rem;
     color: #efefef;
@@ -38,4 +35,17 @@
 .site-layout {
     margin-left: 200,
 
+}
+
+.tableAdmin {
+    margin-left: 12rem;
+    min-height: 100vh;
+}
+
+.rejectAdmin {
+    color: red !important;
+    font-weight: 500 !important;
+}
+img.dashboard__img {
+    width: 112px;
 }

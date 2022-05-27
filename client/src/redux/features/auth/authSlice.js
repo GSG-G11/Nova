@@ -7,7 +7,7 @@ export const checkUser = createAsyncThunk('auth/checkUser', async () => authServ
 const initialState = {
   isAuthenticated: false,
   user: null,
-  loading: false,
+  loading: true,
 };
 
 // Create the authSlice, which will contain the reducer and the actions
@@ -23,6 +23,12 @@ const authSlice = createSlice({
     clearUser: (state) => {
       state.isAuthenticated = false;
       state.user = null;
+    },
+    setImage: (state, action) => {
+      state.user = {
+        ...state.user,
+        profilePicture: action.payload,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -42,5 +48,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser } = authSlice.actions;
+export const { setUser, clearUser, setImage } = authSlice.actions;
 export default authSlice.reducer;

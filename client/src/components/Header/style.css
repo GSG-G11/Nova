@@ -1,11 +1,9 @@
-.headerContent{
-  background: linear-gradient(to right bottom, #ffffff, #faf5ff, #f7edff, #f3e0ff, #ebcbfe);
-}
 
 .novaCommunity{
   background-color: #ece7f1;
   color: #432773;
-  width: 9rem;
+  font-weight: 300;
+  width: 11rem;
   height: 2.5rem;
   border-radius: 10px;
   display: flex;
@@ -30,15 +28,15 @@
 .pDescribe{
   width: 23rem  !important;
   color: #656464 !important;; 
-  font-size: .8rem !important;
-  font-weight: 500 !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
 }
 
 .btnAboutOurTeam, .btnStartPracticing, .btnBookInterview{
   margin-top: 1rem;
-  width: 9rem;
+  width: 12rem;
   height: 3rem;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .btnStartPracticing, .btnBookInterview{
@@ -47,31 +45,72 @@
   border: none;
   margin-right: 1rem;
 }
-.btnAboutOurTeam{
-  background-color: #f7edff;
-  color: #432773;
-  border: 1px solid #432773;
+
+.btnAboutOurTeam  {
+  background: none !important;
+  border: 1px solid #432773 !important;
+  color: #070558 !important;
 }
 
 .btnStartPracticing:hover , .btnBookInterview:hover{
   background-color: rgb(111, 45, 177);
 }
 
-.btnAboutOurTeam:hover{
-  background-color: #e4cafa;
-  border: 1px solid #432773;
-  color: #432773;
+
+.btnStartPracticing:active, .btnStartPracticing:focus, .btnBookInterview:active, .btnBookInterview:focus{
+  background-color: #432773;
+  color: #ece7f1;
 }
 
 .allSec{
+  margin-top: 3%;
   display: flex;  
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .rightSec{
   margin-top: 7rem;
+  -webkit-animation: slide-in-fwd-center 2.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-fwd-center 2.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+.btnAboutOurTeam:focus, .btnStartPracticing:focus, .btnBookInterview:focus {
+  background-color: #432773 !important;
+  color: #ece7f1;
 }
 
 .headerImg{
   height: 30rem;
+}
+.rightSec h2.ant-typography {
+  margin-bottom: 0.5em;
+  color: rgba(0,0,0,.85);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.35;
+  color: #070558;
 }

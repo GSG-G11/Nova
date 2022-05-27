@@ -37,6 +37,33 @@ const interviewee = new Schema({
           enum: ['Technical', 'Analytical', 'Algorithms', 'System Design'],
           required: true,
         },
+        meeting: {
+          type: {
+            join_url: {
+              type: String,
+              required: true,
+            },
+            password: {
+              type: String,
+              required: true,
+            },
+            meetingId: {
+              type: String,
+              required: true,
+            },
+          },
+          required: true,
+          default: {
+            join_url: '',
+            password: '',
+            meetingId: '',
+          },
+        },
+        is_cancelled: {
+          type: Boolean,
+          default: false,
+          required: true,
+        },
         review: {
           type: {
             message: {
@@ -62,6 +89,7 @@ const interviewee = new Schema({
         },
       },
     ],
+
     required: false,
   },
 

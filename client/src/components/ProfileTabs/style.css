@@ -4,8 +4,9 @@
     box-sizing: border-box;
 }
 
-.Tab__header {
+.profile-tabs-holder .Tab__header {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -13,7 +14,21 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 5%;
+    margin-top: 10%;
+    min-height: 50vh;
 }
-.ant-tabs {
-    width: 70%;
+.profile-tabs-holder .ant-tabs {
+    width: 85%;
+    padding: 0 2%;
+    border: 1px solid #f1f1f1;
+    max-height: 100%;
+}
+.profile-tabs-holder .ant-tabs>.ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs>div>.ant-tabs-nav .ant-tabs-nav-wrap {
+    padding: 5px 0;
+}
+.profile-tabs-holder .ant-tabs-tab-btn, .profile-tabs-holder .ant-tabs-tab-remove {
+    color: #2e135e;
+    font-weight: 600;
+    font-size: 15px;
 }

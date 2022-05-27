@@ -1,6 +1,8 @@
 .HowNovaWork{
   background-color: rgb(255, 255, 255);
   min-height: 280px;
+  padding-top: 2.4rem;
+  position: relative;
 }
 
 .titleForHowNovaPractice{
@@ -10,12 +12,35 @@
   text-align: center;
 }
 
-.getPaired{
+.getPaired-img {
   width: 18rem;
   height: 18rem;
   border-radius: 20px;
+  overflow: hidden;
+}
+.getPaired{
+  width: 18rem;
+  height: 18rem;
+  filter: brightness(0.9);
+  transition: all 1.2s ease-in-out;
+}
+.howWork-holder img.svgImgSec {
+  width: 148px;
+  position: absolute;
+  right: 45px;
+  bottom: -44px;
+}
+.howWork-holder img.svgImg {
+  width: 136px;
+  position: absolute;
+  top: 265px;
+  left: 41px;
 }
 
+.getPaired:hover {
+  transform: scale(1.1) rotate(8deg);
+  filter: brightness(1);
+}
 .getPairedDivText{
   display: flex;
   flex-direction: column;
@@ -23,13 +48,13 @@
   align-items: center;
 }
 
-.new1{
+.howWork-holder .new1{
   width: 4rem;
   border: #ffaf2f solid;
   margin: 0 !important;
 }
 
-.titleHrDiv{
+.howWork-holder .titleHrDiv{
   display: flex;
   align-items: center;
   justify-content: start;
@@ -38,19 +63,28 @@
   width: 20rem;
 }
 
-.titleForAll{
+.howWork-holder .titleForAll{
   margin: 0% !important;
   color: #2f2c4a !important;
   margin-left: 1rem !important;
+  font-size: 18px;
 }
 
-.desc{
+.howWork-holder .desc {
   margin: 1rem !important;
-  color: #656464 !important;
+  color: #443f4b !important;
+  font-size: 15px;
+  width: 100%;
+  font-weight: 400;
 }
 
-.allImg{
+.howWork-holder .allImg{
 display: flex !important;   
-justify-content: space-around !important;
+justify-content: space-evenly !important;
 margin-top: 3rem;
+}
+.howWork-holder .howWork-holder {
+  width: 100%;
+  margin-top: 7%;
+  margin-bottom: 5%;
 }

@@ -1,86 +1,102 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './style.css';
+import propTypes from 'prop-types';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import {
-  Button, Image, message, Skeleton, Typography,
+  Button,
+  Image, Result, Skeleton, Typography,
 } from 'antd';
 import Navbar from '../Navbar';
+import CreateInterviewButton from '../common/CreateInterviewButton';
+import circle from '../../assets/images/parpelsvg.png';
 
 const { Text, Title } = Typography;
-const UserInfo = () => {
+
+const UserInfo = ({
+  user, loading, error, success,
+}) => {
+  const {
+    name, bio, level, cv, profilePicture: userImg,
+  } = user;
+  const navigate = useNavigate();
   const { id } = useParams();
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
   const { user: loggedInUser } = useSelector((state) => state.auth);
 
   const loggedInUserId = loggedInUser?.id;
   const loggedInUserRole = loggedInUser?.role;
-
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    try {
-      const getUserData = async () => {
-        setLoading(true);
-        const { data: { data } } = await axios.get(`/api/user/info/${id}`, {
-          cancelToken: source.token,
-        });
-        setUser(data);
-        setLoading(false);
-      };
-      getUserData();
-    } catch ({ response: { data: { message: msg } } }) {
-      message.error(msg);
-    }
-
-    return () => {
-      source.cancel();
-    };
-  }, [id]);
-
-  const {
-    name, bio, profilePicture, level, cv,
-  } = user;
+  const profilePicture = loggedInUser?.profilePicture;
 
   return (
-    <div className="user__info-section">
-      <Navbar />
-      {loading ? (
-        <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
-      ) : (
-        <>
-          <div className="user__primary">
-            <div className="user__image-container">
-              <Image src={profilePicture} alt="profile" />
+    <>
+      <Navbar profilePicture={profilePicture} />
+      <div className="user__info-section">
+        {loading ? (
+          <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
+        ) : success && (
+          <>
+            <div className="user__primary">
+              <img
+                className="active-members__circle"
+                alt="circle"
+                src={circle}
+              />
+              <div className="user__image-container">
+                <Image src={userImg} alt="profile" />
+              </div>
+              <div className="user__primary-info">
+                <Title level={2} className="user__name">{name}</Title>
+                <Text className="user__level">{level}</Text>
+                {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
+                <CreateInterviewButton title="Start a Practice Interview" />
+                )}
+              </div>
             </div>
-            <div className="user__primary-info">
-              <Title level={2} className="user__name">{name}</Title>
-              <Text className="user__level">{level}</Text>
-              {loggedInUserRole === 'interviewee' && loggedInUserId === id && (
-              <Button type="primary" className="user__start-interview">
-                Start a Practice Interview
-              </Button>
-              )}
+            <div className="user__secondary-info">
+              <Title level={4} className="user__about">About me</Title>
+              <hr />
+              <Text className="user__about-description">
+                {bio}
+              </Text>
+              <h4 className="user__cv">
+                My resume
+              </h4>
+              <hr />
+              <p>
+                <a href={cv} download target="_blank" className="cv-a" rel="noreferrer">Link to resume</a>
+              </p>
             </div>
-          </div>
-
-          <div className="user__secondary-info">
-            <Title level={4} className="user__about">About me</Title>
-            <Text className="user__about-description">
-              {bio}
-            </Text>
-            <p className="user__cv">
-              Link to CV:
-              {' '}
-              <a href={cv} download target="_blank" rel="noreferrer">{cv}</a>
-            </p>
-
-          </div>
-        </>
+          </>
+        )}
+      </div>
+      {error && (
+      <Result
+        status="404"
+        title="404"
+        subTitle="Sorry, the user you are looking for does not exist."
+        extra={(
+          <Button onClick={() => navigate('/')} type="primary">
+            Back to Home
+          </Button>
+        )}
+      />
       )}
-    </div>
+
+    </>
 
   );
+};
+
+UserInfo.propTypes = {
+  loading: propTypes.bool.isRequired,
+  error: propTypes.bool.isRequired,
+  success: propTypes.bool.isRequired,
+  user: propTypes.shape({
+    name: propTypes.string.isRequired,
+    bio: propTypes.string.isRequired,
+    profilePicture: propTypes.string.isRequired,
+    level: propTypes.string.isRequired,
+    cv: propTypes.string.isRequired,
+  }).isRequired,
 };
 export default UserInfo;

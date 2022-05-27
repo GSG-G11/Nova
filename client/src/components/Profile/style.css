@@ -1,0 +1,8 @@
+.profile-header {
+    background: linear-gradient(311.76deg, #E6BFFE -15.24%, #FFFFFF 78.85%);
+    height: 45vh;
+    margin-bottom: 20%;
+}
+.ant-layout{
+    background: none !important;
+}

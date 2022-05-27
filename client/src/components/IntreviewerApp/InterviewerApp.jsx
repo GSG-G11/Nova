@@ -18,6 +18,7 @@ const InterviewerApp = ({ setIsModalVisible }) => {
   const [languages, setLanguages] = useState([]);
   const [cv, setCVLink] = useState('');
   const [level, setLevel] = useState('');
+  const [loading, setLoading] = useState(false);
   const steps = [
     {
       title: '',
@@ -48,6 +49,7 @@ const InterviewerApp = ({ setIsModalVisible }) => {
   ];
   const joinUs = async () => {
     if (fullName && email && password && confirm && specialization && languages && cv && level) {
+      setLoading(true);
       try {
         const { data: { message: verifyMessage } } = await axios.post('/api/signup', {
           name: fullName,
@@ -61,9 +63,11 @@ const InterviewerApp = ({ setIsModalVisible }) => {
           level,
         });
         message.success(`Welcome ${fullName}, ${verifyMessage}`);
+        setLoading(false);
         setIsModalVisible(false);
       } catch ({ response: { data: { message: msg } } }) {
         message.error(msg);
+        setLoading(false);
       }
     } else {
       message.error('Please fill all fields');
@@ -100,8 +104,8 @@ const InterviewerApp = ({ setIsModalVisible }) => {
           }}
           autoComplete="off"
         >
-
           {steps[current].content}
+          {/* {loading ? (<LoadingSpinner />) : ()} */}
         </Form>
       </div>
       <div className="steps-action">
@@ -111,7 +115,7 @@ const InterviewerApp = ({ setIsModalVisible }) => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" htmlType="submit" onClick={() => joinUs()}>
+          <Button type="primary" loading={loading} htmlType="submit" onClick={() => joinUs()}>
             Done
           </Button>
         )}

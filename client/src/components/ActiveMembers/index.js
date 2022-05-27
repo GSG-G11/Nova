@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { message, Skeleton } from 'antd';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import SectionIntro from '../common/SectionIntro';
 import './style.css';
 import Member from './Member';
@@ -8,6 +9,7 @@ import Member from './Member';
 const ActiveMembers = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     const getMembers = async () => {
@@ -29,8 +31,23 @@ const ActiveMembers = () => {
       cancelToken.cancel();
     };
   }, []);
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        element.scrollIntoView();
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, [location]);
   return (
-    <section className="active-members">
+    <section className="active-members" id="team">
       <SectionIntro
         action="Valuable Team"
         title="Our professionals Active Members"

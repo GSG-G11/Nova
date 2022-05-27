@@ -1,19 +1,80 @@
 {
     "schedule": [
         {
-            "language": "JAVA",
+            "language": "JAVASCRIPT",
             "specialization": "BACKEND",
             "available": [
                 {
                     "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-04-28",
+                    "date": "2022-08-28",
                     "time": [
                         13, 14, 15, 16, 17, 18
                     ]
                 },
                 {
                     "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-04-29",
+                    "date": "2022-08-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+           
+            ]
+        },
+        {
+            "language": "PHP",
+            "specialization": "BACKEND",
+            "available": [
+                {
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-08-28",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "627c92140d0c3622573195cb",
+                    "date": "2022-08-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "PYTHON",
+            "specialization": "BACKEND",
+            "available": [
+                {
+                    "interviewerId": "627c92140d0c3622573195ce",
+                    "date": "2022-07-28",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "627c92140d0c3622573195ce",
+                    "date": "2022-07-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "RUBY",
+            "specialization": "BACKEND",
+            "available": [
+                {
+                    "interviewerId": "627c92140d0c3622573195ce",
+                    "date": "2022-07-28",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "627c92140d0c3622573195ce",
+                    "date": "2022-07-29",
                     "time": [
                         13, 14, 15, 16, 17, 18
                     ]
@@ -25,15 +86,75 @@
             "specialization": "FRONTEND",
             "available": [
                 {
-                    "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-04-28",
+                    "interviewerId": "a27c92140d0c3622573195ce",
+                    "date": "2022-06-28",
                     "time": [
                         13, 14, 15, 16, 17, 18
                     ]
                 },
                 {
-                    "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-04-29",
+                    "interviewerId": "a27c92140d0c3622573195ce",
+                    "date": "2022-06-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "PYTHON",
+            "specialization": "FRONTEND",
+            "available": [
+                {
+                    "interviewerId": "a27c92140d0c3622573195ce",
+                    "date": "2022-06-28",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "a27c92140d0c3622573195ce",
+                    "date": "2022-06-29",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "JAVA",
+            "specialization": "FULL STACK",
+            "available": [
+                {
+                    "interviewerId": "b27c92140d0c3622573195ce",
+                    "date": "2022-06-18",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "b27c92140d0c3622573195ce",
+                    "date": "2022-06-19",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "GO",
+            "specialization": "FULL STACK",
+            "available": [
+                {
+                    "interviewerId": "b27c92140d0c3622573195ce",
+                    "date": "2022-06-18",
+                    "time": [
+                        13, 14, 15, 16, 17, 18
+                    ]
+                },
+                {
+                    "interviewerId": "b27c92140d0c3622573195ce",
+                    "date": "2022-06-19",
                     "time": [
                         13, 14, 15, 16, 17, 18
                     ]

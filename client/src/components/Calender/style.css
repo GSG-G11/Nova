@@ -1,0 +1,103 @@
+.calender-tab .ant-picker {
+    width: 90%;
+}
+html {
+    scroll-behavior: smooth;
+}
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #250858;
+    border-radius: 50px;
+}
+.datepickerForm{
+    display: flex;
+    align-items: center;
+}
+.calender-tab .dateTimeCalender-holder .dates-sec,.datepickerForm label {
+    color: #0A093D;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+}
+.calender-tab .ant-badge-status-text {
+    font-weight: 500;
+}
+.datepickerForm label{
+    margin-bottom: 5% !important;
+}
+.calender-tab .dateTimeCalender-holder {
+    margin-top: 3%;
+}
+.calender-tab .ant-row.ant-form-item {
+    width: 60%;
+}
+.calender-tab .btn-save-holder{
+    display: flex;
+    margin-top: 2%;
+}
+.calender-tab .btn-save-holder .ant-btn-primary{
+    padding: 2px 26px;
+    height: 33px;
+    color: #fff;
+    border-color: #1890ff;
+    background: #1890ff;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+.calender-tab .events {
+    display: flex;
+}
+.calender-tab .ant-tag {
+    padding: 5px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.ant-picker-cell-disabled {
+    pointer-events: none;
+    font-size: 17px;
+}
+/* .ant-picker-cell-disabled:nth-child(even) {
+    border-top: 2px solid #1890ff;
+    background-color: #2196f31c;
+    color: #2196f3;
+}
+.ant-picker-cell-disabled:nth-child(odd) {
+    border-top: 2px solid #be18ff;
+    background-color: #c844fc1f;
+    color: #be18ff;
+
+} */
+.events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .events .ant-badge-status {
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notes-month {
+    font-size: 28px;
+    text-align: center;
+  }
+  .notes-month section {
+    font-size: 28px;
+  }
+  .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content {
+    height: 51px;
+  }
+  /* .calenders-holder {
+    width: 68%;
+  } */
+  .dateTimeCalender-holder{
+      display: flex;
+      flex-direction: column;
+  }

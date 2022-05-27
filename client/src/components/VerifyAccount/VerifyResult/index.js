@@ -2,13 +2,17 @@ import React from 'react';
 import { Typography, Result, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { LoginButton } from '../../Forms';
+import LoadingSpinner from '../../common/LoadingSpinner';
 
 const { Title, Text } = Typography;
 
 const VerifyResult = ({ verified }) => {
   const navigate = useNavigate();
-
+  if (verified) {
+    setTimeout(() => {
+      navigate('/');
+    }, 3000);
+  }
   return verified ? (
     <Result
       status="success"
@@ -24,7 +28,10 @@ const VerifyResult = ({ verified }) => {
           <Text>
             You can now login
           </Text>
-          <LoginButton />
+          <LoadingSpinner />
+          <Text>
+            You are being redirected to the home page...
+          </Text>
         </div>
       )}
     />

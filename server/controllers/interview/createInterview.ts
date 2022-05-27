@@ -7,6 +7,7 @@ import {
 } from '../../utils';
 import Schedule from '../../database/Models/Schedule';
 import Interviewer from '../../database/Models/Interviewer';
+import createMeeting from '../../zoom/createMeeting';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -63,6 +64,12 @@ const createInterview = async (req: RequestType, res: Response) => {
   const newScheduleTimes = freeTime.filter((_: any, i: any) => i !== indexOfScheduleFreeTime);
 
   // // update the schedule for the interviewer
+  // eslint-disable-next-line prefer-const
+  let { join_url: finalUrl, password, meetingId } = await createMeeting();
+  finalUrl += '?role=1';
+  if (!finalUrl || !password || !meetingId) {
+    throw new CustomError('Something went wrong', 500);
+  }
 
   const interview = {
     interviewerId,
@@ -71,6 +78,11 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
+    meeting: {
+      join_url: finalUrl,
+      password,
+      meetingId,
+    },
   };
 
   const interviewerInterview = {
@@ -80,6 +92,11 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
+    meeting: {
+      join_url: finalUrl,
+      password,
+      meetingId,
+    },
   };
 
   await Promise.all([
@@ -105,7 +122,7 @@ const createInterview = async (req: RequestType, res: Response) => {
       new: true,
     }),
     //   // Update interviewer interviews
-    Interviewer.findByIdAndUpdate(interviewerId, {
+    Interviewer.findOneAndUpdate({ userId: interviewerId }, {
       $push: {
         interviews: interviewerInterview,
       },
@@ -130,6 +147,8 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
+        finalUrl,
+        password,
         intervieweeEmail,
       ),
     ),
@@ -143,6 +162,8 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
+        finalUrl,
+        password,
       ),
     ),
 

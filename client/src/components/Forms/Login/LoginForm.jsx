@@ -1,13 +1,16 @@
+/* eslint-disable import/no-cycle */
 import React, { useState } from 'react';
 import {
   Form, Input, Button,
-  message,
+  message, notification,
 } from 'antd';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import '../style.css';
 import PropTypes from 'prop-types';
 import { setUser } from '../../../redux/features/auth/authSlice';
+import SignupButton from '../signup/SignupButton';
 
 const LoginForm = ({ handleOk }) => {
   const [email, setEmail] = useState('');
@@ -28,6 +31,14 @@ const LoginForm = ({ handleOk }) => {
       const { data: { data: { user } } } = await axios.post('/api/login', { email, password });
       dispatch(setUser(user));
       handleOk();
+      notification.open({
+        message: 'Welcome back',
+        description:
+          'You can start your interview now with the best interviewers',
+        icon: (
+          <CheckCircleTwoTone twoToneColor="#52c41a" />
+        ),
+      });
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
@@ -96,7 +107,7 @@ const LoginForm = ({ handleOk }) => {
       <Item>
         <div className="have-account">
           Don`t have an account?
-          <a href="/api/signup">Sign up</a>
+          <SignupButton className="btn-link" loginForm={() => handleOk()} />
         </div>
       </Item>
     </Form>
