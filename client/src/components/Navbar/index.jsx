@@ -6,11 +6,11 @@ import {
 } from '@ant-design/icons';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import './style.css';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo-removebg-preview.png';
 import { LoginButton, SignupButton } from '../Forms';
 import { clearUser } from '../../redux/features/auth/authSlice';
 
@@ -26,6 +26,11 @@ const Navbar = ({ profilePicture }) => {
     message.success('Logged out successfully');
     navigate('/');
   };
+
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('.head');
+    header.classList.toggle('sticky', window.scrollY > 0);
+  });
 
   let role;
   if (user) {
@@ -56,10 +61,9 @@ const Navbar = ({ profilePicture }) => {
         },
         {
           label: (
-
             <Item
               onClick={() => logout()}
-              className="logout"
+              className="profile"
             >
               <LogoutOutlined className="icon" />
               Logout

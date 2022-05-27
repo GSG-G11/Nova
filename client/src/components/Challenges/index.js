@@ -10,7 +10,7 @@ const challengesArray = [
   {
     id: 1,
     title: 'Sorted Lists',
-    name: 'You are given the heads of two sorted linked lists list1 and list2. Merge the two lists in a one sorted list.',
+    name: 'You are given the heads of two sorted linked lists. Merge the two lists in a one sorted list.',
     tag: 'easy',
     link: 'https://leetcode.com/problems/merge-two-sorted-lists/',
   },
@@ -24,7 +24,7 @@ const challengesArray = [
   {
     id: 3,
     title: 'Longest Valid Parentheses',
-    name: 'Given a string containing just the characters \'(\' and \')\', find the length of the longest valid parentheses substring.',
+    name: 'Given a string containing just the characters, find the length of the longest parentheses.',
     tag: 'hard',
     link: 'https://leetcode.com/problems/longest-valid-parentheses/',
   },

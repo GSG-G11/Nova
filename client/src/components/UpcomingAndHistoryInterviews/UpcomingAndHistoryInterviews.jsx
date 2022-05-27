@@ -50,7 +50,6 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
     const fetchData = async () => {
       try {
         const { data: { data, count } } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`, { cancelToken: source.token });
-        console.log(data);
         if (page === 1) {
           setPageNumber(count);
         }
@@ -119,7 +118,6 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
                 type="primary"
                 key={record.key}
                 onClick={() => {
-                  console.log(record);
                   const readyDate = new Date(record.date.split('/').reverse().join('-')).valueOf();
                   const today = new Date().valueOf();
                   if ((readyDate

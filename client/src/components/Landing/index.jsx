@@ -16,15 +16,17 @@ const Landing = () => {
   const profilePicture = user?.profilePicture;
   return (
     <>
-      <Navbar profilePicture={profilePicture} />
-      <Header />
-      <Resources />
+      <div className="header-nav-holder">
+        <Navbar profilePicture={profilePicture} />
+        <Header />
+      </div>
       <HowNovaWork />
-      <Partner />
       <ActiveMembers />
-      <IntreviewerApp />
-      <Challenges />
       <ClientReviews />
+      <Resources />
+      <Partner />
+      <Challenges />
+      <IntreviewerApp />
       <Footer />
     </>
   );

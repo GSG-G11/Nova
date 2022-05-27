@@ -1,5 +1,8 @@
 import React from 'react';
 import { Tabs } from 'antd';
+import {
+  SettingOutlined, CommentOutlined, CalendarOutlined, ProfileOutlined, HistoryOutlined,
+} from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReviewCard from '../Review';
@@ -7,7 +10,7 @@ import SettingTab from '../Setting';
 import './style.css';
 import CalenderTab from '../Calender';
 import UpcomingAndHistoryInterviews from '../UpcomingAndHistoryInterviews/UpcomingAndHistoryInterviews';
-
+// <HistoryOutlined />
 const { TabPane } = Tabs;
 
 const ProfileTabs = ({ user: userInfo }) => {
@@ -17,23 +20,66 @@ const ProfileTabs = ({ user: userInfo }) => {
     role && (
     <div className="profile-tabs-holder">
       <Tabs defaultActiveKey="1" className="Tabs__section" centered>
-        <TabPane tab="Upcoming interviews" key="1" defaultActiveKey className="Tab__header">
+        <TabPane
+          key="1"
+          defaultActiveKey
+          className="Tab__header"
+          tab={(
+            <span>
+              <ProfileOutlined />
+              Upcoming interviews
+            </span>
+      )}
+        >
           <UpcomingAndHistoryInterviews status="upcoming" />
         </TabPane>
-        <TabPane tab="Interviews history" key="2" className="Tab__header">
+        <TabPane
+          key="2"
+          className="Tab__header"
+          tab={(
+            <span>
+              <HistoryOutlined />
+              Interviews history
+            </span>
+      )}
+        >
           <UpcomingAndHistoryInterviews status="history" />
         </TabPane>
         {role === 'interviewee' ? (
-          <TabPane tab="Reviews" key="3">
+          <TabPane
+            key="3"
+            tab={(
+              <span>
+                <CommentOutlined />
+                Reviews
+              </span>
+          )}
+          >
             <ReviewCard />
           </TabPane>
 
         ) : (
-          <TabPane tab="Schedule" key="3">
+          <TabPane
+            tab={(
+              <span>
+                <CalendarOutlined />
+                Schedule
+              </span>
+        )}
+            key="3"
+          >
             <CalenderTab />
           </TabPane>
         )}
-        <TabPane tab="Settings" key="4">
+        <TabPane
+          tab={(
+            <span>
+              <SettingOutlined />
+              Settings
+            </span>
+      )}
+          key="4"
+        >
           <SettingTab user={userInfo} />
         </TabPane>
       </Tabs>
