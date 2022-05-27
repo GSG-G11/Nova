@@ -41,7 +41,7 @@ const AdminTables = ({ pageLocation, roles }) => {
 
         return {
           ...item,
-          status: 'REJECTED',
+          status: state,
         };
       }));
     } catch ({ response: { data: { message: msg } } }) {
