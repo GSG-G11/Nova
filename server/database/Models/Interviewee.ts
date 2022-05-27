@@ -95,6 +95,7 @@ const interviewee = new Schema({
     ],
 
     required: false,
+    default: [],
   },
 
 });

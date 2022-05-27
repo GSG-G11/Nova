@@ -8,6 +8,7 @@ import {
 import User from '../../database/Models/User';
 import Interviewer from '../../database/Models/Interviewer';
 import verifyEmail from '../../utils/email/verifyEmail';
+import Interviewee from '../../database/Models/Interviewee';
 
 const signup = async (req: Request, res: Response) => {
   const {
@@ -60,8 +61,12 @@ const signup = async (req: Request, res: Response) => {
     });
   }
 
-  await User.create({
+  const createdUser = await User.create({
     email, password: hashedPassword, name, role,
+  });
+
+  await Interviewee.create({
+    userId: createdUser._id,
   });
   await mailSender(
     email,
