@@ -16,6 +16,9 @@
     "lint:client": "cd client && npm run lint",
     "build:db": "cross-env NODE_ENV=development npx ts-node ./server/database/build.ts"
   },
+  "engines": {
+    "node": "16.15.0"
+  },
   "pre-commit": [
     "lint",
     "lint-fix",
