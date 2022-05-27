@@ -18,7 +18,6 @@ const {
   Header, Content, Footer, Sider,
 } = Layout;
 
-// const { Title } = Typography;
 const items = [
   {
     key: '1',

@@ -11,19 +11,6 @@ const { Item } = Form;
 const CalenderTab = () => {
   const [availableDates, setAvailableDates] = useState([]);
 
-  // const colors = [
-  //   'purple',
-  //   'red',
-  //   'yellow',
-  //   'orange',
-  //   'cyan',
-  //   'pink',
-  //   'green',
-  //   'blue',
-  //   'geekblue',
-  //   'magenta',
-  //   'lime',
-  // ];
   useEffect(() => {
     const source = axios.CancelToken.source();
     const getAvailableDate = async () => {
