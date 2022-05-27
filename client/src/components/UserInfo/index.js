@@ -63,7 +63,7 @@ const UserInfo = ({
               </h4>
               <hr />
               <p>
-                <a href={cv} download target="_blank" className="cv-a" rel="noreferrer">Link to resume</a>
+                <a href={cv} target="_blank" className="cv-a" rel="noreferrer">Link to resume</a>
               </p>
             </div>
           </>
