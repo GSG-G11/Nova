@@ -2,6 +2,7 @@
     display: flex;
     justify-content: flex-end;
     padding-right: 2%;
+    margin-bottom: 3%;
 }
 .setting-tab .ant-col.ant-form-item-label label{
     font-size: 15px;

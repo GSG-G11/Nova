@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import {
-  DatePicker, Form, message, Calendar, Badge,
+  DatePicker, Form, message, Calendar, Tag,
 } from 'antd';
 import './style.css';
 
@@ -53,7 +53,7 @@ const CalenderTab = () => {
     availableDate.map((date) => {
       if (date === `${val.year()}-${dateFormat(`${val.month() + 1}`)}-${dateFormat(`${val.date()}`)}`) {
         const availableTime = availableDates.filter((item) => item.date.split('T')[0] === date).map((item) => item.time);
-        availableTime.forEach((h) => h.forEach((hour) => listData.push({ type: 'success', content: `${hour}:00` })));
+        availableTime.forEach((h) => h.forEach((hour) => listData.push({ content: `${hour}:00` })));
       }
       return listData;
     });
@@ -66,7 +66,10 @@ const CalenderTab = () => {
       <ul className="events">
         {listData.map((item) => (
           <li key={item.content}>
-            <Badge status={item.type} text={item.content} />
+            <Tag color="purple">
+              {' '}
+              {item.content}
+            </Tag>
           </li>
         ))}
       </ul>
@@ -90,7 +93,7 @@ const CalenderTab = () => {
         </Form>
       </div>
       <div className="dateTimeCalender-holder">
-        <h3 className="dates-sec">Your Available Dates</h3>
+        <h3 className="dates-sec">My Schedule</h3>
         <div className="calenders-holder">
           <Calendar
             dateCellRender={dateCellRender}
