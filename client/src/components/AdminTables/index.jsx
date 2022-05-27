@@ -134,7 +134,7 @@ const AdminTables = ({ pageLocation, roles }) => {
       dataSource={dataSource}
       className="table"
       loading={loading}
-      pagination={{
+      pagination = {{
         current: page,
         pageSize: 7,
         total: pageNumber,
@@ -215,7 +215,7 @@ const AdminTables = ({ pageLocation, roles }) => {
         key="cv"
         render={(text, { cv }) => (
           <a href={cv} target="_blank" rel="noreferrer">
-            {cv}
+            Cv link
           </a>
         )}
       />
