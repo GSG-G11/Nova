@@ -34,6 +34,9 @@ const AdminTables = ({ pageLocation, roles }) => {
   const acceptUser = async (id, state) => {
     try {
       await axios.patch(`/api/admin/approval/${id}`, { status: state });
+      if(state === 'APPROVED') {
+       return setDataSource((prev) => prev.filter((item) => item.key !== id));
+      }
       setDataSource((prev) => prev.map((item) => {
         if (item.key !== id) {
           return item;
@@ -134,7 +137,7 @@ const AdminTables = ({ pageLocation, roles }) => {
       dataSource={dataSource}
       className="table"
       loading={loading}
-      pagination = {{
+      pagination = {pageNumber > 7 && {
         current: page,
         pageSize: 7,
         total: pageNumber,

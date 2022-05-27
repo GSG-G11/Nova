@@ -85,7 +85,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
     <Table
       dataSource={dataSource}
       loading={loading}
-      pagination={{
+      pagination={pageNumber > 3 && {
         current: page,
         pageSize: 3,
         total: pageNumber,
