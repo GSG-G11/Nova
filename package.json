@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production npx tsc && node ./dist",
     "dev": "cross-env NODE_ENV=development nodemon ./server/index.ts",
     "test": "jest",
-    "heroku-postbuild": "cd client && yarn install && yarn run build && cd ../zoom && yarn install",
+    "heroku-postbuild": "cd client && yarn install && yarn run build",
     "lint": "eslint --ext .ts server/",
     "lint-fix": "eslint --ext .ts server/ --fix && cd client && npm run lint-fix",
     "lint:client": "cd client && npm run lint",
