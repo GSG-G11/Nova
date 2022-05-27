@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { ObjectId } from 'mongodb';
+import { ZoomMtg } from '@zoomus/websdk';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import {
@@ -65,11 +66,9 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   // // update the schedule for the interviewer
   // eslint-disable-next-line prefer-const
-  let { join_url: finalUrl, password, meetingId } = await createMeeting();
-  finalUrl += '?role=1';
-  if (!finalUrl || !password || !meetingId) {
-    throw new CustomError('Something went wrong', 500);
-  }
+  const resp = await createMeeting();
+
+  console.log(resp);
 
   const interview = {
     interviewerId,
@@ -78,11 +77,6 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
-    meeting: {
-      join_url: finalUrl,
-      password,
-      meetingId,
-    },
   };
 
   const interviewerInterview = {
@@ -92,11 +86,6 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
-    meeting: {
-      join_url: finalUrl,
-      password,
-      meetingId,
-    },
   };
 
   await Promise.all([
@@ -147,8 +136,8 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
-        finalUrl,
-        password,
+        'finalUrl',
+        'password',
         intervieweeEmail,
       ),
     ),
@@ -162,8 +151,8 @@ const createInterview = async (req: RequestType, res: Response) => {
         language,
         specialization,
         questionCategory,
-        finalUrl,
-        password,
+        'finalUrl',
+        'password',
       ),
     ),
 
