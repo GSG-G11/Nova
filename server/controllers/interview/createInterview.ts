@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ObjectId } from 'mongodb';
 import Interviewee from '../../database/Models/Interviewee';
 import User from '../../database/Models/User';
 import {
@@ -70,7 +71,10 @@ const createInterview = async (req: RequestType, res: Response) => {
     throw new CustomError('Something went wrong', 500);
   }
 
+  // generate a random mongo id
+  const interviewId = new ObjectId();
   const interview = {
+    _id: interviewId,
     interviewerId,
     date,
     time,
@@ -85,6 +89,7 @@ const createInterview = async (req: RequestType, res: Response) => {
   };
 
   const interviewerInterview = {
+    _id: interviewId,
     intervieweeId: id,
     date,
     time,
