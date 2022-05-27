@@ -19,7 +19,6 @@ const UserInfo = ({
   const {
     name, bio, level, cv, profilePicture: userImg,
   } = user;
-  console.log(user);
   const navigate = useNavigate();
   const { id } = useParams();
   const { user: loggedInUser } = useSelector((state) => state.auth);

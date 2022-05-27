@@ -13,7 +13,6 @@ const SettingTab = ({ user }) => {
   const { TextArea } = Input;
   const { Group } = Radio;
   const dispatch = useDispatch();
-  const { user: loggedInUser } = useSelector((state) => state.auth);
   const [image, setImgLink] = useState('');
   const [cv, setCVLink] = useState('');
   const [bio, setBio] = useState('');
@@ -34,9 +33,7 @@ const SettingTab = ({ user }) => {
       const { data: { message: successMsg } } = await axios.patch('/api/user', {
         image, cv, bio, level,
       });
-      console.log(loggedInUser);
       dispatch(setImage(image));
-      console.log(loggedInUser);
       message.success(successMsg);
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);
