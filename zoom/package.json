@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=development && set BABEL_ENV=development && node corp.js --corp"
+    "start": "NODE_ENV=production && node corp.js --corp"
   },
   "keywords": [
     "zoom",
