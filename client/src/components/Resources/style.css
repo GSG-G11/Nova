@@ -7,8 +7,9 @@
 .resources {
     display: flex;
     flex-direction: column;
-background: linear-gradient(0deg, rgba(253, 241, 253, 0) 1.63%, #FBF1FD 20.5%, #F8F4FF 58.57%, #FFFFFF 100%);
-padding: 1.2rem 0;
+    background: linear-gradient(0deg, rgba(253, 241, 253, 0) 1.63%, #FBF1FD 20.5%, #F8F4FF 58.57%, #FFFFFF 100%);
+    padding: 3.2rem 0;
+    margin: 2% 0;
 }
 
 .resources__cards {
@@ -36,7 +37,7 @@ padding: 1.2rem 0;
 }
 
 .resources__resource-card:hover {
-box-shadow: 0px 10px 22px -2px rgba(109, 171, 255, 0.36);
+box-shadow: 0px 10px 22px -2px rgb(160 146 178 / 68%);
 
 }
 
@@ -53,7 +54,7 @@ box-shadow: 0px 10px 22px -2px rgba(109, 171, 255, 0.36);
 }
 
 .resources__resource-title {
-    font-size: 1.8rem;
+    font-size: 18px;
     color: #2F2C4A;
     font-weight: 500;
 }

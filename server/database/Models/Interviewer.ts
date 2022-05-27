@@ -24,6 +24,10 @@ const interviewer = new Schema({
   interviews: {
     type: [
       {
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
         intervieweeId: {
           $ref: 'Interviewee',
           type: String,
@@ -49,7 +53,7 @@ const interviewer = new Schema({
         },
         meeting: {
           type: {
-            joinUrl: {
+            join_url: {
               type: String,
               required: true,
             },
@@ -64,7 +68,7 @@ const interviewer = new Schema({
           },
           required: true,
           default: {
-            joinUrl: '',
+            join_url: '',
             password: '',
             meetingId: '',
           },

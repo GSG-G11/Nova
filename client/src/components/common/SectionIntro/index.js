@@ -3,18 +3,13 @@ import { Typography } from 'antd';
 import './style.css';
 import PropTypes from 'prop-types';
 
-const { Text } = Typography;
+const { Title } = Typography;
 const SectionIntro = ({ action, title, description }) => (
   <div className="section-intro">
-    <Text className="section-intro__action">
-      {action}
-    </Text>
-    <Text className="section-intro__title">
-      {title}
-    </Text>
-    <Text className="section-intro__description">
-      {description}
-    </Text>
+    <Title level={4} className="section-intro__action">{action}</Title>
+    <Title level={2} className="section-intro__title">{title}</Title>
+    <Title level={5} className="section-intro__description">{description}</Title>
+
   </div>
 );
 

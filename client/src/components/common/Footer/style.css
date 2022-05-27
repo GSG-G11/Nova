@@ -44,6 +44,9 @@
     gap: 1.2rem;
     font-size: 1.4rem;
     margin-top: 1.2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .footer__icon {
