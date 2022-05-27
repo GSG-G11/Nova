@@ -9,7 +9,7 @@ declare const process: {
 const { JWT_SECRET } = process.env;
 
 const verifyToken = (token: string) => new Promise((resolve, reject) => {
-  verify(token, JWT_SECRET, (err, decode) => {
+  verify(token, JWT_SECRET, (err: any, decode: any) => {
     if (err) {
       reject(err);
     } else {
