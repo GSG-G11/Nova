@@ -23,6 +23,9 @@ html {
     font-weight: 600;
     font-size: 18px;
 }
+.calender-tab .ant-badge-status-text {
+    font-weight: 500;
+}
 .datepickerForm label{
     margin-bottom: 5% !important;
 }
@@ -45,6 +48,9 @@ html {
     text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
     box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
 }
+.calender-tab .events {
+    display: flex;
+}
 .calender-tab .ant-tag {
     padding: 5px 14px;
     font-size: 14px;
@@ -55,7 +61,7 @@ html {
     pointer-events: none;
     font-size: 17px;
 }
-.ant-picker-cell-disabled:nth-child(even) {
+/* .ant-picker-cell-disabled:nth-child(even) {
     border-top: 2px solid #1890ff;
     background-color: #2196f31c;
     color: #2196f3;
@@ -65,7 +71,7 @@ html {
     background-color: #c844fc1f;
     color: #be18ff;
 
-}
+} */
 .events {
     margin: 0;
     padding: 0;

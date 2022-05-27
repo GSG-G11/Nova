@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import ProfileTabs from '../ProfileTabs';
 import UserInfo from '../UserInfo';
 import Footer from '../common/Footer';
+import './style.css';
 
 const Profile = () => {
   const { id } = useParams();
@@ -36,7 +37,9 @@ const Profile = () => {
 
   return (
     <section className="profile-container">
-      <UserInfo user={user} loading={loading} />
+      <div className="profile-header">
+        <UserInfo user={user} loading={loading} />
+      </div>
       { loggedInUserId === id && <ProfileTabs user={user} /> }
       <Footer />
     </section>

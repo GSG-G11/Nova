@@ -3,11 +3,13 @@ import './style.css';
 import propTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { EditOutlined } from '@ant-design/icons';
 import {
   Image, Skeleton, Typography,
 } from 'antd';
 import Navbar from '../Navbar';
 import CreateInterviewButton from '../common/CreateInterviewButton';
+import circle from '../../assets/images/parpelsvg.png';
 
 const { Text, Title } = Typography;
 
@@ -30,6 +32,11 @@ const UserInfo = ({ user, loading }) => {
         ) : (
           <>
             <div className="user__primary">
+              <img
+                className="active-members__circle"
+                alt="circle"
+                src={circle}
+              />
               <div className="user__image-container">
                 <Image src={profilePicture} alt="profile" />
               </div>
@@ -41,18 +48,22 @@ const UserInfo = ({ user, loading }) => {
                 )}
               </div>
             </div>
-
             <div className="user__secondary-info">
+              <div className="edit-info">
+                <EditOutlined />
+              </div>
               <Title level={4} className="user__about">About me</Title>
+              <hr />
               <Text className="user__about-description">
                 {bio}
               </Text>
-              <p className="user__cv">
-                Link to CV:
-                {' '}
-                <a href={cv} download target="_blank" rel="noreferrer">{cv}</a>
+              <h4 className="user__cv">
+                My resume
+              </h4>
+              <hr />
+              <p>
+                <a href={cv} download target="_blank" className="cv-a" rel="noreferrer">{cv}</a>
               </p>
-
             </div>
           </>
         )}

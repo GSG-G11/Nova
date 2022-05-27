@@ -28,12 +28,12 @@
     color: #432773;
 }
 .ant-typography.section-intro__description{
-    margin-top: 2% !important;
+    margin-top: 1% !important;
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
     text-align: center;
     color: #656464;
-    width: 50%;
+    width: 48%;
     min-width: 27%;                                                             
 }

@@ -16,7 +16,19 @@
     justify-content: center;
     margin-bottom: 5%;
     margin-top: 3rem;
+    min-height: 50vh;
 }
 .profile-tabs-holder .ant-tabs {
-    width:100%;
+    width: 75%;
+    padding: 0 2%;
+    border: 1px solid #f1f1f1;
+    max-height: 100%;
+}
+.profile-tabs-holder .ant-tabs>.ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs>div>.ant-tabs-nav .ant-tabs-nav-wrap {
+    padding: 5px 0;
+}
+.profile-tabs-holder .ant-tabs-tab-btn, .profile-tabs-holder .ant-tabs-tab-remove {
+    color: #2e135e;
+    font-weight: 600;
+    font-size: 15px;
 }

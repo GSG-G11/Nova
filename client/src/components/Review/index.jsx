@@ -78,7 +78,7 @@ const ReviewCard = () => {
           data: { message: msg },
         },
       }) {
-        message.error(msg);
+        message.warning(msg);
       }
     };
     getReviews();

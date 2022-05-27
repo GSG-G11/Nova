@@ -19,12 +19,12 @@ const Landing = () => (
       <Header />
     </div>
     <HowNovaWork />
+    <ActiveMembers />
+    <ClientReviews />
     <Resources />
     <Partner />
-    <IntreviewerApp />
-    <ActiveMembers />
     <Challenges />
-    <ClientReviews />
+    <IntreviewerApp />
     <Footer />
   </>
 );

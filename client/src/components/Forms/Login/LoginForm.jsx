@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import {
   Form, Input, Button,
-  message,
+  message, notification,
 } from 'antd';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import '../style.css';
@@ -30,6 +31,14 @@ const LoginForm = ({ handleOk }) => {
       const { data: { data: { user } } } = await axios.post('/api/login', { email, password });
       dispatch(setUser(user));
       handleOk();
+      notification.open({
+        message: 'Welcome back',
+        description:
+          'You can start your interview now with the best interviewers',
+        icon: (
+          <CheckCircleTwoTone twoToneColor="#52c41a" />
+        ),
+      });
       // when all pages done link to home page
     } catch ({ response: { data: { message: msg } } }) {
       message.error(msg);

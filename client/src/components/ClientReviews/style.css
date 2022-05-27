@@ -1,5 +1,6 @@
 .ClientReviews {
-    margin: 4% 0;
+    margin-top: 6%;
+    margin-bottom: 4%;
 }
 .ClientReviews .heading {
     display: flex;
