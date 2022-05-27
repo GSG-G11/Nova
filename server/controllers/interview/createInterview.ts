@@ -71,7 +71,6 @@ const createInterview = async (req: RequestType, res: Response) => {
     throw new CustomError('Something went wrong', 500);
   }
 
-  // console.log('from createinterview', finalUrl);
   const interview = {
     interviewerId,
     date,
@@ -93,6 +92,11 @@ const createInterview = async (req: RequestType, res: Response) => {
     language,
     specialization,
     questionCategory,
+    meeting: {
+      join_url: finalUrl,
+      password,
+      meetingId,
+    },
   };
 
   await Promise.all([
@@ -118,7 +122,7 @@ const createInterview = async (req: RequestType, res: Response) => {
       new: true,
     }),
     //   // Update interviewer interviews
-    Interviewer.findByIdAndUpdate(interviewerId, {
+    Interviewer.findOneAndUpdate({ userId: interviewerId }, {
       $push: {
         interviews: interviewerInterview,
       },

@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
 import propTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { EditOutlined } from '@ant-design/icons';
 import {
-  Image, Skeleton, Typography,
+  Button,
+  Image, Result, Skeleton, Typography,
 } from 'antd';
 import Navbar from '../Navbar';
 import CreateInterviewButton from '../common/CreateInterviewButton';
@@ -13,23 +13,28 @@ import circle from '../../assets/images/parpelsvg.png';
 
 const { Text, Title } = Typography;
 
-const UserInfo = ({ user, loading }) => {
+const UserInfo = ({
+  user, loading, error, success,
+}) => {
   const {
-    name, bio, profilePicture, level, cv,
+    name, bio, level, cv, profilePicture: userImg,
   } = user;
+  console.log(user);
+  const navigate = useNavigate();
   const { id } = useParams();
   const { user: loggedInUser } = useSelector((state) => state.auth);
 
   const loggedInUserId = loggedInUser?.id;
   const loggedInUserRole = loggedInUser?.role;
+  const profilePicture = loggedInUser?.profilePicture;
 
   return (
     <>
-      <Navbar />
+      <Navbar profilePicture={profilePicture} />
       <div className="user__info-section">
         {loading ? (
           <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
-        ) : (
+        ) : success && (
           <>
             <div className="user__primary">
               <img
@@ -38,7 +43,7 @@ const UserInfo = ({ user, loading }) => {
                 src={circle}
               />
               <div className="user__image-container">
-                <Image src={profilePicture} alt="profile" />
+                <Image src={userImg} alt="profile" />
               </div>
               <div className="user__primary-info">
                 <Title level={2} className="user__name">{name}</Title>
@@ -49,9 +54,6 @@ const UserInfo = ({ user, loading }) => {
               </div>
             </div>
             <div className="user__secondary-info">
-              <div className="edit-info">
-                <EditOutlined />
-              </div>
               <Title level={4} className="user__about">About me</Title>
               <hr />
               <Text className="user__about-description">
@@ -68,6 +70,19 @@ const UserInfo = ({ user, loading }) => {
           </>
         )}
       </div>
+      {error && (
+      <Result
+        status="404"
+        title="404"
+        subTitle="Sorry, the user you are looking for does not exist."
+        extra={(
+          <Button onClick={() => navigate('/')} type="primary">
+            Back to Home
+          </Button>
+        )}
+      />
+      )}
+
     </>
 
   );
@@ -75,6 +90,8 @@ const UserInfo = ({ user, loading }) => {
 
 UserInfo.propTypes = {
   loading: propTypes.bool.isRequired,
+  error: propTypes.bool.isRequired,
+  success: propTypes.bool.isRequired,
   user: propTypes.shape({
     name: propTypes.string.isRequired,
     bio: propTypes.string.isRequired,

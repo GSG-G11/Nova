@@ -80,7 +80,7 @@
 
 .howWork-holder .allImg{
 display: flex !important;   
-justify-content: space-around !important;
+justify-content: space-evenly !important;
 margin-top: 3rem;
 }
 .howWork-holder .howWork-holder {

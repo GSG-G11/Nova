@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Header from '../Header';
 import Resources from '../Resources';
 import HowNovaWork from '../HowNovaWork';
@@ -10,23 +11,25 @@ import Challenges from '../Challenges';
 import Navbar from '../Navbar';
 import Footer from '../common/Footer';
 
-import './style.css';
-
-const Landing = () => (
-  <>
-    <div className="header-nav-holder">
-      <Navbar />
-      <Header />
-    </div>
-    <HowNovaWork />
-    <ActiveMembers />
-    <ClientReviews />
-    <Resources />
-    <Partner />
-    <Challenges />
-    <IntreviewerApp />
-    <Footer />
-  </>
-);
+const Landing = () => {
+  const user = useSelector((state) => state.auth.user);
+  const profilePicture = user?.profilePicture;
+  return (
+    <>
+      <div className="header-nav-holder">
+        <Navbar profilePicture={profilePicture} />
+        <Header />
+      </div>
+      <HowNovaWork />
+      <ActiveMembers />
+      <ClientReviews />
+      <Resources />
+      <Partner />
+      <Challenges />
+      <IntreviewerApp />
+      <Footer />
+    </>
+  );
+};
 
 export default Landing;

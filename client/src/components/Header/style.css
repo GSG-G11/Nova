@@ -36,9 +36,8 @@
   margin-top: 1rem;
   width: 12rem;
   height: 3rem;
-  border-radius: 10px;
+  border-radius: 5px;
 }
-
 
 .btnStartPracticing, .btnBookInterview{
   background-color: #432773;
@@ -52,11 +51,7 @@
   border: 1px solid #432773 !important;
   color: #070558 !important;
 }
-/* .btnAboutOurTeam :hover,.btnAboutOurTeam :active {
-  background-color: #432773 !important;
-  border: 1px solid #432773 !important;
-  color: #fff !important;
-} */
+
 .btnStartPracticing:hover , .btnBookInterview:hover{
   background-color: rgb(111, 45, 177);
 }
@@ -68,6 +63,7 @@
 }
 
 .allSec{
+  margin-top: 3%;
   display: flex;  
   justify-content: space-evenly;
 }

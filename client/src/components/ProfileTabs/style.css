@@ -15,11 +15,11 @@
     display: flex;
     justify-content: center;
     margin-bottom: 5%;
-    margin-top: 3rem;
+    margin-top: 10%;
     min-height: 50vh;
 }
 .profile-tabs-holder .ant-tabs {
-    width: 75%;
+    width: 85%;
     padding: 0 2%;
     border: 1px solid #f1f1f1;
     max-height: 100%;

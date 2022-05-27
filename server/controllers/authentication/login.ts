@@ -26,7 +26,7 @@ const login = async (req: Request, res: Response) => {
   } = user;
 
   if (!isVerified) {
-    throw new CustomError('Please Verify your email', 401);
+    throw new CustomError('Please Verify your email to access our services', 401);
   }
 
   const payload: JwtPayload = {

@@ -79,7 +79,9 @@ const AdminDashboard = () => {
       >
         <div className="logo" />
         <Header className="dashboard__header">
-          <img src={whiteLogo} className="dashboard__img" alt="dashboard-logo" />
+          <a href="/">
+            <img src={whiteLogo} className="dashboard__img" alt="dashboard-logo" />
+          </a>
         </Header>
         <Menu
           theme="dark"

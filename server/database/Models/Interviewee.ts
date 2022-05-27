@@ -39,7 +39,7 @@ const interviewee = new Schema({
         },
         meeting: {
           type: {
-            joinUrl: {
+            join_url: {
               type: String,
               required: true,
             },
@@ -54,7 +54,7 @@ const interviewee = new Schema({
           },
           required: true,
           default: {
-            joinUrl: '',
+            join_url: '',
             password: '',
             meetingId: '',
           },

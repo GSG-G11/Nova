@@ -7,7 +7,7 @@
 .user__info-section {
     width: 100%;
     padding: 0 8%;
-    margin-top: 3.2rem;
+    margin-top: 8%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,8 +17,6 @@
 .user__primary img.active-members__circle {
     max-width: 100%;
     width: 15rem;
-    /* position: absolute;
-    top: 22px; */
 }
 .user__primary .ant-image {
     position: relative;
