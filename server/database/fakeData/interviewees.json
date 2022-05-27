@@ -142,46 +142,6 @@
            "userId": "627c92140d0c3622573195cf",
               "interviews": [
                 {
-<<<<<<< HEAD
-                    "_id": "628cff93bae18606667a236f",
-                    "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-04-10T14:30:21.892Z",
-                    "time": 12,
-                    "language": "JAVASCRIPT",
-                    "specialization": "FRONTEND",
-                    "questionCategory": "Technical",
-                    "review": {
-                        "message": "Very Nice",
-                        "saved": true,
-                        "_id": "628cff93bae18606667a2370"
-                    }
-                },
-                {
-                    "_id": "628cfd8394c45e75c236f235",
-                    "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-04-10T14:30:21.892Z",
-                    "time": 12,
-                    "language": "JAVASCRIPT",
-                    "specialization": "FRONTEND",
-                    "questionCategory": "Technical",
-                    "review": {
-                        "message": "Great!!",
-                        "saved": true,
-                        "_id": "628cfd8394c45e75c236f236"
-
-                    }
-                },
-                {
-                    "interviewerId": "627c92140d0c3622573195cb",
-                    "date": "2022-06-10T14:30:21.892Z",
-                    "time": 1,
-                    "language": "PHP",
-                    "specialization": "BACKEND",
-                    "questionCategory": "Algorithms",
-                    "review": {
-                        "message": "",
-                        "saved": false
-=======
                      "_id": "627d1d11f5243856362e8a8d",
                      "interviewerId": "627c92140d0c3622573195cb",
                      "date": "2022-08-28",
@@ -198,7 +158,6 @@
                         "meetingId": "88456369303",
                         "password": "YuD4cK",
                         "join_url":"http://localhost:9998/?88456369303?pwd=c0xwcWJRTU9iVmphcFlvNENNWFJpZz09?role=1"
->>>>>>> d7415f1534d7cc5b9c646f20004882dde8c4cf93
                     }
                 }
               ]
