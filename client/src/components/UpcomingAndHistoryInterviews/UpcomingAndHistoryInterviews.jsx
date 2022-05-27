@@ -50,6 +50,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
     const fetchData = async () => {
       try {
         const { data: { data, count } } = await axios.get(`/api/users/interview?status=${status}&&page=${page}`, { cancelToken: source.token });
+        console.log(data);
         if (page === 1) {
           setPageNumber(count);
         }
@@ -57,7 +58,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
         setDataSource(data.map(({
           interviews: {
             _id, questionCategory, language, specialization, date,
-            is_cancelled: isCancelled, time, meeting: { joinUrl },
+            is_cancelled: isCancelled, time, meeting: { join_url: finalUrl },
           }, name,
         }) => ({
           key: _id,
@@ -68,7 +69,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
           date: (`${new Date(date).getDate()}/${(new Date(date).getMonth() + 1)}/${new Date(date).getFullYear()}`),
           is_cancelled: String(isCancelled),
           time: `${`${time}:00`}-${time + 1}:00`,
-          joinUrl,
+          finalUrl,
         })));
         setLoading(false);
       } catch ({ response: { data: { message: msg } } }) {
@@ -118,6 +119,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
                 type="primary"
                 key={record.key}
                 onClick={() => {
+                  console.log(record);
                   const readyDate = new Date(record.date.split('/').reverse().join('-')).valueOf();
                   const today = new Date().valueOf();
                   if ((readyDate
@@ -128,7 +130,7 @@ const UpcomingAndHistoryInterviews = ({ status }) => {
                   if (record.is_cancelled === 'true') {
                     message.error('You cannot join the meeting because the interview has been cancelled');
                   } else {
-                    window.open(record.joinUrl);
+                    window.open(record.finalUrl);
                   }
                 }}
               >
