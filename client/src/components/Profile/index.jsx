@@ -27,6 +27,7 @@ const Profile = () => {
         setUser(data);
         setSuccess(true);
         setLoading(false);
+        setError(false);
       } catch (err) {
         setLoading(false);
         setError(true);
