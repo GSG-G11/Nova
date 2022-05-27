@@ -7,7 +7,7 @@ import {
 } from '../../utils';
 import Schedule from '../../database/Models/Schedule';
 import Interviewer from '../../database/Models/Interviewer';
-// import createMeeting from '../../zoom/createMeeting';
+import createMeeting from '../../zoom/createMeeting';
 
 const createInterview = async (req: RequestType, res: Response) => {
   const id = req.userInfo?.id;
@@ -16,7 +16,6 @@ const createInterview = async (req: RequestType, res: Response) => {
     interviewerId, date, language, specialization, questionCategory, time,
   } : any = await interviewValidation(req.body);
 
-  console.log(interviewerId);
   // Get the interviewee and interviewer emails
   const [{ email: intervieweeEmail },
     { email: interviewerEmail },
@@ -51,8 +50,6 @@ const createInterview = async (req: RequestType, res: Response) => {
 
       ])]);
 
-  console.log(interviewersSchedule);
-
   if (interviewersSchedule.length === 0) {
     throw new CustomError('Interviewer is not available on this date', 400);
   }
@@ -68,13 +65,12 @@ const createInterview = async (req: RequestType, res: Response) => {
 
   // // update the schedule for the interviewer
   // eslint-disable-next-line prefer-const
-  // let { join_url: finalUrl, password, meetingId } = await createMeeting();
-  const finalUrl = '?role=1';
-  // if (!finalUrl || !password || !meetingId) {
-  //   throw new CustomError('Something went wrong', 500);
-  // }
+  let { join_url: finalUrl, password, meetingId } = await createMeeting();
+  finalUrl += '?role=1';
+  if (!finalUrl || !password || !meetingId) {
+    throw new CustomError('Something went wrong', 500);
+  }
 
-  // console.log('from createinterview', finalUrl);
   const interview = {
     interviewerId,
     date,
@@ -84,8 +80,8 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
     meeting: {
       join_url: finalUrl,
-      // password,
-      // meetingId,
+      password,
+      meetingId,
     },
   };
 
@@ -98,8 +94,8 @@ const createInterview = async (req: RequestType, res: Response) => {
     questionCategory,
     meeting: {
       join_url: finalUrl,
-      // password,
-      // meetingId,
+      password,
+      meetingId,
     },
   };
 
@@ -126,7 +122,7 @@ const createInterview = async (req: RequestType, res: Response) => {
       new: true,
     }),
     //   // Update interviewer interviews
-    Interviewer.findByIdAndUpdate(interviewerId, {
+    Interviewer.findOneAndUpdate({ userId: interviewerId }, {
       $push: {
         interviews: interviewerInterview,
       },
@@ -152,7 +148,7 @@ const createInterview = async (req: RequestType, res: Response) => {
         specialization,
         questionCategory,
         finalUrl,
-        '123',
+        password,
         intervieweeEmail,
       ),
     ),
@@ -167,21 +163,12 @@ const createInterview = async (req: RequestType, res: Response) => {
         specialization,
         questionCategory,
         finalUrl,
-        '123',
+        password,
       ),
     ),
 
   ]);
 
-  const a = await Interviewer.findByIdAndUpdate(interviewerId, {
-    $push: {
-      interviews: interviewerInterview,
-    },
-  }, {
-    new: true,
-  });
-
-  console.log('a', a);
   // Return the interviewee interview
   res.status(201).json({
     message: 'Interview created successfully',
