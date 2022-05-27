@@ -1,57 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './style.css';
+import propTypes from 'prop-types';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import {
-  Image, message, Skeleton, Typography,
+  Button,
+  Image, Result, Skeleton, Typography,
 } from 'antd';
 import Navbar from '../Navbar';
 import CreateInterviewButton from '../common/CreateInterviewButton';
-import ProfileTabs from '../ProfileTabs';
 
 const { Text, Title } = Typography;
-const UserInfo = () => {
+
+const UserInfo = ({
+  user, loading, error, success,
+}) => {
+  const {
+    name, bio, level, cv,
+  } = user;
+  const navigate = useNavigate();
   const { id } = useParams();
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
   const { user: loggedInUser } = useSelector((state) => state.auth);
 
   const loggedInUserId = loggedInUser?.id;
   const loggedInUserRole = loggedInUser?.role;
-
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    try {
-      const getUserData = async () => {
-        setLoading(true);
-        const { data: { data } } = await axios.get(`/api/user/info/${id}`, {
-          cancelToken: source.token,
-        });
-        setUser(data);
-        setLoading(false);
-      };
-      getUserData();
-    } catch ({ response: { data: { message: msg } } }) {
-      message.error(msg);
-    }
-
-    return () => {
-      source.cancel();
-    };
-  }, [id]);
-
-  const {
-    name, bio, profilePicture, level, cv,
-  } = user;
+  const profilePicture = loggedInUser?.profilePicture;
 
   return (
     <>
-      <Navbar />
+      <Navbar profilePicture={profilePicture} />
       <div className="user__info-section">
         {loading ? (
           <Skeleton loading={loading} active avatar className="skeleton-userInfo" />
-        ) : (
+        ) : success && (
           <>
             <div className="user__primary">
               <div className="user__image-container">
@@ -78,15 +59,37 @@ const UserInfo = () => {
               </p>
 
             </div>
-
-            { loggedInUserId === id && (
-            <ProfileTabs />
-            )}
           </>
         )}
       </div>
+      {error && (
+      <Result
+        status="404"
+        title="404"
+        subTitle="Sorry, the user you are looking for does not exist."
+        extra={(
+          <Button onClick={() => navigate('/')} type="primary">
+            Back to Home
+          </Button>
+        )}
+      />
+      )}
+
     </>
 
   );
+};
+
+UserInfo.propTypes = {
+  loading: propTypes.bool.isRequired,
+  error: propTypes.bool.isRequired,
+  success: propTypes.bool.isRequired,
+  user: propTypes.shape({
+    name: propTypes.string.isRequired,
+    bio: propTypes.string.isRequired,
+    profilePicture: propTypes.string.isRequired,
+    level: propTypes.string.isRequired,
+    cv: propTypes.string.isRequired,
+  }).isRequired,
 };
 export default UserInfo;
