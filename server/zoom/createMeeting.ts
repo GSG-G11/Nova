@@ -39,11 +39,8 @@ const createMeeting = async () => {
 
   const { join_url: joinUrl, password, id } : any = response;
 
-  console.log(response);
-  const finalUrl = joinUrl.replaceAll('https://us05web.zoom.us/j/', 'http://localhost:9998/?');
-  console.log(finalUrl);
   const dataRes = {
-    join_url: finalUrl,
+    join_url: joinUrl,
     password,
     meetingId: id,
   };

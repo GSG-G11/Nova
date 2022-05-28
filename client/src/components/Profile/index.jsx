@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import ProfileTabs from '../ProfileTabs';
 import UserInfo from '../UserInfo';
 import Footer from '../common/Footer';
-import '../ProfileTabs/style.css';
+import './style.css';
 
 const Profile = () => {
   const { id } = useParams();
@@ -27,6 +27,7 @@ const Profile = () => {
         setUser(data);
         setSuccess(true);
         setLoading(false);
+        setError(false);
       } catch (err) {
         setLoading(false);
         setError(true);
@@ -40,13 +41,13 @@ const Profile = () => {
   }, [id]);
 
   return (
-    <>
-      <section className="profile-container">
+    <section className="profile-container">
+      <div className="profile-header">
         <UserInfo user={user} loading={loading} error={error} success={success} />
-        { loggedInUserId ? loggedInUserId === id && <ProfileTabs user={user} /> : null }
-      </section>
+      </div>
+      { loggedInUserId ? loggedInUserId === id && <ProfileTabs user={user} /> : null }
       <Footer />
-    </>
+    </section>
   );
 };
 

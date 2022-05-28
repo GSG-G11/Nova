@@ -1,7 +1,8 @@
 import React from 'react';
 import './style.css';
-import { Typography, Button } from 'antd';
+import { Typography } from 'antd';
 import ScreenImg from '../../assets/images/joinus.png';
+import JoinUsBtn from './JoinUsBtn';
 
 const { Title } = Typography;
 
@@ -9,10 +10,10 @@ const IntreviewerApp = () => (
 
   <div className="intreviewer-app">
     <div className="heading">
-      <Title level={4} className="main-title">Get Our Aplication</Title>
+      <Title level={4} className="main-title">Get Our Application</Title>
       <Title level={2} className="sub-title">You Can Easily Join Our Team…!</Title>
       <Title level={5} className="description-title">Help us on our quest to make good software even better.</Title>
-      <Button type="primary joinUs-btn">Join Us Now !</Button>
+      <JoinUsBtn />
     </div>
 
     <div className="intreviewer-content-item">

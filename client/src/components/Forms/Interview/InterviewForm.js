@@ -167,7 +167,26 @@ const InterviewForm = ({ visible, setVisible }) => {
       };
     } if (step === 4) {
       return {
-        submit: <Button type="primary" id="done" disabled={loading} onClick={() => setVisible(false)}> Done </Button>,
+        submit:
+  <Button
+    type="primary"
+    id="done"
+    disabled={loading}
+    onClick={() => {
+      setVisible(false);
+      setFormData({
+        step: 0,
+        specialization: '',
+        language: '',
+        questionCategory: '',
+        time: '',
+        date: '',
+        interviewerId: '',
+      });
+    }}
+  >
+    Done
+  </Button>,
         cancel: CancelPop,
       };
     }

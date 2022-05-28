@@ -34,10 +34,10 @@ const AdminTables = ({ pageLocation, roles }) => {
   const acceptUser = async (id, state) => {
     try {
       await axios.patch(`/api/admin/approval/${id}`, { status: state });
-      if(state === 'APPROVED') {
-       return setDataSource((prev) => prev.filter((item) => item.key !== id));
+      if (state === 'APPROVED') {
+        return setDataSource((prev) => prev.filter((item) => item.key !== id));
       }
-      setDataSource((prev) => prev.map((item) => {
+      return setDataSource((prev) => prev.map((item) => {
         if (item.key !== id) {
           return item;
         }
@@ -48,7 +48,7 @@ const AdminTables = ({ pageLocation, roles }) => {
         };
       }));
     } catch ({ response: { data: { message: msg } } }) {
-      message.error(msg);
+      return message.error(msg);
     }
   };
 
@@ -137,7 +137,11 @@ const AdminTables = ({ pageLocation, roles }) => {
       dataSource={dataSource}
       className="table"
       loading={loading}
+<<<<<<< HEAD
       pagination = {pageNumber > 7 && {
+=======
+      pagination={pageNumber > 7 && {
+>>>>>>> main
         current: page,
         pageSize: 7,
         total: pageNumber,

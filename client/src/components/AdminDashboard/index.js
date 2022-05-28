@@ -4,7 +4,7 @@ import {
   UserOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Typography } from 'antd';
+import { Layout, Menu } from 'antd';
 import React, { useState, createElement } from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
@@ -12,12 +12,12 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { clearUser } from '../../redux/features/auth/authSlice';
 import AdminTables from '../AdminTables';
+import whiteLogo from '../../assets/images/whiteLogo.png';
 
 const {
   Header, Content, Footer, Sider,
 } = Layout;
 
-const { Title } = Typography;
 const items = [
   {
     key: '1',
@@ -78,7 +78,9 @@ const AdminDashboard = () => {
       >
         <div className="logo" />
         <Header className="dashboard__header">
-          <Title level={4} className="dashboard__title">Admin Dashboard</Title>
+          <a href="/">
+            <img src={whiteLogo} className="dashboard__img" alt="dashboard-logo" />
+          </a>
         </Header>
         <Menu
           theme="dark"

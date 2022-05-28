@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 3% 0;
 }
 
 .active-members__members {
