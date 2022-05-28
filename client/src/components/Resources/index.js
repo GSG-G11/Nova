@@ -59,7 +59,7 @@ const Resources = () => {
       <SectionIntro
         action="We Provide"
         title="Resources"
-        description="Why Nova, what is it characterized by, and what does it offer you."
+        description="We've compiled a list of useful resources to help you ace your next interview!"
       />
       <div className="resources__cards">
         {resourcesArray.map(({

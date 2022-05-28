@@ -5,7 +5,6 @@ import updateReview from './users/updateSavedReview';
 import updateInfo from './users/updateInfo';
 import getInterviews from './users/getInterviews';
 import deleteInterview from './users/deleteInterview';
-import createInterview from './interview/createInterview';
 import getUserById from './users/getUserById';
 import getAllReviews from './users/getReviews';
 import signup from './authentication/signup';
@@ -17,6 +16,7 @@ import getInterviewers from './users/getInterviewers';
 import logout from './authentication/logout';
 import acceptInterviewer from './admin/acceptInterviewer';
 import getUsersAdmin from './admin/getUsersAdmin';
+import createInterview from './interview/createInterview';
 
 export {
   signup,
@@ -28,7 +28,6 @@ export {
   updateInfo,
   getInterviews,
   deleteInterview,
-  createInterview,
   getAllReviews,
   getUserById,
   getAvailableTime,
@@ -38,4 +37,5 @@ export {
   logout,
   acceptInterviewer,
   getUsersAdmin,
+  createInterview,
 };

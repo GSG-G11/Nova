@@ -137,11 +137,7 @@ const AdminTables = ({ pageLocation, roles }) => {
       dataSource={dataSource}
       className="table"
       loading={loading}
-<<<<<<< HEAD
-      pagination = {pageNumber > 7 && {
-=======
       pagination={pageNumber > 7 && {
->>>>>>> main
         current: page,
         pageSize: 7,
         total: pageNumber,

@@ -5,14 +5,19 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=production npx tsc && node ./dist",
+    "start": "NODE_ENV=production node ./dist/index.js",
     "dev": "cross-env NODE_ENV=development nodemon ./server/index.ts",
     "test": "jest",
-    "heroku-postbuild": "cd client && yarn install && yarn run build && cd ../zoom && yarn install",
+    "heroku-postbuild": "cd client && yarn install && yarn build && cd ../zoom && yarn install",
+    "tsc": "tsc",
+    "postinstall": "npm run tsc",
     "lint": "eslint --ext .ts server/",
     "lint-fix": "eslint --ext .ts server/ --fix && cd client && npm run lint-fix",
     "lint:client": "cd client && npm run lint",
     "build:db": "cross-env NODE_ENV=development npx ts-node ./server/database/build.ts"
+  },
+  "engines": {
+    "node": "16.15.0"
   },
   "pre-commit": [
     "lint",
