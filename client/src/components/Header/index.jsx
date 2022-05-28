@@ -24,8 +24,7 @@ const Header = () => {
             </div>
             <Title level={2} className="PracticeMakesPerfect">Practice Makes Perfect</Title>
             <Title level={5} className="pDescribe">
-              More than 2 billion people in over countries use Nova to
-              practice with professional interviewer.
+            Nova is used by over 2 million people in over 200 countries to practice interviewing with expert interviewers.
             </Title>
             {!user ? (
               <LoginButton title="Start Practicing" className="btnStartPracticing" />

@@ -218,7 +218,7 @@ const AdminTables = ({ pageLocation, roles }) => {
         key="cv"
         render={(text, { cv }) => (
           <a href={cv} target="_blank" rel="noreferrer">
-            {cv}
+            Cv link
           </a>
         )}
       />

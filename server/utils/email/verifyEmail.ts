@@ -333,7 +333,7 @@ const template = (
                           <td>
                             <p>Thank you for using <strong>Nova</strong> to help you find the right person for your interest.</p>
                             <p>${interviewerTemplate(name)}</p>
-                            ${accessToken ? `<p>Click the link <a href="http://localhost:3000/auth/verify?accessToken=${accessToken}">here</a> to verify your account</p>`
+                            ${accessToken ? `<p>Click the link <a href="https://nova-practicing.herokuapp.com/auth/verify?accessToken=${accessToken}">here</a> to verify your account</p>`
     : '<p>We will inform you when the admin see your application</p>'}
                             <p>If you have any questions, please contact us at <a href="mailto:nova.interviewe@gmail.com">Nova</a>
                             <p>Sincerely,</p>

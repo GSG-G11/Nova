@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
-  createInterview, getInterviewerAvailableTime,
-  createReview, getAvailableTime,
+  getInterviewerAvailableTime,
+  createReview, getAvailableTime, createInterview,
 } from '../controllers';
 import { userAuth, checkInterviewer } from '../middlewares/auth';
 

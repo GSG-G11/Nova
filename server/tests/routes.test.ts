@@ -86,25 +86,25 @@ describe('signup', () => {
       });
   });
 
-  // test('Signup with interviewer role', (done) => {
-  //   request(app).post('/api/signup').send({
-  //     name: 'Jack',
-  //     email: 'mahmoud@gmail.com',
-  //     password: 'Abed@123',
-  //     role: 'interviewer',
-  //     languages: ['JAVASCRIPT'],
-  //     specialization: 'FRONTEND',
-  //     cv: 'http://www.cv.com',
-  //     level: 'JUNIOR',
-  //   }).expect(201)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       expect(res.body.message).toBe('Account created successfully please wait for the email');
-  //       return done();
-  //     });
-  // });
+  test('Signup with interviewer role', (done) => {
+    request(app).post('/api/signup').send({
+      name: 'Jack',
+      email: 'mahmoud@gmail.com',
+      password: 'Abed@123',
+      role: 'interviewer',
+      languages: ['JAVASCRIPT'],
+      specialization: 'FRONTEND',
+      cv: 'http://www.cv.com',
+      level: 'JUNIOR',
+    }).expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please wait for the email');
+        return done();
+      });
+  });
   test('Signup with existing user', (done) => {
     request(app).post('/api/signup').send({
       name: 'Jack',
@@ -121,24 +121,23 @@ describe('signup', () => {
       });
   });
 
-  // test('Signup with non existent user', (done) => {
-  //   request(app)
-  //     .post('/api/signup')
-  //     .send({
-  //       name: 'Jack',
-  //       email: 'mahmoud@gmail.com',
-  //       password: 'Abed@123',
-  //       role: 'interviewee',
-  //     })
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       expect(res.body.message).toBe('Account created successfully please
-  // check your email to verify your account');
-  //       return done();
-  //     });
-  // });
+  test('Signup with non existent user', (done) => {
+    request(app)
+      .post('/api/signup')
+      .send({
+        name: 'Jack',
+        email: 'mahmoud@gmail.com',
+        password: 'Abed@123',
+        role: 'interviewee',
+      })
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Account created successfully please check your email to verify your account');
+        return done();
+      });
+  });
 
   test('Verify Email failed', (done) => {
     request(app).patch('/api/auth/verify').expect(401)
@@ -605,17 +604,17 @@ describe('Get Interview', () => {
       });
   });
 
-  // test('Should return Interviews found', (done) => {
-  //   request(app).get('/api/users/interview?status=history&&page=1')
-  // .set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
-  //     if (err) {
-  //       return done(err);
-  //     }
-  //     expect(res.status).toBe(200);
-  //     expect(res.body.message).toBe('Interviews fetched successfully!');
-  //     return done();
-  //   });
-  // });
+  test('Should return Interviews found', (done) => {
+    request(app).get('/api/users/interview?status=history&&page=1')
+      .set('Cookie', [`token=${process.env.TEST_TOKEN}`]).end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('Interviews fetched successfully!');
+        return done();
+      });
+  });
 
   test('Should return error no Interviews found', (done) => {
     request(app).get('/api/users/interview?status=upcoming&&page=1').set('Cookie', [`token=${process.env.NO_INTERVIEWS}`]).end((err, res) => {
@@ -932,20 +931,19 @@ describe('Create Review for a specific interview', () => {
         return done();
       });
   });
-  // test('Should create a review for the interview', (done) => {
-  //   request(app).post('/api/user/review/627d1d11f5
-  // 243856362e8a8c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
-  //     message: 'This is a review',
-  //   })
-  //     .expect(201)
-  //     .end((err, res) => {
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       expect(res.body.message).toBe('Review created successfully');
-  //       return done();
-  //     });
-  // });
+  test('Should create a review for the interview', (done) => {
+    request(app).post('/api/user/review/627d1d11f5243856362e7a7c').set('Cookie', [`token=${process.env.INTERVIEWER_TOKEN}`]).send({
+      message: 'This is a review',
+    })
+      .expect(201)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        expect(res.body.message).toBe('Review created successfully');
+        return done();
+      });
+  });
 });
 
 describe('Get users', () => {
