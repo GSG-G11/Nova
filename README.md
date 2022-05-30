@@ -36,6 +36,11 @@
 </table>
 
 ## 🔹User stories
+ > 🔸 As a guest
+ - As a guest, I want to be able to navigate and browse through the landing page. So I can see what Nova is all about.
+
+
+ > 🔸 As a user
 - As a user, I want to be able to sign up as an interviewee so that I can verify my email address and practice with the best interviewers.
 - As a user, I want to be able to sign up as an interviewer so I can help other interviewees.
 - As a user, I want to be able to verify my account from the email address so I can enjoy Nova services.
@@ -65,7 +70,7 @@
 
     <br>
 
-> 🔸 As a admin
+> 🔸 As an admin
 - As an admin, I want to be able to display all Nova users so I can see all the users.
 - As an admin, I want to be able to delete any interviewee so I can remove any fake interviewee.
 - As an admin, I want to be able to delete any interviewer so I can remove any interviewer not meeting the requirements.
@@ -77,6 +82,35 @@
     <br>
 
 ## 🔹User journey
+
+As a user.
+
+- By entering the website, the user can see the landing page. And will see the logo and the description of the website.
+- The user can also see the buttons sign up and login. When the user click the sign up button, a Modal will show up with sign up form. When the user click the login button, a Modal will show up with login form.
+- Sign up form will have a full name field, an email field, a password field, a confirm password field a submit button and a cancel button. When the user click the submit button, the user will be able to sign up as an interviewee based on the requirements of the form. When the user click the cancel button, the Modal will close.
+- After the user sign up, an email will be sent to the user's email address. The user will be able to verify the email address. When the user click the verify button, the user will be able to login.
+- Login form will have a email field, a password field, a submit button and a cancel button. When the user click the Login button, the user will be able to login based on the requirements of the form. When the user click the cancel button, the Modal will close.
+- After the user login, the user will be able to see the dashboard. The user can click the profile button to see the profile of the user. The user can click the logout button to logout.
+- by Clicking on the the profile tab, the user will be able to see the user information. There will be a Start a Practice interview button. 
+- When the user click the Start a Practice interview button, a Modal will show up with a multi steps form to create an interview.
+The user can click the Cancel button to close the Modal.
+- The first step of the multi steps form will be the specialization. The user can click the next button to go to the next step.
+- The second step of the multi steps form will be the language. The user can click the next button to go to the next step.
+- The third step of the multi steps form will be the questions category. The user can click the next button to go to the next step.
+- The fourth step of the multi steps form will be the available dates and hours for the specifications that were entered. The user can click the next button to go to the next step.
+- If no available dates and hours are found, a message will be shown and  the user will be able to click the back button to go to the previous step.
+- The fifth step of the multi steps form will be informing the user that the interview is created and he got matched with interviewer. The user can click the done button to close the Modal.
+
+- The user can see tabs that is about upcoming interviews, interview history, reviews and settings.
+- By clicking on the tabs respectivley The user can see the interviews that are upcoming, the past interviews, the reviews of the interviews and the settings. 
+- Upcoming interviews tab will show the details of the interviews that are upcoming. The user can click on join button, a new browser tab will redirect the user to zoom application to join the interview. or cancel button to cancel the interview.
+- Reviews tabs will have a filter button. When the user click the filter dropdown button, the user can see the filter options.
+The user can click the filter options to filter the reviews based on saved and unsaved reviews.
+- Settings tab will have an optional inputs including (image, link to cv and bio). The user can click the save button to save the optional inputs.
+
+
+
+
 After logging in to the site, the user can view the landing page, which contains the following sections: How Nova Works, Nova Team, Resources, About Nova, Joining The Nova Team, Nova Partners
 Then by clicking on his profile picture, he can access his profile, which displays his name, photo, resume, bio, specialization, and degree of experience in the field
 
