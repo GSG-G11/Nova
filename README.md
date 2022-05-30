@@ -116,6 +116,14 @@ The user can click the Cancel button to close the Modal.
 The user can click the filter options to filter the reviews based on saved and unsaved reviews.
 - Settings tab will have an optional inputs including (image, link to cv, level of experience and bio). The user can click the save button to save the optional inputs.
 
+### As a admin:
+- After the admin login, the admin can click the profile button to see the dashboard.
+- The admin can see tabs that is about interviewees, interviewers, interviewers applications, and logout.
+- Interviewees tab will show the details of the interviewees. The admin can click on the delete button to delete the interviewee.
+- Interviewers tab will show the details of the interviewers. The admin can click on the delete button to delete the interviewer.
+- Interviewers applications tab will show the details of the interviewers applications. The admin can click on the delete button to delete the interviewer application, the approve button to approve the interviewer application, and the reject button to reject the interviewer application.
+- Logout will logout the admin.
+
 
 <br>
 
