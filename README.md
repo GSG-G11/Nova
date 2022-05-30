@@ -144,6 +144,29 @@ The user can click the filter options to filter the reviews based on saved and u
 - Nodemailer
 
     <br>
+## 🔹Installation
+  1. clone Nova repo
+  ```
+    https://github.com/GSG-G11/Nova
+  ```
+  2. install npm packages in server folder
+  ```
+  npm i
+  ```
+  3. install npm packages in client folder
+  ```
+  cd client
+  npm i
+  ```
+  4. write env variables in .env file 
+  ```
+DEV_DATABASE_URL=mongodb://localhost:27017/nova
+TEST_DATABASE_URL=mongodb://localhost:27017/test-nova
+JWT_SECRET='<your secret key>'
+EMAIl='<your email>'
+EMAIL_PASSWORD='<your password>'
+  ```
+  <br>
 
 ## 🔹Contributors
 * [Abedalrahman Shamia](https://github.com/abedshamia)
