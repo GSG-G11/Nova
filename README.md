@@ -5,7 +5,7 @@
   </a>
 
   <p align="center">
-    Website to Help developers practice and pass technical interviews with the help of our professional interviewers.
+    Website to Help developers practice and pass interviews with the help of our professional interviewers.
   </p>
     <a href="https://nova-practicing.herokuapp.com/"> Demo</a>
     ·
@@ -30,56 +30,49 @@
 <tr>
 <td>
 
-**Nova**, a website that aims to helping interviewers to practice on interviews with the best and most skilled interviewers. Where the interviewer determines the specialization and languages he wants to train in, and then the site suggests to him the appropriate times with the available interviewers.
-
-On the other hand, it helps interviewees to practice how interviews work and how to evaluate interviewees and communicate with them.
-
+**Nova**, a website dedicated to assisting users in practicing interviews with the best and most experienced interviewers.
 </td>
 </tr>
 </table>
 
-## 🔹User story
-- I can sign up as a interviewee
-- I can join to interviewers team as a interviewer
-- I can verify my account from the email address
-- I can log in as a interviewee/interviewer
-- I can log in as an admin
-- I can browse landing page
-- I can logout
+## 🔹User stories
+- As a user, I want to be able to sign up as an interviewee so that I can verify my email address and practice with the best interviewers.
+- As a user, I want to be able to sign up as an interviewer so I can help other interviewees.
+- As a user, I want to be able to verify my account from the email address so I can enjoy Nova services.
+- As a verified user, I want to be able to log in as an interviewee/interviewer so I can access Nova system.
+- As a verified user, I want to be able to logout so I can login again.
+- As a verified user, I want to be able to display my profile so I can view my information.
+- As a verified user, I want to be able to modify my information so I can update my information.
+- As a verified user, I want to be able to display my interviews history so I can display my interviews history. 
+- As a verified user, I want to be able to delete any pervious interview so I can add new interview.
+- As a verified user, I want to be able to display my upcoming interviews so I can check the information of upcoming interviews.
+- As a verified user, I want to be able to join the interview through the zoom link so I can join the interview.
+- As a verified user, I want to be able to cancel any interview so I can add new interview.
+- As a verified user, I want to be able to display my interviews reviews so I can check the information of reviews.
+- As a verified user, I want to be able to save any reviews so I can come back to the review easily.
+- As a verified user, I want to be able to filter saved and unsaved reviews. So I can see the saved reviews and the unsaved reviews.
+- As a verified user, I want to be able to create interview by inputting the requirments of the interview. So I can create an interview.
 
     <br>
 
- > 🔸As a interviewer
-- I can display my profile
-- I can Edit my information
-- I can add my available interviews dates 
-- I can display my interviews schedule
-- I can display my upcoming interviews
-- I can display my interviews history
+ > 🔸 As an interviewer
+- As a confirmed interviewer, I want to be able to display my profile so I can view my information.
+- As a confirmed interviewer, I want to be able to edit my information so I can update my information.
+- As a confirmed interviewer, I want to be able to add my available free time so I can be on time to interview.
+- As a confirmed interviewer, I want to be able to display my interviews schedule so I can check the information of interviews.
+- As a confirmed interviewer, I want to be able to display my upcoming interviews so I can check the information of upcoming interviews.
+- As a confirmed interviewer, I want to be able to display my interviews history so I can check the information of previous interviews.
 
     <br>
 
-> 🔸As a interviewee
-- I can display my profile
-- I can Edit my information
-- I can display my interviews history
-- I can delete any pervious interview
-- I can display my upcoming interviews
-- I can join the interview through the zoom link
-- I can cancel any interview
-- I can display my reviews
-- I can save any reviews 
-- I can filter saved , unsaved reviews 
-- I can start interview by enter the interviews requirements
-
-    <br>
-
-> 🔸As a admin
-- I can display all Nova users
-- I can delete any interviewee/interviewer
-- I can display all interviewers applications
-- I can delete any interviewer application
-- I can reject/ accept interviewers applications
+> 🔸 As a admin
+- As an admin, I want to be able to display all Nova users so I can see all the users.
+- As an admin, I want to be able to delete any interviewee so I can remove any fake interviewee.
+- As an admin, I want to be able to delete any interviewer so I can remove any interviewer not meeting the requirements.
+- As an admin, I want to be able to display all interviewers applications so I can see all the interviewers applications.
+- As an admin, I want to be able to delete any interviewer application so I can remove the interviewer application.
+- As an admin, I want to be able to reject any interviewer application so I can remove the interviewer application.
+- As an admin, I want to be able to approve any interviewer application so I can confirm the interviewer application.
 
     <br>
 
@@ -98,15 +91,20 @@ Also, the interviewer can view his available dates and times and add dates to hi
 <br>
 
 ## 🔹Built With
-
+- Node.js
 - Express.js
 - Typescript
+- Zoom API
+- MongoDB
 - Mongoose
 - React.js
-- Redux.js
+- Redux
 - Ant Design
+- Axios
+- Jest
+- Supertest
+- JWT
 - Nodemailer
-- request-promise
 
     <br>
 
