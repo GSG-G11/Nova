@@ -144,6 +144,13 @@ The user can click the filter options to filter the reviews based on saved and u
 - Nodemailer
 
     <br>
+    
+## 🔹 Database Schema
+
+
+<img src="https://cdn.discordapp.com/attachments/967089710566625310/980948829723578448/unknown.png"/>
+          
+    
 ## 🔹Installation
   1. clone Nova repo
   ```
