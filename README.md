@@ -158,18 +158,20 @@ The user can click the filter options to filter the reviews based on saved and u
   ```
   2. install npm packages in server folder
   ```
-  npm i
+  yarn install
   ```
   3. install npm packages in client folder
   ```
   cd client
-  npm i
+  tarn install
   ```
   4. write env variables in .env file 
   ```
 DEV_DATABASE_URL=mongodb://localhost:27017/nova
 TEST_DATABASE_URL=mongodb://localhost:27017/test-nova
 JWT_SECRET='<your secret key>'
+API_KEY='<your API key>'
+API_SECRET='<your secret key>'
 EMAIl='<your email>'
 EMAIL_PASSWORD='<your password>'
   ```
