@@ -92,7 +92,7 @@
 - By entering the website, the user can see the landing page. And will see the logo and the description of the website.
 - The user can also see the buttons sign up and login. When the user click the sign up button, a Modal will show up with sign up form. When the user click the login button, a Modal will show up with login form.
 - Sign up form will have a full name field, an email field, a password field, a confirm password field a submit button and a cancel button. When the user click the submit button, the user will be able to sign up as an interviewee based on the requirements of the form. When the user click the cancel button, the Modal will close.
-- - Login form will have a email field, a password field, a submit button and a cancel button. When the user click the Login button, the user will be able to login based on the requirements of the form. When the user click the cancel button, the Modal will close.
+- Login form will have a email field, a password field, a submit button and a cancel button. When the user click the Login button, the user will be able to login based on the requirements of the form. When the user click the cancel button, the Modal will close.
 
 ### As a user:
 - After the user sign up, an email will be sent to the user's email address. The user will be able to verify the email address. When the user click the verify button, the user will be able to login.
